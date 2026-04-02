@@ -1,898 +1,923 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vojtěch "Voku" Kurinec | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-:root {
-  --light-beige: #f8f4e9;
-  --beige: #e6d3c4;
-  --white: #ffffff;
-  --gray: #d9d9d9;
-  --dark-gray: #777;
-  --primary-color: #8c7b6b;
-  --secondary-color: #a58f7a;
-  --accent-color: #c5b5a6;
-  --card-bg: #ffffff;
-  --text: #333;
-  --text-muted: #777;
-  --border-radius: 18px;
-  --shadow: 0 4px 24px 0 rgba(0,0,0,0.05);
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, var(--light-beige) 0%, var(--white) 100%);
-  color: var(--text);
-  min-height: 100vh;
-  line-height: 1.7;
-  letter-spacing: 0.01em;
-}
-
-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2.5rem;
-  padding: 4rem 2rem 3rem 2rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.header-side {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 140px;
-  min-width: 100px;
-  max-width: 160px;
-  transition: transform 0.3s ease;
-}
-
-.header-side:hover {
-  transform: translateY(-5px);
-}
-
-.header-side img {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--beige);
-  box-shadow: 0 2px 16px 0 rgba(140,123,107,0.15);
-  margin-bottom: 0.7rem;
-  background: #fafafa;
-}
-
-.header-side .caption {
-  color: var(--text-muted);
-  font-size: 1rem;
-  text-align: center;
-  margin-top: 0.2rem;
-  line-height: 1.3;
-}
-
-.header-center {
-  flex: 1 1 0;
-  text-align: center;
-  min-width: 0;
-}
-
-.name-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0.7rem;
-}
-
-.name-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.name-part {
-  font-size: 3.2rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  color: var(--primary-color);
-}
-
-.nickname {
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  background: linear-gradient(90deg, var(--beige), var(--accent-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  padding: 0 0.5rem;
-  position: relative;
-}
-
-.nickname::before, .nickname::after {
-  content: '"';
-  position: absolute;
-  font-size: 2rem;
-  color: var(--accent-color);
-}
-
-.nickname::before {
-  left: -0.5rem;
-  top: -0.3rem;
-}
-
-.nickname::after {
-  right: -0.5rem;
-  bottom: -0.3rem;
-}
-
-header p {
-  font-size: 1.3rem;
-  color: var(--text-muted);
-  margin-bottom: 0.5rem;
-}
-
-.hobby-icons {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.hobby-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.8rem;
-  color: var(--primary-color);
-  transition: transform 0.3s ease;
-}
-
-.hobby-icon:hover {
-  transform: scale(1.2);
-}
-
-.hobby-icon span {
-  font-size: 0.85rem;
-  margin-top: 0.5rem;
-  color: var(--text-muted);
-}
-
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-section {
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 2.5rem;
-  padding: 2.5rem 2rem;
-  transition: box-shadow 0.2s, transform 0.3s ease;
-  position: relative;
-}
-
-section:hover {
-  box-shadow: 0 8px 32px 0 rgba(140,123,107,0.1);
-  transform: translateY(-5px);
-}
-
-h2 {
-  font-size: 2.1rem;
-  margin-bottom: 1.7rem;
-  color: var(--primary-color);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  position: relative;
-  padding-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.whoami {
-  font-size: 1.18rem;
-  color: var(--text);
-  line-height: 1.8;
-}
-
-.whoami strong {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.project-list {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-}
-
-.project-item {
-  background: rgba(255,255,255,0.8);
-  border-radius: var(--border-radius);
-  padding: 1.7rem 1.3rem;
-  box-shadow: 0 2px 12px 0 rgba(140,123,107,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1.5px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.project-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(140,123,107,0.15);
-  border-color: var(--beige);
-}
-
-.project-item h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-  color: var(--primary-color);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
-.project-item p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  margin-bottom: 1.5rem;
-}
-
-.project-links {
-  display: flex;
-  gap: 0.8rem;
-  margin-top: 1rem;
-}
-
-.project-item a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 1rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.project-item a.github {
-  background: rgba(140,123,107,0.08);
-  color: var(--primary-color);
-}
-
-.project-item a.website {
-  background: var(--primary-color);
-  color: var(--white);
-}
-
-.project-item a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(140,123,107,0.15);
-}
-
-.project-item a:hover i {
-  transform: translateX(5px);
-}
-
-.project-item a i {
-  transition: transform 0.3s ease;
-}
-
-.tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.tech-card {
-  background: rgba(255,255,255,0.8);
-  border-radius: var(--border-radius);
-  padding: 1.8rem 1.5rem;
-  border-left: 4px solid var(--beige);
-  box-shadow: 0 1px 8px 0 rgba(140,123,107,0.05);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.tech-card:hover {
-  border-left: 4px solid var(--primary-color);
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(140,123,107,0.15);
-}
-
-.tech-card h3 {
-  color: var(--primary-color);
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-}
-
-.tech-card p {
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.tech-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-width: 60px;
-}
-
-.tech-icon i {
-  font-size: 2.2rem;
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
-}
-
-.tech-icon span {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
-  font-size: 1.15rem;
-  margin-top: 0.5rem;
-}
-
-.contact-info p {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.contact-info a {
-  color: var(--primary-color);
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.contact-info a:hover {
-  color: var(--text);
-  text-decoration: underline;
-}
-
-.contact-info a:hover i {
-  transform: translateX(5px);
-}
-
-.contact-info a i {
-  transition: transform 0.3s ease;
-}
-
-footer {
-  text-align: center;
-  padding: 3rem 2rem;
-  margin-top: 3rem;
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  border-top: 1.5px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.7);
-  box-shadow: 0 -2px 12px 0 rgba(0,0,0,0.03);
-}
-
-footer p:first-child {
-  font-style: italic;
-  margin-bottom: 0.7rem;
-  color: var(--primary-color);
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-.lang-switch {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  gap: 0.4rem;
-  z-index: 1000;
-}
-.lang-switch button {
-  padding: 0.4rem 0.8rem;
-  border: 1px solid var(--beige);
-  background: var(--card-bg);
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--primary-color);
-  transition: all 0.25s ease;
-}
-.lang-switch button.active, .lang-switch button:hover {
-  background: var(--primary-color);
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(140,123,107,0.25);
-}
-
-@media (max-width: 900px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 3rem 1rem 2rem 1rem;
-  }
-  .header-side {
-    flex-direction: row;
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 0.5rem;
-    justify-content: center;
-  }
-  .header-side img {
-    width: 90px;
-    height: 90px;
-  }
-}
-
-@media (max-width: 768px) {
-  .project-list,
-  .tech-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .name-row {
-    flex-direction: column;
-    gap: 0.3rem;
-  }
-
-  .name-part {
-    font-size: 2.5rem;
-  }
-
-  .nickname {
-    font-size: 1.6rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .name-part {
-    font-size: 2.1rem;
-  }
-
-  .nickname {
-    font-size: 1.4rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  section {
-    padding: 2rem 1.5rem;
-  }
-
-  .header-side {
-    width: 100px;
-  }
-
-  .header-side img {
-    width: 65px;
-    height: 65px;
-  }
-
-  .hobby-icons {
-    gap: 1rem;
-  }
-
-  .hobby-icon {
-    font-size: 1.5rem;
-  }
-
-  .hobby-icon span {
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-side {
-    flex-direction: column;
-    width: auto;
-  }
-
-  .hobby-icons {
-    flex-wrap: wrap;
-  }
-
-  .hobby-icon {
-    width: 70px;
-  }
-
-  .name-part {
-    font-size: 1.8rem;
-  }
-
-  .nickname {
-    font-size: 1.2rem;
-  }
-}
-
-/* Animace pro plynulé zobrazení */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate {
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.delay-1 {
-  animation-delay: 0.2s;
-}
-
-.delay-2 {
-  animation-delay: 0.4s;
-}
-
-.delay-3 {
-  animation-delay: 0.6s;
-}
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vojtěch "Voku" Kurinec | Portfolio</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <!-- Font Awesome pres JS -> SVG ikony bez webfont requestu (zadne CORS chyby na woff/ttf). -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <!-- Bez externich webfontu: JetBrains preview pridava x-ijt hlavicku, ktera blokuje CORS fonty. -->
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────── */
+    :root {
+      --green:  #6DC066;
+      --yellow: #F6C21B;
+      --orange: #F28C28;
+      --red:    #F54F36;
+      --purple: #BF3F8C;
+      --blue:   #2E5EBB;
+      --beige:  #E6D3C4;
+
+      --bg:      #04050a;
+      --bg-card: #0b0d14;
+      --text:    #f5f5f7;
+      --muted:   #86868b;
+      --border:  rgba(255,255,255,0.065);
+      --r:       22px;
+      --tr: 0.3s cubic-bezier(.25,.46,.45,.94);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Lokani fallback ikon bez Font Awesome fontu */
+    i.fas, i.fab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.15em;
+      font-style: normal;
+      line-height: 1;
+    }
+    i.fas::before, i.fab::before {
+      content: "?";
+      font-size: 0.72em;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .fa-robot::before { content: "AI"; }
+    .fa-print::before { content: "3D"; }
+    .fa-microchip::before { content: "PI"; }
+    .fa-code::before { content: "<>"; }
+    .fa-brain::before { content: "AI"; }
+    .fa-chevron-down::before { content: "v"; }
+    .fa-graduation-cap::before { content: "ED"; }
+    .fa-github::before { content: "GH"; }
+    .fa-crosshairs::before { content: "LG"; }
+    .fa-globe::before { content: "WEB"; }
+    .fa-comments::before { content: "CH"; }
+    .fa-keyboard::before { content: "KB"; }
+    .fa-python::before { content: "PY"; }
+    .fa-html5::before { content: "H5"; }
+    .fa-css3-alt::before { content: "C3"; }
+    .fa-js::before { content: "JS"; }
+    .fa-java::before { content: "JV"; }
+    .fa-layer-group::before { content: "FW"; }
+    .fa-server::before { content: "BE"; }
+    .fa-mobile-alt::before { content: "APP"; }
+    .fa-discord::before { content: "DC"; }
+    .fa-chart-bar::before { content: "ERP"; }
+    .fa-cogs::before { content: "SYS"; }
+    .fa-raspberry-pi::before { content: "RPI"; }
+    .fa-video::before { content: "VID"; }
+    .fa-envelope::before { content: "@"; }
+    .fa-instagram::before { content: "IG"; }
+    .fa-map-marker-alt::before { content: "LOC"; }
+
+    /* ─── SCROLLBAR ──────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 2.5rem;
+      background: rgba(4,5,10,0.72);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--tr);
+    }
+    .nav-logo {
+      font-size: 1.05rem; font-weight: 800; letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lang-switch { display: flex; gap: 0.3rem; }
+    .lang-switch button {
+      padding: 0.32rem 0.7rem;
+      border: 1px solid var(--border);
+      background: transparent; border-radius: 7px; cursor: pointer;
+      font-size: 0.72rem; font-weight: 600;
+      color: var(--muted); font-family: inherit; transition: all 0.2s;
+    }
+    .lang-switch button.active,
+    .lang-switch button:hover {
+      background: rgba(255,255,255,0.09);
+      color: var(--text); border-color: rgba(255,255,255,0.16);
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 7rem 2rem 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    /* Dot grid overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.032) 1px, transparent 1px);
+      background-size: 38px 38px;
+      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 50%, black 20%, transparent 100%);
+      mask-image: radial-gradient(ellipse 85% 65% at 50% 50%, black 20%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Ambient orbs */
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(110px); pointer-events: none;
+    }
+    .orb-1 { width:620px;height:620px; background:var(--blue);   opacity:.065; top:-180px;   left:-140px;  animation: orb-move 9s  ease-in-out infinite; }
+    .orb-2 { width:480px;height:480px; background:var(--purple); opacity:.065; bottom:-80px; right:-80px;  animation: orb-move 8s  ease-in-out infinite 2.5s; }
+    .orb-3 { width:340px;height:340px; background:var(--green);  opacity:.045; top:42%;      left:58%;     animation: orb-move 10s ease-in-out infinite 5s; }
+    .orb-4 { width:260px;height:260px; background:var(--red);    opacity:.040; top:15%;      right:22%;    animation: orb-move 7s  ease-in-out infinite 1.5s; }
+
+    @keyframes orb-move {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(22px,-22px) scale(1.04); }
+      66%      { transform: translate(-16px,16px) scale(0.97); }
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 920px; width: 100%; }
+
+    /* Eyebrow pill */
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.4rem 1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 50px;
+      margin-bottom: 2.2rem;
+      opacity: 0; animation: fade-up .7s ease .1s forwards;
+    }
+    .eyebrow-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse-green 2.2s ease-in-out infinite;
+    }
+    @keyframes pulse-green {
+      0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(109,192,102,.5); }
+      50%      { opacity:.6; box-shadow: 0 0 0 5px rgba(109,192,102,0); }
+    }
+
+    /* Name */
+    .hero-name {
+      font-size: clamp(3.2rem, 9vw, 7.8rem);
+      font-weight: 900; letter-spacing: -0.055em;
+      line-height: 0.96; margin-bottom: 1.8rem;
+    }
+    .name-first {
+      display: block; color: var(--text);
+      opacity: 0; animation: fade-up .7s ease .28s forwards;
+    }
+    .name-nick {
+      display: block;
+      font-size: clamp(2.6rem, 7.5vw, 6.8rem);
+      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 55%, var(--red) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 200%;
+      opacity: 0;
+      animation: fade-up .7s ease .46s forwards, gradient-shift 5s ease-in-out infinite 1.2s;
+    }
+    .name-last {
+      display: block; color: var(--text);
+      opacity: 0; animation: fade-up .7s ease .64s forwards;
+    }
+    @keyframes gradient-shift {
+      0%,100% { background-position: 0% 50%; }
+      50%      { background-position: 100% 50%; }
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      color: var(--muted); font-weight: 400; letter-spacing: -0.01em;
+      margin-bottom: 2.4rem;
+      opacity: 0; animation: fade-up .7s ease .78s forwards;
+    }
+
+    /* Hobby pills */
+    .hero-tags {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 0.65rem; margin-bottom: 3.2rem;
+      opacity: 0; animation: fade-up .7s ease .92s forwards;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.48rem 1.05rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 50px;
+      font-size: 0.82rem; font-weight: 500; color: var(--muted);
+      transition: all .25s; cursor: default;
+    }
+    .hero-tag:hover {
+      background: rgba(255,255,255,0.09); color: var(--text);
+      border-color: rgba(255,255,255,0.14); transform: translateY(-2px);
+    }
+
+    /* Photos */
+    .hero-photos {
+      display: flex; justify-content: center; gap: 2.8rem;
+      opacity: 0; animation: fade-up .7s ease 1.1s forwards;
+    }
+    .hero-photo {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.6rem; transition: transform var(--tr); cursor: default;
+    }
+    .hero-photo:hover { transform: translateY(-9px); }
+    .hero-photo img {
+      width: 88px; height: 88px; object-fit: cover; border-radius: 50%;
+      border: 1.5px solid var(--border);
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+      transition: border-color var(--tr);
+    }
+    .hero-photo:hover img { border-color: rgba(255,255,255,0.22); }
+    .photo-caption { font-size: 0.74rem; color: var(--muted); }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      color: var(--muted); font-size: 0.65rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      opacity: 0; animation: fade-up .7s ease 1.65s forwards;
+    }
+    .scroll-hint i { animation: scroll-bounce 2s ease-in-out infinite; }
+    @keyframes scroll-bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(7px); }
+    }
+
+    /* ─── MAIN & SECTIONS ────────────────────────────────────── */
+    main { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .s {
+      margin-bottom: 5.5rem;
+      opacity: 0; transform: translateY(38px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .s.show { opacity: 1; transform: none; }
+
+    .s-head { text-align: center; margin-bottom: 3rem; }
+    .s-label {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.7rem;
+    }
+    .s-head h2 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800; letter-spacing: -0.04em; color: var(--text);
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────────── */
+    .about-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--r);
+      padding: 3.5rem 3rem; position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 33%, var(--red) 66%, var(--orange) 100%);
+    }
+    .about-text {
+      font-size: 1.1rem; line-height: 1.9;
+      color: rgba(245,245,247,.82);
+      text-align: center; max-width: 840px; margin: 0 auto;
+    }
+    .about-text strong { color: var(--text); font-weight: 600; }
+
+    /* ─── PROJECT CARDS ──────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .p-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--r);
+      padding: 2rem 1.8rem;
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .5s ease, transform .5s ease, border-color var(--tr), box-shadow var(--tr);
+    }
+    .s.show .p-card                  { opacity: 1; transform: translateY(0); }
+    .s.show .p-card:nth-child(1)     { transition-delay: .08s; }
+    .s.show .p-card:nth-child(2)     { transition-delay: .18s; }
+    .s.show .p-card:nth-child(3)     { transition-delay: .28s; }
+    .s.show .p-card:nth-child(4)     { transition-delay: .38s; }
+
+    .p-card:hover {
+      transform: translateY(-9px) !important;
+      border-color: rgba(255,255,255,0.13);
+      box-shadow: 0 28px 64px rgba(0,0,0,.4);
+    }
+    .p-card::after {
+      content: '';
+      position: absolute; inset: -1px; border-radius: var(--r);
+      background: radial-gradient(circle at 30% 30%, var(--accent, transparent) 0%, transparent 60%);
+      opacity: 0; pointer-events: none; transition: opacity .4s;
+    }
+    .p-card:hover::after { opacity: 0.06; }
+
+    .p-icon {
+      width: 52px; height: 52px; border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1rem;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .live-badge {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--green);
+      background: rgba(109,192,102,0.1);
+      border: 1px solid rgba(109,192,102,0.25);
+      border-radius: 50px; padding: 0.2rem 0.6rem;
+      margin-bottom: 0.8rem;
+      position: relative; z-index: 1; width: fit-content;
+    }
+    .live-badge .dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+    .p-title {
+      font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 0.55rem;
+      position: relative; z-index: 1;
+    }
+    .p-desc {
+      font-size: 0.9rem; color: var(--muted); line-height: 1.65;
+      flex: 1; margin-bottom: 1.5rem;
+      position: relative; z-index: 1;
+    }
+    .p-links {
+      display: flex; gap: 0.6rem; flex-wrap: wrap;
+      margin-top: auto; position: relative; z-index: 1;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.5rem 1rem; border-radius: 9px;
+      font-size: 0.8rem; font-weight: 600;
+      text-decoration: none; font-family: inherit;
+      white-space: nowrap; transition: all .2s;
+    }
+    .btn-fill { color: white; }
+    .btn-fill:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+    .btn-ghost {
+      background: rgba(255,255,255,0.05); color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--text); transform: translateY(-2px); }
+
+    /* ─── TECH CARDS ─────────────────────────────────────────── */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+      gap: 1.4rem;
+    }
+    .t-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--r);
+      padding: 2rem 1.8rem; position: relative; overflow: hidden;
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .5s ease, transform .5s ease, border-color var(--tr), box-shadow var(--tr);
+    }
+    .s.show .t-card                  { opacity: 1; transform: translateY(0); }
+    .s.show .t-card:nth-child(1)     { transition-delay: .08s; }
+    .s.show .t-card:nth-child(2)     { transition-delay: .2s; }
+    .s.show .t-card:nth-child(3)     { transition-delay: .32s; }
+
+    .t-card:hover {
+      transform: translateY(-7px) !important;
+      border-color: rgba(255,255,255,0.11);
+      box-shadow: 0 18px 50px rgba(0,0,0,.32);
+    }
+    .t-accent { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+    .t-title {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 1.5rem; display: flex; align-items: center;
+      gap: 0.6rem; letter-spacing: -0.01em;
+    }
+    .t-icons { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .t-icon {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.4rem; transition: transform .2s; cursor: default;
+    }
+    .t-icon:hover { transform: translateY(-5px); }
+    .t-icon-box {
+      width: 52px; height: 52px; border-radius: 13px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; position: relative; transition: background .2s;
+    }
+    .t-icon:hover .t-icon-box { background: rgba(255,255,255,0.09); }
+    .t-icon-label { font-size: 0.68rem; color: var(--muted); text-align: center; line-height: 1.2; }
+    .t-badge {
+      position: absolute; top: -6px; right: -6px;
+      font-size: 0.5rem; font-weight: 800;
+      padding: 0.12rem 0.38rem; border-radius: 5px;
+      letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    .contact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--r);
+      padding: 3.5rem 3rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .contact-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow), var(--green), var(--blue), var(--purple));
+    }
+    .contact-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800;
+      letter-spacing: -0.04em; margin-bottom: 0.6rem;
+    }
+    .contact-sub { font-size: .95rem; color: var(--muted); margin-bottom: 2.5rem; }
+    .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .c-link {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.85rem 1.4rem;
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 13px; text-decoration: none;
+      color: var(--muted); font-size: .9rem; font-weight: 500; transition: all .25s;
+    }
+    .c-link .c-ico { font-size: 1.15rem; }
+    .c-link:hover {
+      background: rgba(255,255,255,0.09); color: var(--text);
+      transform: translateY(-4px); border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+    }
+    .contact-location {
+      margin-top: 2rem; font-size: .82rem;
+      color: rgba(134,134,139,.55);
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      text-align: center; padding: 3rem 2rem;
+      border-top: 1px solid var(--border); margin-top: 2rem;
+    }
+    .footer-quote { font-size: 1.05rem; font-style: italic; color: var(--muted); margin-bottom: 0.5rem; }
+    .footer-copy { font-size: .78rem; color: rgba(134,134,139,.45); }
+
+    /* ─── KEYFRAMES ──────────────────────────────────────────── */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 900px)  { nav { padding: .8rem 1.5rem; } }
+    @media (max-width: 768px)  {
+      .hero { padding: 6rem 1.5rem 4rem; }
+      .projects-grid, .tech-grid { grid-template-columns: 1fr; }
+      .about-card, .contact-card { padding: 2.5rem 1.5rem; }
+      .hero-photos { gap: 1.8rem; }
+    }
+    @media (max-width: 520px)  {
+      .hero-photos { gap: 1.2rem; }
+      .hero-photo img { width: 72px; height: 72px; }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- ── NAV ────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-logo">Voku</div>
     <div class="lang-switch" aria-label="Language switch">
-        <button type="button" data-lang="cs" class="active">Česky</button>
-        <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="cs" class="active">Česky</button>
+      <button type="button" data-lang="en">English</button>
     </div>
-    <header>
-        <div class="header-side">
-            <img src="ja_seriozne.png" alt="Profilová fotka" data-i18n-attr="alt:captionNormal">
-            <div class="caption" data-i18n="captionNormal">Normální fotka</div>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        <span data-i18n="heroEyebrow">Portfolio · 2026</span>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="name-first">Vojtěch</span>
+        <span class="name-nick">"Voku"</span>
+        <span class="name-last">Kurinec</span>
+      </h1>
+
+      <p class="hero-tagline" data-i18n="tagline">Mladý vývojář & IT nadšenec</p>
+
+      <div class="hero-tags">
+        <span class="hero-tag"><i class="fas fa-robot"></i><span data-i18n="hobbyAI">AI</span></span>
+        <span class="hero-tag"><i class="fas fa-print"></i><span data-i18n="hobby3d">3D tisk</span></span>
+        <span class="hero-tag"><i class="fas fa-microchip"></i>Raspberry Pi</span>
+        <span class="hero-tag"><i class="fas fa-code"></i><span data-i18n="hobbyCode">Programování</span></span>
+        <span class="hero-tag"><i class="fas fa-brain"></i><span data-i18n="hobbyTech">Technologie</span></span>
+      </div>
+
+      <div class="hero-photos">
+        <div class="hero-photo">
+          <img src="ja_seriozne.png" alt="Profilová fotka" data-i18n-attr="alt:captionNormal">
+          <span class="photo-caption" data-i18n="captionNormal">Normální fotka</span>
+        </div>
+        <div class="hero-photo">
+          <img src="ja_uwu.png" alt="Vtipná fotka" data-i18n-attr="alt:captionFunny">
+          <span class="photo-caption" data-i18n="captionFunny">Trošku vtipnej.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span data-i18n="scrollHint">Scroll</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ── KDO JSEM ─────────────────────────────────────────── -->
+    <div class="s" id="about">
+      <div class="s-head">
+        <div class="s-label" data-i18n="whoLabel">O mně</div>
+        <h2 data-i18n="whoHeading">Kdo jsem?</h2>
+      </div>
+      <div class="about-card">
+        <p class="about-text" data-i18n="whoText">Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a jsem nadšenec do IT, věnuju se programování, AI, 3D tisku a Raspberry Pi. Pracuju na projektu jako <strong>Knowix</strong>. A pracoval jsem nad <strong>Školní chat</strong>, <strong>Easy Keylogger</strong> a <strong>rádoby mini OS</strong>. Ve škole jsem aktivní, sportuju a dokážu být vážný, když je potřeba. Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním – ne pro slávu nebo peníze.</p>
+      </div>
+    </div>
+
+    <!-- ── PROJEKTY ──────────────────────────────────────────── -->
+    <div class="s" id="projects">
+      <div class="s-head">
+        <div class="s-label" data-i18n="projectsLabel">Moje práce</div>
+        <h2 data-i18n="projectsHeading">Projekty</h2>
+      </div>
+      <div class="projects-grid">
+
+        <!-- Knowix -->
+        <div class="p-card" style="--accent: var(--blue)">
+          <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <div class="live-badge"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></div>
+          <div class="p-title" data-i18n="knowixTitle">Knowix</div>
+          <div class="p-desc" data-i18n="knowixDesc">Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).</div>
+          <div class="p-links">
+            <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn-ghost">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+          </div>
         </div>
 
-        <div class="header-center">
-            <div class="name-container">
-                <div class="name-row">
-                    <div class="name-part animate">Vojtěch</div>
-                    <div class="nickname animate delay-1">Voku</div>
-                    <div class="name-part animate delay-2">Kurinec</div>
-                </div>
-            </div>
-            <p data-i18n="tagline">Mladý vývojář & IT nadšenec</p>
-
-            <div class="hobby-icons">
-                <div class="hobby-icon">
-                    <i class="fas fa-robot"></i>
-                    <span data-i18n="hobbyAI">AI</span>
-                </div>
-                <div class="hobby-icon">
-                    <i class="fas fa-print"></i>
-                    <span data-i18n="hobby3d">3D tisk</span>
-                </div>
-                <div class="hobby-icon">
-                    <i class="fas fa-microchip"></i>
-                    <span data-i18n="hobbyRpi">Raspberry Pi</span>
-                </div>
-                <div class="hobby-icon">
-                    <i class="fas fa-code"></i>
-                    <span data-i18n="hobbyCode">Programování</span>
-                </div>
-                <div class="hobby-icon">
-                    <i class="fas fa-brain"></i>
-                    <span data-i18n="hobbyTech">Technologie</span>
-                </div>
-            </div>
+        <!-- LasergameMC -->
+        <div class="p-card" style="--accent: var(--red)">
+          <div class="p-icon" style="background:rgba(245,79,54,.14);color:var(--red)">
+            <i class="fas fa-crosshairs"></i>
+          </div>
+          <div class="live-badge"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></div>
+          <div class="p-title" data-i18n="lmcTitle">LasergameMC (LMC)</div>
+          <div class="p-desc" data-i18n="lmcDesc">Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.</div>
+          <div class="p-links">
+            <a href="https://lasergamemc.cz" target="_blank" class="btn btn-fill" style="background:var(--red)">
+              <i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span>
+            </a>
+          </div>
         </div>
 
-        <div class="header-side">
-            <img src="ja_uwu.png" alt="Lego profil" data-i18n-attr="alt:captionFunny">
-            <div class="caption" data-i18n="captionFunny">Trošku vtipnej.</div>
+        <!-- Školní chat -->
+        <div class="p-card" style="--accent: var(--yellow)">
+          <div class="p-icon" style="background:rgba(246,194,27,.14);color:var(--yellow)">
+            <i class="fas fa-comments"></i>
+          </div>
+          <div class="p-title" data-i18n="schoolChatTitle">Školní chat</div>
+          <div class="p-desc" data-i18n="schoolChatDesc">Chatovací platforma postavená na Fletu — zároveň můj první projekt.</div>
+          <div class="p-links">
+            <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn-ghost">
+              <i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span>
+            </a>
+          </div>
         </div>
-    </header>
 
-    <main>
-        <!-- Kdo jsem -->
-        <section>
-            <h2><i class="fas fa-user"></i> <span data-i18n="whoHeading">Kdo jsem?</span></h2>
-            <div class="whoami">
-                <p data-i18n="whoText">Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a jsem nadšenec do IT, věnuju se programování, AI, 3D tisku a Raspberry Pi. Pracuju na projektu jako <strong>Knowix</strong>. A pracoval jsem nad <strong>Školní chat</strong>, <strong>Easy Keylogger</strong> <strong>rádoby mini OS</strong> Ve škole jsem aktivní, sportuju a dokážu být vážný, když je potřeba. Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním – ne pro slávu nebo peníze.</p>
+        <!-- Easy Keylogger -->
+        <div class="p-card" style="--accent: var(--orange)">
+          <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--orange)">
+            <i class="fas fa-keyboard"></i>
+          </div>
+          <div class="p-title" data-i18n="easyKeyloggerTitle">Easy Keylogger</div>
+          <div class="p-desc" data-i18n="easyKeyloggerDesc">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.</div>
+          <div class="p-links">
+            <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn-ghost">
+              <i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── TECHNOLOGIE ───────────────────────────────────────── -->
+    <div class="s" id="tech">
+      <div class="s-head">
+        <div class="s-label" data-i18n="techLabel">Stack</div>
+        <h2 data-i18n="technologiesHeading">Technologie</h2>
+      </div>
+      <div class="tech-grid">
+
+        <!-- Jazyky -->
+        <div class="t-card">
+          <div class="t-accent" style="background:linear-gradient(90deg,var(--green),var(--blue))"></div>
+          <div class="t-title">
+            <i class="fas fa-code" style="color:var(--green)"></i>
+            <span data-i18n="languagesHeading">Jazyky</span>
+          </div>
+          <div class="t-icons">
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fab fa-python" style="color:#4b9cd3"></i></div>
+              <span class="t-icon-label">Python</span>
             </div>
-        </section>
-
-        <!-- Projekty -->
-        <section>
-            <h2><i class="fas fa-lightbulb"></i> <span data-i18n="projectsHeading">Projekty</span></h2>
-            <div class="project-list">
-                <div class="project-item">
-                    <h3><i class="fas fa-graduation-cap"></i> <span data-i18n="knowixTitle">Knowix</span></h3>
-                    <p data-i18n="knowixDesc">Vzdělávací web (Něco jako Umimeto.org)</p>
-                    <div class="project-links">
-                        <a href="https://knowix.cz" target="_blank" class="website">
-                            <i class="fas fa-globe"></i> <span data-i18n="visitSite">Navštívit web</span>
-                        </a>
-                        <a href="https://github.com/Voku199/Knowix" target="_blank" class="github">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-item">
-                    <h3><i class="fas fa-comments"></i> <span data-i18n="schoolChatTitle">Školní chat</span></h3>
-                    <p data-i18n="schoolChatDesc">Chatovací platforma (Flet, zároveň první projekt)</p>
-                    <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="github">
-                        <i class="fab fa-github"></i> <span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span>
-                    </a>
-                </div>
-
-                <div class="project-item">
-                    <h3><i class="fas fa-keyboard"></i> <span data-i18n="easyKeyloggerTitle">Easy Keylogger</span></h3>
-                    <p data-i18n="easyKeyloggerDesc">Vzdělávací pokus (neškodný)</p>
-                    <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="github">
-                        <i class="fab fa-github"></i> <span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span>
-                    </a>
-                </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fab fa-html5" style="color:#e34c26"></i></div>
+              <span class="t-icon-label">HTML</span>
             </div>
-        </section>
-
-        <!-- Technologie -->
-        <section>
-            <h2><i class="fas fa-tools"></i> <span data-i18n="technologiesHeading">Technologie</span></h2>
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <h3><i class="fas fa-code"></i> <span data-i18n="languagesHeading">Jazyky</span></h3>
-                    <div class="tech-icons">
-                        <div class="tech-icon">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fab fa-css3-alt"></i>
-                            <span>CSS</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fab fa-js"></i>
-                            <span>JavaScript</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <h3><i class="fas fa-layer-group"></i> <span data-i18n="frameworksHeading">Frameworky</span></h3>
-                    <div class="tech-icons">
-                        <div class="tech-icon">
-                            <i class="fas fa-server"></i>
-                            <span>Flask</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fas fa-arrow-right"></i>
-                            <span>Flet</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fas fa-comment-dots"></i>
-                            <span>Discord</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fas fa-chart-line"></i>
-                            <span>Odoo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tech-card">
-                    <h3><i class="fas fa-cogs"></i> <span data-i18n="otherHeading">Ostatní</span></h3>
-                    <div class="tech-icons">
-                        <div class="tech-icon">
-                            <i class="fas fa-microchip"></i>
-                            <span>Raspberry Pi</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fas fa-print"></i>
-                            <span>3D tisk</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fas fa-video"></i>
-                            <span>Střih videí</span>
-                        </div>
-                        <div class="tech-icon">
-                            <i class="fas fa-brain"></i>
-                            <span>AI</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fab fa-css3-alt" style="color:#264de4"></i></div>
+              <span class="t-icon-label">CSS</span>
             </div>
-        </section>
-
-        <!-- Kontakt -->
-        <section>
-            <h2><i class="fas fa-envelope"></i> <span data-i18n="contactHeading">Kontakt</span></h2>
-            <div class="contact-info">
-                <p>
-                    <i class="fas fa-envelope"></i>
-                    <strong data-i18n="emailLabel">Email:</strong>
-                    <a href="mailto:vojta.kurinec@gmail.com?subject=Dotaz&body=Ahoj, hele chci se zeptat na">vojta.kurinec@gmail.com</a>
-                </p>
-                <p>
-                    <i class="fab fa-github"></i>
-                    <strong data-i18n="githubLabel">GitHub:</strong>
-                    <a href="https://github.com/Voku199" target="_blank">@Voku199</a>
-                </p>
-                <p>
-                    <i class="fas fa-map-marker-alt"></i>
-                    <strong data-i18n="regionLabel">Kraj:</strong> <span data-i18n="regionValue">Jihočeský, Česká republika</span>
-                </p>
+            <div class="t-icon">
+              <div class="t-icon-box">
+                <i class="fab fa-js" style="color:#f7df1e"></i>
+                <span class="t-badge" style="background:rgba(246,194,27,.18);color:var(--yellow)" data-i18n="badgeSome">Trochu</span>
+              </div>
+              <span class="t-icon-label">JavaScript</span>
             </div>
-        </section>
-    </main>
+            <div class="t-icon">
+              <div class="t-icon-box">
+                <i class="fab fa-java" style="color:#f89820"></i>
+                <span class="t-badge" style="background:rgba(191,63,140,.18);color:var(--purple)" data-i18n="badgeLearning">Učím&nbsp;se</span>
+              </div>
+              <span class="t-icon-label">Java</span>
+            </div>
+          </div>
+        </div>
 
-    <footer>
-        <p data-i18n="footerQuote">"Sedmkrát padneš, osmkrát vstaneš."</p>
-        <p id="footer-date"></p>
-    </footer>
-    <script>
-      const translations = {
-        cs: {
-          title: 'Vojtěch "Voku" Kurinec | Portfolio',
-          tagline: 'Mladý vývojář & IT nadšenec',
-          captionNormal: 'Normální fotka',
-            captionFunny: 'Trošku vtipnej.',
-          hobbyAI: 'AI',
-          hobby3d: '3D tisk',
-          hobbyRpi: 'Raspberry Pi',
-          hobbyCode: 'Programování',
-          hobbyTech: 'Technologie',
-          whoHeading: 'Kdo jsem?',
-          whoText: 'Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a jsem nadšenec do IT, věnuju se programování, AI, 3D tisku a Raspberry Pi. Pracuju na projektu jako <strong>Knowix</strong>. A pracoval jsem nad <strong>Školní chat</strong>, <strong>Easy Keylogger</strong> a <strong>rádoby mini OS</strong>. Ve škole jsem aktivní, sportuju a dokážu být vážný, když je potřeba. Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním – ne pro slávu nebo peníze.',
-          projectsHeading: 'Projekty',
-          knowixTitle: 'Knowix',
-          knowixDesc: 'Vzdělávací web (Něco jako Umimeto.org)',
-          visitSite: 'Navštívit web',
-          schoolChatTitle: 'Školní chat',
-          schoolChatDesc: 'Chatovací platforma (Flet, zároveň první projekt)',
-          viewOnGitHub: 'Zobrazit na GitHubu',
-          easyKeyloggerTitle: 'Easy Keylogger',
-          easyKeyloggerDesc: 'Vzdělávací pokus (neškodný)',
-          technologiesHeading: 'Technologie',
-          languagesHeading: 'Jazyky',
-          frameworksHeading: 'Frameworky',
-          otherHeading: 'Ostatní',
-          contactHeading: 'Kontakt',
-          emailLabel: 'Email:',
-          githubLabel: 'GitHub:',
-          regionLabel: 'Kraj:',
-          regionValue: 'Jihočeský, Česká republika',
-          footerQuote: '"Sedmkrát padneš, osmkrát vstaneš."'
-        },
-        en: {
-          title: 'Vojtěch "Voku" Kurinec | Portfolio',
-          tagline: 'Young Developer & IT Enthusiast',
-          captionNormal: 'Normal photo',
-            captionFunny: 'A bit funny.',
-          hobbyAI: 'AI',
-          hobby3d: '3D Printing',
-          hobbyRpi: 'Raspberry Pi',
-          hobbyCode: 'Coding',
-          hobbyTech: 'Technology',
-          whoHeading: 'Who am I?',
-          whoText: 'My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and an IT enthusiast focusing on programming, AI, 3D printing and Raspberry Pi. I am working on a project called <strong>Knowix</strong>. I have also worked on <strong>School Chat</strong>, <strong>Easy Keylogger</strong> and a <strong>mini OS attempt</strong>. At school I stay active, I do sports and can be serious when needed. I do things mainly to grow and help others – not for fame or money.',
-          projectsHeading: 'Projects',
-          knowixTitle: 'Knowix',
-          knowixDesc: 'Educational website (Similar to Umimeto.org)',
-          visitSite: 'Visit Site',
-          schoolChatTitle: 'School Chat',
-          schoolChatDesc: 'Chat platform (Flet, also my first project)',
-          viewOnGitHub: 'View on GitHub',
-          easyKeyloggerTitle: 'Easy Keylogger',
-          easyKeyloggerDesc: 'Educational experiment (harmless)',
-          technologiesHeading: 'Technologies',
-          languagesHeading: 'Languages',
-          frameworksHeading: 'Frameworks',
-          otherHeading: 'Other',
-          contactHeading: 'Contact',
-          emailLabel: 'Email:',
-          githubLabel: 'GitHub:',
-          regionLabel: 'Region:',
-          regionValue: 'South Bohemian, Czech Republic',
-          footerQuote: '"Fall seven times, stand up eight."'
-        }
-      };
+        <!-- Frameworky -->
+        <div class="t-card">
+          <div class="t-accent" style="background:linear-gradient(90deg,var(--purple),var(--red))"></div>
+          <div class="t-title">
+            <i class="fas fa-layer-group" style="color:var(--purple)"></i>
+            <span data-i18n="frameworksHeading">Frameworky</span>
+          </div>
+          <div class="t-icons">
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fas fa-server" style="color:#ccc"></i></div>
+              <span class="t-icon-label">Flask</span>
+            </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fas fa-mobile-alt" style="color:var(--green)"></i></div>
+              <span class="t-icon-label">Flet</span>
+            </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fab fa-discord" style="color:#5865F2"></i></div>
+              <span class="t-icon-label">Discord</span>
+            </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fas fa-chart-bar" style="color:#714B67"></i></div>
+              <span class="t-icon-label">Odoo</span>
+            </div>
+          </div>
+        </div>
 
-      function updateDate(lang) {
-        const date = new Date();
-        const locale = lang === 'en' ? 'en-US' : 'cs-CZ';
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const formatted = date.toLocaleDateString(locale, options);
-        document.getElementById('footer-date').textContent = `© Vojtěch Kurinec, ${formatted}`;
-      }
+        <!-- Ostatní -->
+        <div class="t-card">
+          <div class="t-accent" style="background:linear-gradient(90deg,var(--orange),var(--yellow))"></div>
+          <div class="t-title">
+            <i class="fas fa-cogs" style="color:var(--orange)"></i>
+            <span data-i18n="otherHeading">Ostatní</span>
+          </div>
+          <div class="t-icons">
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fab fa-raspberry-pi" style="color:#C51A4A"></i></div>
+              <span class="t-icon-label">Raspberry Pi</span>
+            </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fas fa-print" style="color:#ccc"></i></div>
+              <span class="t-icon-label" data-i18n="tech3dPrint">3D tisk</span>
+            </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fas fa-video" style="color:#ccc"></i></div>
+              <span class="t-icon-label" data-i18n="techVideo">Střih videí</span>
+            </div>
+            <div class="t-icon">
+              <div class="t-icon-box"><i class="fas fa-brain" style="color:var(--purple)"></i></div>
+              <span class="t-icon-label">AI</span>
+            </div>
+          </div>
+        </div>
 
-      function setLanguage(lang) {
-        const dict = translations[lang];
-        if (!dict) return;
-        document.documentElement.lang = lang;
-        // Title
-        document.title = dict.title;
-        // Text nodes
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (dict[key]) el.innerHTML = dict[key];
-        });
-        // Attributes mapping: data-i18n-attr="attr:key;attr2:key2"
-        document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-          const mappings = el.getAttribute('data-i18n-attr').split(';');
-            mappings.forEach(map => {
-              const [attr, key] = map.split(':');
-              if (attr && key && dict[key]) el.setAttribute(attr.trim(), dict[key]);
-            });
-        });
-        // Toggle active button
-        document.querySelectorAll('.lang-switch button').forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        localStorage.setItem('lang', lang);
-        updateDate(lang);
-      }
+      </div>
+    </div>
 
-      // Inicializace jazyka
-      const saved = localStorage.getItem('lang') || 'cs';
-      setLanguage(saved);
+    <!-- ── KONTAKT ────────────────────────────────────────────── -->
+    <div class="s" id="contact">
+      <div class="contact-card">
+        <div class="contact-heading" data-i18n="contactHeading">Kontakt</div>
+        <div class="contact-sub" data-i18n="contactSub">Napiš mi — každou zprávu rád přečtu.</div>
+        <div class="contact-links">
+          <a href="mailto:vojta.kurinec@gmail.com?subject=Dotaz&body=Ahoj," class="c-link">
+            <i class="fas fa-envelope c-ico" style="color:var(--red)"></i>
+            <span>vojta.kurinec@gmail.com</span>
+          </a>
+          <a href="https://github.com/Voku199" target="_blank" class="c-link">
+            <i class="fab fa-github c-ico"></i>
+            <span>@Voku199</span>
+          </a>
+          <a href="https://instagram.com/voku199" target="_blank" class="c-link">
+            <i class="fab fa-instagram c-ico" style="color:#E1306C"></i>
+            <span>@voku199</span>
+          </a>
+        </div>
+        <div class="contact-location">
+          <i class="fas fa-map-marker-alt"></i>
+          <span data-i18n="regionValue">Jihočeský, Česká republika</span>
+        </div>
+      </div>
+    </div>
 
-      // Přepínač jazyků
-      document.querySelectorAll('.lang-switch button').forEach(btn => {
-        btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  </main>
+
+  <footer>
+    <p class="footer-quote" data-i18n="footerQuote">"Sedmkrát padneš, osmkrát vstaneš."</p>
+    <p class="footer-copy" id="footer-date"></p>
+  </footer>
+
+  <!-- ── SCRIPT ─────────────────────────────────────────────── -->
+  <script>
+  const T = {
+    cs: {
+      title:             'Vojtěch "Voku" Kurinec | Portfolio',
+      heroEyebrow:       'Portfolio · 2026',
+      tagline:           'Mladý vývojář & IT nadšenec',
+      captionNormal:     'Normální fotka',
+      captionFunny:      'Trošku vtipnej.',
+      hobbyAI:           'AI',
+      hobby3d:           '3D tisk',
+      hobbyCode:         'Programování',
+      hobbyTech:         'Technologie',
+      scrollHint:        'Scroll',
+      whoLabel:          'O mně',
+      whoHeading:        'Kdo jsem?',
+      whoText:           'Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a jsem nadšenec do IT, věnuju se programování, AI, 3D tisku a Raspberry Pi. Pracuju na projektu jako <strong>Knowix</strong>. A pracoval jsem nad <strong>Školní chat</strong>, <strong>Easy Keylogger</strong> a <strong>rádoby mini OS</strong>. Ve škole jsem aktivní, sportuju a dokážu být vážný, když je potřeba. Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním – ne pro slávu nebo peníze.',
+      projectsLabel:     'Moje práce',
+      projectsHeading:   'Projekty',
+      liveBadge:         'Aktivní',
+      knowixTitle:       'Knowix',
+      knowixDesc:        'Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).',
+      lmcTitle:          'LasergameMC (LMC)',
+      lmcDesc:           'Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.',
+      visitSite:         'Navštívit web',
+      schoolChatTitle:   'Školní chat',
+      schoolChatDesc:    'Chatovací platforma postavená na Fletu — zároveň můj první projekt.',
+      viewOnGitHub:      'Zobrazit na GitHubu',
+      easyKeyloggerTitle:'Easy Keylogger',
+      easyKeyloggerDesc: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.',
+      techLabel:         'Stack',
+      technologiesHeading:'Technologie',
+      languagesHeading:  'Jazyky',
+      frameworksHeading: 'Frameworky',
+      otherHeading:      'Ostatní',
+      badgeSome:         'Trochu',
+      badgeLearning:     'Učím&nbsp;se',
+      tech3dPrint:       '3D tisk',
+      techVideo:         'Střih videí',
+      contactHeading:    'Kontakt',
+      contactSub:        'Napiš mi — každou zprávu rád přečtu.',
+      regionValue:       'Jihočeský, Česká republika',
+      footerQuote:       '"Sedmkrát padneš, osmkrát vstaneš."'
+    },
+    en: {
+      title:             'Vojtěch "Voku" Kurinec | Portfolio',
+      heroEyebrow:       'Portfolio · 2026',
+      tagline:           'Young Developer & IT Enthusiast',
+      captionNormal:     'Normal photo',
+      captionFunny:      'A bit funny.',
+      hobbyAI:           'AI',
+      hobby3d:           '3D Printing',
+      hobbyCode:         'Coding',
+      hobbyTech:         'Technology',
+      scrollHint:        'Scroll',
+      whoLabel:          'About me',
+      whoHeading:        'Who am I?',
+      whoText:           'My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and an IT enthusiast focusing on programming, AI, 3D printing and Raspberry Pi. I\'m working on a project called <strong>Knowix</strong>. I\'ve also worked on <strong>School Chat</strong>, <strong>Easy Keylogger</strong> and a <strong>mini OS attempt</strong>. At school I stay active, do sports and can be serious when needed. I do things mainly to grow and help others – not for fame or money.',
+      projectsLabel:     'My Work',
+      projectsHeading:   'Projects',
+      liveBadge:         'Active',
+      knowixTitle:       'Knowix',
+      knowixDesc:        'Educational website — practice and learn interactively (similar to Umimeto.org).',
+      lmcTitle:          'LasergameMC (LMC)',
+      lmcDesc:           'Web platform for LasergameMC – statistics, player management and more.',
+      visitSite:         'Visit Site',
+      schoolChatTitle:   'School Chat',
+      schoolChatDesc:    'Chat platform built with Flet — also my very first project.',
+      viewOnGitHub:      'View on GitHub',
+      easyKeyloggerTitle:'Easy Keylogger',
+      easyKeyloggerDesc: 'Educational experiment focused on understanding input devices. Completely harmless.',
+      techLabel:         'Stack',
+      technologiesHeading:'Technologies',
+      languagesHeading:  'Languages',
+      frameworksHeading: 'Frameworks',
+      otherHeading:      'Other',
+      badgeSome:         'Basic',
+      badgeLearning:     'Learning',
+      tech3dPrint:       '3D Printing',
+      techVideo:         'Video Editing',
+      contactHeading:    'Contact',
+      contactSub:        'Drop me a message — I read every one.',
+      regionValue:       'South Bohemian, Czech Republic',
+      footerQuote:       '"Fall seven times, stand up eight."'
+    }
+  };
+
+  function updateDate(lang) {
+    const d = new Date();
+    const locale = lang === 'en' ? 'en-US' : 'cs-CZ';
+    document.getElementById('footer-date').textContent =
+      '© Vojtěch Kurinec, ' + d.toLocaleDateString(locale, {year:'numeric',month:'long',day:'numeric'});
+  }
+
+  function setLang(lang) {
+    const d = T[lang]; if (!d) return;
+    document.documentElement.lang = lang;
+    document.title = d.title;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.getAttribute('data-i18n');
+      if (d[k] !== undefined) el.innerHTML = d[k];
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      el.getAttribute('data-i18n-attr').split(';').forEach(m => {
+        const [a, k] = m.split(':');
+        if (a && k && d[k]) el.setAttribute(a.trim(), d[k]);
       });
+    });
+    document.querySelectorAll('.lang-switch button').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === lang));
+    localStorage.setItem('lang', lang);
+    updateDate(lang);
+  }
 
-      // Jednoduchá animace při scrollování
-      const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.project-item, .tech-card');
-        elements.forEach(element => {
-          const elementPosition = element.getBoundingClientRect().top;
-          const screenPosition = window.innerHeight / 1.3;
+  setLang(localStorage.getItem('lang') || 'cs');
+  document.querySelectorAll('.lang-switch button').forEach(b =>
+    b.addEventListener('click', () => setLang(b.dataset.lang)));
 
-          if (elementPosition < screenPosition) {
-            element.style.opacity = 1;
-            element.style.transform = 'translateY(0)';
-          }
-        });
-      };
+  // Scroll reveal
+  const io = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }),
+    { threshold: 0.08 }
+  );
+  document.querySelectorAll('.s').forEach(el => io.observe(el));
 
-      window.addEventListener('load', animateOnScroll);
-      window.addEventListener('scroll', animateOnScroll);
-    </script>
+  // Nav opacity on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(4,5,10,0.92)'
+      : 'rgba(4,5,10,0.72)';
+  }, { passive: true });
+  </script>
 </body>
 </html>
+
