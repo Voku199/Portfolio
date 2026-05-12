@@ -83,6 +83,8 @@
     .fa-envelope::before { content: "@"; }
     .fa-instagram::before { content: "IG"; }
     .fa-map-marker-alt::before { content: "LOC"; }
+    .fa-tint::before { content: "H2O"; }
+    .fa-star::before { content: "★"; }
 
     /* ─── SCROLLBAR ──────────────────────────────────────────── */
     ::-webkit-scrollbar { width: 4px; }
@@ -150,6 +152,7 @@
     .orb-2 { width:480px;height:480px; background:var(--purple); opacity:.065; bottom:-80px; right:-80px;  animation: orb-move 8s  ease-in-out infinite 2.5s; }
     .orb-3 { width:340px;height:340px; background:var(--green);  opacity:.045; top:42%;      left:58%;     animation: orb-move 10s ease-in-out infinite 5s; }
     .orb-4 { width:260px;height:260px; background:var(--red);    opacity:.040; top:15%;      right:22%;    animation: orb-move 7s  ease-in-out infinite 1.5s; }
+    .orb-5 { width:200px;height:200px; background:var(--orange); opacity:.035; bottom:25%;   left:30%;     animation: orb-move 11s ease-in-out infinite 3.5s; }
 
     @keyframes orb-move {
       0%,100% { transform: translate(0,0) scale(1); }
@@ -239,7 +242,7 @@
     /* Photos */
     .hero-photos {
       display: flex; justify-content: center; gap: 2.8rem;
-      opacity: 0; animation: fade-up .7s ease 1.1s forwards;
+      opacity: 0; animation: fade-up .7s ease 1.28s forwards;
     }
     .hero-photo {
       display: flex; flex-direction: column; align-items: center;
@@ -261,7 +264,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
       color: var(--muted); font-size: 0.65rem;
       letter-spacing: 0.1em; text-transform: uppercase;
-      opacity: 0; animation: fade-up .7s ease 1.65s forwards;
+      opacity: 0; animation: fade-up .7s ease 1.85s forwards;
     }
     .scroll-hint i { animation: scroll-bounce 2s ease-in-out infinite; }
     @keyframes scroll-bounce {
@@ -304,7 +307,24 @@
     .about-text {
       font-size: 1.1rem; line-height: 1.9;
       color: rgba(245,245,247,.82);
-      text-align: center; max-width: 840px; margin: 0 auto;
+      text-align: left; max-width: 840px; margin: 0 auto;
+    }
+    .about-text p + p { margin-top: 1rem; }
+    .about-text h3 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .about-divider {
+      text-align: center;
+      color: rgba(245,245,247,.35);
+      letter-spacing: 0.3em;
+      margin: 1.4rem 0;
+    }
+    .about-footer {
+      margin-top: 1.3rem;
+      color: rgba(245,245,247,.9);
     }
     .about-text strong { color: var(--text); font-weight: 600; }
 
@@ -329,6 +349,9 @@
     .s.show .p-card:nth-child(2)     { transition-delay: .18s; }
     .s.show .p-card:nth-child(3)     { transition-delay: .28s; }
     .s.show .p-card:nth-child(4)     { transition-delay: .38s; }
+    .s.show .p-card:nth-child(5)     { transition-delay: .48s; }
+    .s.show .p-card:nth-child(6)     { transition-delay: .58s; }
+    .s.show .p-card:nth-child(7)     { transition-delay: .68s; }
 
     .p-card:hover {
       transform: translateY(-9px) !important;
@@ -496,6 +519,71 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    /* ─── HERO STATS ─────────────────────────────────────────── */
+    .hero-stats {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2.8rem; margin-bottom: 3rem;
+      opacity: 0; animation: fade-up .7s ease 1.05s forwards;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-size: 2.1rem; font-weight: 900; letter-spacing: -.05em; line-height: 1;
+      background: linear-gradient(135deg, var(--text) 0%, rgba(245,245,247,.5) 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-stat-lbl {
+      font-size: .67rem; color: var(--muted); text-transform: uppercase;
+      letter-spacing: .12em; margin-top: .3rem;
+    }
+    .hero-stat-div { width: 1px; height: 38px; background: var(--border); }
+
+    /* ─── PROJECT HOVER OVERLAY ──────────────────────────────── */
+    .p-hover-overlay {
+      position: absolute; inset: 0; border-radius: var(--r);
+      background: rgba(11,13,20,0.96);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      padding: 1.8rem; display: flex; flex-direction: column;
+      justify-content: space-between;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity .28s ease, transform .28s ease;
+      z-index: 10; pointer-events: none;
+    }
+    .p-card:hover .p-hover-overlay { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .p-overlay-from {
+      font-size: .63rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .6rem;
+    }
+    .p-overlay-text {
+      font-size: .88rem; color: rgba(245,245,247,.82); line-height: 1.72; flex: 1;
+    }
+    .p-overlay-links { display: flex; gap: .55rem; flex-wrap: wrap; margin-top: 1.1rem; }
+
+    /* ─── PLANNED BADGE ──────────────────────────────────────── */
+    .planned-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--purple);
+      background: rgba(191,63,140,.12); border: 1px solid rgba(191,63,140,.28);
+      border-radius: 50px; padding: .2rem .6rem; margin-bottom: .8rem;
+      position: relative; z-index: 1; width: fit-content;
+    }
+    .planned-badge .dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--purple);
+      animation: pulse-purple 2s ease-in-out infinite;
+    }
+    @keyframes pulse-purple {
+      0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(191,63,140,.5); }
+      50%      { opacity:.6; box-shadow:0 0 0 5px rgba(191,63,140,0); }
+    }
+
+    /* ─── AURORA DIVIDER ─────────────────────────────────────── */
+    .aurora-line {
+      height: 1px; border: none; margin: -3rem 0 5rem;
+      background: linear-gradient(90deg, transparent 0%, var(--blue) 20%, var(--purple) 50%, var(--red) 80%, transparent 100%);
+      opacity: .14;
+    }
+
+
     /* ─── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 900px)  { nav { padding: .8rem 1.5rem; } }
     @media (max-width: 768px)  {
@@ -527,6 +615,7 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
     <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
 
     <div class="hero-content">
       <div class="hero-eyebrow">
@@ -548,6 +637,23 @@
         <span class="hero-tag"><i class="fas fa-microchip"></i>Raspberry Pi</span>
         <span class="hero-tag"><i class="fas fa-code"></i><span data-i18n="hobbyCode">Programování</span></span>
         <span class="hero-tag"><i class="fas fa-brain"></i><span data-i18n="hobbyTech">Technologie</span></span>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num" data-i18n="statProjects">7+</div>
+          <div class="hero-stat-lbl" data-i18n="statProjectsLbl">Projektů</div>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" data-i18n="statYears">3+</div>
+          <div class="hero-stat-lbl" data-i18n="statYearsLbl">Roky kódování</div>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-num" data-i18n="statAge">15</div>
+          <div class="hero-stat-lbl" data-i18n="statAgeLbl">Let</div>
+        </div>
       </div>
 
       <div class="hero-photos">
@@ -574,14 +680,15 @@
     <div class="s" id="about">
       <div class="s-head">
         <div class="s-label" data-i18n="whoLabel">O mně</div>
-        <h2 data-i18n="whoHeading">Kdo jsem?</h2>
+        <h2 data-i18n="whoHeading">Vojtěch Kurinec — Voku</h2>
       </div>
       <div class="about-card">
-        <p class="about-text" data-i18n="whoText">Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a jsem nadšenec do IT, věnuju se programování, AI, 3D tisku a Raspberry Pi. Pracuju na projektu jako <strong>Knowix</strong>. A pracoval jsem nad <strong>Školní chat</strong>, <strong>Easy Keylogger</strong> a <strong>rádoby mini OS</strong>. Ve škole jsem aktivní, sportuju a dokážu být vážný, když je potřeba. Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním – ne pro slávu nebo peníze.</p>
+        <div class="about-text" data-i18n="whoText"><p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hraju hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to postavit — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-divider">---</p><h3>Projekty</h3><p><strong>Knowix</strong> — platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</p><p><strong>Fluxen</strong> — nástupce Knowixu. Duolingo-style learning platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozdělených podle ročníků. V aktivním vývoji.</p><p><strong>LasergameMC</strong> — český Minecraft server s Laserforce mechanikami. Obsahuje vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</p><p><strong>Supo</strong> — aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožňuje načítání a zobrazování dat z potápěčských hodinek.</p><p><strong>Školní chat / Easy Keylogger</strong> — starší projekty, ze kterých jsem se hodně naučil — hlavně to, jak <em>nedělat</em> věci. A to je taky cenná zkušenost.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p></div>
       </div>
     </div>
 
     <!-- ── PROJEKTY ──────────────────────────────────────────── -->
+    <hr class="aurora-line">
     <div class="s" id="projects">
       <div class="s-head">
         <div class="s-label" data-i18n="projectsLabel">Moje práce</div>
@@ -591,66 +698,139 @@
 
         <!-- Knowix -->
         <div class="p-card" style="--accent: var(--blue)">
-          <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)">
-            <i class="fas fa-graduation-cap"></i>
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="knowixInfo">Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</div>
+            </div>
+            <div class="p-overlay-links">
+              <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+            </div>
           </div>
-          <div class="live-badge"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></div>
+          <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)"><i class="fas fa-graduation-cap"></i></div>
           <div class="p-title" data-i18n="knowixTitle">Knowix</div>
           <div class="p-desc" data-i18n="knowixDesc">Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).</div>
           <div class="p-links">
-            <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn-ghost">
-              <i class="fab fa-github"></i> GitHub
-            </a>
+            <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
           </div>
         </div>
 
         <!-- LasergameMC -->
         <div class="p-card" style="--accent: var(--red)">
-          <div class="p-icon" style="background:rgba(245,79,54,.14);color:var(--red)">
-            <i class="fas fa-crosshairs"></i>
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="lmcInfo">Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</div>
+            </div>
+            <div class="p-overlay-links">
+              <a href="https://lasergamemc.cz" target="_blank" class="btn btn-fill" style="background:var(--red)"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>
+              <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+            </div>
           </div>
+          <div class="p-icon" style="background:rgba(245,79,54,.14);color:var(--red)"><i class="fas fa-crosshairs"></i></div>
           <div class="live-badge"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></div>
           <div class="p-title" data-i18n="lmcTitle">LasergameMC (LMC)</div>
           <div class="p-desc" data-i18n="lmcDesc">Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.</div>
           <div class="p-links">
-            <a href="https://lasergamemc.cz" target="_blank" class="btn btn-fill" style="background:var(--red)">
-              <i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span>
-            </a>
+            <a href="https://lasergamemc.cz" target="_blank" class="btn btn-fill" style="background:var(--red)"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>
+            <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+
+        <!-- Lasergame-Stats-Own -->
+        <div class="p-card" style="--accent: var(--green)">
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="lsoInfo">Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.</div>
+            </div>
+            <div class="p-overlay-links">
+              <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+          </div>
+          <div class="p-icon" style="background:rgba(109,192,102,.14);color:var(--green)"><i class="fas fa-chart-bar"></i></div>
+          <div class="p-title" data-i18n="lsoTitle">Lasergame-Stats-Own</div>
+          <div class="p-desc" data-i18n="lsoDesc">Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.</div>
+          <div class="p-links">
+            <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
           </div>
         </div>
 
         <!-- Školní chat -->
         <div class="p-card" style="--accent: var(--yellow)">
-          <div class="p-icon" style="background:rgba(246,194,27,.14);color:var(--yellow)">
-            <i class="fas fa-comments"></i>
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="schoolChatInfo">Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).</div>
+            </div>
+            <div class="p-overlay-links">
+              <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+            </div>
           </div>
+          <div class="p-icon" style="background:rgba(246,194,27,.14);color:var(--yellow)"><i class="fas fa-comments"></i></div>
           <div class="p-title" data-i18n="schoolChatTitle">Školní chat</div>
           <div class="p-desc" data-i18n="schoolChatDesc">Chatovací platforma postavená na Fletu — zároveň můj první projekt.</div>
           <div class="p-links">
-            <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn-ghost">
-              <i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span>
-            </a>
+            <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
           </div>
         </div>
 
         <!-- Easy Keylogger -->
         <div class="p-card" style="--accent: var(--orange)">
-          <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--orange)">
-            <i class="fas fa-keyboard"></i>
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="easyKeyloggerInfo">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.</div>
+            </div>
+            <div class="p-overlay-links">
+              <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+            </div>
           </div>
+          <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--orange)"><i class="fas fa-keyboard"></i></div>
           <div class="p-title" data-i18n="easyKeyloggerTitle">Easy Keylogger</div>
           <div class="p-desc" data-i18n="easyKeyloggerDesc">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.</div>
           <div class="p-links">
-            <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn-ghost">
-              <i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span>
-            </a>
+            <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
           </div>
+        </div>
+
+        <!-- Fluxen – Plánováno -->
+        <div class="p-card" style="--accent: var(--purple)">
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. V aktivním vývoji.</div>
+            </div>
+            <div class="p-overlay-links"></div>
+          </div>
+          <div class="p-icon" style="background:rgba(191,63,140,.14);color:var(--purple)"><i class="fas fa-graduation-cap"></i></div>
+          <div class="planned-badge"><span class="dot"></span><span data-i18n="plannedBadge">Plánováno</span></div>
+          <div class="p-title" data-i18n="fluxenTitle">Fluxen</div>
+          <div class="p-desc" data-i18n="fluxenDesc">Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.</div>
+          <div class="p-links"></div>
+        </div>
+
+        <!-- Supo – Plánováno -->
+        <div class="p-card" style="--accent: var(--blue)">
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="supoInfo">Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožní načítání a zobrazování dat z potápěčských hodinek.</div>
+            </div>
+            <div class="p-overlay-links"></div>
+          </div>
+          <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)"><i class="fas fa-tint"></i></div>
+          <div class="planned-badge"><span class="dot"></span><span data-i18n="plannedBadge">Plánováno</span></div>
+          <div class="p-title" data-i18n="supoTitle">Supo</div>
+          <div class="p-desc" data-i18n="supoDesc">Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.</div>
+          <div class="p-links"></div>
         </div>
 
       </div>
     </div>
 
     <!-- ── TECHNOLOGIE ───────────────────────────────────────── -->
+    <hr class="aurora-line">
     <div class="s" id="tech">
       <div class="s-head">
         <div class="s-label" data-i18n="techLabel">Stack</div>
@@ -753,6 +933,7 @@
     </div>
 
     <!-- ── KONTAKT ────────────────────────────────────────────── -->
+    <hr class="aurora-line">
     <div class="s" id="contact">
       <div class="contact-card">
         <div class="contact-heading" data-i18n="contactHeading">Kontakt</div>
@@ -799,22 +980,43 @@
       hobbyCode:         'Programování',
       hobbyTech:         'Technologie',
       scrollHint:        'Scroll',
+      statProjects:      '7+',
+      statProjectsLbl:   'Projektů',
+      statYears:         '3+',
+      statYearsLbl:      'Roky kódování',
+      statAge:           '15',
+      statAgeLbl:        'Let',
       whoLabel:          'O mně',
-      whoHeading:        'Kdo jsem?',
-      whoText:           'Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a jsem nadšenec do IT, věnuju se programování, AI, 3D tisku a Raspberry Pi. Pracuju na projektu jako <strong>Knowix</strong>. A pracoval jsem nad <strong>Školní chat</strong>, <strong>Easy Keylogger</strong> a <strong>rádoby mini OS</strong>. Ve škole jsem aktivní, sportuju a dokážu být vážný, když je potřeba. Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním – ne pro slávu nebo peníze.',
+      whoHeading:        'Vojtěch Kurinec — Voku',
+      whoText:           '<p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hraju hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to postavit — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-divider">---</p><h3>Projekty</h3><p><strong>Knowix</strong> — platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</p><p><strong>Fluxen</strong> — nástupce Knowixu. Duolingo-style learning platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozdělených podle ročníků. V aktivním vývoji.</p><p><strong>LasergameMC</strong> — český Minecraft server s Laserforce mechanikami. Obsahuje vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</p><p><strong>Lasergame-Stats-Own</strong> — web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her a porovnáváním výsledků.</p><p><strong>Supo</strong> — aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožňuje načítání a zobrazování dat z potápěčských hodinek.</p><p><strong>Školní chat / Easy Keylogger</strong> — starší projekty, ze kterých jsem se hodně naučil — hlavně to, jak <em>nedělat</em> věci. A to je taky cenná zkušenost.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p>',
       projectsLabel:     'Moje práce',
       projectsHeading:   'Projekty',
-      liveBadge:         'Aktivní',
+      overlayFromLabel:  'O projektu',
       knowixTitle:       'Knowix',
       knowixDesc:        'Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).',
+      knowixInfo:        'Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.',
       lmcTitle:          'LasergameMC (LMC)',
       lmcDesc:           'Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.',
+      lmcInfo:           'Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.',
       visitSite:         'Navštívit web',
+      lsoTitle:          'Lasergame-Stats-Own',
+      lsoDesc:           'Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.',
+      lsoInfo:           'Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.',
       schoolChatTitle:   'Školní chat',
       schoolChatDesc:    'Chatovací platforma postavená na Fletu — zároveň můj první projekt.',
+      schoolChatInfo:    'Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).',
       viewOnGitHub:      'Zobrazit na GitHubu',
       easyKeyloggerTitle:'Easy Keylogger',
       easyKeyloggerDesc: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.',
+      easyKeyloggerInfo: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.',
+      fluxenTitle:       'Fluxen',
+      fluxenDesc:        'Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.',
+      fluxenInfo:        'Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. V aktivním vývoji.',
+      supoTitle:         'Supo',
+      supoDesc:          'Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.',
+      supoInfo:          'Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožní načítání a zobrazování dat z potápěčských hodinek.',
+      plannedBadge:      'Plánováno',
+      liveBadge:         'Aktivní',
       techLabel:         'Stack',
       technologiesHeading:'Technologie',
       languagesHeading:  'Jazyky',
@@ -840,22 +1042,43 @@
       hobbyCode:         'Coding',
       hobbyTech:         'Technology',
       scrollHint:        'Scroll',
+      statProjects:      '7+',
+      statProjectsLbl:   'Projects',
+      statYears:         '3+',
+      statYearsLbl:      'Years coding',
+      statAge:           '15',
+      statAgeLbl:        'Years old',
       whoLabel:          'About me',
-      whoHeading:        'Who am I?',
-      whoText:           'My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and an IT enthusiast focusing on programming, AI, 3D printing and Raspberry Pi. I\'m working on a project called <strong>Knowix</strong>. I\'ve also worked on <strong>School Chat</strong>, <strong>Easy Keylogger</strong> and a <strong>mini OS attempt</strong>. At school I stay active, do sports and can be serious when needed. I do things mainly to grow and help others – not for fame or money.',
+      whoHeading:        'Vojtěch Kurinec — Voku',
+      whoText:           '<p>My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and IT is my passion — I code, experiment with AI, 3D print, tinker with Raspberry Pi and enjoy hardware. I like chess, games and sometimes sports too.</p><p>I believe the best way to learn something new is to build it — that is why I already have several personal projects behind me, and they taught me far more than any textbook could.</p><p class="about-divider">---</p><h3>Projects</h3><p><strong>Knowix</strong> — an English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary — all free, without pay-to-win elements. Built with Flask, MySQL and the Genius API.</p><p><strong>Fluxen</strong> — the successor to Knowix. A Duolingo-style learning platform combining English lessons through songs with science content split by school grade. In active development.</p><p><strong>LasergameMC</strong> — a Czech Minecraft server with Laserforce mechanics. It includes a custom Paper plugin for laserball, player statistics and multiple game modes. The plugin is now open source.</p><p><strong>Lasergame-Stats-Own</strong> — a web app for scraping and displaying personal Laserforce statistics. Clean dashboard with game history and result comparison.</p><p><strong>Supo</strong> — an app for divers with Suunto OAuth 2.0 API integration. It allows loading and displaying data from diving watches.</p><p><strong>School Chat / Easy Keylogger</strong> — older projects that taught me a lot, especially how <em>not</em> to do things. And that is valuable experience too.</p><p class="about-footer"><em>I do things mainly to keep improving and help others — not for fame or money.</em></p>',
       projectsLabel:     'My Work',
       projectsHeading:   'Projects',
-      liveBadge:         'Active',
+      overlayFromLabel:  'About project',
       knowixTitle:       'Knowix',
       knowixDesc:        'Educational website — practice and learn interactively (similar to Umimeto.org).',
+      knowixInfo:        'English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary — all free, no pay-to-win. Built with Flask, MySQL and the Genius API.',
       lmcTitle:          'LasergameMC (LMC)',
       lmcDesc:           'Web platform for LasergameMC – statistics, player management and more.',
+      lmcInfo:           'Czech Minecraft server with Laserforce mechanics. Custom Paper plugin for laserball, player stats and multiple game modes. Plugin is now open source.',
       visitSite:         'Visit Site',
+      lsoTitle:          'Lasergame-Stats-Own',
+      lsoDesc:           'Personal Laserforce stats dashboard — data scraping, game history and result comparison.',
+      lsoInfo:           'Web app for scraping and displaying personal Laserforce statistics. Clean dashboard with game history, result comparison and a custom database.',
       schoolChatTitle:   'School Chat',
       schoolChatDesc:    'Chat platform built with Flet — also my very first project.',
+      schoolChatInfo:    'My very first project — a chat platform built with Flet. I learned a lot about how things work (and how they don\'t).',
       viewOnGitHub:      'View on GitHub',
       easyKeyloggerTitle:'Easy Keylogger',
       easyKeyloggerDesc: 'Educational experiment focused on understanding input devices. Completely harmless.',
+      easyKeyloggerInfo: 'Educational experiment focused on understanding input devices. I learned a lot about how <em>not</em> to do things — and that\'s valuable experience too.',
+      fluxenTitle:       'Fluxen',
+      fluxenDesc:        'Knowix 2.0 — Duolingo-style platform for English and science learning.',
+      fluxenInfo:        'Successor to Knowix — Duolingo-style platform combining English lessons through songs with science content split by school grade. In active development.',
+      supoTitle:         'Supo',
+      supoDesc:          'Diving app — load and visualize data from Suunto watches.',
+      supoInfo:          'App for divers with Suunto OAuth 2.0 API integration. Enables loading and displaying data from diving watches.',
+      plannedBadge:      'Planned',
+      liveBadge:         'Live',
       techLabel:         'Stack',
       technologiesHeading:'Technologies',
       languagesHeading:  'Languages',
