@@ -352,6 +352,7 @@
     .s.show .p-card:nth-child(5)     { transition-delay: .48s; }
     .s.show .p-card:nth-child(6)     { transition-delay: .58s; }
     .s.show .p-card:nth-child(7)     { transition-delay: .68s; }
+    .s.show .p-card:nth-child(8)     { transition-delay: .78s; }
 
     .p-card:hover {
       transform: translateY(-9px) !important;
@@ -576,6 +577,37 @@
       50%      { opacity:.6; box-shadow:0 0 0 5px rgba(191,63,140,0); }
     }
 
+    /* ─── WIP / IN-DEV BADGE ────────────────────────────────── */
+    .wip-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(242,140,40,.12); border: 1px solid rgba(242,140,40,.28);
+      border-radius: 50px; padding: .2rem .6rem; margin-bottom: .8rem;
+      position: relative; z-index: 1; width: fit-content;
+    }
+    .wip-badge .dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
+      animation: pulse-orange 2s ease-in-out infinite;
+    }
+    @keyframes pulse-orange {
+      0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(242,140,40,.5); }
+      50%      { opacity:.6; box-shadow:0 0 0 5px rgba(242,140,40,0); }
+    }
+
+    /* ─── MAINTENANCE / LOW-ACTIVITY BADGE ──────────────────── */
+    .maintenance-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(134,134,139,.10); border: 1px solid rgba(134,134,139,.25);
+      border-radius: 50px; padding: .2rem .6rem; margin-bottom: .8rem;
+      position: relative; z-index: 1; width: fit-content;
+    }
+    .maintenance-badge .dot {
+      width: 5px; height: 5px; border-radius: 50%; background: var(--muted); opacity: .55;
+    }
+
     /* ─── AURORA DIVIDER ─────────────────────────────────────── */
     .aurora-line {
       height: 1px; border: none; margin: -3rem 0 5rem;
@@ -756,6 +788,22 @@
           </div>
         </div>
 
+        <!-- Bakix – Ve vývoji -->
+        <div class="p-card" style="--accent: var(--orange)">
+          <div class="p-hover-overlay">
+            <div>
+              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+              <div class="p-overlay-text" data-i18n="bakixInfo">Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.</div>
+            </div>
+            <div class="p-overlay-links"></div>
+          </div>
+          <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--orange)"><i class="fas fa-mobile-alt"></i></div>
+          <div class="wip-badge"><span class="dot"></span><span data-i18n="wipBadge">Ve vývoji</span></div>
+          <div class="p-title" data-i18n="bakixTitle">Bakix</div>
+          <div class="p-desc" data-i18n="bakixDesc">Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.</div>
+          <div class="p-links"></div>
+        </div>
+
         <!-- Školní chat -->
         <div class="p-card" style="--accent: var(--yellow)">
           <div class="p-hover-overlay">
@@ -794,33 +842,33 @@
           </div>
         </div>
 
-        <!-- Fluxen – Plánováno -->
+        <!-- Fluxen – Nízká aktivita -->
         <div class="p-card" style="--accent: var(--purple)">
           <div class="p-hover-overlay">
             <div>
               <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. V aktivním vývoji.</div>
+              <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
             </div>
             <div class="p-overlay-links"></div>
           </div>
           <div class="p-icon" style="background:rgba(191,63,140,.14);color:var(--purple)"><i class="fas fa-graduation-cap"></i></div>
-          <div class="planned-badge"><span class="dot"></span><span data-i18n="plannedBadge">Plánováno</span></div>
+          <div class="maintenance-badge"><span class="dot"></span><span data-i18n="maintenanceBadge">Nízká aktivita</span></div>
           <div class="p-title" data-i18n="fluxenTitle">Fluxen</div>
           <div class="p-desc" data-i18n="fluxenDesc">Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.</div>
           <div class="p-links"></div>
         </div>
 
-        <!-- Supo – Plánováno -->
+        <!-- Supo – Nízká aktivita -->
         <div class="p-card" style="--accent: var(--blue)">
           <div class="p-hover-overlay">
             <div>
               <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="supoInfo">Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožní načítání a zobrazování dat z potápěčských hodinek.</div>
+              <div class="p-overlay-text" data-i18n="supoInfo">Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
             </div>
             <div class="p-overlay-links"></div>
           </div>
           <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)"><i class="fas fa-tint"></i></div>
-          <div class="planned-badge"><span class="dot"></span><span data-i18n="plannedBadge">Plánováno</span></div>
+          <div class="maintenance-badge"><span class="dot"></span><span data-i18n="maintenanceBadge">Nízká aktivita</span></div>
           <div class="p-title" data-i18n="supoTitle">Supo</div>
           <div class="p-desc" data-i18n="supoDesc">Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.</div>
           <div class="p-links"></div>
@@ -980,7 +1028,7 @@
       hobbyCode:         'Programování',
       hobbyTech:         'Technologie',
       scrollHint:        'Scroll',
-      statProjects:      '7+',
+      statProjects:      '8+',
       statProjectsLbl:   'Projektů',
       statYears:         '3+',
       statYearsLbl:      'Roky kódování',
@@ -1011,11 +1059,16 @@
       easyKeyloggerInfo: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.',
       fluxenTitle:       'Fluxen',
       fluxenDesc:        'Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.',
-      fluxenInfo:        'Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. V aktivním vývoji.',
+      fluxenInfo:        'Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
       supoTitle:         'Supo',
       supoDesc:          'Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.',
-      supoInfo:          'Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožní načítání a zobrazování dat z potápěčských hodinek.',
+      supoInfo:          'Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
+      bakixTitle:        'Bakix',
+      bakixDesc:         'Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.',
+      bakixInfo:         'Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.',
       plannedBadge:      'Plánováno',
+      wipBadge:          'Ve vývoji',
+      maintenanceBadge:  'Nízká aktivita',
       liveBadge:         'Aktivní',
       techLabel:         'Stack',
       technologiesHeading:'Technologie',
@@ -1042,7 +1095,7 @@
       hobbyCode:         'Coding',
       hobbyTech:         'Technology',
       scrollHint:        'Scroll',
-      statProjects:      '7+',
+      statProjects:      '8+',
       statProjectsLbl:   'Projects',
       statYears:         '3+',
       statYearsLbl:      'Years coding',
@@ -1073,11 +1126,16 @@
       easyKeyloggerInfo: 'Educational experiment focused on understanding input devices. I learned a lot about how <em>not</em> to do things — and that\'s valuable experience too.',
       fluxenTitle:       'Fluxen',
       fluxenDesc:        'Knowix 2.0 — Duolingo-style platform for English and science learning.',
-      fluxenInfo:        'Successor to Knowix — Duolingo-style platform combining English lessons through songs with science content split by school grade. In active development.',
+      fluxenInfo:        'Successor to Knowix — Duolingo-style platform combining English lessons through songs with science content split by school grade. Currently in low-activity / maintenance mode with no fixed release timeline.',
       supoTitle:         'Supo',
       supoDesc:          'Diving app — load and visualize data from Suunto watches.',
-      supoInfo:          'App for divers with Suunto OAuth 2.0 API integration. Enables loading and displaying data from diving watches.',
+      supoInfo:          'App for divers with Suunto OAuth 2.0 API integration. Currently in low-activity / maintenance mode with no fixed release timeline.',
+      bakixTitle:        'Bakix',
+      bakixDesc:         'Modern PWA leveraging the Bakaláři API — a seamless, student-focused interface.',
+      bakixInfo:         'A modern PWA application leveraging the Bakaláři API to provide a seamless, student-focused interface. Displays timetables, grades, absences and messages in a clean, mobile-first UI.',
       plannedBadge:      'Planned',
+      wipBadge:          'In Development',
+      maintenanceBadge:  'Low Activity',
       liveBadge:         'Live',
       techLabel:         'Stack',
       technologiesHeading:'Technologies',
