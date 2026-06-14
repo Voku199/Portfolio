@@ -12,6 +12,11 @@
 <meta property="og:site_name" content="Voku Portfolio">
 <meta property="og:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
 <meta property="og:description" content="Mladý vývojář & IT nadšenec — AI, 3D tisk, Raspberry Pi a vlastní projekty.">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
+<meta name="twitter:description" content="Mladý vývojář & IT nadšenec — AI, 3D tisk, Raspberry Pi a vlastní projekty.">
+<meta name="twitter:image" content="og-image.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <!-- Font Awesome pres JS -> SVG ikony bez webfont requestu -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
@@ -53,6 +58,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
+:target, section[id], header[id] { scroll-margin-top: 84px; }
 html, body { overflow-x: hidden; }
 @supports (overflow: clip) { html, body { overflow-x: clip; } }
 
@@ -108,6 +114,12 @@ i.fas::before, i.fab::before { content: "?"; font-size: .72em; font-weight: 700;
 .fa-map-marker-alt::before { content: "◉"; }
 .fa-tint::before { content: "H2O"; }
 .fa-star::before { content: "✦"; }
+.fa-lightbulb::before { content: "IDEA"; }
+.fa-rocket::before { content: "GO"; }
+.fa-shield-halved::before, .fa-lock::before { content: "SEC"; }
+.fa-flask::before, .fa-vial::before { content: "QA"; }
+.fa-bullhorn::before { content: "MKT"; }
+.fa-arrows-rotate::before, .fa-sync::before { content: "↻"; }
 
 /* ── Film grain over everything ─────────────────────────── */
 body::after {
@@ -529,7 +541,7 @@ body::after {
   line-height: 1.1;
 }
 .fcard--live { color: var(--cream); line-height: 1.5; }
-.fcard--live .live-dot {
+.live-dot {
   display: inline-block;
   width: 7px; height: 7px;
   border-radius: 50%;
@@ -993,6 +1005,78 @@ body::after {
 .footer__quote { color: var(--cream); font-style: italic; font-size: 13px; max-width: 40ch; }
 .footer small { color: var(--muted); font-size: 10px; letter-spacing: 1px; }
 
+/* ── Hero "now building" line ───────────────────────────── */
+.hero__now {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.4rem;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero__now b { color: var(--cream); font-weight: 700; }
+
+/* clickable github floating card */
+a.fcard { text-decoration: none; transition: transform .4s var(--spring), border-color .3s; }
+a.fcard:hover { border-color: var(--terra); }
+
+/* ── How I work ─────────────────────────────────────────── */
+.how {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(4rem, 9vw, 7rem) 1.5rem;
+  text-align: center;
+}
+.how__head { max-width: 60ch; margin: 0 auto clamp(2.5rem, 6vw, 4rem); }
+.how__head .kicker { justify-content: center; }
+.how__head h2 {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+}
+.how__head h2 em { font-style: normal; color: var(--terra3); }
+.how__lead { color: var(--muted); font-size: clamp(.92rem, 1.5vw, 1.05rem); }
+.how__lead strong { color: var(--cream); font-weight: 700; }
+.how__lead em { color: var(--terra3); font-style: italic; }
+.flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  text-align: left;
+}
+.flow__step {
+  position: relative;
+  background: linear-gradient(170deg, var(--bg3) 0%, var(--bg2) 75%);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.3rem 1.2rem;
+  transition: transform .45s var(--ease), border-color .35s;
+}
+.flow__step:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--terra) 40%, var(--line)); }
+.flow__num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--terra);
+}
+.flow__ico {
+  font-size: 18px;
+  color: var(--terra3);
+  margin: .6rem 0 .8rem;
+}
+.flow__t { font-size: 1rem; font-weight: 700; margin-bottom: .35rem; }
+.flow__d { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+
+/* ── Project card: touch / no-hover fallback ────────────── */
+@media (hover: none) {
+  .p-card .p-hover-overlay { display: none; }
+  .p-card.is-open .p-hover-overlay { display: flex; opacity: 1; transform: none; pointer-events: auto; }
+  .p-card { cursor: pointer; }
+}
+
 /* ── Scroll reveal system ───────────────────────────────── */
 .reveal {
   opacity: 0;
@@ -1032,6 +1116,7 @@ body::after {
   <a class="nav__logo" href="#hero"><span class="nav__star">✦</span>VOKU</a>
   <div class="nav__links">
     <a href="#about" data-i18n="navAbout">O mně</a>
+    <a href="#how" data-i18n="navHow">Jak pracuju</a>
     <a href="#projects" data-i18n="navProjects">Projekty</a>
     <a href="#tech" data-i18n="navTech">Technologie</a>
     <a href="#contact" data-i18n="navContact">Kontakt</a>
@@ -1058,7 +1143,7 @@ body::after {
       <span class="mask"><span class="accent-soft">Kurinec</span></span>
     </h1>
     <p class="hero__sub reveal" style="--d:.45s" data-i18n="heroSub">
-      <strong>Mladý vývojář & IT nadšenec.</strong> Programuju, experimentuju s AI, tisknu na 3D tiskárně a bastlím s Raspberry Pi. Nejlíp se učím tím, že věci <strong>prostě postavím</strong>.
+      <strong>Mladý vývojář & IT nadšenec.</strong> Stavím reálné projekty — od nápadu přes nasazení po bezpečnost. AI je můj nástroj, ne berlička: <strong>rozumím tomu, co dělám</strong>, a u každého projektu se učím dál.
     </p>
     <div class="hero__cta reveal" style="--d:.55s">
       <a class="btn btn--primary" href="#projects"><span data-i18n="heroCtaProjects">Moje projekty</span> ✦</a>
@@ -1070,6 +1155,7 @@ body::after {
       <span><i class="fas fa-microchip"></i> Raspberry Pi</span>
       <span><i class="fas fa-code"></i> <span data-i18n="hobbyCode">Programování</span></span>
     </div>
+    <div class="hero__now reveal" style="--d:.66s"><span class="live-dot"></span> <span data-i18n="heroNow">Právě stavím: <b>Fluxen</b> &amp; <b>Bakix</b></span></div>
     <div class="hero__stats reveal" style="--d:.7s">
       <div>
         <div class="hstat__num"><span data-count="8">0</span><sub style="font-size:.55em;color:var(--muted)">+</sub></div>
@@ -1116,15 +1202,15 @@ body::after {
         <span class="k">self</span>.loves = [<span class="s">"AI"</span>, <span class="s">"3D tisk"</span>, <span class="s">"Pi"</span>]
 
     <span class="k">def</span> <span class="f">build</span>(<span class="k">self</span>, idea):
-        <span class="c"># nejlíp se učím stavěním</span>
+        <span class="c"># nápad → AI → deploy → secure → test</span>
         <span class="k">return</span> <span class="f">ship</span>(idea)<span class="editor__cursor"></span></div>
       </div>
     </div>
 
-    <div class="fcard fcard--gh" data-depth="14">
+    <a class="fcard fcard--gh" href="https://github.com/Voku199" target="_blank" rel="noopener" data-depth="14">
       <div class="fcard__label"><span>✦</span> GitHub</div>
       <b style="color:var(--terra3)">@Voku199</b>
-    </div>
+    </a>
     <div class="fcard fcard--proj" data-depth="20">
       <div class="fcard__label" data-i18n="statProjectsLbl">Projektů</div>
       <div class="fcard__num"><span data-count="8">0</span>+</div>
@@ -1180,10 +1266,27 @@ body::after {
   </div>
 </section>
 
-<!-- ═══ 02 PROJEKTY ═══ -->
+<!-- ═══ 02 JAK PRACUJU ═══ -->
+<section class="how" id="how">
+  <div class="how__head">
+    <div class="kicker reveal"><span class="kicker__num">02</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="howLabel">Jak pracuju</span></div>
+    <h2 class="reveal" style="--d:.08s" data-i18n="howHeadingFancy">Řídím vývoj. <em>AI dělá těžkou práci.</em></h2>
+    <p class="how__lead reveal" style="--d:.16s" data-i18n="howLead">Snažím se programovat i „normálně" — ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>pomocník</strong>: klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>. Když rozjedu projekt, musím vědět co to je, dostat ho k lidem, zabezpečit ho a otestovat — a u všeho se <em>učím pořád dokola</em>.</p>
+  </div>
+  <div class="flow">
+    <div class="flow__step reveal"><div class="flow__num">01</div><div class="flow__ico"><i class="fas fa-lightbulb"></i></div><div class="flow__t" data-i18n="flow1t">Nápad</div><div class="flow__d" data-i18n="flow1d">Najít problém, který stojí za to vyřešit.</div></div>
+    <div class="flow__step reveal" style="--d:.06s"><div class="flow__num">02</div><div class="flow__ico"><i class="fas fa-robot"></i></div><div class="flow__t" data-i18n="flow2t">Stavba s AI</div><div class="flow__d" data-i18n="flow2d">AI píše kód, já vedu směr, architekturu a kontroluju to.</div></div>
+    <div class="flow__step reveal" style="--d:.12s"><div class="flow__num">03</div><div class="flow__ico"><i class="fas fa-rocket"></i></div><div class="flow__t" data-i18n="flow3t">Deploy</div><div class="flow__d" data-i18n="flow3d">Dostat to z localhostu k reálným uživatelům.</div></div>
+    <div class="flow__step reveal" style="--d:.18s"><div class="flow__num">04</div><div class="flow__ico"><i class="fas fa-shield-halved"></i></div><div class="flow__t" data-i18n="flow4t">Security</div><div class="flow__d" data-i18n="flow4d">Ošetřit data, přihlašování a slabá místa.</div></div>
+    <div class="flow__step reveal" style="--d:.24s"><div class="flow__num">05</div><div class="flow__ico"><i class="fas fa-flask"></i></div><div class="flow__t" data-i18n="flow5t">Testování</div><div class="flow__d" data-i18n="flow5d">Projít to, najít bugy, opravit, zopakovat.</div></div>
+    <div class="flow__step reveal" style="--d:.3s"><div class="flow__num">06</div><div class="flow__ico"><i class="fas fa-bullhorn"></i></div><div class="flow__t" data-i18n="flow6t">Marketing</div><div class="flow__d" data-i18n="flow6d">Zpopularizovat projekt a dostat ho mezi lidi.</div></div>
+  </div>
+</section>
+
+<!-- ═══ 03 PROJEKTY ═══ -->
 <section class="projects" id="projects">
   <div class="projects__head">
-    <div class="kicker reveal"><span class="kicker__num">02</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="projectsLabel">Moje práce</span></div>
+    <div class="kicker reveal"><span class="kicker__num">03</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="projectsLabel">Moje práce</span></div>
     <h2 class="reveal" style="--d:.08s" data-i18n="projectsHeadingFancy">Věci, co jsem <em>postavil</em>.</h2>
   </div>
   <div class="projects-grid">
@@ -1337,10 +1440,10 @@ body::after {
   </div>
 </section>
 
-<!-- ═══ 03 TECHNOLOGIE ═══ -->
+<!-- ═══ 04 TECHNOLOGIE ═══ -->
 <section class="section section--flip" id="tech">
   <div>
-    <div class="kicker reveal"><span class="kicker__num">03</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="techLabel">Stack</span></div>
+    <div class="kicker reveal"><span class="kicker__num">04</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="techLabel">Stack</span></div>
     <h2 class="reveal" style="--d:.08s" data-i18n="techHeadingFancy">Čím to <em>stavím</em>.</h2>
     <p class="lead reveal" style="--d:.16s" data-i18n="techLead">Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.</p>
     <ul class="bullets reveal" style="--d:.24s">
@@ -1443,14 +1546,16 @@ const T = {
   cs: {
     title:             'Vojtěch "Voku" Kurinec | Portfolio',
     navAbout:          'O mně',
+    navHow:            'Jak pracuju',
     navProjects:       'Projekty',
     navTech:           'Technologie',
     navContact:        'Kontakt',
     navContactBtn:     'Spojit se',
     heroEyebrow:       'Portfolio · 2026',
-    heroSub:           '<strong>Mladý vývojář & IT nadšenec.</strong> Programuju, experimentuju s AI, tisknu na 3D tiskárně a bastlím s Raspberry Pi. Nejlíp se učím tím, že věci <strong>prostě postavím</strong>.',
+    heroSub:           '<strong>Mladý vývojář & IT nadšenec.</strong> Stavím reálné projekty — od nápadu přes nasazení po bezpečnost. AI je můj nástroj, ne berlička: <strong>rozumím tomu, co dělám</strong>, a u každého projektu se učím dál.',
     heroCtaProjects:   'Moje projekty',
     heroCtaContact:    'Spojit se',
+    heroNow:           'Právě stavím: <b>Fluxen</b> &amp; <b>Bakix</b>',
     hobby3d:           '3D tisk',
     hobbyCode:         'Programování',
     fcardLive:         'LasergameMC běží naživo',
@@ -1464,6 +1569,21 @@ const T = {
     aboutPanelPill:    'Jihočeský · CZ',
     captionNormal:     'Normální fotka',
     captionFunny:      'Trošku vtipnej.',
+    howLabel:          'Jak pracuju',
+    howHeadingFancy:   'Řídím vývoj. <em>AI dělá těžkou práci.</em>',
+    howLead:           'Snažím se programovat i „normálně" — ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>pomocník</strong>: klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>. Když rozjedu projekt, musím vědět co to je, dostat ho k lidem, zabezpečit ho a otestovat — a u všeho se <em>učím pořád dokola</em>.',
+    flow1t:            'Nápad',
+    flow1d:            'Najít problém, který stojí za to vyřešit.',
+    flow2t:            'Stavba s AI',
+    flow2d:            'AI píše kód, já vedu směr, architekturu a kontroluju to.',
+    flow3t:            'Deploy',
+    flow3d:            'Dostat to z localhostu k reálným uživatelům.',
+    flow4t:            'Security',
+    flow4d:            'Ošetřit data, přihlašování a slabá místa.',
+    flow5t:            'Testování',
+    flow5d:            'Projít to, najít bugy, opravit, zopakovat.',
+    flow6t:            'Marketing',
+    flow6d:            'Zpopularizovat projekt a dostat ho mezi lidi.',
     projectsLabel:     'Moje práce',
     projectsHeadingFancy:'Věci, co jsem <em>postavil</em>.',
     overlayFromLabel:  'O projektu',
@@ -1514,14 +1634,16 @@ const T = {
   en: {
     title:             'Vojtěch "Voku" Kurinec | Portfolio',
     navAbout:          'About',
+    navHow:            'How I work',
     navProjects:       'Projects',
     navTech:           'Tech',
     navContact:        'Contact',
     navContactBtn:     'Get in touch',
     heroEyebrow:       'Portfolio · 2026',
-    heroSub:           '<strong>Young developer & IT enthusiast.</strong> I code, experiment with AI, 3D print and tinker with Raspberry Pi. I learn best by simply <strong>building things</strong>.',
+    heroSub:           '<strong>Young developer & IT enthusiast.</strong> I build real projects — from idea through deployment to security. AI is my tool, not a crutch: <strong>I understand what I am doing</strong>, and I keep learning with every project.',
     heroCtaProjects:   'My projects',
     heroCtaContact:    'Get in touch',
+    heroNow:           'Currently building: <b>Fluxen</b> &amp; <b>Bakix</b>',
     hobby3d:           '3D Printing',
     hobbyCode:         'Coding',
     fcardLive:         'LasergameMC is live',
@@ -1535,6 +1657,21 @@ const T = {
     aboutPanelPill:    'South Bohemia · CZ',
     captionNormal:     'Normal photo',
     captionFunny:      'A bit funny.',
+    howLabel:          'How I work',
+    howHeadingFancy:   'I lead the build. <em>AI does the heavy lifting.</em>',
+    howLead:           'I do try to code "the normal way" too — but not using AI in 2026 is like refusing a calculator in 2010. AI is a <strong>helper</strong>: sure, let it write the code, but <strong>I have to understand it</strong>. When I start a project, I need to know what it is, get it to people, secure it and test it — and through all of it I <em>keep learning, over and over</em>.',
+    flow1t:            'Idea',
+    flow1d:            'Find a problem actually worth solving.',
+    flow2t:            'Build with AI',
+    flow2d:            'AI writes the code; I drive direction, architecture and review.',
+    flow3t:            'Deploy',
+    flow3d:            'Get it off localhost and to real users.',
+    flow4t:            'Security',
+    flow4d:            'Handle data, auth and weak spots.',
+    flow5t:            'Testing',
+    flow5d:            'Go through it, find bugs, fix, repeat.',
+    flow6t:            'Marketing',
+    flow6d:            'Get the project out there and to people.',
     projectsLabel:     'My Work',
     projectsHeadingFancy:'Things I have <em>built</em>.',
     overlayFromLabel:  'About project',
@@ -1711,6 +1848,16 @@ const T = {
       tx = (e.clientX / window.innerWidth - 0.5) * 2;
       ty = (e.clientY / window.innerHeight - 0.5) * 2;
       if (!raf) raf = requestAnimationFrame(loop);
+    });
+  }
+
+  /* ── Project cards: tap to flip on touch devices ──────── */
+  if (window.matchMedia('(hover: none)').matches) {
+    $$('.p-card').forEach(function (card) {
+      card.addEventListener('click', function (e) {
+        if (e.target.closest('a')) return; /* let links work */
+        card.classList.toggle('is-open');
+      });
     });
   }
 
