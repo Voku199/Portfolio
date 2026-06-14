@@ -1,1204 +1,1723 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vojtěch "Voku" Kurinec | Portfolio</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <!-- Font Awesome pres JS -> SVG ikony bez webfont requestu (zadne CORS chyby na woff/ttf). -->
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
-  <!-- Bez externich webfontu: JetBrains preview pridava x-ijt hlavicku, ktera blokuje CORS fonty. -->
-  <style>
-    /* ─── DESIGN TOKENS ─────────────────────────────────────── */
-    :root {
-      --green:  #6DC066;
-      --yellow: #F6C21B;
-      --orange: #F28C28;
-      --red:    #F54F36;
-      --purple: #BF3F8C;
-      --blue:   #2E5EBB;
-      --beige:  #E6D3C4;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vojtěch "Voku" Kurinec | Portfolio</title>
+<meta name="description" content="Portfolio Vojtěcha „Voku" Kurince — mladého vývojáře a IT nadšence. AI, 3D tisk, Raspberry Pi a vlastní projekty jako Knowix, LasergameMC a Bakix.">
+<meta name="author" content="Vojtěch Kurinec">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#16120e">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Voku Portfolio">
+<meta property="og:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
+<meta property="og:description" content="Mladý vývojář & IT nadšenec — AI, 3D tisk, Raspberry Pi a vlastní projekty.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<!-- Font Awesome pres JS -> SVG ikony bez webfont requestu -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* ════════════════════════════════════════════════════════════
+   VOKU PORTFOLIO — Apple-style product page
+   dark earthy / terracotta / Space Mono / grain & glow
+   (inspired by the Bakix welcome page)
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --bg:      #16120e;
+  --bg2:     #1d1812;
+  --bg3:     #251e16;
+  --line:    #352c21;
+  --cream:   #f0ebe3;
+  --muted:   #9a8f82;
+  --terra:   #d4622a;
+  --terra2:  #b5451b;
+  --terra3:  #ff8a4d;
+  --green:   #4a9470;
+  --red:     #c0403a;
 
-      --bg:      #04050a;
-      --bg-card: #0b0d14;
-      --text:    #f5f5f7;
-      --muted:   #86868b;
-      --border:  rgba(255,255,255,0.065);
-      --r:       22px;
-      --tr: 0.3s cubic-bezier(.25,.46,.45,.94);
-    }
+  /* project accent palette (kept from old portfolio for variety) */
+  --p-green:  #6DC066;
+  --p-yellow: #F6C21B;
+  --p-orange: #F28C28;
+  --p-red:    #F54F36;
+  --p-purple: #BF3F8C;
+  --p-blue:   #4b9cd3;
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
+  --font:    'Space Mono', 'Courier New', monospace;
+  --ease:    cubic-bezier(.22, 1, .36, 1);
+  --spring:  cubic-bezier(.34, 1.45, .44, 1);
+}
 
-    body {
-      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Lokani fallback ikon bez Font Awesome fontu */
-    i.fas, i.fab {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 1.15em;
-      font-style: normal;
-      line-height: 1;
-    }
-    i.fas::before, i.fab::before {
-      content: "?";
-      font-size: 0.72em;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
-    .fa-robot::before { content: "AI"; }
-    .fa-print::before { content: "3D"; }
-    .fa-microchip::before { content: "PI"; }
-    .fa-code::before { content: "<>"; }
-    .fa-brain::before { content: "AI"; }
-    .fa-chevron-down::before { content: "v"; }
-    .fa-graduation-cap::before { content: "ED"; }
-    .fa-github::before { content: "GH"; }
-    .fa-crosshairs::before { content: "LG"; }
-    .fa-globe::before { content: "WEB"; }
-    .fa-comments::before { content: "CH"; }
-    .fa-keyboard::before { content: "KB"; }
-    .fa-python::before { content: "PY"; }
-    .fa-html5::before { content: "H5"; }
-    .fa-css3-alt::before { content: "C3"; }
-    .fa-js::before { content: "JS"; }
-    .fa-java::before { content: "JV"; }
-    .fa-layer-group::before { content: "FW"; }
-    .fa-server::before { content: "BE"; }
-    .fa-mobile-alt::before { content: "APP"; }
-    .fa-discord::before { content: "DC"; }
-    .fa-chart-bar::before { content: "ERP"; }
-    .fa-cogs::before { content: "SYS"; }
-    .fa-raspberry-pi::before { content: "RPI"; }
-    .fa-video::before { content: "VID"; }
-    .fa-envelope::before { content: "@"; }
-    .fa-instagram::before { content: "IG"; }
-    .fa-map-marker-alt::before { content: "LOC"; }
-    .fa-tint::before { content: "H2O"; }
-    .fa-star::before { content: "★"; }
+html { scroll-behavior: smooth; }
+html, body { overflow-x: hidden; }
+@supports (overflow: clip) { html, body { overflow-x: clip; } }
 
-    /* ─── SCROLLBAR ──────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--cream);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
 
-    /* ─── NAV ────────────────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0.85rem 2.5rem;
-      background: rgba(4,5,10,0.72);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
-      border-bottom: 1px solid var(--border);
-      transition: background var(--tr);
-    }
-    .nav-logo {
-      font-size: 1.05rem; font-weight: 800; letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .lang-switch { display: flex; gap: 0.3rem; }
-    .lang-switch button {
-      padding: 0.32rem 0.7rem;
-      border: 1px solid var(--border);
-      background: transparent; border-radius: 7px; cursor: pointer;
-      font-size: 0.72rem; font-weight: 600;
-      color: var(--muted); font-family: inherit; transition: all 0.2s;
-    }
-    .lang-switch button.active,
-    .lang-switch button:hover {
-      background: rgba(255,255,255,0.09);
-      color: var(--text); border-color: rgba(255,255,255,0.16);
-    }
+::selection { background: var(--terra); color: var(--bg); }
+a { color: inherit; }
 
-    /* ─── HERO ───────────────────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 7rem 2rem 5rem;
-      position: relative; overflow: hidden;
-    }
+/* Font Awesome SVG fallback (no webfont) */
+i.fas, i.fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.1em;
+  font-style: normal;
+  line-height: 1;
+}
+i.fas::before, i.fab::before { content: "?"; font-size: .72em; font-weight: 700; }
+.fa-robot::before { content: "AI"; }
+.fa-print::before { content: "3D"; }
+.fa-microchip::before { content: "PI"; }
+.fa-code::before { content: "</>"; }
+.fa-brain::before { content: "AI"; }
+.fa-chevron-down::before { content: "↓"; }
+.fa-graduation-cap::before { content: "ED"; }
+.fa-github::before { content: "GH"; }
+.fa-crosshairs::before { content: "◎"; }
+.fa-globe::before { content: "WEB"; }
+.fa-comments::before { content: "CH"; }
+.fa-keyboard::before { content: "KB"; }
+.fa-python::before { content: "PY"; }
+.fa-html5::before { content: "H5"; }
+.fa-css3-alt::before { content: "C3"; }
+.fa-js::before { content: "JS"; }
+.fa-java::before { content: "JV"; }
+.fa-layer-group::before { content: "FW"; }
+.fa-server::before { content: "BE"; }
+.fa-mobile-alt::before { content: "APP"; }
+.fa-discord::before { content: "DC"; }
+.fa-chart-bar::before { content: "ERP"; }
+.fa-cogs::before { content: "SYS"; }
+.fa-raspberry-pi::before { content: "RPI"; }
+.fa-video::before { content: "VID"; }
+.fa-envelope::before { content: "@"; }
+.fa-instagram::before { content: "IG"; }
+.fa-map-marker-alt::before { content: "◉"; }
+.fa-tint::before { content: "H2O"; }
+.fa-star::before { content: "✦"; }
 
-    /* Dot grid overlay */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0; z-index: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.032) 1px, transparent 1px);
-      background-size: 38px 38px;
-      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 50%, black 20%, transparent 100%);
-      mask-image: radial-gradient(ellipse 85% 65% at 50% 50%, black 20%, transparent 100%);
-      pointer-events: none;
-    }
+/* ── Film grain over everything ─────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 2000;
+  opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-    /* Ambient orbs */
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(110px); pointer-events: none;
-    }
-    .orb-1 { width:620px;height:620px; background:var(--blue);   opacity:.065; top:-180px;   left:-140px;  animation: orb-move 9s  ease-in-out infinite; }
-    .orb-2 { width:480px;height:480px; background:var(--purple); opacity:.065; bottom:-80px; right:-80px;  animation: orb-move 8s  ease-in-out infinite 2.5s; }
-    .orb-3 { width:340px;height:340px; background:var(--green);  opacity:.045; top:42%;      left:58%;     animation: orb-move 10s ease-in-out infinite 5s; }
-    .orb-4 { width:260px;height:260px; background:var(--red);    opacity:.040; top:15%;      right:22%;    animation: orb-move 7s  ease-in-out infinite 1.5s; }
-    .orb-5 { width:200px;height:200px; background:var(--orange); opacity:.035; bottom:25%;   left:30%;     animation: orb-move 11s ease-in-out infinite 3.5s; }
+/* ── Scroll progress ────────────────────────────────────── */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 1001;
+  background: transparent;
+}
+.progress__bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--terra2), var(--terra3));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
 
-    @keyframes orb-move {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33%      { transform: translate(22px,-22px) scale(1.04); }
-      66%      { transform: translate(-16px,16px) scale(0.97); }
-    }
+/* ── Nav ────────────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: 1rem 1.5rem;
+  transition: background .4s var(--ease), border-color .4s var(--ease), padding .4s var(--ease);
+  border-bottom: 1px solid transparent;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+}
+.nav.scrolled {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border-bottom-color: var(--line);
+  padding: .65rem 1.5rem;
+}
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  font-size: 13px;
+  text-decoration: none;
+}
+.nav__star { color: var(--terra); font-size: 15px; }
+.nav__links {
+  display: flex;
+  gap: 1.4rem;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-right: auto;
+  margin-left: 1.6rem;
+}
+.nav__links a {
+  text-decoration: none;
+  color: var(--muted);
+  transition: color .25s;
+}
+.nav__links a:hover { color: var(--cream); }
+.nav__actions { display: flex; align-items: center; gap: .6rem; }
+@media (max-width: 880px) { .nav__links { display: none; } }
+@media (max-width: 560px) { .nav .btn--nav-cta { display: none; } }
 
-    .hero-content { position: relative; z-index: 1; max-width: 920px; width: 100%; }
+.lang-switch { display: flex; gap: 2px; align-items: center; }
+.btn--lang {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: .5px;
+  line-height: 1;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.btn--lang:hover { border-color: var(--muted); color: var(--cream); }
+.btn--lang.active {
+  background: var(--terra);
+  border-color: var(--terra) !important;
+  color: #1a0d05 !important;
+}
 
-    /* Eyebrow pill */
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.4rem 1rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border); border-radius: 50px;
-      margin-bottom: 2.2rem;
-      opacity: 0; animation: fade-up .7s ease .1s forwards;
-    }
-    .eyebrow-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--green);
-      animation: pulse-green 2.2s ease-in-out infinite;
-    }
-    @keyframes pulse-green {
-      0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(109,192,102,.5); }
-      50%      { opacity:.6; box-shadow: 0 0 0 5px rgba(109,192,102,0); }
-    }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  padding: .8rem 1.6rem;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform .45s var(--spring), box-shadow .45s var(--ease), border-color .25s, color .25s;
+}
+.btn:active { transform: scale(.96); }
+.btn--primary {
+  background: linear-gradient(135deg, var(--terra3) 0%, var(--terra2) 80%);
+  color: #1a0d05;
+  box-shadow: 0 8px 28px -8px color-mix(in srgb, var(--terra) 60%, transparent);
+}
+.btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -8px color-mix(in srgb, var(--terra) 70%, transparent);
+}
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.35) 50%, transparent 65%);
+  transform: translateX(-130%);
+  transition: transform .8s var(--ease);
+}
+.btn--primary:hover::after { transform: translateX(130%); }
+.btn--ghost {
+  background: transparent;
+  color: var(--cream);
+  border: 1px solid var(--line);
+}
+.btn--ghost:hover { border-color: var(--terra); color: var(--terra3); }
+.btn--small { padding: .55rem 1.1rem; font-size: 10px; }
 
-    /* Name */
-    .hero-name {
-      font-size: clamp(3.2rem, 9vw, 7.8rem);
-      font-weight: 900; letter-spacing: -0.055em;
-      line-height: 0.96; margin-bottom: 1.8rem;
-    }
-    .name-first {
-      display: block; color: var(--text);
-      opacity: 0; animation: fade-up .7s ease .28s forwards;
-    }
-    .name-nick {
-      display: block;
-      font-size: clamp(2.6rem, 7.5vw, 6.8rem);
-      background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 55%, var(--red) 100%);
-      -webkit-background-clip: text; background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-size: 200% 200%;
-      opacity: 0;
-      animation: fade-up .7s ease .46s forwards, gradient-shift 5s ease-in-out infinite 1.2s;
-    }
-    .name-last {
-      display: block; color: var(--text);
-      opacity: 0; animation: fade-up .7s ease .64s forwards;
-    }
-    @keyframes gradient-shift {
-      0%,100% { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
-    }
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  align-items: center;
+  gap: 2rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 7.5rem 1.5rem 4rem;
+}
+@media (max-width: 920px) {
+  .hero { grid-template-columns: 1fr; padding-top: 6.5rem; gap: 3rem; }
+}
 
-    .hero-tagline {
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
-      color: var(--muted); font-weight: 400; letter-spacing: -0.01em;
-      margin-bottom: 2.4rem;
-      opacity: 0; animation: fade-up .7s ease .78s forwards;
-    }
+.hero__glow {
+  position: absolute;
+  top: -20%;
+  right: -15%;
+  width: 70vw;
+  height: 70vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--terra2) 26%, transparent) 0%,
+    transparent 62%);
+  filter: blur(40px);
+  pointer-events: none;
+  animation: glow-drift 14s ease-in-out infinite alternate;
+}
+@keyframes glow-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-6%, 5%) scale(1.12); }
+}
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: .14;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 0%, transparent 70%);
+}
 
-    /* Hobby pills */
-    .hero-tags {
-      display: flex; justify-content: center; flex-wrap: wrap;
-      gap: 0.65rem; margin-bottom: 3.2rem;
-      opacity: 0; animation: fade-up .7s ease .92s forwards;
-    }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.48rem 1.05rem;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border); border-radius: 50px;
-      font-size: 0.82rem; font-weight: 500; color: var(--muted);
-      transition: all .25s; cursor: default;
-    }
-    .hero-tag:hover {
-      background: rgba(255,255,255,0.09); color: var(--text);
-      border-color: rgba(255,255,255,0.14); transform: translateY(-2px);
-    }
+.hero__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--terra3);
+  border: 1px solid color-mix(in srgb, var(--terra) 35%, transparent);
+  background: color-mix(in srgb, var(--terra) 8%, transparent);
+  padding: .45rem .9rem;
+  border-radius: 100px;
+  margin-bottom: 1.6rem;
+}
+.hero__kicker .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--terra);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--terra) 55%, transparent); }
+  50%      { box-shadow: 0 0 0 7px transparent; }
+}
 
-    /* Photos */
-    .hero-photos {
-      display: flex; justify-content: center; gap: 2.8rem;
-      opacity: 0; animation: fade-up .7s ease 1.28s forwards;
-    }
-    .hero-photo {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 0.6rem; transition: transform var(--tr); cursor: default;
-    }
-    .hero-photo:hover { transform: translateY(-9px); }
-    .hero-photo img {
-      width: 88px; height: 88px; object-fit: cover; border-radius: 50%;
-      border: 1.5px solid var(--border);
-      box-shadow: 0 10px 40px rgba(0,0,0,.45);
-      transition: border-color var(--tr);
-    }
-    .hero-photo:hover img { border-color: rgba(255,255,255,0.22); }
-    .photo-caption { font-size: 0.74rem; color: var(--muted); }
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+.hero h1 .accent { color: var(--terra); }
+.hero h1 .accent-soft { color: var(--muted); }
 
-    /* Scroll hint */
-    .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      color: var(--muted); font-size: 0.65rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      opacity: 0; animation: fade-up .7s ease 1.85s forwards;
-    }
-    .scroll-hint i { animation: scroll-bounce 2s ease-in-out infinite; }
-    @keyframes scroll-bounce {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(7px); }
-    }
+/* masked line reveal */
+.mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.mask > span {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 1s var(--ease);
+}
+.in .mask:nth-child(1) > span { transition-delay: .05s; }
+.in .mask:nth-child(2) > span { transition-delay: .15s; }
+.in .mask:nth-child(3) > span { transition-delay: .25s; }
+.in .mask > span { transform: translateY(0); }
 
-    /* ─── MAIN & SECTIONS ────────────────────────────────────── */
-    main { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+.hero__sub {
+  color: var(--muted);
+  max-width: 46ch;
+  margin-bottom: 2rem;
+  font-size: clamp(.92rem, 1.4vw, 1.02rem);
+}
+.hero__sub strong { color: var(--cream); font-weight: 400; }
+.hero__cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
+.hero__meta {
+  display: flex;
+  gap: .9rem 1.1rem;
+  flex-wrap: wrap;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero__meta span { display: flex; align-items: center; gap: .45rem; }
+.hero__meta i { color: var(--terra); font-style: normal; min-width: auto; }
 
-    .s {
-      margin-bottom: 5.5rem;
-      opacity: 0; transform: translateY(38px);
-      transition: opacity .7s ease, transform .7s ease;
-    }
-    .s.show { opacity: 1; transform: none; }
+/* hero stats */
+.hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 2rem 0 0;
+  flex-wrap: wrap;
+}
+.hstat__num {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--terra3);
+  line-height: 1;
+}
+.hstat__lbl {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: .35rem;
+}
+.hstat__div { width: 1px; height: 34px; background: var(--line); }
 
-    .s-head { text-align: center; margin-bottom: 3rem; }
-    .s-label {
-      font-size: 0.68rem; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 0.7rem;
-    }
-    .s-head h2 {
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      font-weight: 800; letter-spacing: -0.04em; color: var(--text);
-    }
+/* ── Code editor stage ──────────────────────────────────── */
+.stage {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  perspective: 1200px;
+}
+.editor {
+  width: min(420px, 92vw);
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--bg3) 0%, var(--bg2) 70%);
+  box-shadow:
+    0 50px 100px -30px rgba(0, 0, 0, .8),
+    inset 0 1px 0 rgba(240, 235, 227, .06);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  transform: rotate3d(.5, -1, .1, 9deg);
+  animation: editor-float 7s ease-in-out infinite alternate;
+}
+@keyframes editor-float {
+  from { transform: rotate3d(.5, -1, .1, 9deg) translateY(0); }
+  to   { transform: rotate3d(.5, -1, .1, 7deg) translateY(-12px); }
+}
+.editor__bar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .7rem .9rem;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 40%, transparent);
+}
+.editor__dot { width: 11px; height: 11px; border-radius: 50%; }
+.editor__dot--r { background: #ff5f57; }
+.editor__dot--y { background: #febc2e; }
+.editor__dot--g { background: #28c840; }
+.editor__file {
+  margin-left: .6rem;
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+.editor__file i { color: var(--terra3); font-style: normal; }
+.editor__body {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  font-size: 12.5px;
+  line-height: 1.85;
+  padding: .8rem 0 1rem;
+}
+.editor__ln {
+  text-align: right;
+  padding-right: .7rem;
+  color: color-mix(in srgb, var(--muted) 55%, transparent);
+  user-select: none;
+  border-right: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+}
+.editor__code { padding: 0 1rem; white-space: pre; overflow-x: auto; }
+.editor__code .k { color: var(--terra3); }     /* keyword */
+.editor__code .s { color: #9ccc8f; }           /* string */
+.editor__code .f { color: var(--cream); }       /* fn / name */
+.editor__code .c { color: var(--muted); font-style: italic; } /* comment */
+.editor__code .n { color: #d9a05b; }           /* number */
+.editor__cursor {
+  display: inline-block;
+  width: 7px; height: 14px;
+  background: var(--terra3);
+  vertical-align: -2px;
+  animation: caret .9s steps(2) infinite;
+}
+@keyframes caret { 50% { opacity: 0; } }
 
-    /* ─── ABOUT ──────────────────────────────────────────────── */
-    .about-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: var(--r);
-      padding: 3.5rem 3rem; position: relative; overflow: hidden;
-    }
-    .about-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 33%, var(--red) 66%, var(--orange) 100%);
-    }
-    .about-text {
-      font-size: 1.1rem; line-height: 1.9;
-      color: rgba(245,245,247,.82);
-      text-align: left; max-width: 840px; margin: 0 auto;
-    }
-    .about-text p + p { margin-top: 1rem; }
-    .about-text h3 {
-      font-size: 1.1rem;
-      margin: 1.5rem 0 0.75rem;
-      color: var(--text);
-      letter-spacing: -0.02em;
-    }
-    .about-divider {
-      text-align: center;
-      color: rgba(245,245,247,.35);
-      letter-spacing: 0.3em;
-      margin: 1.4rem 0;
-    }
-    .about-footer {
-      margin-top: 1.3rem;
-      color: rgba(245,245,247,.9);
-    }
-    .about-text strong { color: var(--text); font-weight: 600; }
+/* floating cards around the editor */
+.fcard {
+  position: absolute;
+  z-index: 3;
+  background: color-mix(in srgb, var(--bg2) 90%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: .7rem .9rem;
+  font-size: 11px;
+  box-shadow: 0 24px 50px -18px rgba(0, 0, 0, .75);
+  will-change: transform;
+}
+.fcard--gh {
+  top: 4%;
+  left: -6%;
+  animation: float-a 6s ease-in-out infinite alternate;
+}
+.fcard--proj {
+  bottom: 12%;
+  left: -8%;
+  text-align: center;
+  animation: float-b 8s ease-in-out infinite alternate;
+}
+.fcard--live {
+  top: 34%;
+  right: -7%;
+  max-width: 190px;
+  animation: float-c 7s ease-in-out infinite alternate;
+}
+@media (max-width: 920px) {
+  .fcard--gh { left: 0; }
+  .fcard--proj { left: 2%; }
+  .fcard--live { right: 0; }
+}
+@media (max-width: 480px) {
+  .fcard--live { display: none; }
+}
+@keyframes float-a { from { transform: translateY(0); } to { transform: translateY(-16px); } }
+@keyframes float-b { from { transform: translateY(0); } to { transform: translateY(12px); } }
+@keyframes float-c { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+.fcard__label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: .3rem;
+}
+.fcard__num {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--terra3);
+  line-height: 1.1;
+}
+.fcard--live { color: var(--cream); line-height: 1.5; }
+.fcard--live .live-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: .35rem;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 60%, transparent);
+  animation: livepulse 1.8s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 55%, transparent); }
+  50%     { box-shadow: 0 0 0 6px transparent; }
+}
 
-    /* ─── PROJECT CARDS ──────────────────────────────────────── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
-      gap: 1.4rem;
-    }
+/* ── Ticker ─────────────────────────────────────────────── */
+.ticker {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  padding: .9rem 0;
+  background: var(--bg2);
+  white-space: nowrap;
+  position: relative;
+}
+.ticker__track {
+  display: inline-flex;
+  gap: 2.6rem;
+  padding-right: 2.6rem;
+  animation: ticker 26s linear infinite;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ticker__track i { color: var(--terra); font-style: normal; }
+@keyframes ticker { to { transform: translateX(-50%); } }
 
-    .p-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: var(--r);
-      padding: 2rem 1.8rem;
-      display: flex; flex-direction: column;
-      position: relative; overflow: hidden;
-      opacity: 0; transform: translateY(28px);
-      transition: opacity .5s ease, transform .5s ease, border-color var(--tr), box-shadow var(--tr);
-    }
-    .s.show .p-card                  { opacity: 1; transform: translateY(0); }
-    .s.show .p-card:nth-child(1)     { transition-delay: .08s; }
-    .s.show .p-card:nth-child(2)     { transition-delay: .18s; }
-    .s.show .p-card:nth-child(3)     { transition-delay: .28s; }
-    .s.show .p-card:nth-child(4)     { transition-delay: .38s; }
-    .s.show .p-card:nth-child(5)     { transition-delay: .48s; }
-    .s.show .p-card:nth-child(6)     { transition-delay: .58s; }
-    .s.show .p-card:nth-child(7)     { transition-delay: .68s; }
-    .s.show .p-card:nth-child(8)     { transition-delay: .78s; }
+/* ── Sections ───────────────────────────────────────────── */
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(5rem, 11vw, 9rem) 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+}
+.section--flip > .demo { order: -1; }
+@media (max-width: 920px) {
+  .section { grid-template-columns: 1fr; }
+  .section--flip > .demo { order: 0; }
+}
+.kicker {
+  display: flex;
+  align-items: baseline;
+  gap: .9rem;
+  margin-bottom: 1.3rem;
+}
+.kicker__num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--terra);
+  letter-spacing: 2px;
+}
+.kicker__line {
+  height: 1px;
+  width: 42px;
+  background: var(--terra);
+  opacity: .5;
+  align-self: center;
+}
+.kicker__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.section h2 {
+  font-size: clamp(1.9rem, 4.2vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  margin-bottom: 1.2rem;
+}
+.section h2 em { font-style: normal; color: var(--terra3); }
+.section p.lead {
+  color: var(--muted);
+  max-width: 46ch;
+  margin-bottom: 1.6rem;
+}
+.section p.lead strong { color: var(--cream); font-weight: 400; }
+.section p.lead em { color: var(--cream); font-style: italic; }
+.bullets { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; }
+.bullets li {
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  border-radius: 100px;
+  padding: .4rem .85rem;
+}
+.bullets li::before { content: '✦ '; color: var(--terra); }
 
-    .p-card:hover {
-      transform: translateY(-9px) !important;
-      border-color: rgba(255,255,255,0.13);
-      box-shadow: 0 28px 64px rgba(0,0,0,.4);
-    }
-    .p-card::after {
-      content: '';
-      position: absolute; inset: -1px; border-radius: var(--r);
-      background: radial-gradient(circle at 30% 30%, var(--accent, transparent) 0%, transparent 60%);
-      opacity: 0; pointer-events: none; transition: opacity .4s;
-    }
-    .p-card:hover::after { opacity: 0.06; }
+/* demo side */
+.demo { position: relative; }
+.demo__glow {
+  position: absolute;
+  inset: -12%;
+  background: radial-gradient(circle at 50% 50%,
+    color-mix(in srgb, var(--terra2) 13%, transparent), transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
+}
+.panel {
+  position: relative;
+  background: linear-gradient(170deg, var(--bg3) 0%, var(--bg2) 70%);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.4rem 1.5rem;
+  box-shadow: 0 40px 80px -38px rgba(0, 0, 0, .9), inset 0 1px 0 rgba(240, 235, 227, .05);
+}
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+.panel__title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.panel__pill {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--terra3);
+  background: color-mix(in srgb, var(--terra) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--terra) 30%, transparent);
+  padding: 3px 9px;
+  border-radius: 100px;
+}
 
-    .p-icon {
-      width: 52px; height: 52px; border-radius: 15px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin-bottom: 1rem;
-      flex-shrink: 0; position: relative; z-index: 1;
-    }
-    .live-badge {
-      display: inline-flex; align-items: center; gap: 0.35rem;
-      font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--green);
-      background: rgba(109,192,102,0.1);
-      border: 1px solid rgba(109,192,102,0.25);
-      border-radius: 50px; padding: 0.2rem 0.6rem;
-      margin-bottom: 0.8rem;
-      position: relative; z-index: 1; width: fit-content;
-    }
-    .live-badge .dot {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--green);
-      animation: pulse-green 2s ease-in-out infinite;
-    }
-    .p-title {
-      font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em;
-      color: var(--text); margin-bottom: 0.55rem;
-      position: relative; z-index: 1;
-    }
-    .p-desc {
-      font-size: 0.9rem; color: var(--muted); line-height: 1.65;
-      flex: 1; margin-bottom: 1.5rem;
-      position: relative; z-index: 1;
-    }
-    .p-links {
-      display: flex; gap: 0.6rem; flex-wrap: wrap;
-      margin-top: auto; position: relative; z-index: 1;
-    }
+/* ── About ──────────────────────────────────────────────── */
+.about-text { color: var(--muted); }
+.about-text p { margin-bottom: .9rem; }
+.about-text strong { color: var(--cream); font-weight: 700; }
+.about-text em { color: var(--cream); }
+.about-text h3 {
+  color: var(--cream);
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 1.3rem 0 .7rem;
+}
+.about-divider { color: var(--terra); letter-spacing: 4px; }
+.about-footer { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 
-    .btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.5rem 1rem; border-radius: 9px;
-      font-size: 0.8rem; font-weight: 600;
-      text-decoration: none; font-family: inherit;
-      white-space: nowrap; transition: all .2s;
-    }
-    .btn-fill { color: white; }
-    .btn-fill:hover { filter: brightness(1.15); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
-    .btn-ghost {
-      background: rgba(255,255,255,0.05); color: var(--muted);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--text); transform: translateY(-2px); }
+/* about photos */
+.about-photos { display: flex; gap: 1rem; margin-top: .4rem; }
+.about-photo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+}
+.about-photo img {
+  width: 100%;
+  max-width: 150px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 40px -20px rgba(0,0,0,.7);
+  transition: transform .5s var(--spring);
+}
+.about-photo:hover img { transform: translateY(-6px) rotate(-1.5deg); }
+.about-photo:last-child:hover img { transform: translateY(-6px) rotate(1.5deg); }
+.photo-cap {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
-    /* ─── TECH CARDS ─────────────────────────────────────────── */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
-      gap: 1.4rem;
-    }
-    .t-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: var(--r);
-      padding: 2rem 1.8rem; position: relative; overflow: hidden;
-      opacity: 0; transform: translateY(28px);
-      transition: opacity .5s ease, transform .5s ease, border-color var(--tr), box-shadow var(--tr);
-    }
-    .s.show .t-card                  { opacity: 1; transform: translateY(0); }
-    .s.show .t-card:nth-child(1)     { transition-delay: .08s; }
-    .s.show .t-card:nth-child(2)     { transition-delay: .2s; }
-    .s.show .t-card:nth-child(3)     { transition-delay: .32s; }
+/* ── Projects grid ──────────────────────────────────────── */
+.projects {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) 1.5rem clamp(4rem, 9vw, 7rem);
+}
+.projects__head { text-align: center; margin-bottom: clamp(2.5rem, 6vw, 4rem); }
+.projects__head .kicker { justify-content: center; }
+.projects__head h2 {
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  letter-spacing: -.025em;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+}
+.p-card {
+  position: relative;
+  background: linear-gradient(170deg, var(--bg3) 0%, var(--bg2) 75%);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.5rem;
+  overflow: hidden;
+  transition: transform .45s var(--ease), border-color .35s, box-shadow .45s var(--ease);
+}
+.p-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--accent, var(--terra));
+  opacity: .65;
+}
+.p-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent, var(--terra)) 45%, var(--line));
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.8);
+}
+.p-icon {
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  margin-bottom: 1rem;
+}
+.p-title { font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .5rem; }
+.p-desc { color: var(--muted); font-size: 12.5px; line-height: 1.6; margin-bottom: 1.1rem; }
+.p-links { display: flex; gap: .5rem; flex-wrap: wrap; }
 
-    .t-card:hover {
-      transform: translateY(-7px) !important;
-      border-color: rgba(255,255,255,0.11);
-      box-shadow: 0 18px 50px rgba(0,0,0,.32);
-    }
-    .t-accent { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
-    .t-title {
-      font-size: 1rem; font-weight: 700; color: var(--text);
-      margin-bottom: 1.5rem; display: flex; align-items: center;
-      gap: 0.6rem; letter-spacing: -0.01em;
-    }
-    .t-icons { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .t-icon {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 0.4rem; transition: transform .2s; cursor: default;
-    }
-    .t-icon:hover { transform: translateY(-5px); }
-    .t-icon-box {
-      width: 52px; height: 52px; border-radius: 13px;
-      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; position: relative; transition: background .2s;
-    }
-    .t-icon:hover .t-icon-box { background: rgba(255,255,255,0.09); }
-    .t-icon-label { font-size: 0.68rem; color: var(--muted); text-align: center; line-height: 1.2; }
-    .t-badge {
-      position: absolute; top: -6px; right: -6px;
-      font-size: 0.5rem; font-weight: 800;
-      padding: 0.12rem 0.38rem; border-radius: 5px;
-      letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
-    }
+/* status badges */
+.badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 100px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--muted);
+}
+.badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge--live { color: #7fc4a4; border-color: color-mix(in srgb, var(--green) 45%, transparent); }
+.badge--live .dot { animation: livepulse 1.8s ease-in-out infinite; }
+.badge--wip { color: var(--terra3); border-color: color-mix(in srgb, var(--terra) 45%, transparent); }
+.badge--maint { color: #d9a05b; }
 
-    /* ─── CONTACT ────────────────────────────────────────────── */
-    .contact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: var(--r);
-      padding: 3.5rem 3rem; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .contact-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--red), var(--orange), var(--yellow), var(--green), var(--blue), var(--purple));
-    }
-    .contact-heading {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800;
-      letter-spacing: -0.04em; margin-bottom: 0.6rem;
-    }
-    .contact-sub { font-size: .95rem; color: var(--muted); margin-bottom: 2.5rem; }
-    .contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
-    .c-link {
-      display: flex; align-items: center; gap: 0.7rem;
-      padding: 0.85rem 1.4rem;
-      background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-      border-radius: 13px; text-decoration: none;
-      color: var(--muted); font-size: .9rem; font-weight: 500; transition: all .25s;
-    }
-    .c-link .c-ico { font-size: 1.15rem; }
-    .c-link:hover {
-      background: rgba(255,255,255,0.09); color: var(--text);
-      transform: translateY(-4px); border-color: rgba(255,255,255,0.16);
-      box-shadow: 0 10px 28px rgba(0,0,0,.25);
-    }
-    .contact-location {
-      margin-top: 2rem; font-size: .82rem;
-      color: rgba(134,134,139,.55);
-      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
-    }
+/* hover overlay (info on hover) */
+.p-hover-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 1.5rem;
+  background: linear-gradient(170deg, var(--bg3) 0%, var(--bg2) 90%);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+  z-index: 4;
+}
+.p-card:hover .p-hover-overlay { opacity: 1; transform: none; pointer-events: auto; }
+.p-overlay-from {
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--terra3);
+  margin-bottom: .6rem;
+}
+.p-overlay-text { font-size: 12px; color: var(--cream); line-height: 1.65; }
+.p-overlay-text em { color: var(--terra3); }
+.p-overlay-links { display: flex; gap: .5rem; flex-wrap: wrap; }
 
-    /* ─── FOOTER ─────────────────────────────────────────────── */
-    footer {
-      text-align: center; padding: 3rem 2rem;
-      border-top: 1px solid var(--border); margin-top: 2rem;
-    }
-    .footer-quote { font-size: 1.05rem; font-style: italic; color: var(--muted); margin-bottom: 0.5rem; }
-    .footer-copy { font-size: .78rem; color: rgba(134,134,139,.45); }
+/* ── Tech section (alternating layout) ──────────────────── */
+.tech-stack { display: flex; flex-direction: column; gap: .9rem; }
+.t-card {
+  position: relative;
+  background: color-mix(in srgb, var(--bg) 45%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.2rem;
+}
+.t-title {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .9rem;
+}
+.t-icons { display: flex; flex-wrap: wrap; gap: .7rem; }
+.t-icon { display: flex; flex-direction: column; align-items: center; gap: .4rem; position: relative; }
+.t-icon-box {
+  width: 42px; height: 42px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  font-size: 14px;
+  position: relative;
+  transition: transform .35s var(--spring), border-color .3s;
+}
+.t-icon:hover .t-icon-box { transform: translateY(-4px); border-color: color-mix(in srgb, var(--terra) 45%, transparent); }
+.t-icon-label { font-size: 9px; letter-spacing: 1px; color: var(--muted); }
+.t-badge {
+  position: absolute;
+  top: -7px; right: -10px;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
 
-    /* ─── KEYFRAMES ──────────────────────────────────────────── */
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+/* ── Stats band ─────────────────────────────────────────── */
+.stats {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(4rem, 9vw, 7rem) 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; gap: 2.6rem; } }
+.stat__num {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--terra3);
+}
+.stat__num sub {
+  font-size: .35em;
+  color: var(--muted);
+  vertical-align: baseline;
+  letter-spacing: 0;
+}
+.stat__cap {
+  margin-top: .7rem;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 
-    /* ─── HERO STATS ─────────────────────────────────────────── */
-    .hero-stats {
-      display: flex; align-items: center; justify-content: center;
-      gap: 2.8rem; margin-bottom: 3rem;
-      opacity: 0; animation: fade-up .7s ease 1.05s forwards;
-    }
-    .hero-stat { text-align: center; }
-    .hero-stat-num {
-      font-size: 2.1rem; font-weight: 900; letter-spacing: -.05em; line-height: 1;
-      background: linear-gradient(135deg, var(--text) 0%, rgba(245,245,247,.5) 100%);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero-stat-lbl {
-      font-size: .67rem; color: var(--muted); text-transform: uppercase;
-      letter-spacing: .12em; margin-top: .3rem;
-    }
-    .hero-stat-div { width: 1px; height: 38px; background: var(--border); }
+/* ── CTA / Contact ──────────────────────────────────────── */
+.cta { padding: 0 1.5rem clamp(5rem, 10vw, 8rem); }
+.cta__panel {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-radius: 28px;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.8rem, 6vw, 5rem);
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 110% at 50% -20%,
+      color-mix(in srgb, var(--terra3) 38%, transparent), transparent 60%),
+    linear-gradient(160deg, #3a1d0d 0%, var(--bg3) 70%);
+  border: 1px solid color-mix(in srgb, var(--terra) 35%, var(--line));
+}
+.cta__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(240,235,227,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,235,227,.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 0%, #000, transparent 75%);
+}
+.cta h2 {
+  position: relative;
+  font-size: clamp(2rem, 5.4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  margin-bottom: 1.1rem;
+}
+.cta p {
+  position: relative;
+  color: var(--muted);
+  max-width: 52ch;
+  margin: 0 auto 2rem;
+}
+.cta__links {
+  position: relative;
+  display: flex;
+  gap: .7rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.6rem;
+}
+.c-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--cream);
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 40%, transparent);
+  padding: .7rem 1.2rem;
+  border-radius: 100px;
+  transition: transform .4s var(--spring), border-color .3s, color .3s;
+}
+.c-link:hover { transform: translateY(-3px); border-color: var(--terra); color: var(--terra3); }
+.c-link i { color: var(--terra3); }
+.cta__loc {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.cta__loc i { color: var(--terra); font-style: normal; }
 
-    /* ─── PROJECT HOVER OVERLAY ──────────────────────────────── */
-    .p-hover-overlay {
-      position: absolute; inset: 0; border-radius: var(--r);
-      background: rgba(11,13,20,0.96);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      padding: 1.8rem; display: flex; flex-direction: column;
-      justify-content: space-between;
-      opacity: 0; transform: translateY(12px);
-      transition: opacity .28s ease, transform .28s ease;
-      z-index: 10; pointer-events: none;
-    }
-    .p-card:hover .p-hover-overlay { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .p-overlay-from {
-      font-size: .63rem; font-weight: 700; letter-spacing: .16em;
-      text-transform: uppercase; color: var(--muted); margin-bottom: .6rem;
-    }
-    .p-overlay-text {
-      font-size: .88rem; color: rgba(245,245,247,.82); line-height: 1.72; flex: 1;
-    }
-    .p-overlay-links { display: flex; gap: .55rem; flex-wrap: wrap; margin-top: 1.1rem; }
+/* ── Footer ─────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 2.4rem 1.5rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .7rem;
+  text-align: center;
+}
+.footer__logo { font-weight: 700; letter-spacing: 5px; font-size: 12px; }
+.footer__logo i { color: var(--terra); font-style: normal; }
+.footer__quote { color: var(--cream); font-style: italic; font-size: 13px; max-width: 40ch; }
+.footer small { color: var(--muted); font-size: 10px; letter-spacing: 1px; }
 
-    /* ─── PLANNED BADGE ──────────────────────────────────────── */
-    .planned-badge {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--purple);
-      background: rgba(191,63,140,.12); border: 1px solid rgba(191,63,140,.28);
-      border-radius: 50px; padding: .2rem .6rem; margin-bottom: .8rem;
-      position: relative; z-index: 1; width: fit-content;
-    }
-    .planned-badge .dot {
-      width: 5px; height: 5px; border-radius: 50%; background: var(--purple);
-      animation: pulse-purple 2s ease-in-out infinite;
-    }
-    @keyframes pulse-purple {
-      0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(191,63,140,.5); }
-      50%      { opacity:.6; box-shadow:0 0 0 5px rgba(191,63,140,0); }
-    }
+/* ── Scroll reveal system ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  filter: blur(6px);
+  transition:
+    opacity .9s var(--ease),
+    transform .9s var(--ease),
+    filter .9s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.reveal.in { opacity: 1; transform: none; filter: blur(0); }
+.reveal--left  { transform: translateX(-40px); }
+.reveal--right { transform: translateX(40px); }
+.reveal--pop   { transform: scale(.9); }
+.reveal--left.in, .reveal--right.in, .reveal--pop.in { transform: none; }
 
-    /* ─── WIP / IN-DEV BADGE ────────────────────────────────── */
-    .wip-badge {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--orange);
-      background: rgba(242,140,40,.12); border: 1px solid rgba(242,140,40,.28);
-      border-radius: 50px; padding: .2rem .6rem; margin-bottom: .8rem;
-      position: relative; z-index: 1; width: fit-content;
-    }
-    .wip-badge .dot {
-      width: 5px; height: 5px; border-radius: 50%; background: var(--orange);
-      animation: pulse-orange 2s ease-in-out infinite;
-    }
-    @keyframes pulse-orange {
-      0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(242,140,40,.5); }
-      50%      { opacity:.6; box-shadow:0 0 0 5px rgba(242,140,40,0); }
-    }
-
-    /* ─── MAINTENANCE / LOW-ACTIVITY BADGE ──────────────────── */
-    .maintenance-badge {
-      display: inline-flex; align-items: center; gap: .35rem;
-      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--muted);
-      background: rgba(134,134,139,.10); border: 1px solid rgba(134,134,139,.25);
-      border-radius: 50px; padding: .2rem .6rem; margin-bottom: .8rem;
-      position: relative; z-index: 1; width: fit-content;
-    }
-    .maintenance-badge .dot {
-      width: 5px; height: 5px; border-radius: 50%; background: var(--muted); opacity: .55;
-    }
-
-    /* ─── AURORA DIVIDER ─────────────────────────────────────── */
-    .aurora-line {
-      height: 1px; border: none; margin: -3rem 0 5rem;
-      background: linear-gradient(90deg, transparent 0%, var(--blue) 20%, var(--purple) 50%, var(--red) 80%, transparent 100%);
-      opacity: .14;
-    }
-
-
-    /* ─── RESPONSIVE ─────────────────────────────────────────── */
-    @media (max-width: 900px)  { nav { padding: .8rem 1.5rem; } }
-    @media (max-width: 768px)  {
-      .hero { padding: 6rem 1.5rem 4rem; }
-      .projects-grid, .tech-grid { grid-template-columns: 1fr; }
-      .about-card, .contact-card { padding: 2.5rem 1.5rem; }
-      .hero-photos { gap: 1.8rem; }
-    }
-    @media (max-width: 520px)  {
-      .hero-photos { gap: 1.2rem; }
-      .hero-photo img { width: 72px; height: 72px; }
-    }
-  </style>
+/* ── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; filter: none; }
+  .mask > span { transform: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
 </head>
 <body>
 
-  <!-- ── NAV ────────────────────────────────────────────────── -->
-  <nav>
-    <div class="nav-logo">Voku</div>
-    <div class="lang-switch" aria-label="Language switch">
-      <button type="button" data-lang="cs" class="active">Česky</button>
-      <button type="button" data-lang="en">English</button>
+<div class="progress"><div class="progress__bar" id="progress"></div></div>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav" id="nav">
+  <a class="nav__logo" href="#hero"><span class="nav__star">✦</span>VOKU</a>
+  <div class="nav__links">
+    <a href="#about" data-i18n="navAbout">O mně</a>
+    <a href="#projects" data-i18n="navProjects">Projekty</a>
+    <a href="#tech" data-i18n="navTech">Technologie</a>
+    <a href="#contact" data-i18n="navContact">Kontakt</a>
+  </div>
+  <div class="nav__actions">
+    <div class="lang-switch" role="group" aria-label="Language switch">
+      <button type="button" class="btn--lang active" data-lang="cs" title="Česky">CS</button>
+      <button type="button" class="btn--lang" data-lang="en" title="English">EN</button>
     </div>
-  </nav>
+    <a class="btn btn--primary btn--small btn--nav-cta" href="#contact"><span data-i18n="navContactBtn">Spojit se</span> →</a>
+  </div>
+</nav>
 
-  <!-- ── HERO ───────────────────────────────────────────────── -->
-  <section class="hero">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-    <div class="orb orb-4"></div>
-    <div class="orb orb-5"></div>
+<!-- ═══ HERO ═══ -->
+<header class="hero" id="hero">
+  <div class="hero__glow"></div>
+  <div class="hero__grid"></div>
 
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="eyebrow-dot"></span>
-        <span data-i18n="heroEyebrow">Portfolio · 2026</span>
+  <div>
+    <div class="hero__kicker reveal"><span class="dot"></span><span data-i18n="heroEyebrow">Portfolio · 2026</span></div>
+    <h1 id="heroTitle">
+      <span class="mask"><span>Vojtěch</span></span>
+      <span class="mask"><span class="accent">"Voku"</span></span>
+      <span class="mask"><span class="accent-soft">Kurinec</span></span>
+    </h1>
+    <p class="hero__sub reveal" style="--d:.45s" data-i18n="heroSub">
+      <strong>Mladý vývojář & IT nadšenec.</strong> Programuju, experimentuju s AI, tisknu na 3D tiskárně a bastlím s Raspberry Pi. Nejlíp se učím tím, že věci <strong>prostě postavím</strong>.
+    </p>
+    <div class="hero__cta reveal" style="--d:.55s">
+      <a class="btn btn--primary" href="#projects"><span data-i18n="heroCtaProjects">Moje projekty</span> ✦</a>
+      <a class="btn btn--ghost" href="#contact"><span data-i18n="heroCtaContact">Spojit se</span> →</a>
+    </div>
+    <div class="hero__meta reveal" style="--d:.62s">
+      <span><i class="fas fa-robot"></i> AI</span>
+      <span><i class="fas fa-print"></i> <span data-i18n="hobby3d">3D tisk</span></span>
+      <span><i class="fas fa-microchip"></i> Raspberry Pi</span>
+      <span><i class="fas fa-code"></i> <span data-i18n="hobbyCode">Programování</span></span>
+    </div>
+    <div class="hero__stats reveal" style="--d:.7s">
+      <div>
+        <div class="hstat__num"><span data-count="8">0</span><sub style="font-size:.55em;color:var(--muted)">+</sub></div>
+        <div class="hstat__lbl" data-i18n="statProjectsLbl">Projektů</div>
       </div>
-
-      <h1 class="hero-name">
-        <span class="name-first">Vojtěch</span>
-        <span class="name-nick">"Voku"</span>
-        <span class="name-last">Kurinec</span>
-      </h1>
-
-      <p class="hero-tagline" data-i18n="tagline">Mladý vývojář & IT nadšenec</p>
-
-      <div class="hero-tags">
-        <span class="hero-tag"><i class="fas fa-robot"></i><span data-i18n="hobbyAI">AI</span></span>
-        <span class="hero-tag"><i class="fas fa-print"></i><span data-i18n="hobby3d">3D tisk</span></span>
-        <span class="hero-tag"><i class="fas fa-microchip"></i>Raspberry Pi</span>
-        <span class="hero-tag"><i class="fas fa-code"></i><span data-i18n="hobbyCode">Programování</span></span>
-        <span class="hero-tag"><i class="fas fa-brain"></i><span data-i18n="hobbyTech">Technologie</span></span>
+      <div class="hstat__div"></div>
+      <div>
+        <div class="hstat__num"><span data-count="3">0</span><sub style="font-size:.55em;color:var(--muted)">+</sub></div>
+        <div class="hstat__lbl" data-i18n="statYearsLbl">Roky kódování</div>
       </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num" data-i18n="statProjects">7+</div>
-          <div class="hero-stat-lbl" data-i18n="statProjectsLbl">Projektů</div>
-        </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <div class="hero-stat-num" data-i18n="statYears">3+</div>
-          <div class="hero-stat-lbl" data-i18n="statYearsLbl">Roky kódování</div>
-        </div>
-        <div class="hero-stat-div"></div>
-        <div class="hero-stat">
-          <div class="hero-stat-num" data-i18n="statAge">15</div>
-          <div class="hero-stat-lbl" data-i18n="statAgeLbl">Let</div>
-        </div>
+      <div class="hstat__div"></div>
+      <div>
+        <div class="hstat__num"><span data-count="15">0</span></div>
+        <div class="hstat__lbl" data-i18n="statAgeLbl">Let</div>
       </div>
+    </div>
+  </div>
 
-      <div class="hero-photos">
-        <div class="hero-photo">
+  <div class="stage" id="stage">
+    <div class="editor" data-depth="6">
+      <div class="editor__bar">
+        <span class="editor__dot editor__dot--r"></span>
+        <span class="editor__dot editor__dot--y"></span>
+        <span class="editor__dot editor__dot--g"></span>
+        <span class="editor__file"><i>✦</i> voku.py</span>
+      </div>
+      <div class="editor__body">
+        <div class="editor__ln">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+<div class="editor__code"><span class="k">class</span> <span class="f">Voku</span>(<span class="f">Developer</span>):
+    <span class="k">def</span> <span class="f">__init__</span>(<span class="k">self</span>):
+        <span class="k">self</span>.name  = <span class="s">"Vojtěch Kurinec"</span>
+        <span class="k">self</span>.age   = <span class="n">15</span>
+        <span class="k">self</span>.langs = [<span class="s">"Python"</span>, <span class="s">"JS"</span>, <span class="s">"Java"</span>]
+        <span class="k">self</span>.loves = [<span class="s">"AI"</span>, <span class="s">"3D tisk"</span>, <span class="s">"Pi"</span>]
+
+    <span class="k">def</span> <span class="f">build</span>(<span class="k">self</span>, idea):
+        <span class="c"># nejlíp se učím stavěním</span>
+        <span class="k">return</span> <span class="f">ship</span>(idea)<span class="editor__cursor"></span></div>
+      </div>
+    </div>
+
+    <div class="fcard fcard--gh" data-depth="14">
+      <div class="fcard__label"><span>✦</span> GitHub</div>
+      <b style="color:var(--terra3)">@Voku199</b>
+    </div>
+    <div class="fcard fcard--proj" data-depth="20">
+      <div class="fcard__label" data-i18n="statProjectsLbl">Projektů</div>
+      <div class="fcard__num"><span data-count="8">0</span>+</div>
+    </div>
+    <div class="fcard fcard--live" data-depth="17">
+      <div class="fcard__label"><span class="live-dot"></span> <span data-i18n="liveBadge">Aktivní</span></div>
+      <span data-i18n="fcardLive">LasergameMC běží naživo</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track" id="ticker">
+    <span>AI <i>✦</i></span><span>3D TISK <i>✦</i></span><span>RASPBERRY PI <i>✦</i></span>
+    <span>PYTHON <i>✦</i></span><span>FLASK <i>✦</i></span><span>MINECRAFT <i>✦</i></span>
+    <span>HARDWARE <i>✦</i></span><span>OPEN SOURCE <i>✦</i></span>
+  </div>
+</div>
+
+<main>
+
+<!-- ═══ 01 O MNĚ ═══ -->
+<section class="section" id="about">
+  <div>
+    <div class="kicker reveal"><span class="kicker__num">01</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="whoLabel">O mně</span></div>
+    <h2 class="reveal" style="--d:.08s" data-i18n="whoHeadingFancy">Ahoj, jsem <em>Voku</em>.</h2>
+    <div class="about-text reveal" style="--d:.16s" data-i18n="whoTextShort">
+      <p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hry a občas i sportuju.</p>
+      <p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to <strong>postavit</strong> — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p>
+      <p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p>
+    </div>
+  </div>
+
+  <div class="demo reveal reveal--right" style="--d:.15s">
+    <div class="demo__glow"></div>
+    <div class="panel">
+      <div class="panel__head">
+        <span class="panel__title" data-i18n="aboutPanelTitle">Kdo je Voku</span>
+        <span class="panel__pill" data-i18n="aboutPanelPill">Jihočeský · CZ</span>
+      </div>
+      <div class="about-photos">
+        <div class="about-photo">
           <img src="ja_seriozne.png" alt="Profilová fotka" data-i18n-attr="alt:captionNormal">
-          <span class="photo-caption" data-i18n="captionNormal">Normální fotka</span>
+          <span class="photo-cap" data-i18n="captionNormal">Normální fotka</span>
         </div>
-        <div class="hero-photo">
+        <div class="about-photo">
           <img src="ja_uwu.png" alt="Vtipná fotka" data-i18n-attr="alt:captionFunny">
-          <span class="photo-caption" data-i18n="captionFunny">Trošku vtipnej.</span>
+          <span class="photo-cap" data-i18n="captionFunny">Trošku vtipnej.</span>
         </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="scroll-hint">
-      <span data-i18n="scrollHint">Scroll</span>
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </section>
+<!-- ═══ 02 PROJEKTY ═══ -->
+<section class="projects" id="projects">
+  <div class="projects__head">
+    <div class="kicker reveal"><span class="kicker__num">02</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="projectsLabel">Moje práce</span></div>
+    <h2 class="reveal" style="--d:.08s" data-i18n="projectsHeadingFancy">Věci, co jsem <em>postavil</em>.</h2>
+  </div>
+  <div class="projects-grid">
 
-  <main>
-
-    <!-- ── KDO JSEM ─────────────────────────────────────────── -->
-    <div class="s" id="about">
-      <div class="s-head">
-        <div class="s-label" data-i18n="whoLabel">O mně</div>
-        <h2 data-i18n="whoHeading">Vojtěch Kurinec — Voku</h2>
+    <!-- Knowix -->
+    <div class="p-card reveal" style="--accent: var(--p-blue)">
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="knowixInfo">Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</div>
+        </div>
+        <div class="p-overlay-links">
+          <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+        </div>
       </div>
-      <div class="about-card">
-        <div class="about-text" data-i18n="whoText"><p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hraju hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to postavit — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-divider">---</p><h3>Projekty</h3><p><strong>Knowix</strong> — platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</p><p><strong>Fluxen</strong> — nástupce Knowixu. Duolingo-style learning platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozdělených podle ročníků. V aktivním vývoji.</p><p><strong>LasergameMC</strong> — český Minecraft server s Laserforce mechanikami. Obsahuje vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</p><p><strong>Supo</strong> — aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožňuje načítání a zobrazování dat z potápěčských hodinek.</p><p><strong>Školní chat / Easy Keylogger</strong> — starší projekty, ze kterých jsem se hodně naučil — hlavně to, jak <em>nedělat</em> věci. A to je taky cenná zkušenost.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p></div>
-      </div>
-    </div>
-
-    <!-- ── PROJEKTY ──────────────────────────────────────────── -->
-    <hr class="aurora-line">
-    <div class="s" id="projects">
-      <div class="s-head">
-        <div class="s-label" data-i18n="projectsLabel">Moje práce</div>
-        <h2 data-i18n="projectsHeading">Projekty</h2>
-      </div>
-      <div class="projects-grid">
-
-        <!-- Knowix -->
-        <div class="p-card" style="--accent: var(--blue)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="knowixInfo">Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</div>
-            </div>
-            <div class="p-overlay-links">
-              <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-          <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)"><i class="fas fa-graduation-cap"></i></div>
-          <div class="p-title" data-i18n="knowixTitle">Knowix</div>
-          <div class="p-desc" data-i18n="knowixDesc">Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).</div>
-          <div class="p-links">
-            <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-          </div>
-        </div>
-
-        <!-- LasergameMC -->
-        <div class="p-card" style="--accent: var(--red)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="lmcInfo">Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</div>
-            </div>
-            <div class="p-overlay-links">
-              <a href="https://lasergamemc.cz" target="_blank" class="btn btn-fill" style="background:var(--red)"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>
-              <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-          <div class="p-icon" style="background:rgba(245,79,54,.14);color:var(--red)"><i class="fas fa-crosshairs"></i></div>
-          <div class="live-badge"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></div>
-          <div class="p-title" data-i18n="lmcTitle">LasergameMC (LMC)</div>
-          <div class="p-desc" data-i18n="lmcDesc">Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.</div>
-          <div class="p-links">
-            <a href="https://lasergamemc.cz" target="_blank" class="btn btn-fill" style="background:var(--red)"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>
-            <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-          </div>
-        </div>
-
-        <!-- Lasergame-Stats-Own -->
-        <div class="p-card" style="--accent: var(--green)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="lsoInfo">Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.</div>
-            </div>
-            <div class="p-overlay-links">
-              <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-          </div>
-          <div class="p-icon" style="background:rgba(109,192,102,.14);color:var(--green)"><i class="fas fa-chart-bar"></i></div>
-          <div class="p-title" data-i18n="lsoTitle">Lasergame-Stats-Own</div>
-          <div class="p-desc" data-i18n="lsoDesc">Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.</div>
-          <div class="p-links">
-            <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-          </div>
-        </div>
-
-        <!-- Bakix – Ve vývoji -->
-        <div class="p-card" style="--accent: var(--orange)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="bakixInfo">Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.</div>
-            </div>
-            <div class="p-overlay-links"></div>
-          </div>
-          <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--orange)"><i class="fas fa-mobile-alt"></i></div>
-          <div class="wip-badge"><span class="dot"></span><span data-i18n="wipBadge">Ve vývoji</span></div>
-          <div class="p-title" data-i18n="bakixTitle">Bakix</div>
-          <div class="p-desc" data-i18n="bakixDesc">Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.</div>
-          <div class="p-links"></div>
-        </div>
-
-        <!-- Školní chat -->
-        <div class="p-card" style="--accent: var(--yellow)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="schoolChatInfo">Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).</div>
-            </div>
-            <div class="p-overlay-links">
-              <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
-            </div>
-          </div>
-          <div class="p-icon" style="background:rgba(246,194,27,.14);color:var(--yellow)"><i class="fas fa-comments"></i></div>
-          <div class="p-title" data-i18n="schoolChatTitle">Školní chat</div>
-          <div class="p-desc" data-i18n="schoolChatDesc">Chatovací platforma postavená na Fletu — zároveň můj první projekt.</div>
-          <div class="p-links">
-            <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
-          </div>
-        </div>
-
-        <!-- Easy Keylogger -->
-        <div class="p-card" style="--accent: var(--orange)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="easyKeyloggerInfo">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.</div>
-            </div>
-            <div class="p-overlay-links">
-              <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
-            </div>
-          </div>
-          <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--orange)"><i class="fas fa-keyboard"></i></div>
-          <div class="p-title" data-i18n="easyKeyloggerTitle">Easy Keylogger</div>
-          <div class="p-desc" data-i18n="easyKeyloggerDesc">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.</div>
-          <div class="p-links">
-            <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
-          </div>
-        </div>
-
-        <!-- Fluxen – Nízká aktivita -->
-        <div class="p-card" style="--accent: var(--purple)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
-            </div>
-            <div class="p-overlay-links"></div>
-          </div>
-          <div class="p-icon" style="background:rgba(191,63,140,.14);color:var(--purple)"><i class="fas fa-graduation-cap"></i></div>
-          <div class="maintenance-badge"><span class="dot"></span><span data-i18n="maintenanceBadge">Nízká aktivita</span></div>
-          <div class="p-title" data-i18n="fluxenTitle">Fluxen</div>
-          <div class="p-desc" data-i18n="fluxenDesc">Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.</div>
-          <div class="p-links"></div>
-        </div>
-
-        <!-- Supo – Nízká aktivita -->
-        <div class="p-card" style="--accent: var(--blue)">
-          <div class="p-hover-overlay">
-            <div>
-              <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-              <div class="p-overlay-text" data-i18n="supoInfo">Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
-            </div>
-            <div class="p-overlay-links"></div>
-          </div>
-          <div class="p-icon" style="background:rgba(46,94,187,.14);color:var(--blue)"><i class="fas fa-tint"></i></div>
-          <div class="maintenance-badge"><span class="dot"></span><span data-i18n="maintenanceBadge">Nízká aktivita</span></div>
-          <div class="p-title" data-i18n="supoTitle">Supo</div>
-          <div class="p-desc" data-i18n="supoDesc">Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.</div>
-          <div class="p-links"></div>
-        </div>
-
+      <div class="p-icon" style="background:rgba(75,156,211,.14);color:var(--p-blue)"><i class="fas fa-graduation-cap"></i></div>
+      <div class="p-title" data-i18n="knowixTitle">Knowix</div>
+      <div class="p-desc" data-i18n="knowixDesc">Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).</div>
+      <div class="p-links">
+        <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
-    <!-- ── TECHNOLOGIE ───────────────────────────────────────── -->
-    <hr class="aurora-line">
-    <div class="s" id="tech">
-      <div class="s-head">
-        <div class="s-label" data-i18n="techLabel">Stack</div>
-        <h2 data-i18n="technologiesHeading">Technologie</h2>
+    <!-- LasergameMC -->
+    <div class="p-card reveal" style="--accent: var(--p-red); --d:.06s">
+      <span class="badge badge--live"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></span>
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="lmcInfo">Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</div>
+        </div>
+        <div class="p-overlay-links">
+          <a href="https://lasergamemc.cz" target="_blank" class="btn btn--primary btn--small"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>
+          <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+        </div>
       </div>
-      <div class="tech-grid">
-
-        <!-- Jazyky -->
-        <div class="t-card">
-          <div class="t-accent" style="background:linear-gradient(90deg,var(--green),var(--blue))"></div>
-          <div class="t-title">
-            <i class="fas fa-code" style="color:var(--green)"></i>
-            <span data-i18n="languagesHeading">Jazyky</span>
-          </div>
-          <div class="t-icons">
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fab fa-python" style="color:#4b9cd3"></i></div>
-              <span class="t-icon-label">Python</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fab fa-html5" style="color:#e34c26"></i></div>
-              <span class="t-icon-label">HTML</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fab fa-css3-alt" style="color:#264de4"></i></div>
-              <span class="t-icon-label">CSS</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box">
-                <i class="fab fa-js" style="color:#f7df1e"></i>
-                <span class="t-badge" style="background:rgba(246,194,27,.18);color:var(--yellow)" data-i18n="badgeSome">Trochu</span>
-              </div>
-              <span class="t-icon-label">JavaScript</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box">
-                <i class="fab fa-java" style="color:#f89820"></i>
-                <span class="t-badge" style="background:rgba(191,63,140,.18);color:var(--purple)" data-i18n="badgeLearning">Učím&nbsp;se</span>
-              </div>
-              <span class="t-icon-label">Java</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Frameworky -->
-        <div class="t-card">
-          <div class="t-accent" style="background:linear-gradient(90deg,var(--purple),var(--red))"></div>
-          <div class="t-title">
-            <i class="fas fa-layer-group" style="color:var(--purple)"></i>
-            <span data-i18n="frameworksHeading">Frameworky</span>
-          </div>
-          <div class="t-icons">
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fas fa-server" style="color:#ccc"></i></div>
-              <span class="t-icon-label">Flask</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fas fa-mobile-alt" style="color:var(--green)"></i></div>
-              <span class="t-icon-label">Flet</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fab fa-discord" style="color:#5865F2"></i></div>
-              <span class="t-icon-label">Discord</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fas fa-chart-bar" style="color:#714B67"></i></div>
-              <span class="t-icon-label">Odoo</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ostatní -->
-        <div class="t-card">
-          <div class="t-accent" style="background:linear-gradient(90deg,var(--orange),var(--yellow))"></div>
-          <div class="t-title">
-            <i class="fas fa-cogs" style="color:var(--orange)"></i>
-            <span data-i18n="otherHeading">Ostatní</span>
-          </div>
-          <div class="t-icons">
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fab fa-raspberry-pi" style="color:#C51A4A"></i></div>
-              <span class="t-icon-label">Raspberry Pi</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fas fa-print" style="color:#ccc"></i></div>
-              <span class="t-icon-label" data-i18n="tech3dPrint">3D tisk</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fas fa-video" style="color:#ccc"></i></div>
-              <span class="t-icon-label" data-i18n="techVideo">Střih videí</span>
-            </div>
-            <div class="t-icon">
-              <div class="t-icon-box"><i class="fas fa-brain" style="color:var(--purple)"></i></div>
-              <span class="t-icon-label">AI</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="p-icon" style="background:rgba(245,79,54,.14);color:var(--p-red)"><i class="fas fa-crosshairs"></i></div>
+      <div class="p-title" data-i18n="lmcTitle">LasergameMC (LMC)</div>
+      <div class="p-desc" data-i18n="lmcDesc">Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.</div>
+      <div class="p-links">
+        <a href="https://lasergamemc.cz" target="_blank" class="btn btn--primary btn--small"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>
+        <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
-    <!-- ── KONTAKT ────────────────────────────────────────────── -->
-    <hr class="aurora-line">
-    <div class="s" id="contact">
-      <div class="contact-card">
-        <div class="contact-heading" data-i18n="contactHeading">Kontakt</div>
-        <div class="contact-sub" data-i18n="contactSub">Napiš mi — každou zprávu rád přečtu.</div>
-        <div class="contact-links">
-          <a href="mailto:vojta.kurinec@gmail.com?subject=Dotaz&body=Ahoj," class="c-link">
-            <i class="fas fa-envelope c-ico" style="color:var(--red)"></i>
-            <span>vojta.kurinec@gmail.com</span>
-          </a>
-          <a href="https://github.com/Voku199" target="_blank" class="c-link">
-            <i class="fab fa-github c-ico"></i>
-            <span>@Voku199</span>
-          </a>
-          <a href="https://instagram.com/voku199" target="_blank" class="c-link">
-            <i class="fab fa-instagram c-ico" style="color:#E1306C"></i>
-            <span>@voku199</span>
-          </a>
+    <!-- Lasergame-Stats-Own -->
+    <div class="p-card reveal" style="--accent: var(--p-green); --d:.12s">
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="lsoInfo">Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.</div>
         </div>
-        <div class="contact-location">
-          <i class="fas fa-map-marker-alt"></i>
-          <span data-i18n="regionValue">Jihočeský, Česká republika</span>
+        <div class="p-overlay-links">
+          <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
         </div>
+      </div>
+      <div class="p-icon" style="background:rgba(109,192,102,.14);color:var(--p-green)"><i class="fas fa-chart-bar"></i></div>
+      <div class="p-title" data-i18n="lsoTitle">Lasergame-Stats-Own</div>
+      <div class="p-desc" data-i18n="lsoDesc">Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.</div>
+      <div class="p-links">
+        <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
-  </main>
+    <!-- Bakix -->
+    <div class="p-card reveal" style="--accent: var(--p-orange); --d:.18s">
+      <span class="badge badge--wip"><span class="dot"></span><span data-i18n="wipBadge">Ve vývoji</span></span>
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="bakixInfo">Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.</div>
+        </div>
+        <div class="p-overlay-links"></div>
+      </div>
+      <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--p-orange)"><i class="fas fa-mobile-alt"></i></div>
+      <div class="p-title" data-i18n="bakixTitle">Bakix</div>
+      <div class="p-desc" data-i18n="bakixDesc">Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.</div>
+      <div class="p-links"></div>
+    </div>
 
-  <footer>
-    <p class="footer-quote" data-i18n="footerQuote">"Sedmkrát padneš, osmkrát vstaneš."</p>
-    <p class="footer-copy" id="footer-date"></p>
-  </footer>
+    <!-- Školní chat -->
+    <div class="p-card reveal" style="--accent: var(--p-yellow)">
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="schoolChatInfo">Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).</div>
+        </div>
+        <div class="p-overlay-links">
+          <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+        </div>
+      </div>
+      <div class="p-icon" style="background:rgba(246,194,27,.14);color:var(--p-yellow)"><i class="fas fa-comments"></i></div>
+      <div class="p-title" data-i18n="schoolChatTitle">Školní chat</div>
+      <div class="p-desc" data-i18n="schoolChatDesc">Chatovací platforma postavená na Fletu — zároveň můj první projekt.</div>
+      <div class="p-links">
+        <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+      </div>
+    </div>
 
-  <!-- ── SCRIPT ─────────────────────────────────────────────── -->
-  <script>
-  const T = {
-    cs: {
-      title:             'Vojtěch "Voku" Kurinec | Portfolio',
-      heroEyebrow:       'Portfolio · 2026',
-      tagline:           'Mladý vývojář & IT nadšenec',
-      captionNormal:     'Normální fotka',
-      captionFunny:      'Trošku vtipnej.',
-      hobbyAI:           'AI',
-      hobby3d:           '3D tisk',
-      hobbyCode:         'Programování',
-      hobbyTech:         'Technologie',
-      scrollHint:        'Scroll',
-      statProjects:      '8+',
-      statProjectsLbl:   'Projektů',
-      statYears:         '3+',
-      statYearsLbl:      'Roky kódování',
-      statAge:           '15',
-      statAgeLbl:        'Let',
-      whoLabel:          'O mně',
-      whoHeading:        'Vojtěch Kurinec — Voku',
-      whoText:           '<p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hraju hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to postavit — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-divider">---</p><h3>Projekty</h3><p><strong>Knowix</strong> — platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</p><p><strong>Fluxen</strong> — nástupce Knowixu. Duolingo-style learning platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozdělených podle ročníků. V aktivním vývoji.</p><p><strong>LasergameMC</strong> — český Minecraft server s Laserforce mechanikami. Obsahuje vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</p><p><strong>Lasergame-Stats-Own</strong> — web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her a porovnáváním výsledků.</p><p><strong>Supo</strong> — aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Umožňuje načítání a zobrazování dat z potápěčských hodinek.</p><p><strong>Školní chat / Easy Keylogger</strong> — starší projekty, ze kterých jsem se hodně naučil — hlavně to, jak <em>nedělat</em> věci. A to je taky cenná zkušenost.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p>',
-      projectsLabel:     'Moje práce',
-      projectsHeading:   'Projekty',
-      overlayFromLabel:  'O projektu',
-      knowixTitle:       'Knowix',
-      knowixDesc:        'Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).',
-      knowixInfo:        'Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.',
-      lmcTitle:          'LasergameMC (LMC)',
-      lmcDesc:           'Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.',
-      lmcInfo:           'Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.',
-      visitSite:         'Navštívit web',
-      lsoTitle:          'Lasergame-Stats-Own',
-      lsoDesc:           'Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.',
-      lsoInfo:           'Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.',
-      schoolChatTitle:   'Školní chat',
-      schoolChatDesc:    'Chatovací platforma postavená na Fletu — zároveň můj první projekt.',
-      schoolChatInfo:    'Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).',
-      viewOnGitHub:      'Zobrazit na GitHubu',
-      easyKeyloggerTitle:'Easy Keylogger',
-      easyKeyloggerDesc: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.',
-      easyKeyloggerInfo: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.',
-      fluxenTitle:       'Fluxen',
-      fluxenDesc:        'Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.',
-      fluxenInfo:        'Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
-      supoTitle:         'Supo',
-      supoDesc:          'Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.',
-      supoInfo:          'Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
-      bakixTitle:        'Bakix',
-      bakixDesc:         'Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.',
-      bakixInfo:         'Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.',
-      plannedBadge:      'Plánováno',
-      wipBadge:          'Ve vývoji',
-      maintenanceBadge:  'Nízká aktivita',
-      liveBadge:         'Aktivní',
-      techLabel:         'Stack',
-      technologiesHeading:'Technologie',
-      languagesHeading:  'Jazyky',
-      frameworksHeading: 'Frameworky',
-      otherHeading:      'Ostatní',
-      badgeSome:         'Trochu',
-      badgeLearning:     'Učím&nbsp;se',
-      tech3dPrint:       '3D tisk',
-      techVideo:         'Střih videí',
-      contactHeading:    'Kontakt',
-      contactSub:        'Napiš mi — každou zprávu rád přečtu.',
-      regionValue:       'Jihočeský, Česká republika',
-      footerQuote:       '"Sedmkrát padneš, osmkrát vstaneš."'
-    },
-    en: {
-      title:             'Vojtěch "Voku" Kurinec | Portfolio',
-      heroEyebrow:       'Portfolio · 2026',
-      tagline:           'Young Developer & IT Enthusiast',
-      captionNormal:     'Normal photo',
-      captionFunny:      'A bit funny.',
-      hobbyAI:           'AI',
-      hobby3d:           '3D Printing',
-      hobbyCode:         'Coding',
-      hobbyTech:         'Technology',
-      scrollHint:        'Scroll',
-      statProjects:      '8+',
-      statProjectsLbl:   'Projects',
-      statYears:         '3+',
-      statYearsLbl:      'Years coding',
-      statAge:           '15',
-      statAgeLbl:        'Years old',
-      whoLabel:          'About me',
-      whoHeading:        'Vojtěch Kurinec — Voku',
-      whoText:           '<p>My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and IT is my passion — I code, experiment with AI, 3D print, tinker with Raspberry Pi and enjoy hardware. I like chess, games and sometimes sports too.</p><p>I believe the best way to learn something new is to build it — that is why I already have several personal projects behind me, and they taught me far more than any textbook could.</p><p class="about-divider">---</p><h3>Projects</h3><p><strong>Knowix</strong> — an English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary — all free, without pay-to-win elements. Built with Flask, MySQL and the Genius API.</p><p><strong>Fluxen</strong> — the successor to Knowix. A Duolingo-style learning platform combining English lessons through songs with science content split by school grade. In active development.</p><p><strong>LasergameMC</strong> — a Czech Minecraft server with Laserforce mechanics. It includes a custom Paper plugin for laserball, player statistics and multiple game modes. The plugin is now open source.</p><p><strong>Lasergame-Stats-Own</strong> — a web app for scraping and displaying personal Laserforce statistics. Clean dashboard with game history and result comparison.</p><p><strong>Supo</strong> — an app for divers with Suunto OAuth 2.0 API integration. It allows loading and displaying data from diving watches.</p><p><strong>School Chat / Easy Keylogger</strong> — older projects that taught me a lot, especially how <em>not</em> to do things. And that is valuable experience too.</p><p class="about-footer"><em>I do things mainly to keep improving and help others — not for fame or money.</em></p>',
-      projectsLabel:     'My Work',
-      projectsHeading:   'Projects',
-      overlayFromLabel:  'About project',
-      knowixTitle:       'Knowix',
-      knowixDesc:        'Educational website — practice and learn interactively (similar to Umimeto.org).',
-      knowixInfo:        'English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary — all free, no pay-to-win. Built with Flask, MySQL and the Genius API.',
-      lmcTitle:          'LasergameMC (LMC)',
-      lmcDesc:           'Web platform for LasergameMC – statistics, player management and more.',
-      lmcInfo:           'Czech Minecraft server with Laserforce mechanics. Custom Paper plugin for laserball, player stats and multiple game modes. Plugin is now open source.',
-      visitSite:         'Visit Site',
-      lsoTitle:          'Lasergame-Stats-Own',
-      lsoDesc:           'Personal Laserforce stats dashboard — data scraping, game history and result comparison.',
-      lsoInfo:           'Web app for scraping and displaying personal Laserforce statistics. Clean dashboard with game history, result comparison and a custom database.',
-      schoolChatTitle:   'School Chat',
-      schoolChatDesc:    'Chat platform built with Flet — also my very first project.',
-      schoolChatInfo:    'My very first project — a chat platform built with Flet. I learned a lot about how things work (and how they don\'t).',
-      viewOnGitHub:      'View on GitHub',
-      easyKeyloggerTitle:'Easy Keylogger',
-      easyKeyloggerDesc: 'Educational experiment focused on understanding input devices. Completely harmless.',
-      easyKeyloggerInfo: 'Educational experiment focused on understanding input devices. I learned a lot about how <em>not</em> to do things — and that\'s valuable experience too.',
-      fluxenTitle:       'Fluxen',
-      fluxenDesc:        'Knowix 2.0 — Duolingo-style platform for English and science learning.',
-      fluxenInfo:        'Successor to Knowix — Duolingo-style platform combining English lessons through songs with science content split by school grade. Currently in low-activity / maintenance mode with no fixed release timeline.',
-      supoTitle:         'Supo',
-      supoDesc:          'Diving app — load and visualize data from Suunto watches.',
-      supoInfo:          'App for divers with Suunto OAuth 2.0 API integration. Currently in low-activity / maintenance mode with no fixed release timeline.',
-      bakixTitle:        'Bakix',
-      bakixDesc:         'Modern PWA leveraging the Bakaláři API — a seamless, student-focused interface.',
-      bakixInfo:         'A modern PWA application leveraging the Bakaláři API to provide a seamless, student-focused interface. Displays timetables, grades, absences and messages in a clean, mobile-first UI.',
-      plannedBadge:      'Planned',
-      wipBadge:          'In Development',
-      maintenanceBadge:  'Low Activity',
-      liveBadge:         'Live',
-      techLabel:         'Stack',
-      technologiesHeading:'Technologies',
-      languagesHeading:  'Languages',
-      frameworksHeading: 'Frameworks',
-      otherHeading:      'Other',
-      badgeSome:         'Basic',
-      badgeLearning:     'Learning',
-      tech3dPrint:       '3D Printing',
-      techVideo:         'Video Editing',
-      contactHeading:    'Contact',
-      contactSub:        'Drop me a message — I read every one.',
-      regionValue:       'South Bohemian, Czech Republic',
-      footerQuote:       '"Fall seven times, stand up eight."'
-    }
-  };
+    <!-- Easy Keylogger -->
+    <div class="p-card reveal" style="--accent: var(--p-orange); --d:.06s">
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="easyKeyloggerInfo">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.</div>
+        </div>
+        <div class="p-overlay-links">
+          <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+        </div>
+      </div>
+      <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--p-orange)"><i class="fas fa-keyboard"></i></div>
+      <div class="p-title" data-i18n="easyKeyloggerTitle">Easy Keylogger</div>
+      <div class="p-desc" data-i18n="easyKeyloggerDesc">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.</div>
+      <div class="p-links">
+        <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+      </div>
+    </div>
 
-  function updateDate(lang) {
-    const d = new Date();
-    const locale = lang === 'en' ? 'en-US' : 'cs-CZ';
-    document.getElementById('footer-date').textContent =
-      '© Vojtěch Kurinec, ' + d.toLocaleDateString(locale, {year:'numeric',month:'long',day:'numeric'});
+    <!-- Fluxen -->
+    <div class="p-card reveal" style="--accent: var(--p-purple); --d:.12s">
+      <span class="badge badge--maint"><span class="dot"></span><span data-i18n="maintenanceBadge">Nízká aktivita</span></span>
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
+        </div>
+        <div class="p-overlay-links"></div>
+      </div>
+      <div class="p-icon" style="background:rgba(191,63,140,.14);color:var(--p-purple)"><i class="fas fa-graduation-cap"></i></div>
+      <div class="p-title" data-i18n="fluxenTitle">Fluxen</div>
+      <div class="p-desc" data-i18n="fluxenDesc">Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.</div>
+      <div class="p-links"></div>
+    </div>
+
+    <!-- Supo -->
+    <div class="p-card reveal" style="--accent: var(--p-blue); --d:.18s">
+      <span class="badge badge--maint"><span class="dot"></span><span data-i18n="maintenanceBadge">Nízká aktivita</span></span>
+      <div class="p-hover-overlay">
+        <div>
+          <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
+          <div class="p-overlay-text" data-i18n="supoInfo">Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
+        </div>
+        <div class="p-overlay-links"></div>
+      </div>
+      <div class="p-icon" style="background:rgba(75,156,211,.14);color:var(--p-blue)"><i class="fas fa-tint"></i></div>
+      <div class="p-title" data-i18n="supoTitle">Supo</div>
+      <div class="p-desc" data-i18n="supoDesc">Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.</div>
+      <div class="p-links"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 03 TECHNOLOGIE ═══ -->
+<section class="section section--flip" id="tech">
+  <div>
+    <div class="kicker reveal"><span class="kicker__num">03</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="techLabel">Stack</span></div>
+    <h2 class="reveal" style="--d:.08s" data-i18n="techHeadingFancy">Čím to <em>stavím</em>.</h2>
+    <p class="lead reveal" style="--d:.16s" data-i18n="techLead">Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.</p>
+    <ul class="bullets reveal" style="--d:.24s">
+      <li>Python</li>
+      <li>Flask</li>
+      <li>Raspberry Pi</li>
+      <li data-i18n="hobby3d">3D tisk</li>
+    </ul>
+  </div>
+
+  <div class="demo reveal reveal--left" style="--d:.15s">
+    <div class="demo__glow"></div>
+    <div class="tech-stack">
+
+      <div class="t-card">
+        <div class="t-title"><i class="fas fa-code" style="color:var(--p-green)"></i><span data-i18n="languagesHeading">Jazyky</span></div>
+        <div class="t-icons">
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-python" style="color:#4b9cd3"></i></div><span class="t-icon-label">Python</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-html5" style="color:#e34c26"></i></div><span class="t-icon-label">HTML</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-css3-alt" style="color:#264de4"></i></div><span class="t-icon-label">CSS</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-js" style="color:#f7df1e"></i><span class="t-badge" style="background:rgba(246,194,27,.18);color:var(--p-yellow)" data-i18n="badgeSome">Trochu</span></div><span class="t-icon-label">JavaScript</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-java" style="color:#f89820"></i><span class="t-badge" style="background:rgba(191,63,140,.18);color:var(--p-purple)" data-i18n="badgeLearning">Učím&nbsp;se</span></div><span class="t-icon-label">Java</span></div>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-title"><i class="fas fa-layer-group" style="color:var(--p-purple)"></i><span data-i18n="frameworksHeading">Frameworky</span></div>
+        <div class="t-icons">
+          <div class="t-icon"><div class="t-icon-box"><i class="fas fa-server" style="color:#ccc"></i></div><span class="t-icon-label">Flask</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fas fa-mobile-alt" style="color:var(--p-green)"></i></div><span class="t-icon-label">Flet</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-discord" style="color:#5865F2"></i></div><span class="t-icon-label">Discord</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fas fa-chart-bar" style="color:#714B67"></i></div><span class="t-icon-label">Odoo</span></div>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-title"><i class="fas fa-cogs" style="color:var(--p-orange)"></i><span data-i18n="otherHeading">Ostatní</span></div>
+        <div class="t-icons">
+          <div class="t-icon"><div class="t-icon-box"><i class="fab fa-raspberry-pi" style="color:#C51A4A"></i></div><span class="t-icon-label">Raspberry Pi</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fas fa-print" style="color:#ccc"></i></div><span class="t-icon-label" data-i18n="tech3dPrint">3D tisk</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fas fa-video" style="color:#ccc"></i></div><span class="t-icon-label" data-i18n="techVideo">Střih videí</span></div>
+          <div class="t-icon"><div class="t-icon-box"><i class="fas fa-brain" style="color:var(--p-purple)"></i></div><span class="t-icon-label">AI</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats">
+  <div class="reveal">
+    <div class="stat__num"><span data-count="8">0</span><sub>+</sub></div>
+    <div class="stat__cap" data-i18n="statProjectsLbl">Projektů</div>
+  </div>
+  <div class="reveal" style="--d:.1s">
+    <div class="stat__num"><span data-count="3">0</span><sub>+</sub></div>
+    <div class="stat__cap" data-i18n="statYearsLbl">Roky kódování</div>
+  </div>
+  <div class="reveal" style="--d:.2s">
+    <div class="stat__num"><span data-count="15">0</span></div>
+    <div class="stat__cap" data-i18n="statAgeLbl">Let</div>
+  </div>
+</section>
+
+<!-- ═══ 04 KONTAKT ═══ -->
+<section class="cta" id="contact">
+  <div class="cta__panel reveal reveal--pop">
+    <h2 data-i18n="contactHeadingFancy">Pojďme se spojit.</h2>
+    <p data-i18n="contactSub">Napiš mi — každou zprávu rád přečtu.</p>
+    <div class="cta__links">
+      <a href="mailto:vojta.kurinec@gmail.com?subject=Dotaz&body=Ahoj," class="c-link">
+        <i class="fas fa-envelope"></i><span>vojta.kurinec@gmail.com</span>
+      </a>
+      <a href="https://github.com/Voku199" target="_blank" class="c-link">
+        <i class="fab fa-github"></i><span>@Voku199</span>
+      </a>
+      <a href="https://instagram.com/voku199" target="_blank" class="c-link">
+        <i class="fab fa-instagram"></i><span>@voku199</span>
+      </a>
+    </div>
+    <div class="cta__loc">
+      <i class="fas fa-map-marker-alt"></i>
+      <span data-i18n="regionValue">Jihočeský, Česká republika</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer__logo"><i>✦</i> VOKU</div>
+  <p class="footer__quote" data-i18n="footerQuote">"Sedmkrát padneš, osmkrát vstaneš."</p>
+  <small id="footer-date"></small>
+</footer>
+
+<script>
+const T = {
+  cs: {
+    title:             'Vojtěch "Voku" Kurinec | Portfolio',
+    navAbout:          'O mně',
+    navProjects:       'Projekty',
+    navTech:           'Technologie',
+    navContact:        'Kontakt',
+    navContactBtn:     'Spojit se',
+    heroEyebrow:       'Portfolio · 2026',
+    heroSub:           '<strong>Mladý vývojář & IT nadšenec.</strong> Programuju, experimentuju s AI, tisknu na 3D tiskárně a bastlím s Raspberry Pi. Nejlíp se učím tím, že věci <strong>prostě postavím</strong>.',
+    heroCtaProjects:   'Moje projekty',
+    heroCtaContact:    'Spojit se',
+    hobby3d:           '3D tisk',
+    hobbyCode:         'Programování',
+    fcardLive:         'LasergameMC běží naživo',
+    statProjectsLbl:   'Projektů',
+    statYearsLbl:      'Roky kódování',
+    statAgeLbl:        'Let',
+    whoLabel:          'O mně',
+    whoHeadingFancy:   'Ahoj, jsem <em>Voku</em>.',
+    whoTextShort:      '<p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to <strong>postavit</strong> — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p>',
+    aboutPanelTitle:   'Kdo je Voku',
+    aboutPanelPill:    'Jihočeský · CZ',
+    captionNormal:     'Normální fotka',
+    captionFunny:      'Trošku vtipnej.',
+    projectsLabel:     'Moje práce',
+    projectsHeadingFancy:'Věci, co jsem <em>postavil</em>.',
+    overlayFromLabel:  'O projektu',
+    knowixTitle:       'Knowix',
+    knowixDesc:        'Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).',
+    knowixInfo:        'Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.',
+    lmcTitle:          'LasergameMC (LMC)',
+    lmcDesc:           'Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.',
+    lmcInfo:           'Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.',
+    visitSite:         'Navštívit web',
+    lsoTitle:          'Lasergame-Stats-Own',
+    lsoDesc:           'Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.',
+    lsoInfo:           'Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.',
+    schoolChatTitle:   'Školní chat',
+    schoolChatDesc:    'Chatovací platforma postavená na Fletu — zároveň můj první projekt.',
+    schoolChatInfo:    'Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).',
+    viewOnGitHub:      'Zobrazit na GitHubu',
+    easyKeyloggerTitle:'Easy Keylogger',
+    easyKeyloggerDesc: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.',
+    easyKeyloggerInfo: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.',
+    fluxenTitle:       'Fluxen',
+    fluxenDesc:        'Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.',
+    fluxenInfo:        'Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
+    supoTitle:         'Supo',
+    supoDesc:          'Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.',
+    supoInfo:          'Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
+    bakixTitle:        'Bakix',
+    bakixDesc:         'Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.',
+    bakixInfo:         'Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.',
+    wipBadge:          'Ve vývoji',
+    maintenanceBadge:  'Nízká aktivita',
+    liveBadge:         'Aktivní',
+    techLabel:         'Stack',
+    techHeadingFancy:  'Čím to <em>stavím</em>.',
+    techLead:          'Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.',
+    languagesHeading:  'Jazyky',
+    frameworksHeading: 'Frameworky',
+    otherHeading:      'Ostatní',
+    badgeSome:         'Trochu',
+    badgeLearning:     'Učím&nbsp;se',
+    tech3dPrint:       '3D tisk',
+    techVideo:         'Střih videí',
+    contactHeadingFancy:'Pojďme se spojit.',
+    contactSub:        'Napiš mi — každou zprávu rád přečtu.',
+    regionValue:       'Jihočeský, Česká republika',
+    footerQuote:       '"Sedmkrát padneš, osmkrát vstaneš."'
+  },
+  en: {
+    title:             'Vojtěch "Voku" Kurinec | Portfolio',
+    navAbout:          'About',
+    navProjects:       'Projects',
+    navTech:           'Tech',
+    navContact:        'Contact',
+    navContactBtn:     'Get in touch',
+    heroEyebrow:       'Portfolio · 2026',
+    heroSub:           '<strong>Young developer & IT enthusiast.</strong> I code, experiment with AI, 3D print and tinker with Raspberry Pi. I learn best by simply <strong>building things</strong>.',
+    heroCtaProjects:   'My projects',
+    heroCtaContact:    'Get in touch',
+    hobby3d:           '3D Printing',
+    hobbyCode:         'Coding',
+    fcardLive:         'LasergameMC is live',
+    statProjectsLbl:   'Projects',
+    statYearsLbl:      'Years coding',
+    statAgeLbl:        'Years old',
+    whoLabel:          'About me',
+    whoHeadingFancy:   'Hi, I am <em>Voku</em>.',
+    whoTextShort:      '<p>My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and IT is my passion — I code, experiment with AI, 3D print, tinker with Raspberry Pi and enjoy hardware. I like chess, games and sometimes sports too.</p><p>I believe the best way to learn something new is to just <strong>build it</strong> — that is why I already have several personal projects behind me, and they taught me far more than any textbook could.</p><p class="about-footer"><em>I do things mainly to keep improving and help others — not for fame or money.</em></p>',
+    aboutPanelTitle:   'Who is Voku',
+    aboutPanelPill:    'South Bohemia · CZ',
+    captionNormal:     'Normal photo',
+    captionFunny:      'A bit funny.',
+    projectsLabel:     'My Work',
+    projectsHeadingFancy:'Things I have <em>built</em>.',
+    overlayFromLabel:  'About project',
+    knowixTitle:       'Knowix',
+    knowixDesc:        'Educational website — practice and learn interactively (similar to Umimeto.org).',
+    knowixInfo:        'English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary — all free, no pay-to-win. Built with Flask, MySQL and the Genius API.',
+    lmcTitle:          'LasergameMC (LMC)',
+    lmcDesc:           'Web platform for LasergameMC – statistics, player management and more.',
+    lmcInfo:           'Czech Minecraft server with Laserforce mechanics. Custom Paper plugin for laserball, player stats and multiple game modes. Plugin is now open source.',
+    visitSite:         'Visit Site',
+    lsoTitle:          'Lasergame-Stats-Own',
+    lsoDesc:           'Personal Laserforce stats dashboard — data scraping, game history and result comparison.',
+    lsoInfo:           'Web app for scraping and displaying personal Laserforce statistics. Clean dashboard with game history, result comparison and a custom database.',
+    schoolChatTitle:   'School Chat',
+    schoolChatDesc:    'Chat platform built with Flet — also my very first project.',
+    schoolChatInfo:    'My very first project — a chat platform built with Flet. I learned a lot about how things work (and how they don\'t).',
+    viewOnGitHub:      'View on GitHub',
+    easyKeyloggerTitle:'Easy Keylogger',
+    easyKeyloggerDesc: 'Educational experiment focused on understanding input devices. Completely harmless.',
+    easyKeyloggerInfo: 'Educational experiment focused on understanding input devices. I learned a lot about how <em>not</em> to do things — and that\'s valuable experience too.',
+    fluxenTitle:       'Fluxen',
+    fluxenDesc:        'Knowix 2.0 — Duolingo-style platform for English and science learning.',
+    fluxenInfo:        'Successor to Knowix — Duolingo-style platform combining English lessons through songs with science content split by school grade. Currently in low-activity / maintenance mode with no fixed release timeline.',
+    supoTitle:         'Supo',
+    supoDesc:          'Diving app — load and visualize data from Suunto watches.',
+    supoInfo:          'App for divers with Suunto OAuth 2.0 API integration. Currently in low-activity / maintenance mode with no fixed release timeline.',
+    bakixTitle:        'Bakix',
+    bakixDesc:         'Modern PWA leveraging the Bakaláři API — a seamless, student-focused interface.',
+    bakixInfo:         'A modern PWA application leveraging the Bakaláři API to provide a seamless, student-focused interface. Displays timetables, grades, absences and messages in a clean, mobile-first UI.',
+    wipBadge:          'In Development',
+    maintenanceBadge:  'Low Activity',
+    liveBadge:         'Live',
+    techLabel:         'Stack',
+    techHeadingFancy:  'What I <em>build with</em>.',
+    techLead:          'From backend to hardware. I love Python and Flask the most, but I am not afraid to reach for anything that solves the problem.',
+    languagesHeading:  'Languages',
+    frameworksHeading: 'Frameworks',
+    otherHeading:      'Other',
+    badgeSome:         'Basic',
+    badgeLearning:     'Learning',
+    tech3dPrint:       '3D Printing',
+    techVideo:         'Video Editing',
+    contactHeadingFancy:'Let us connect.',
+    contactSub:        'Drop me a message — I read every one.',
+    regionValue:       'South Bohemian, Czech Republic',
+    footerQuote:       '"Fall seven times, stand up eight."'
   }
+};
 
+(function () {
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+  /* ── i18n ─────────────────────────────────────────────── */
+  function updateDate(lang) {
+    var d = new Date();
+    var locale = lang === 'en' ? 'en-US' : 'cs-CZ';
+    $('#footer-date').textContent =
+      '© Vojtěch Kurinec, ' + d.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' });
+  }
   function setLang(lang) {
-    const d = T[lang]; if (!d) return;
+    var d = T[lang]; if (!d) return;
     document.documentElement.lang = lang;
     document.title = d.title;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
+    $$('[data-i18n]').forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
       if (d[k] !== undefined) el.innerHTML = d[k];
     });
-    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
-      el.getAttribute('data-i18n-attr').split(';').forEach(m => {
-        const [a, k] = m.split(':');
+    $$('[data-i18n-attr]').forEach(function (el) {
+      el.getAttribute('data-i18n-attr').split(';').forEach(function (m) {
+        var parts = m.split(':'), a = parts[0], k = parts[1];
         if (a && k && d[k]) el.setAttribute(a.trim(), d[k]);
       });
     });
-    document.querySelectorAll('.lang-switch button').forEach(b =>
-      b.classList.toggle('active', b.dataset.lang === lang));
+    $$('.lang-switch button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
     localStorage.setItem('lang', lang);
     updateDate(lang);
   }
-
   setLang(localStorage.getItem('lang') || 'cs');
-  document.querySelectorAll('.lang-switch button').forEach(b =>
-    b.addEventListener('click', () => setLang(b.dataset.lang)));
+  $$('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.dataset.lang); });
+  });
 
-  // Scroll reveal
-  const io = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }),
-    { threshold: 0.08 }
-  );
-  document.querySelectorAll('.s').forEach(el => io.observe(el));
+  /* ── Scroll progress + nav state ──────────────────────── */
+  var bar = $('#progress');
+  var nav = $('#nav');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      nav.classList.toggle('scrolled', window.scrollY > 12);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  // Nav opacity on scroll
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.background = window.scrollY > 40
-      ? 'rgba(4,5,10,0.92)'
-      : 'rgba(4,5,10,0.72)';
-  }, { passive: true });
-  </script>
+  /* ── Count-up ─────────────────────────────────────────── */
+  function countUp(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (reduced) { el.textContent = target; return; }
+    var dur = 1100, t0 = performance.now();
+    function frame(t) {
+      var p = Math.min(1, (t - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(target * e);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ── Reveal-on-scroll engine ──────────────────────────── */
+  var counted = new WeakSet();
+  function activate(el) {
+    el.classList.add('in');
+    var counters = $$('[data-count]', el);
+    if (el.matches('[data-count]')) counters.push(el);
+    counters.forEach(function (c) {
+      if (counted.has(c)) return;
+      counted.add(c);
+      countUp(c);
+    });
+  }
+  if ('IntersectionObserver' in window && !reduced) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        io.unobserve(en.target);
+        activate(en.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    $$('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    $$('.reveal').forEach(activate);
+  }
+
+  /* ── Hero plays immediately ───────────────────────────── */
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      $('#heroTitle').classList.add('in');
+      $$('#hero .reveal').forEach(function (el) { el.classList.add('in'); });
+      $$('#hero [data-count], #stage [data-count]').forEach(function (c) {
+        if (counted.has(c)) return;
+        counted.add(c);
+        setTimeout(function () { countUp(c); }, 500);
+      });
+    });
+  });
+
+  /* ── Hero parallax (fine pointers only) ───────────────── */
+  if (!reduced && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var stage = $('#stage');
+    var layers = $$('[data-depth]', stage);
+    var px = 0, py = 0, tx = 0, ty = 0, raf = 0;
+    function loop() {
+      px += (tx - px) * 0.06;
+      py += (ty - py) * 0.06;
+      layers.forEach(function (l) {
+        var dep = parseFloat(l.getAttribute('data-depth'));
+        l.style.translate = (px * dep).toFixed(1) + 'px ' + (py * dep).toFixed(1) + 'px';
+      });
+      if (Math.abs(tx - px) > 0.02 || Math.abs(ty - py) > 0.02) {
+        raf = requestAnimationFrame(loop);
+      } else { raf = 0; }
+    }
+    $('#hero').addEventListener('pointermove', function (e) {
+      tx = (e.clientX / window.innerWidth - 0.5) * 2;
+      ty = (e.clientY / window.innerHeight - 0.5) * 2;
+      if (!raf) raf = requestAnimationFrame(loop);
+    });
+  }
+
+  /* ── Ticker: duplicate for seamless loop ──────────────── */
+  var tick = $('#ticker');
+  tick.innerHTML += tick.innerHTML;
+})();
+</script>
 </body>
 </html>
-
