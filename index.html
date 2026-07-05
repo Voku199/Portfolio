@@ -1312,7 +1312,6 @@ a.fcard:hover { border-color: var(--terra); }
 
     <!-- LasergameMC -->
     <div class="p-card reveal" style="--accent: var(--p-red); --d:.06s">
-      <span class="badge badge--live"><span class="dot"></span><span data-i18n="liveBadge">Aktivní</span></span>
       <div class="p-hover-overlay">
         <div>
           <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
@@ -1359,12 +1358,16 @@ a.fcard:hover { border-color: var(--terra); }
           <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
           <div class="p-overlay-text" data-i18n="bakixInfo">Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.</div>
         </div>
-        <div class="p-overlay-links"></div>
+        <div class="p-overlay-links">
+          <a href="https://github.com/Voku199/.Bakix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+        </div>
       </div>
       <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--p-orange)"><i class="fas fa-mobile-alt"></i></div>
       <div class="p-title" data-i18n="bakixTitle">Bakix</div>
       <div class="p-desc" data-i18n="bakixDesc">Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.</div>
-      <div class="p-links"></div>
+      <div class="p-links">
+        <a href="https://github.com/Voku199/.Bakix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+      </div>
     </div>
 
     <!-- Školní chat -->
@@ -1440,10 +1443,39 @@ a.fcard:hover { border-color: var(--terra); }
   </div>
 </section>
 
-<!-- ═══ 04 TECHNOLOGIE ═══ -->
+<!-- ═══ 04 RESPAWN LASERGAME ČB ═══ -->
+<section class="section" id="client">
+  <div>
+    <div class="kicker reveal"><span class="kicker__num">04</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="clientLabel">Klientská práce</span></div>
+    <h2 class="reveal" style="--d:.08s" data-i18n="clientHeadingFancy">Moje první <em>velká zakázka</em>.</h2>
+    <div class="about-text reveal" style="--d:.16s" data-i18n="clientText">
+      <p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény — rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p>
+      <p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong> — od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>
+    </div>
+    <div class="reveal" style="--d:.24s; margin-top:1.4rem">
+      <a href="https://lasergame-cb.cz" target="_blank" rel="noopener" class="btn btn--primary btn--small"><i class="fas fa-globe"></i> lasergame-cb.cz</a>
+    </div>
+  </div>
+  <div class="demo reveal reveal--right" style="--d:.15s">
+    <div class="demo__glow"></div>
+    <div class="panel">
+      <div class="panel__head">
+        <span class="panel__title" data-i18n="clientPanelTitle">Respawn Lasergame CB</span>
+        <span class="panel__pill" data-i18n="clientPanelPill">Klientský projekt</span>
+      </div>
+      <div style="color:var(--muted);font-size:12.5px;line-height:1.75;margin-top:.4rem">
+        <p style="margin-bottom:.85rem"><strong style="color:var(--cream)" data-i18n="clientDetail1Head">Web + kompletní systém</strong> — <span data-i18n="clientDetail1Body">rezervace, turnaje, výsledky her.</span></p>
+        <p style="margin-bottom:.85rem"><strong style="color:var(--cream)" data-i18n="clientDetail2Head">První seriózní zakázka</strong> — <span data-i18n="clientDetail2Body">komunikace s klientem, dodávání pod tlakem.</span></p>
+        <p><a href="https://lasergame-cb.cz" target="_blank" rel="noopener" style="color:var(--terra3);text-decoration:none;font-weight:700">lasergame-cb.cz ↗</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 TECHNOLOGIE ═══ -->
 <section class="section section--flip" id="tech">
   <div>
-    <div class="kicker reveal"><span class="kicker__num">04</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="techLabel">Stack</span></div>
+    <div class="kicker reveal"><span class="kicker__num">05</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="techLabel">Stack</span></div>
     <h2 class="reveal" style="--d:.08s" data-i18n="techHeadingFancy">Čím to <em>stavím</em>.</h2>
     <p class="lead reveal" style="--d:.16s" data-i18n="techLead">Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.</p>
     <ul class="bullets reveal" style="--d:.24s">
@@ -1616,6 +1648,15 @@ const T = {
     wipBadge:          'Ve vývoji',
     maintenanceBadge:  'Nízká aktivita',
     liveBadge:         'Aktivní',
+    clientLabel:       'Klientská práce',
+    clientHeadingFancy:'Moje první <em>velká zakázka</em>.',
+    clientText:        '<p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény — rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p><p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong> — od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>',
+    clientPanelTitle:  'Respawn Lasergame CB',
+    clientPanelPill:   'Klientský projekt',
+    clientDetail1Head: 'Web + kompletní systém',
+    clientDetail1Body: 'rezervace, turnaje, výsledky her.',
+    clientDetail2Head: 'První seriózní zakázka',
+    clientDetail2Body: 'komunikace s klientem, dodávání pod tlakem.',
     techLabel:         'Stack',
     techHeadingFancy:  'Čím to <em>stavím</em>.',
     techLead:          'Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.',
@@ -1704,6 +1745,15 @@ const T = {
     wipBadge:          'In Development',
     maintenanceBadge:  'Low Activity',
     liveBadge:         'Live',
+    clientLabel:       'Client Work',
+    clientHeadingFancy:'My first <em>big client project</em>.',
+    clientText:        '<p>For <strong>Respawn Lasergame České Budějovice</strong> I built a complete website and the entire arena management system — bookings, tournament management, game results. This was my first truly large project for a real client, one where I had to be <strong>more professional</strong> and communicate properly.</p><p>I learned how to work with people on <strong>bigger projects</strong> — from the initial brief through ongoing consultations to final handover. An experience no personal project can give you.</p>',
+    clientPanelTitle:  'Respawn Lasergame CB',
+    clientPanelPill:   'Client project',
+    clientDetail1Head: 'Website + full system',
+    clientDetail1Body: 'bookings, tournaments, game results.',
+    clientDetail2Head: 'First serious client work',
+    clientDetail2Body: 'client communication, delivery under pressure.',
     techLabel:         'Stack',
     techHeadingFancy:  'What I <em>build with</em>.',
     techLead:          'From backend to hardware. I love Python and Flask the most, but I am not afraid to reach for anything that solves the problem.',
