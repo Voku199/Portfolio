@@ -1094,6 +1094,108 @@ a.fcard:hover { border-color: var(--terra); }
 .reveal--pop   { transform: scale(.9); }
 .reveal--left.in, .reveal--right.in, .reveal--pop.in { transform: none; }
 
+/* ── Respawn client preview (blue/red team viewport) ────── */
+.respawn-viewport {
+  --rv-blue: #3da9fc;
+  --rv-red:  #f25c7a;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: radial-gradient(ellipse 120% 90% at 50% 40%, #14141b 0%, #0a0a0d 78%);
+  border: 1px solid #20202a;
+  box-shadow: 0 40px 80px -38px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.rv-glow {
+  position: absolute;
+  width: 62%; height: 62%;
+  border-radius: 50%;
+  filter: blur(52px);
+  pointer-events: none;
+  opacity: .5;
+}
+.rv-glow-blue { top: -12%; left: -12%; background: var(--rv-blue); animation: rv-drift-b 9s ease-in-out infinite alternate; }
+.rv-glow-red  { bottom: -12%; right: -12%; background: var(--rv-red); animation: rv-drift-r 11s ease-in-out infinite alternate; }
+@keyframes rv-drift-b { to { transform: translate(22%, 16%); } }
+@keyframes rv-drift-r { to { transform: translate(-22%, -16%); } }
+.rv-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 60%; aspect-ratio: 1;
+  border: 1px solid rgba(61,169,252,.22);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.rv-ring-2 { width: 84%; border-color: rgba(242,92,122,.16); }
+.rv-3d { position: absolute; inset: 0; z-index: 2; }
+.rv-3d canvas { display: block; width: 100% !important; height: 100% !important; }
+.rv-chip {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(246,246,248,.72);
+  background: rgba(10,10,13,.55);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 4px 8px;
+  border-radius: 7px;
+}
+.rv-tl { top: 10px; left: 10px; }
+.rv-tr { top: 10px; right: 10px; }
+.rv-bl { bottom: 10px; left: 10px; }
+.rv-br { bottom: 10px; right: 10px; }
+.rv-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rv-blue); box-shadow: 0 0 8px var(--rv-blue); }
+.rv-chip .led { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+.rv-chip .led.b { background: var(--rv-blue); }
+.rv-chip .led.r { background: var(--rv-red); }
+.rv-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .9rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.rv-lens {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, var(--rv-blue), #0a0a0d 72%);
+  box-shadow: 0 0 34px rgba(61,169,252,.5);
+  animation: rv-pulse 2.4s ease-in-out infinite;
+}
+@keyframes rv-pulse { 50% { box-shadow: 0 0 46px rgba(61,169,252,.75); } }
+.respawn-viewport.loaded .rv-fallback { display: none; }
+.respawn-cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  margin-top: .9rem;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.respawn-cap b { color: var(--cream); }
+.respawn-cap .rc-teams { display: inline-flex; align-items: center; gap: .45rem; }
+.respawn-cap .rc-teams i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
 /* ── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1458,16 +1560,24 @@ a.fcard:hover { border-color: var(--terra); }
   </div>
   <div class="demo reveal reveal--right" style="--d:.15s">
     <div class="demo__glow"></div>
-    <div class="panel">
-      <div class="panel__head">
-        <span class="panel__title" data-i18n="clientPanelTitle">Respawn Lasergame CB</span>
-        <span class="panel__pill" data-i18n="clientPanelPill">Klientský projekt</span>
+    <div class="respawn-viewport" id="respawn-viewport" data-model="models/laserforce.glb">
+      <div class="rv-glow rv-glow-blue"></div>
+      <div class="rv-glow rv-glow-red"></div>
+      <div class="rv-ring"></div>
+      <div class="rv-ring rv-ring-2"></div>
+      <div class="rv-3d" id="respawn-3d"></div>
+      <div class="rv-fallback">
+        <span class="rv-lens"></span>
+        <span data-i18n="clientViewportFallback">Laserforce phaser · 3D</span>
       </div>
-      <div style="color:var(--muted);font-size:12.5px;line-height:1.75;margin-top:.4rem">
-        <p style="margin-bottom:.85rem"><strong style="color:var(--cream)" data-i18n="clientDetail1Head">Web + kompletní systém</strong> — <span data-i18n="clientDetail1Body">rezervace, turnaje, výsledky her.</span></p>
-        <p style="margin-bottom:.85rem"><strong style="color:var(--cream)" data-i18n="clientDetail2Head">První seriózní zakázka</strong> — <span data-i18n="clientDetail2Body">komunikace s klientem, dodávání pod tlakem.</span></p>
-        <p><a href="https://lasergame-cb.cz" target="_blank" rel="noopener" style="color:var(--terra3);text-decoration:none;font-weight:700">lasergame-cb.cz ↗</a></p>
-      </div>
+      <span class="rv-chip rv-tl"><i class="dot"></i> LASERFORCE&nbsp;SYSTEM</span>
+      <span class="rv-chip rv-tr">PHASER · MK-VII</span>
+      <span class="rv-chip rv-bl">RESPAWN · CB</span>
+      <span class="rv-chip rv-br"><i class="led b"></i><i class="led r"></i> TÝM&nbsp;LED</span>
+    </div>
+    <div class="respawn-cap">
+      <span class="rc-teams"><i style="background:#3da9fc"></i><i style="background:#f25c7a"></i> <b>lasergame-cb.cz</b></span>
+      <a href="https://lasergame-cb.cz" target="_blank" rel="noopener" style="color:var(--terra3);text-decoration:none;letter-spacing:1.5px"><span data-i18n="clientViewportCta">Živý web</span> ↗</a>
     </div>
   </div>
 </section>
@@ -1651,12 +1761,8 @@ const T = {
     clientLabel:       'Klientská práce',
     clientHeadingFancy:'Moje první <em>velká zakázka</em>.',
     clientText:        '<p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény — rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p><p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong> — od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>',
-    clientPanelTitle:  'Respawn Lasergame CB',
-    clientPanelPill:   'Klientský projekt',
-    clientDetail1Head: 'Web + kompletní systém',
-    clientDetail1Body: 'rezervace, turnaje, výsledky her.',
-    clientDetail2Head: 'První seriózní zakázka',
-    clientDetail2Body: 'komunikace s klientem, dodávání pod tlakem.',
+    clientViewportFallback: 'Laserforce phaser · 3D',
+    clientViewportCta: 'Živý web',
     techLabel:         'Stack',
     techHeadingFancy:  'Čím to <em>stavím</em>.',
     techLead:          'Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.',
@@ -1748,12 +1854,8 @@ const T = {
     clientLabel:       'Client Work',
     clientHeadingFancy:'My first <em>big client project</em>.',
     clientText:        '<p>For <strong>Respawn Lasergame České Budějovice</strong> I built a complete website and the entire arena management system — bookings, tournament management, game results. This was my first truly large project for a real client, one where I had to be <strong>more professional</strong> and communicate properly.</p><p>I learned how to work with people on <strong>bigger projects</strong> — from the initial brief through ongoing consultations to final handover. An experience no personal project can give you.</p>',
-    clientPanelTitle:  'Respawn Lasergame CB',
-    clientPanelPill:   'Client project',
-    clientDetail1Head: 'Website + full system',
-    clientDetail1Body: 'bookings, tournaments, game results.',
-    clientDetail2Head: 'First serious client work',
-    clientDetail2Body: 'client communication, delivery under pressure.',
+    clientViewportFallback: 'Laserforce phaser · 3D',
+    clientViewportCta: 'Live site',
     techLabel:         'Stack',
     techHeadingFancy:  'What I <em>build with</em>.',
     techLead:          'From backend to hardware. I love Python and Flask the most, but I am not afraid to reach for anything that solves the problem.',
@@ -1915,6 +2017,87 @@ const T = {
   var tick = $('#ticker');
   tick.innerHTML += tick.innerHTML;
 })();
+</script>
+
+<!-- Respawn preview: Laserforce phaser 3D (three.js + GLTFLoader) -->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+}}
+</script>
+<script type="module">
+const stage = document.getElementById("respawn-viewport");
+const mount = document.getElementById("respawn-3d");
+const saveData = !!(navigator.connection && navigator.connection.saveData);
+
+if (stage && mount && !saveData) {
+  try {
+    const THREE = await import("three");
+    const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+    camera.position.set(0, 0, 6);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    if (THREE.SRGBColorSpace) renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+    mount.appendChild(renderer.domElement);
+
+    // team-coloured lights (blue vs red)
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(3, 4, 5); scene.add(key);
+    const blue = new THREE.PointLight(0x3da9fc, 26, 30); blue.position.set(-4, 3, 2); scene.add(blue);
+    const red = new THREE.PointLight(0xf25c7a, 22, 30); red.position.set(4, -3, 1); scene.add(red);
+
+    const pivot = new THREE.Group();
+    scene.add(pivot);
+
+    function fit() {
+      const w = mount.clientWidth || 1, h = mount.clientHeight || 1;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+    }
+
+    let loaded = false;
+    new GLTFLoader().load(
+      stage.dataset.model,
+      (gltf) => {
+        const model = gltf.scene;
+        const box = new THREE.Box3().setFromObject(model);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+        model.position.sub(center);
+        const maxDim = Math.max(size.x, size.y, size.z) || 1;
+        model.scale.setScalar(3.2 / maxDim);
+        pivot.add(model);
+        loaded = true;
+        stage.classList.add("loaded");
+        fit();
+      },
+      undefined,
+      () => { /* model error -> keep fallback lens */ }
+    );
+
+    window.addEventListener("resize", fit, { passive: true });
+    fit();
+
+    const clock = new THREE.Clock();
+    function tick() {
+      requestAnimationFrame(tick);
+      if (!loaded) { renderer.render(scene, camera); return; }
+      const t = clock.getElapsedTime();
+      pivot.rotation.y = reduce ? 0 : t * 0.5;
+      pivot.position.y = reduce ? 0 : Math.sin(t * 1.1) * 0.12;
+      renderer.render(scene, camera);
+    }
+    tick();
+  } catch (e) { /* no ES modules / three.js failed -> fallback stays */ }
+}
 </script>
 </body>
 </html>
