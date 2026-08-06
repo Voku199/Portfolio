@@ -4,28 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vojtěch "Voku" Kurinec | Portfolio</title>
-<meta name="description" content="Portfolio Vojtěcha „Voku" Kurince — mladého vývojáře a IT nadšence. AI, 3D tisk, Raspberry Pi a vlastní projekty jako Knowix, LasergameMC a Bakix.">
+<meta name="description" content="Portfolio Vojtěcha „Voku“ Kurince, mladého vývojáře a IT nadšence. AI, 3D tisk, Raspberry Pi a vlastní projekty jako Knowix, LasergameMC a Bakix.">
 <meta name="author" content="Vojtěch Kurinec">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#16120e">
+<link rel="canonical" href="https://voku199.github.io/Portfolio/">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://voku199.github.io/Portfolio/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="Voku Portfolio">
 <meta property="og:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
-<meta property="og:description" content="Mladý vývojář & IT nadšenec — AI, 3D tisk, Raspberry Pi a vlastní projekty.">
-<meta property="og:image" content="og-image.png">
+<meta property="og:description" content="Mladý vývojář a IT nadšenec: AI, 3D tisk, Raspberry Pi a vlastní projekty.">
+<meta property="og:image" content="https://voku199.github.io/Portfolio/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
-<meta name="twitter:description" content="Mladý vývojář & IT nadšenec — AI, 3D tisk, Raspberry Pi a vlastní projekty.">
-<meta name="twitter:image" content="og-image.png">
+<meta name="twitter:description" content="Mladý vývojář a IT nadšenec: AI, 3D tisk, Raspberry Pi a vlastní projekty.">
+<meta name="twitter:image" content="https://voku199.github.io/Portfolio/og-image.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <!-- Font Awesome pres JS -> SVG ikony bez webfont requestu -->
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vojtěch Kurinec",
+  "alternateName": "Voku",
+  "url": "https://voku199.github.io/Portfolio/",
+  "image": "https://voku199.github.io/Portfolio/og-image.png",
+  "email": "vojta.kurinec@gmail.com",
+  "jobTitle": "Vývojář",
+  "address": { "@type": "PostalAddress", "addressRegion": "Jihočeský kraj", "addressCountry": "CZ" },
+  "sameAs": [
+    "https://github.com/Voku199",
+    "https://instagram.com/voku199"
+  ],
+  "knowsAbout": ["Python", "Flask", "JavaScript", "Java", "Raspberry Pi", "3D tisk", "AI"]
+}
+</script>
 <style>
 /* ════════════════════════════════════════════════════════════
-   VOKU PORTFOLIO — Apple-style product page
+   VOKU PORTFOLIO / Apple-style product page
    dark earthy / terracotta / Space Mono / grain & glow
    (inspired by the Bakix welcome page)
    ════════════════════════════════════════════════════════════ */
@@ -50,7 +74,10 @@
   --p-purple: #BF3F8C;
   --p-blue:   #4b9cd3;
 
+  /* Space Mono nese identitu: nadpisy, labely, cisla, tlacitka, kod.
+     Geist nese prozu: odstavce, popisy, lead texty. */
   --font:    'Space Mono', 'Courier New', monospace;
+  --sans:    'Geist', 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ease:    cubic-bezier(.22, 1, .36, 1);
   --spring:  cubic-bezier(.34, 1.45, .44, 1);
 }
@@ -73,6 +100,46 @@ body {
 
 ::selection { background: var(--terra); color: var(--bg); }
 a { color: inherit; }
+
+/* ── Proza: citelny sans, zbytek stranky zustava mono ───── */
+.hero__sub,
+.about-text,
+.how__lead,
+.section p.lead,
+.p-desc,
+.p-overlay-text,
+.flow__d,
+.cta p,
+.footer__quote {
+  font-family: var(--sans);
+  letter-spacing: 0;
+}
+
+/* Skip link */
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 3000;
+  background: var(--terra);
+  color: #1a0d05;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: .7rem 1.2rem;
+  border-radius: 10px;
+  transition: top .2s var(--ease);
+}
+.skip:focus { top: 1rem; }
+
+/* Viditelny focus ring pro klavesnici */
+:focus-visible {
+  outline: 2px solid var(--terra3);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
 /* Font Awesome SVG fallback (no webfont) */
 i.fas, i.fab {
@@ -150,6 +217,14 @@ body::after {
   transform-origin: 0 50%;
   transform: scaleX(0);
 }
+/* nativni scroll-driven animation - zadny scroll listener, bezi mimo main thread */
+@supports (animation-timeline: scroll()) {
+  .progress__bar {
+    animation: progress-grow linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+@keyframes progress-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 /* ── Nav ────────────────────────────────────────────────── */
 .nav {
@@ -197,8 +272,81 @@ body::after {
 }
 .nav__links a:hover { color: var(--cream); }
 .nav__actions { display: flex; align-items: center; gap: .6rem; }
-@media (max-width: 880px) { .nav__links { display: none; } }
-@media (max-width: 560px) { .nav .btn--nav-cta { display: none; } }
+
+/* ── Burger + mobilni drawer ────────────────────────────── */
+.nav__burger {
+  display: none;
+  width: 38px; height: 38px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color .2s;
+}
+.nav__burger:hover { border-color: var(--muted); }
+.nav__burger span {
+  display: block;
+  position: relative;
+  width: 16px; height: 1.5px;
+  background: var(--cream);
+  transition: transform .35s var(--ease), background .2s;
+}
+.nav__burger span::before,
+.nav__burger span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 16px; height: 1.5px;
+  background: var(--cream);
+  transition: transform .35s var(--ease), opacity .2s;
+}
+.nav__burger span::before { top: -5px; }
+.nav__burger span::after  { top: 5px; }
+.nav__burger[aria-expanded="true"] span { background: transparent; }
+.nav__burger[aria-expanded="true"] span::before { transform: translateY(5px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span::after  { transform: translateY(-5px) rotate(-45deg); }
+
+.nav__drawer {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  display: none;
+  flex-direction: column;
+  gap: .25rem;
+  padding: 5.2rem 1.5rem 2rem;
+  background: color-mix(in srgb, var(--bg) 97%, transparent);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-102%);
+  transition: transform .45s var(--ease);
+}
+.nav__drawer.open { transform: translateY(0); }
+.nav__drawer a {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--cream);
+  padding: .95rem .25rem;
+  border-bottom: 1px solid var(--line);
+  transition: color .2s, padding-left .25s var(--ease);
+}
+.nav__drawer a:last-of-type { border-bottom: none; }
+.nav__drawer a:hover, .nav__drawer a:focus-visible { color: var(--terra3); padding-left: .8rem; }
+.nav__drawer .btn { margin-top: 1.1rem; align-self: flex-start; }
+
+@media (max-width: 880px) {
+  .nav__links { display: none; }
+  .nav__burger { display: inline-flex; }
+  .nav__drawer { display: flex; }
+  .nav .btn--nav-cta { display: none; }
+}
+body.nav-open { overflow: hidden; }
 
 .lang-switch { display: flex; gap: 2px; align-items: center; }
 .btn--lang {
@@ -371,42 +519,7 @@ body::after {
   font-size: clamp(.92rem, 1.4vw, 1.02rem);
 }
 .hero__sub strong { color: var(--cream); font-weight: 400; }
-.hero__cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1.8rem; }
-.hero__meta {
-  display: flex;
-  gap: .9rem 1.1rem;
-  flex-wrap: wrap;
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.hero__meta span { display: flex; align-items: center; gap: .45rem; }
-.hero__meta i { color: var(--terra); font-style: normal; min-width: auto; }
-
-/* hero stats */
-.hero__stats {
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-  margin: 2rem 0 0;
-  flex-wrap: wrap;
-}
-.hstat__num {
-  font-size: 1.9rem;
-  font-weight: 700;
-  letter-spacing: -.02em;
-  color: var(--terra3);
-  line-height: 1;
-}
-.hstat__lbl {
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: .35rem;
-}
-.hstat__div { width: 1px; height: 34px; background: var(--line); }
+.hero__cta { display: flex; gap: .8rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
 
 /* ── Code editor stage ──────────────────────────────────── */
 .stage {
@@ -596,15 +709,9 @@ body::after {
 }
 .kicker {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: .9rem;
   margin-bottom: 1.3rem;
-}
-.kicker__num {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--terra);
-  letter-spacing: 2px;
 }
 .kicker__line {
   height: 1px;
@@ -820,10 +927,24 @@ body::after {
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
-  transition: opacity .35s var(--ease), transform .35s var(--ease);
+  /* visibility:hidden drzi odkazy uvnitr mimo tab order i mimo a11y strom,
+     jinak klavesnice tabuje do neviditelnych odkazu.
+     Prepina se skokem (0s) s delayem az po dojeti fade-outu. */
+  visibility: hidden;
+  transition: opacity .35s var(--ease), transform .35s var(--ease), visibility 0s linear .35s;
   z-index: 4;
 }
-.p-card:hover .p-hover-overlay { opacity: 1; transform: none; pointer-events: auto; }
+.p-card:hover .p-hover-overlay,
+.p-card.is-open .p-hover-overlay {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity .35s var(--ease), transform .35s var(--ease), visibility 0s linear 0s;
+}
+/* pod overlayem jsou realne odkazy - schovat je, at neni pod nim zivy klik */
+.p-card:hover .p-links,
+.p-card.is-open .p-links { visibility: hidden; }
 .p-overlay-from {
   font-size: 8.5px;
   font-weight: 700;
@@ -1196,6 +1317,20 @@ a.fcard:hover { border-color: var(--terra); }
 .respawn-cap .rc-teams { display: inline-flex; align-items: center; gap: .45rem; }
 .respawn-cap .rc-teams i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
+/* ── Velikost prozy ─────────────────────────────────────────
+   Az na konci, aby to prebilo velikosti u jednotlivych komponent.
+   Geist ma vetsi x-height nez Space Mono, tak nizsi cisla nez by
+   se cekalo porad ctou vetsi. */
+.hero__sub        { font-size: clamp(15px, 1.4vw, 16.5px); line-height: 1.7; }
+.about-text p     { font-size: 15.5px; line-height: 1.72; }
+.how__lead        { font-size: clamp(15px, 1.5vw, 17px);  line-height: 1.72; }
+.section p.lead   { font-size: 15.5px; line-height: 1.72; }
+.cta p            { font-size: 15.5px; line-height: 1.7; }
+.p-desc           { font-size: 13.5px; line-height: 1.6; }
+.p-overlay-text   { font-size: 13.5px; line-height: 1.65; }
+.flow__d          { font-size: 13px;   line-height: 1.6; }
+.footer__quote    { font-size: 14.5px; line-height: 1.65; }
+
 /* ── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -1211,6 +1346,8 @@ a.fcard:hover { border-color: var(--terra); }
 </head>
 <body>
 
+<a class="skip" href="#main" data-i18n="skipLink">Přeskočit na obsah</a>
+
 <div class="progress"><div class="progress__bar" id="progress"></div></div>
 
 <!-- ═══ NAV ═══ -->
@@ -1224,13 +1361,24 @@ a.fcard:hover { border-color: var(--terra); }
     <a href="#contact" data-i18n="navContact">Kontakt</a>
   </div>
   <div class="nav__actions">
-    <div class="lang-switch" role="group" aria-label="Language switch">
-      <button type="button" class="btn--lang active" data-lang="cs" title="Česky">CS</button>
-      <button type="button" class="btn--lang" data-lang="en" title="English">EN</button>
+    <div class="lang-switch" role="group" aria-label="Language / Jazyk">
+      <button type="button" class="btn--lang active" data-lang="cs" aria-pressed="true" title="Česky">CS</button>
+      <button type="button" class="btn--lang" data-lang="en" aria-pressed="false" title="English">EN</button>
     </div>
     <a class="btn btn--primary btn--small btn--nav-cta" href="#contact"><span data-i18n="navContactBtn">Spojit se</span> →</a>
+    <button type="button" class="nav__burger" id="burger"
+            aria-expanded="false" aria-controls="drawer" aria-label="Menu"><span></span></button>
   </div>
 </nav>
+
+<div class="nav__drawer" id="drawer">
+  <a href="#about" data-i18n="navAbout">O mně</a>
+  <a href="#how" data-i18n="navHow">Jak pracuju</a>
+  <a href="#projects" data-i18n="navProjects">Projekty</a>
+  <a href="#tech" data-i18n="navTech">Technologie</a>
+  <a href="#contact" data-i18n="navContact">Kontakt</a>
+  <a class="btn btn--primary btn--small" href="#contact"><span data-i18n="navContactBtn">Spojit se</span> →</a>
+</div>
 
 <!-- ═══ HERO ═══ -->
 <header class="hero" id="hero">
@@ -1245,35 +1393,13 @@ a.fcard:hover { border-color: var(--terra); }
       <span class="mask"><span class="accent-soft">Kurinec</span></span>
     </h1>
     <p class="hero__sub reveal" style="--d:.45s" data-i18n="heroSub">
-      <strong>Mladý vývojář & IT nadšenec.</strong> Stavím reálné projekty — od nápadu přes nasazení po bezpečnost. AI je můj nástroj, ne berlička: <strong>rozumím tomu, co dělám</strong>, a u každého projektu se učím dál.
+      <strong>Mladý vývojář a IT nadšenec.</strong> Stavím reálné projekty: od nápadu přes nasazení po bezpečnost. AI je můj nástroj, ne berlička: <strong>rozumím tomu, co dělám</strong>, a u každého projektu se učím dál.
     </p>
     <div class="hero__cta reveal" style="--d:.55s">
       <a class="btn btn--primary" href="#projects"><span data-i18n="heroCtaProjects">Moje projekty</span> ✦</a>
       <a class="btn btn--ghost" href="#contact"><span data-i18n="heroCtaContact">Spojit se</span> →</a>
     </div>
-    <div class="hero__meta reveal" style="--d:.62s">
-      <span><i class="fas fa-robot"></i> AI</span>
-      <span><i class="fas fa-print"></i> <span data-i18n="hobby3d">3D tisk</span></span>
-      <span><i class="fas fa-microchip"></i> Raspberry Pi</span>
-      <span><i class="fas fa-code"></i> <span data-i18n="hobbyCode">Programování</span></span>
-    </div>
-    <div class="hero__now reveal" style="--d:.66s"><span class="live-dot"></span> <span data-i18n="heroNow">Právě stavím: <b>Fluxen</b> &amp; <b>Bakix</b></span></div>
-    <div class="hero__stats reveal" style="--d:.7s">
-      <div>
-        <div class="hstat__num"><span data-count="8">0</span><sub style="font-size:.55em;color:var(--muted)">+</sub></div>
-        <div class="hstat__lbl" data-i18n="statProjectsLbl">Projektů</div>
-      </div>
-      <div class="hstat__div"></div>
-      <div>
-        <div class="hstat__num"><span data-count="3">0</span><sub style="font-size:.55em;color:var(--muted)">+</sub></div>
-        <div class="hstat__lbl" data-i18n="statYearsLbl">Roky kódování</div>
-      </div>
-      <div class="hstat__div"></div>
-      <div>
-        <div class="hstat__num"><span data-count="15">0</span></div>
-        <div class="hstat__lbl" data-i18n="statAgeLbl">Let</div>
-      </div>
-    </div>
+    <div class="hero__now reveal" style="--d:.62s"><span class="live-dot"></span> <span data-i18n="heroNow">Právě stavím: <b>Fluxen</b> a <b>Bakix</b></span></div>
   </div>
 
   <div class="stage" id="stage">
@@ -1333,17 +1459,16 @@ a.fcard:hover { border-color: var(--terra); }
   </div>
 </div>
 
-<main>
+<main id="main">
 
-<!-- ═══ 01 O MNĚ ═══ -->
+<!-- ═══ O MNĚ ═══ -->
 <section class="section" id="about">
   <div>
-    <div class="kicker reveal"><span class="kicker__num">01</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="whoLabel">O mně</span></div>
-    <h2 class="reveal" style="--d:.08s" data-i18n="whoHeadingFancy">Ahoj, jsem <em>Voku</em>.</h2>
+    <h2 class="reveal" data-i18n="whoHeadingFancy">Ahoj, jsem <em>Voku</em>.</h2>
     <div class="about-text reveal" style="--d:.16s" data-i18n="whoTextShort">
-      <p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hry a občas i sportuju.</p>
-      <p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to <strong>postavit</strong> — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p>
-      <p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p>
+      <p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň. Programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hry a občas i sportuju.</p>
+      <p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to <strong>postavit</strong>. Proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p>
+      <p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním, ne pro slávu nebo peníze.</em></p>
     </div>
   </div>
 
@@ -1356,11 +1481,13 @@ a.fcard:hover { border-color: var(--terra); }
       </div>
       <div class="about-photos">
         <div class="about-photo">
-          <img src="ja_seriozne.png" alt="Profilová fotka" data-i18n-attr="alt:captionNormal">
+          <img src="ja_seriozne.webp" width="302" height="400" loading="lazy" decoding="async"
+               alt="Vojtěch Kurinec, portrét" data-i18n-attr="alt:photoAltNormal">
           <span class="photo-cap" data-i18n="captionNormal">Normální fotka</span>
         </div>
         <div class="about-photo">
-          <img src="ja_uwu.png" alt="Vtipná fotka" data-i18n-attr="alt:captionFunny">
+          <img src="ja_uwu.webp" width="229" height="400" loading="lazy" decoding="async"
+               alt="Vojtěch Kurinec, vtipná fotka s legračním výrazem" data-i18n-attr="alt:photoAltFunny">
           <span class="photo-cap" data-i18n="captionFunny">Trošku vtipnej.</span>
         </div>
       </div>
@@ -1371,9 +1498,8 @@ a.fcard:hover { border-color: var(--terra); }
 <!-- ═══ 02 JAK PRACUJU ═══ -->
 <section class="how" id="how">
   <div class="how__head">
-    <div class="kicker reveal"><span class="kicker__num">02</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="howLabel">Jak pracuju</span></div>
-    <h2 class="reveal" style="--d:.08s" data-i18n="howHeadingFancy">Řídím vývoj. <em>AI dělá těžkou práci.</em></h2>
-    <p class="how__lead reveal" style="--d:.16s" data-i18n="howLead">Snažím se programovat i „normálně" — ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>pomocník</strong>: klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>. Když rozjedu projekt, musím vědět co to je, dostat ho k lidem, zabezpečit ho a otestovat — a u všeho se <em>učím pořád dokola</em>.</p>
+    <h2 class="reveal" data-i18n="howHeadingFancy">Řídím vývoj. <em>AI dělá těžkou práci.</em></h2>
+    <p class="how__lead reveal" style="--d:.16s" data-i18n="howLead">Snažím se programovat i „normálně“, ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>pomocník</strong>: klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>. Když rozjedu projekt, musím vědět co to je, dostat ho k lidem, zabezpečit ho a otestovat. A u všeho se <em>učím pořád dokola</em>.</p>
   </div>
   <div class="flow">
     <div class="flow__step reveal"><div class="flow__num">01</div><div class="flow__ico"><i class="fas fa-lightbulb"></i></div><div class="flow__t" data-i18n="flow1t">Nápad</div><div class="flow__d" data-i18n="flow1d">Najít problém, který stojí za to vyřešit.</div></div>
@@ -1388,7 +1514,7 @@ a.fcard:hover { border-color: var(--terra); }
 <!-- ═══ 03 PROJEKTY ═══ -->
 <section class="projects" id="projects">
   <div class="projects__head">
-    <div class="kicker reveal"><span class="kicker__num">03</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="projectsLabel">Moje práce</span></div>
+    <div class="kicker reveal"><span class="kicker__line"></span><span class="kicker__label" data-i18n="projectsLabel">Moje práce</span><span class="kicker__line"></span></div>
     <h2 class="reveal" style="--d:.08s" data-i18n="projectsHeadingFancy">Věci, co jsem <em>postavil</em>.</h2>
   </div>
   <div class="projects-grid">
@@ -1398,17 +1524,17 @@ a.fcard:hover { border-color: var(--terra); }
       <div class="p-hover-overlay">
         <div>
           <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-          <div class="p-overlay-text" data-i18n="knowixInfo">Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</div>
+          <div class="p-overlay-text" data-i18n="knowixInfo">Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu. Všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.</div>
         </div>
         <div class="p-overlay-links">
-          <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://github.com/Voku199/Knowix" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
       <div class="p-icon" style="background:rgba(75,156,211,.14);color:var(--p-blue)"><i class="fas fa-graduation-cap"></i></div>
       <div class="p-title" data-i18n="knowixTitle">Knowix</div>
-      <div class="p-desc" data-i18n="knowixDesc">Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).</div>
+      <div class="p-desc" data-i18n="knowixDesc">Vzdělávací web: procvičuj a uč se interaktivně (podobné Umimeto.org).</div>
       <div class="p-links">
-        <a href="https://github.com/Voku199/Knowix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://github.com/Voku199/Knowix" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
@@ -1420,16 +1546,14 @@ a.fcard:hover { border-color: var(--terra); }
           <div class="p-overlay-text" data-i18n="lmcInfo">Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.</div>
         </div>
         <div class="p-overlay-links">
-{#          <a href="https://lasergamemc.cz" target="_blank" class="btn btn--primary btn--small"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>#}
-          <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://github.com/Voku199/Lasergame" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
       <div class="p-icon" style="background:rgba(245,79,54,.14);color:var(--p-red)"><i class="fas fa-crosshairs"></i></div>
       <div class="p-title" data-i18n="lmcTitle">LasergameMC (LMC)</div>
-      <div class="p-desc" data-i18n="lmcDesc">Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.</div>
+      <div class="p-desc" data-i18n="lmcDesc">Webová platforma pro LasergameMC: statistiky, správa hráčů a víc.</div>
       <div class="p-links">
-{#        <a href="https://lasergamemc.cz" target="_blank" class="btn btn--primary btn--small"><i class="fas fa-globe"></i><span data-i18n="visitSite">Navštívit web</span></a>#}
-        <a href="https://github.com/Voku199/Lasergame" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://github.com/Voku199/Lasergame" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
@@ -1441,14 +1565,14 @@ a.fcard:hover { border-color: var(--terra); }
           <div class="p-overlay-text" data-i18n="lsoInfo">Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.</div>
         </div>
         <div class="p-overlay-links">
-          <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
         </div>
       </div>
       <div class="p-icon" style="background:rgba(109,192,102,.14);color:var(--p-green)"><i class="fas fa-chart-bar"></i></div>
       <div class="p-title" data-i18n="lsoTitle">Lasergame-Stats-Own</div>
-      <div class="p-desc" data-i18n="lsoDesc">Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.</div>
+      <div class="p-desc" data-i18n="lsoDesc">Vlastní dashboard pro Laserforce statistiky: scraping dat, historie her a porovnávání výsledků.</div>
       <div class="p-links">
-        <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://github.com/Voku199/Lasergame-Stats-Own" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i> GitHub</a>
       </div>
     </div>
 
@@ -1461,14 +1585,14 @@ a.fcard:hover { border-color: var(--terra); }
           <div class="p-overlay-text" data-i18n="bakixInfo">Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.</div>
         </div>
         <div class="p-overlay-links">
-          <a href="https://github.com/Voku199/.Bakix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+          <a href="https://github.com/Voku199/.Bakix" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
         </div>
       </div>
       <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--p-orange)"><i class="fas fa-mobile-alt"></i></div>
       <div class="p-title" data-i18n="bakixTitle">Bakix</div>
-      <div class="p-desc" data-i18n="bakixDesc">Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.</div>
+      <div class="p-desc" data-i18n="bakixDesc">Moderní PWA nad Bakaláři API: přehledné rozhraní pro studenty.</div>
       <div class="p-links">
-        <a href="https://github.com/Voku199/.Bakix" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+        <a href="https://github.com/Voku199/.Bakix" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
       </div>
     </div>
 
@@ -1477,17 +1601,17 @@ a.fcard:hover { border-color: var(--terra); }
       <div class="p-hover-overlay">
         <div>
           <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-          <div class="p-overlay-text" data-i18n="schoolChatInfo">Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).</div>
+          <div class="p-overlay-text" data-i18n="schoolChatInfo">Můj úplně první projekt: chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).</div>
         </div>
         <div class="p-overlay-links">
-          <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+          <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
         </div>
       </div>
       <div class="p-icon" style="background:rgba(246,194,27,.14);color:var(--p-yellow)"><i class="fas fa-comments"></i></div>
       <div class="p-title" data-i18n="schoolChatTitle">Školní chat</div>
-      <div class="p-desc" data-i18n="schoolChatDesc">Chatovací platforma postavená na Fletu — zároveň můj první projekt.</div>
+      <div class="p-desc" data-i18n="schoolChatDesc">Chatovací platforma postavená na Fletu, zároveň můj první projekt.</div>
       <div class="p-links">
-        <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+        <a href="https://github.com/Voku199/skolni-chat-flet" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
       </div>
     </div>
 
@@ -1496,17 +1620,17 @@ a.fcard:hover { border-color: var(--terra); }
       <div class="p-hover-overlay">
         <div>
           <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-          <div class="p-overlay-text" data-i18n="easyKeyloggerInfo">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.</div>
+          <div class="p-overlay-text" data-i18n="easyKeyloggerInfo">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci. A to je taky cenná zkušenost.</div>
         </div>
         <div class="p-overlay-links">
-          <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+          <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
         </div>
       </div>
       <div class="p-icon" style="background:rgba(242,140,40,.14);color:var(--p-orange)"><i class="fas fa-keyboard"></i></div>
       <div class="p-title" data-i18n="easyKeyloggerTitle">Easy Keylogger</div>
       <div class="p-desc" data-i18n="easyKeyloggerDesc">Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.</div>
       <div class="p-links">
-        <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
+        <a href="https://github.com/Voku199/Easy-keylogger" target="_blank" rel="noopener" class="btn btn--ghost btn--small"><i class="fab fa-github"></i><span data-i18n="viewOnGitHub">Zobrazit na GitHubu</span></a>
       </div>
     </div>
 
@@ -1516,13 +1640,13 @@ a.fcard:hover { border-color: var(--terra); }
       <div class="p-hover-overlay">
         <div>
           <div class="p-overlay-from" data-i18n="overlayFromLabel">O projektu</div>
-          <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
+          <div class="p-overlay-text" data-i18n="fluxenInfo">Nástupce Knowixu: Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.</div>
         </div>
         <div class="p-overlay-links"></div>
       </div>
       <div class="p-icon" style="background:rgba(191,63,140,.14);color:var(--p-purple)"><i class="fas fa-graduation-cap"></i></div>
       <div class="p-title" data-i18n="fluxenTitle">Fluxen</div>
-      <div class="p-desc" data-i18n="fluxenDesc">Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.</div>
+      <div class="p-desc" data-i18n="fluxenDesc">Knowix 2.0: Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.</div>
       <div class="p-links"></div>
     </div>
 
@@ -1538,7 +1662,7 @@ a.fcard:hover { border-color: var(--terra); }
       </div>
       <div class="p-icon" style="background:rgba(75,156,211,.14);color:var(--p-blue)"><i class="fas fa-tint"></i></div>
       <div class="p-title" data-i18n="supoTitle">Supo</div>
-      <div class="p-desc" data-i18n="supoDesc">Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.</div>
+      <div class="p-desc" data-i18n="supoDesc">Potápěčská aplikace: načítání a vizualizace dat z hodinek Suunto.</div>
       <div class="p-links"></div>
     </div>
 
@@ -1548,11 +1672,11 @@ a.fcard:hover { border-color: var(--terra); }
 <!-- ═══ 04 RESPAWN LASERGAME ČB ═══ -->
 <section class="section" id="client">
   <div>
-    <div class="kicker reveal"><span class="kicker__num">04</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="clientLabel">Klientská práce</span></div>
+    <div class="kicker reveal"><span class="kicker__line"></span><span class="kicker__label" data-i18n="clientLabel">Klientská práce</span></div>
     <h2 class="reveal" style="--d:.08s" data-i18n="clientHeadingFancy">Moje první <em>velká zakázka</em>.</h2>
     <div class="about-text reveal" style="--d:.16s" data-i18n="clientText">
-      <p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény — rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p>
-      <p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong> — od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>
+      <p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény: rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p>
+      <p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong>: od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>
     </div>
     <div class="reveal" style="--d:.24s; margin-top:1.4rem">
       <a href="https://lasergamecb.cz" target="_blank" rel="noopener" class="btn btn--primary btn--small"><i class="fas fa-globe"></i> lasergamecb.cz</a>
@@ -1585,8 +1709,7 @@ a.fcard:hover { border-color: var(--terra); }
 <!-- ═══ 05 TECHNOLOGIE ═══ -->
 <section class="section section--flip" id="tech">
   <div>
-    <div class="kicker reveal"><span class="kicker__num">05</span><span class="kicker__line"></span><span class="kicker__label" data-i18n="techLabel">Stack</span></div>
-    <h2 class="reveal" style="--d:.08s" data-i18n="techHeadingFancy">Čím to <em>stavím</em>.</h2>
+    <h2 class="reveal" data-i18n="techHeadingFancy">Čím to <em>stavím</em>.</h2>
     <p class="lead reveal" style="--d:.16s" data-i18n="techLead">Od backendu po hardware. Nejradši mám Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.</p>
     <ul class="bullets reveal" style="--d:.24s">
       <li>Python</li>
@@ -1655,15 +1778,15 @@ a.fcard:hover { border-color: var(--terra); }
 <section class="cta" id="contact">
   <div class="cta__panel reveal reveal--pop">
     <h2 data-i18n="contactHeadingFancy">Pojďme se spojit.</h2>
-    <p data-i18n="contactSub">Napiš mi — každou zprávu rád přečtu.</p>
+    <p data-i18n="contactSub">Napiš mi, každou zprávu rád přečtu.</p>
     <div class="cta__links">
       <a href="mailto:vojta.kurinec@gmail.com?subject=Dotaz&body=Ahoj," class="c-link">
         <i class="fas fa-envelope"></i><span>vojta.kurinec@gmail.com</span>
       </a>
-      <a href="https://github.com/Voku199" target="_blank" class="c-link">
+      <a href="https://github.com/Voku199" target="_blank" rel="noopener" class="c-link">
         <i class="fab fa-github"></i><span>@Voku199</span>
       </a>
-      <a href="https://instagram.com/voku199" target="_blank" class="c-link">
+      <a href="https://instagram.com/voku199" target="_blank" rel="noopener" class="c-link">
         <i class="fab fa-instagram"></i><span>@voku199</span>
       </a>
     </div>
@@ -1694,7 +1817,7 @@ const T = {
     navContact:        'Kontakt',
     navContactBtn:     'Spojit se',
     heroEyebrow:       'Portfolio · 2026',
-    heroSub:           '<strong>Mladý vývojář & IT nadšenec.</strong> Stavím reálné projekty — od nápadu přes nasazení po bezpečnost. AI je můj nástroj, ne berlička: <strong>rozumím tomu, co dělám</strong>, a u každého projektu se učím dál.',
+    heroSub:           '<strong>Mladý vývojář a IT nadšenec.</strong> Stavím reálné projekty: od nápadu přes nasazení po bezpečnost. AI je můj nástroj, ne berlička: <strong>rozumím tomu, co dělám</strong>, a u každého projektu se učím dál.',
     heroCtaProjects:   'Moje projekty',
     heroCtaContact:    'Spojit se',
     heroNow:           'Právě stavím: <b>Fluxen</b> &amp; <b>Bakix</b>',
@@ -1706,14 +1829,17 @@ const T = {
     statAgeLbl:        'Let',
     whoLabel:          'O mně',
     whoHeadingFancy:   'Ahoj, jsem <em>Voku</em>.',
-    whoTextShort:      '<p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň — programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to <strong>postavit</strong> — proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním — ne pro slávu nebo peníze.</em></p>',
+    whoTextShort:      '<p>Jmenuji se <strong>Vojtěch Kurinec</strong>, ale většina mě zná jako <strong>Voku</strong>. Je mi <strong>15 let</strong> a IT je moje vášeň. Programuju, experimentuju s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a zajímám se o hardware. Rád hraju šachy, hry a občas i sportuju.</p><p>Věřím, že nejlepší způsob jak se naučit něco nového je prostě to <strong>postavit</strong>. Proto mám za sebou několik vlastních projektů, na kterých jsem se naučil víc než v jakékoli učebnici.</p><p class="about-footer"><em>Dělám věci hlavně proto, abych se posouval dál a pomáhal ostatním, ne pro slávu nebo peníze.</em></p>',
     aboutPanelTitle:   'Kdo je Voku',
     aboutPanelPill:    'Jihočeský · CZ',
     captionNormal:     'Normální fotka',
     captionFunny:      'Trošku vtipnej.',
+    photoAltNormal:    'Vojtěch Kurinec, portrét',
+    photoAltFunny:     'Vojtěch Kurinec, vtipná fotka s legračním výrazem',
+    skipLink:          'Přeskočit na obsah',
     howLabel:          'Jak pracuju',
     howHeadingFancy:   'Řídím vývoj. <em>AI dělá těžkou práci.</em>',
-    howLead:           'Snažím se programovat i „normálně" — ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>pomocník</strong>: klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>. Když rozjedu projekt, musím vědět co to je, dostat ho k lidem, zabezpečit ho a otestovat — a u všeho se <em>učím pořád dokola</em>.',
+    howLead:           'Snažím se programovat i „normálně“, ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>pomocník</strong>: klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>. Když rozjedu projekt, musím vědět co to je, dostat ho k lidem, zabezpečit ho a otestovat. A u všeho se <em>učím pořád dokola</em>.',
     flow1t:            'Nápad',
     flow1d:            'Najít problém, který stojí za to vyřešit.',
     flow2t:            'Stavba s AI',
@@ -1730,37 +1856,37 @@ const T = {
     projectsHeadingFancy:'Věci, co jsem <em>postavil</em>.',
     overlayFromLabel:  'O projektu',
     knowixTitle:       'Knowix',
-    knowixDesc:        'Vzdělávací web — procvičuj a uč se interaktivně (podobné Umimeto.org).',
-    knowixInfo:        'Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu — všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.',
+    knowixDesc:        'Vzdělávací web: procvičuj a uč se interaktivně (podobné Umimeto.org).',
+    knowixInfo:        'Platforma pro učení angličtiny skrze písničky. Uživatelé vyplňují chybějící slova, překládají texty a procvičují slovní zásobu. Všechno zdarma, bez pay-to-win prvků. Postaveno na Flasku, MySQL a Genius API.',
     lmcTitle:          'LasergameMC (LMC)',
-    lmcDesc:           'Webová platforma pro LasergameMC – statistiky, správa hráčů a víc.',
+    lmcDesc:           'Webová platforma pro LasergameMC: statistiky, správa hráčů a víc.',
     lmcInfo:           'Český Minecraft server s Laserforce mechanikami. Vlastní Paper plugin pro laserball, statistiky hráčů a více herních módů. Plugin je nyní open source.',
     visitSite:         'Navštívit web',
     lsoTitle:          'Lasergame-Stats-Own',
-    lsoDesc:           'Vlastní dashboard pro Laserforce statistiky — scraping dat, historie her a porovnávání výsledků.',
+    lsoDesc:           'Vlastní dashboard pro Laserforce statistiky: scraping dat, historie her a porovnávání výsledků.',
     lsoInfo:           'Web app pro scraping a zobrazování vlastních Laserforce statistik. Přehledný dashboard s historií her, porovnáváním výsledků a vlastní databází.',
     schoolChatTitle:   'Školní chat',
-    schoolChatDesc:    'Chatovací platforma postavená na Fletu — zároveň můj první projekt.',
-    schoolChatInfo:    'Můj úplně první projekt — chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).',
+    schoolChatDesc:    'Chatovací platforma postavená na Fletu, zároveň můj první projekt.',
+    schoolChatInfo:    'Můj úplně první projekt: chatovací platforma postavená na Fletu. Hodně jsem se naučil o tom, jak věci fungují (a jak ne).',
     viewOnGitHub:      'Zobrazit na GitHubu',
     easyKeyloggerTitle:'Easy Keylogger',
     easyKeyloggerDesc: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Zcela neškodný.',
-    easyKeyloggerInfo: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci — a to je taky cenná zkušenost.',
+    easyKeyloggerInfo: 'Vzdělávací pokus zaměřený na pochopení vstupních zařízení. Naučil jsem se hodně o tom, jak <em>nedělat</em> věci. A to je taky cenná zkušenost.',
     fluxenTitle:       'Fluxen',
-    fluxenDesc:        'Knowix 2.0 — Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.',
-    fluxenInfo:        'Nástupce Knowixu — Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
+    fluxenDesc:        'Knowix 2.0: Duolingo-style platforma pro výuku angličtiny a přírodovědných předmětů.',
+    fluxenInfo:        'Nástupce Knowixu: Duolingo-style platforma kombinující výuku angličtiny přes písničky s přírodovědným obsahem rozděleným podle ročníků. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
     supoTitle:         'Supo',
-    supoDesc:          'Potápěčská aplikace — načítání a vizualizace dat z hodinek Suunto.',
+    supoDesc:          'Potápěčská aplikace: načítání a vizualizace dat z hodinek Suunto.',
     supoInfo:          'Aplikace pro potápěče s integrací Suunto OAuth 2.0 API. Projekt je momentálně v režimu nízké aktivity s neurčitým vývojovým plánem.',
     bakixTitle:        'Bakix',
-    bakixDesc:         'Moderní PWA nad Bakaláři API — přehledné rozhraní pro studenty.',
+    bakixDesc:         'Moderní PWA nad Bakaláři API: přehledné rozhraní pro studenty.',
     bakixInfo:         'Moderní PWA aplikace využívající Bakaláři API pro přehledné, studentsky orientované rozhraní. Zobrazuje rozvrh, známky, absence a zprávy v čistém, mobilním UI.',
     wipBadge:          'Ve vývoji',
     maintenanceBadge:  'Nízká aktivita',
     liveBadge:         'Aktivní',
     clientLabel:       'Klientská práce',
     clientHeadingFancy:'Moje první <em>velká zakázka</em>.',
-    clientText:        '<p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény — rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p><p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong> — od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>',
+    clientText:        '<p>Pro <strong>Respawn Lasergame České Budějovice</strong> jsem postavil kompletní webové stránky a celý systém arény: rezervace, správa turnajů, výsledky her. Tahle zakázka byla moje první opravdu velká práce pro klienta, kde jsem musel být <strong>serióznější</strong> a komunikovat profesionálně.</p><p>Naučil jsem se, jak pracovat s lidmi na <strong>větších projektech</strong>: od zadání přes průběžné konzultace až po finální předání. Zkušenost, kterou žádný vlastní projekt nedá.</p>',
     clientViewportFallback: 'Laserforce phaser · 3D',
     clientViewportCta: 'Živý web',
     techLabel:         'Stack',
@@ -1774,7 +1900,7 @@ const T = {
     tech3dPrint:       '3D tisk',
     techVideo:         'Střih videí',
     contactHeadingFancy:'Pojďme se spojit.',
-    contactSub:        'Napiš mi — každou zprávu rád přečtu.',
+    contactSub:        'Napiš mi, každou zprávu rád přečtu.',
     regionValue:       'Jihočeský, Česká republika',
     footerQuote:       '"Sedmkrát padneš, osmkrát vstaneš."'
   },
@@ -1787,7 +1913,7 @@ const T = {
     navContact:        'Contact',
     navContactBtn:     'Get in touch',
     heroEyebrow:       'Portfolio · 2026',
-    heroSub:           '<strong>Young developer & IT enthusiast.</strong> I build real projects — from idea through deployment to security. AI is my tool, not a crutch: <strong>I understand what I am doing</strong>, and I keep learning with every project.',
+    heroSub:           '<strong>Young developer and IT enthusiast.</strong> I build real projects: from idea through deployment to security. AI is my tool, not a crutch: <strong>I understand what I am doing</strong>, and I keep learning with every project.',
     heroCtaProjects:   'My projects',
     heroCtaContact:    'Get in touch',
     heroNow:           'Currently building: <b>Fluxen</b> &amp; <b>Bakix</b>',
@@ -1799,14 +1925,17 @@ const T = {
     statAgeLbl:        'Years old',
     whoLabel:          'About me',
     whoHeadingFancy:   'Hi, I am <em>Voku</em>.',
-    whoTextShort:      '<p>My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and IT is my passion — I code, experiment with AI, 3D print, tinker with Raspberry Pi and enjoy hardware. I like chess, games and sometimes sports too.</p><p>I believe the best way to learn something new is to just <strong>build it</strong> — that is why I already have several personal projects behind me, and they taught me far more than any textbook could.</p><p class="about-footer"><em>I do things mainly to keep improving and help others — not for fame or money.</em></p>',
+    whoTextShort:      '<p>My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I am <strong>15 years old</strong> and IT is my passion. I code, experiment with AI, 3D print, tinker with Raspberry Pi and enjoy hardware. I like chess, games and sometimes sports too.</p><p>I believe the best way to learn something new is to just <strong>build it</strong>. That is why I already have several personal projects behind me, and they taught me far more than any textbook could.</p><p class="about-footer"><em>I do things mainly to keep improving and help others, not for fame or money.</em></p>',
     aboutPanelTitle:   'Who is Voku',
     aboutPanelPill:    'South Bohemia · CZ',
     captionNormal:     'Normal photo',
     captionFunny:      'A bit funny.',
+    photoAltNormal:    'Vojtěch Kurinec, portrait photo',
+    photoAltFunny:     'Vojtěch Kurinec, funny photo pulling a face',
+    skipLink:          'Skip to content',
     howLabel:          'How I work',
     howHeadingFancy:   'I lead the build. <em>AI does the heavy lifting.</em>',
-    howLead:           'I do try to code "the normal way" too — but not using AI in 2026 is like refusing a calculator in 2010. AI is a <strong>helper</strong>: sure, let it write the code, but <strong>I have to understand it</strong>. When I start a project, I need to know what it is, get it to people, secure it and test it — and through all of it I <em>keep learning, over and over</em>.',
+    howLead:           'I do try to code "the normal way" too, but not using AI in 2026 is like refusing a calculator in 2010. AI is a <strong>helper</strong>: sure, let it write the code, but <strong>I have to understand it</strong>. When I start a project, I need to know what it is, get it to people, secure it and test it. And through all of it I <em>keep learning, over and over</em>.',
     flow1t:            'Idea',
     flow1d:            'Find a problem actually worth solving.',
     flow2t:            'Build with AI',
@@ -1823,37 +1952,37 @@ const T = {
     projectsHeadingFancy:'Things I have <em>built</em>.',
     overlayFromLabel:  'About project',
     knowixTitle:       'Knowix',
-    knowixDesc:        'Educational website — practice and learn interactively (similar to Umimeto.org).',
-    knowixInfo:        'English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary — all free, no pay-to-win. Built with Flask, MySQL and the Genius API.',
+    knowixDesc:        'Educational website: practice and learn interactively (similar to Umimeto.org).',
+    knowixInfo:        'English-learning platform through songs. Users fill in missing words, translate lyrics and practice vocabulary. All free, no pay-to-win. Built with Flask, MySQL and the Genius API.',
     lmcTitle:          'LasergameMC (LMC)',
-    lmcDesc:           'Web platform for LasergameMC – statistics, player management and more.',
+    lmcDesc:           'Web platform for LasergameMC: statistics, player management and more.',
     lmcInfo:           'Czech Minecraft server with Laserforce mechanics. Custom Paper plugin for laserball, player stats and multiple game modes. Plugin is now open source.',
     visitSite:         'Visit Site',
     lsoTitle:          'Lasergame-Stats-Own',
-    lsoDesc:           'Personal Laserforce stats dashboard — data scraping, game history and result comparison.',
+    lsoDesc:           'Personal Laserforce stats dashboard: data scraping, game history and result comparison.',
     lsoInfo:           'Web app for scraping and displaying personal Laserforce statistics. Clean dashboard with game history, result comparison and a custom database.',
     schoolChatTitle:   'School Chat',
-    schoolChatDesc:    'Chat platform built with Flet — also my very first project.',
-    schoolChatInfo:    'My very first project — a chat platform built with Flet. I learned a lot about how things work (and how they don\'t).',
+    schoolChatDesc:    'Chat platform built with Flet, also my very first project.',
+    schoolChatInfo:    'My very first project: a chat platform built with Flet. I learned a lot about how things work (and how they don\'t).',
     viewOnGitHub:      'View on GitHub',
     easyKeyloggerTitle:'Easy Keylogger',
     easyKeyloggerDesc: 'Educational experiment focused on understanding input devices. Completely harmless.',
-    easyKeyloggerInfo: 'Educational experiment focused on understanding input devices. I learned a lot about how <em>not</em> to do things — and that\'s valuable experience too.',
+    easyKeyloggerInfo: 'Educational experiment focused on understanding input devices. I learned a lot about how <em>not</em> to do things. And that\'s valuable experience too.',
     fluxenTitle:       'Fluxen',
-    fluxenDesc:        'Knowix 2.0 — Duolingo-style platform for English and science learning.',
-    fluxenInfo:        'Successor to Knowix — Duolingo-style platform combining English lessons through songs with science content split by school grade. Currently in low-activity / maintenance mode with no fixed release timeline.',
+    fluxenDesc:        'Knowix 2.0: Duolingo-style platform for English and science learning.',
+    fluxenInfo:        'Successor to Knowix: Duolingo-style platform combining English lessons through songs with science content split by school grade. Currently in low-activity / maintenance mode with no fixed release timeline.',
     supoTitle:         'Supo',
-    supoDesc:          'Diving app — load and visualize data from Suunto watches.',
+    supoDesc:          'Diving app: load and visualize data from Suunto watches.',
     supoInfo:          'App for divers with Suunto OAuth 2.0 API integration. Currently in low-activity / maintenance mode with no fixed release timeline.',
     bakixTitle:        'Bakix',
-    bakixDesc:         'Modern PWA leveraging the Bakaláři API — a seamless, student-focused interface.',
+    bakixDesc:         'Modern PWA leveraging the Bakaláři API: a seamless, student-focused interface.',
     bakixInfo:         'A modern PWA application leveraging the Bakaláři API to provide a seamless, student-focused interface. Displays timetables, grades, absences and messages in a clean, mobile-first UI.',
     wipBadge:          'In Development',
     maintenanceBadge:  'Low Activity',
     liveBadge:         'Live',
     clientLabel:       'Client Work',
     clientHeadingFancy:'My first <em>big client project</em>.',
-    clientText:        '<p>For <strong>Respawn Lasergame České Budějovice</strong> I built a complete website and the entire arena management system — bookings, tournament management, game results. This was my first truly large project for a real client, one where I had to be <strong>more professional</strong> and communicate properly.</p><p>I learned how to work with people on <strong>bigger projects</strong> — from the initial brief through ongoing consultations to final handover. An experience no personal project can give you.</p>',
+    clientText:        '<p>For <strong>Respawn Lasergame České Budějovice</strong> I built a complete website and the entire arena management system: bookings, tournament management, game results. This was my first truly large project for a real client, one where I had to be <strong>more professional</strong> and communicate properly.</p><p>I learned how to work with people on <strong>bigger projects</strong>: from the initial brief through ongoing consultations to final handover. An experience no personal project can give you.</p>',
     clientViewportFallback: 'Laserforce phaser · 3D',
     clientViewportCta: 'Live site',
     techLabel:         'Stack',
@@ -1867,7 +1996,7 @@ const T = {
     tech3dPrint:       '3D Printing',
     techVideo:         'Video Editing',
     contactHeadingFancy:'Let us connect.',
-    contactSub:        'Drop me a message — I read every one.',
+    contactSub:        'Drop me a message, I read every one.',
     regionValue:       'South Bohemian, Czech Republic',
     footerQuote:       '"Fall seven times, stand up eight."'
   }
@@ -1901,7 +2030,9 @@ const T = {
       });
     });
     $$('.lang-switch button').forEach(function (b) {
-      b.classList.toggle('active', b.dataset.lang === lang);
+      var on = b.dataset.lang === lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     localStorage.setItem('lang', lang);
     updateDate(lang);
@@ -1911,17 +2042,47 @@ const T = {
     b.addEventListener('click', function () { setLang(b.dataset.lang); });
   });
 
+  /* ── Mobilni drawer ───────────────────────────────────── */
+  var burger = $('#burger');
+  var drawer = $('#drawer');
+  function setDrawer(open) {
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    drawer.classList.toggle('open', open);
+    document.body.classList.toggle('nav-open', open);
+  }
+  burger.addEventListener('click', function () {
+    setDrawer(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  drawer.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setDrawer(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+      setDrawer(false);
+      burger.focus();
+    }
+  });
+  /* drawer je jen pod 880px - pri roztazeni okna ho zavrit, at nezustane body locked */
+  window.matchMedia('(min-width: 881px)').addEventListener('change', function (m) {
+    if (m.matches) setDrawer(false);
+  });
+
   /* ── Scroll progress + nav state ──────────────────────── */
+  /* progress bar jede primarne pres CSS scroll-driven animation (viz @supports),
+     JS je fallback pro prohlizece bez animation-timeline */
   var bar = $('#progress');
   var nav = $('#nav');
+  var cssScroll = CSS.supports('animation-timeline', 'scroll()');
   var ticking = false;
   function onScroll() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function () {
       ticking = false;
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      if (!cssScroll) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      }
       nav.classList.toggle('scrolled', window.scrollY > 12);
     });
   }
@@ -2029,9 +2190,16 @@ const T = {
 <script type="module">
 const stage = document.getElementById("respawn-viewport");
 const mount = document.getElementById("respawn-3d");
-const saveData = !!(navigator.connection && navigator.connection.saveData);
 
-if (stage && mount && !saveData) {
+/* Model ma 12.7 MB + three.js ~600 kB. Nestahovat to pri page loadu:
+   - preskocit uplne pri saveData / pomalem pripojeni / uzkem displeji
+     (zustane fallback lens, ktery vypada dobre sam o sobe)
+   - jinak nacist az kdyz je sekce blizko viewportu */
+const conn = navigator.connection || {};
+const slow = !!conn.saveData || /(^|-)2g$/.test(conn.effectiveType || "");
+const narrow = window.matchMedia("(max-width: 640px)").matches;
+
+async function boot3D() {
   try {
     const THREE = await import("three");
     const { GLTFLoader } = await import("three/addons/loaders/GLTFLoader.js");
@@ -2086,8 +2254,17 @@ if (stage && mount && !saveData) {
     window.addEventListener("resize", fit, { passive: true });
     fit();
 
+    /* render loop bezi jen kdyz je viewport videt - jinak zbytecne zere GPU */
+    let visible = true, running = false;
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !running) tick();
+    }, { threshold: 0 }).observe(stage);
+
     const clock = new THREE.Clock();
     function tick() {
+      if (!visible) { running = false; return; }
+      running = true;
       requestAnimationFrame(tick);
       if (!loaded) { renderer.render(scene, camera); return; }
       const t = clock.getElapsedTime();
@@ -2095,8 +2272,18 @@ if (stage && mount && !saveData) {
       pivot.position.y = reduce ? 0 : Math.sin(t * 1.1) * 0.12;
       renderer.render(scene, camera);
     }
-    tick();
+    if (!running) tick();
   } catch (e) { /* no ES modules / three.js failed -> fallback stays */ }
+}
+
+if (stage && mount && !slow && !narrow) {
+  /* nacist az kdyz je sekce na dosah - ne pri page loadu */
+  const io = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    boot3D();
+  }, { rootMargin: "300px 0px" });
+  io.observe(stage);
 }
 </script>
 </body>
