@@ -29,7 +29,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap">
-<script>document.documentElement.classList.add('js');</script>
+<script>
+/* js + rozhodnuti o uvodnim "ahoj" jeste pred prvnim vykreslenim, at stranka neblikne.
+   Ahoj jen pri prvni navsteve; ?intro ho vynuti znovu, odkaz na kotvu (#kontakt) ho preskoci. */
+(function (d) {
+  d.classList.add('js');
+  try {
+    var force = /[?&]intro\b/.test(location.search);
+    var deep = location.hash && location.hash !== '#top';
+    var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (force || (!localStorage.getItem('hello') && !deep && !calm)) {
+      d.classList.add('is-hello');
+      /* pojistka: kdyby hlavni skript spadl, opona nesmi zustat viset */
+      window.helloGuard = setTimeout(function () { d.classList.remove('is-hello'); }, 6000);
+    }
+  } catch (e) {}
+})(document.documentElement);
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -495,6 +511,106 @@ body.nav-open { overflow: hidden; }
 html:not(.js) .mask > span { transform: none; }
 html:not(.js) .brush--draw { background-size: 100% .16em; }
 
+/* ── Ahoj: jen pri prvni navsteve ───────────────────────────
+   Ruka napise "ahoj" jako hello na Macu. Prvni scroll zvedne
+   papir jako oponu a stranka pod nim vyjede na misto. */
+.hello { display: none; }
+html.is-hello { overflow: hidden; scrollbar-gutter: stable; }
+html.is-hello .hello { display: block; }
+.hello {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  background: var(--bg);
+  border-bottom: 1px solid var(--ink);
+  transition: transform 1.15s cubic-bezier(.76, 0, .24, 1) .15s;
+}
+.hello__in {
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  padding: var(--gutter);
+  transition: transform 1s var(--ease), opacity .6s ease, filter .8s ease;
+}
+.hello__stage {
+  align-self: center;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.2rem, 3vw, 2rem);
+}
+.hello__word { width: min(560px, 82vw); height: auto; overflow: visible; }
+.hello__ink {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* pathLength=1: cela cara je dlouha 1, mezera o chlup delsi, at na startu nesvitne tecka */
+  stroke-dasharray: 1 1.01;
+  stroke-dashoffset: 1;
+  animation: hello-write 2.4s cubic-bezier(.45, .05, .4, 1) .45s forwards;
+}
+.hello__dot {
+  fill: var(--clay);
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: hello-dot .5s cubic-bezier(.34, 1.56, .64, 1) 2.85s forwards;
+}
+.hello__sub {
+  max-width: 34ch;
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.45;
+  text-align: center;
+  color: var(--muted);
+  animation: hello-in 1.1s var(--ease) 2.7s both;
+}
+.hello__sub em { font-style: italic; color: var(--ink); }
+.hello__go {
+  display: grid;
+  justify-items: center;
+  gap: .7rem;
+  padding: .5rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color .2s;
+  animation: hello-in 1s var(--ease) 3.3s both;
+}
+.hello__go:hover { color: var(--ink); }
+/* linka, po ktere dolu stece kapka inkoustu */
+.hello__go i { position: relative; width: 1px; height: 44px; overflow: hidden; background: var(--hair); }
+.hello__go i::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 1px; height: 14px;
+  background: var(--ink);
+  animation: hello-drip 1.8s var(--ease) infinite;
+}
+@keyframes hello-write { to { stroke-dashoffset: 0; } }
+@keyframes hello-dot   { to { transform: scale(1); } }
+@keyframes hello-in {
+  from { opacity: 0; filter: blur(8px); transform: translateY(10px); }
+  to   { opacity: 1; filter: none; transform: none; }
+}
+@keyframes hello-drip {
+  from { transform: translateY(-14px); }
+  to   { transform: translateY(44px); }
+}
+/* odchod: ahoj se rozmaze a odleti, opona jede nahoru, stranka pod ni dojede zdola */
+html.is-hello-out .hello { transform: translateY(-100%); }
+html.is-hello-out .hello__in { transform: translateY(-6vh) scale(.94); opacity: 0; filter: blur(10px); }
+html.is-hello main, html.is-hello .nav { transform: translateY(12vh); }
+html.is-hello-out main, html.is-hello-out .nav { transform: none; transition: transform 1.4s var(--ease) .2s; }
+
 /* ── Cisla ──────────────────────────────────────────────── */
 .figures {
   display: grid;
@@ -919,8 +1035,12 @@ html:not(.js) .brush--draw { background-size: 100% .16em; }
 }
 
 /* ── Postupne odkryvani sekci ───────────────────────────── */
-.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
 .js .reveal.is-in { opacity: 1; transform: none; }
+/* bunky mrizek: linky stoji, obsah do nich najede po jedne.
+   Bunka sama zustava nepruhledna, jinak by mezerami prosvitla cerna. */
+.js .reveal-in > * { opacity: 0; transform: translateY(18px); transition: opacity .9s var(--ease), transform 1s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+.js .reveal-in.is-in > * { opacity: 1; transform: none; }
 
 /* ── Reduced motion ─────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -931,7 +1051,7 @@ html:not(.js) .brush--draw { background-size: 100% .16em; }
     transition-delay: 0s !important;
   }
   .js .mask > span, .js #top:not(.in) .mask > span { transform: none; }
-  .js .fade, .js .reveal { opacity: 1; transform: none; }
+  .js .fade, .js .reveal, .js .reveal-in > * { opacity: 1; transform: none; }
   .js .plate__paint img { clip-path: none; }
   .js .plate__photo { opacity: 1; transform: rotate(-3deg); }
   .brush--draw { background-size: 100% .16em; }
@@ -967,6 +1087,20 @@ html:not(.js) .brush--draw { background-size: 100% .16em; }
   <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2.5 20.5 7v10L12 21.5 3.5 17V7z"/><path d="M3.5 7 12 11.5 20.5 7M12 11.5v10"/></symbol>
   <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
 </svg>
+
+<!-- ═══ AHOJ (jen pri prvni navsteve, rozhoduje skript v <head>) ═══ -->
+<div class="hello" id="hello">
+  <div class="hello__in">
+    <div class="hello__stage">
+      <svg class="hello__word" viewBox="50 14 510 290" role="img" aria-label="Ahoj">
+        <path class="hello__ink" pathLength="1" d="M130 134C118 120 90 118 74 132C58 146 56 178 68 192C80 206 108 202 120 184C128 172 132 150 134 124C132 150 130 182 138 196C144 206 156 204 166 192C190 160 214 90 216 60C218 34 204 22 194 34C184 48 186 120 188 200C192 160 212 124 236 124C258 124 262 146 262 166C262 184 262 196 274 200C284 204 298 196 306 184C318 160 340 128 370 124C350 118 326 136 326 162C326 190 346 204 364 198C384 192 394 166 388 146C384 130 372 122 360 126C352 130 356 140 368 138C388 136 412 124 432 114C434 160 436 230 432 262C428 292 400 298 396 280C392 262 420 230 460 210C490 196 520 190 548 196"/>
+        <circle class="hello__dot" cx="440" cy="84" r="7"/>
+      </svg>
+      <p class="hello__sub" data-i18n="helloSub">Jsem Voku a tohle je moje portfolio.</p>
+    </div>
+    <button type="button" class="hello__go" id="hello-go"><span data-i18n="helloGo">Scrolluj dolů</span><i aria-hidden="true"></i></button>
+  </div>
+</div>
 
 <a class="skip" href="#main" data-i18n="skipLink">Přeskočit na obsah</a>
 
@@ -1437,6 +1571,8 @@ html:not(.js) .brush--draw { background-size: 100% .16em; }
 const T = {
   cs: {
     title:             'Vojtěch "Voku" Kurinec | Portfolio',
+    helloSub:          'Jsem Voku a tohle je moje portfolio.',
+    helloGo:           'Scrolluj dolů',
     skipLink:          'Přeskočit na obsah',
     navAbout:          'O mně',
     navNow:            'Teď stavím',
@@ -1532,6 +1668,8 @@ const T = {
   },
   en: {
     title:             'Vojtěch "Voku" Kurinec | Portfolio',
+    helloSub:          '<em>Ahoj</em> is Czech for hello. I’m Voku, and this is my portfolio.',
+    helloGo:           'Scroll down',
     skipLink:          'Skip to content',
     navAbout:          'About',
     navNow:            'Now',
@@ -1692,22 +1830,81 @@ const T = {
   });
 
   /* ── Sekce se odkryji, az k nim doscrolluju ───────────── */
-  var reveal = $$('.block > *');
-  if ('IntersectionObserver' in window) {
+  function startReveal() {
+    if (!('IntersectionObserver' in window)) return;
     var ro = new IntersectionObserver(function (entries) {
+      var n = 0;
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
+        /* co vyjede naraz (bunky jedne rady, hlava a telo sekce), jde po sobe */
+        e.target.style.setProperty('--i', Math.min(n++, 5));
         e.target.classList.add('is-in');
         ro.unobserve(e.target);
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    reveal.forEach(function (el) { el.classList.add('reveal'); ro.observe(el); });
+    $$('.block > :not(.block__full)').forEach(function (el) { el.classList.add('reveal'); ro.observe(el); });
+    $$('.cells > *, .figures > div').forEach(function (el) { el.classList.add('reveal-in'); ro.observe(el); });
   }
 
   /* ── Hero: jmeno vyjede, zbytek se dotahne ────────────── */
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () { $('#top').classList.add('in'); });
-  });
+  function heroIn() { $('#top').classList.add('in'); }
+
+  /* ── Ahoj: prvni scroll zvedne papir jako oponu ───────── */
+  var root = document.documentElement;
+  var hello = $('#hello');
+  clearTimeout(window.helloGuard);
+  if (hello && root.classList.contains('is-hello')) {
+    sayHello();
+  } else {
+    root.classList.remove('is-hello');
+    if (hello) hello.remove();
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { heroIn(); startReveal(); });
+    });
+  }
+
+  function sayHello() {
+    var y0 = null, gone = false;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
+    function leave() {
+      if (gone) return;
+      gone = true;
+      store('hello', '1');
+      root.classList.add('is-hello-out');
+      startReveal();
+      setTimeout(heroIn, 420);
+      setTimeout(function () {
+        root.classList.remove('is-hello', 'is-hello-out');
+        hello.remove();
+        window.removeEventListener('wheel', onWheel);
+        document.removeEventListener('keydown', onKey);
+        document.removeEventListener('touchstart', onTouchStart);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('focusin', onFocus);
+        if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+      }, 1650);
+    }
+    function onWheel(e) { if (e.deltaY > 0) leave(); }
+    function onKey(e) {
+      if (/^(ArrowDown|PageDown|End|Enter|Escape| |Spacebar)$/.test(e.key)) { e.preventDefault(); leave(); }
+    }
+    function onTouchStart(e) { y0 = e.touches[0].clientY; }
+    function onTouchMove(e) {
+      e.preventDefault(); /* jinak iOS posouva stranku pod oponou */
+      if (y0 !== null && y0 - e.touches[0].clientY > 24) leave();
+    }
+    /* Tab mimo ahoj (treba na "Preskocit na obsah") = chce na stranku */
+    function onFocus(e) { if (!hello.contains(e.target)) leave(); }
+
+    window.addEventListener('wheel', onWheel, { passive: true });
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    document.addEventListener('focusin', onFocus);
+    $('#hello-go').addEventListener('click', leave);
+  }
 })();
 </script>
 
