@@ -36,8 +36,10 @@ GitHub Pages (`voku199.github.io/Portfolio/`) běží dál jako zrcadlo; `canoni
 ```bash
 python tools/build_projects.py && python tools/shoot.py --og
 git commit -am "..." && git push
-python C:/Users/vojta/.claude/skills/rpi-deploy/scripts/rpi.py upload . "~/vokudev"
+python C:/Users/vojta/.claude/skills/rpi-deploy/scripts/rpi.py upload . "~/vokudev" --exclude ignore.local.txt
 ```
+
+`--exclude ignore.local.txt` je důležitý: ten soubor obsahuje jména soukromých složek a na server nepatří.
 
 Upload si sám udělá zálohu do `~/backups/`. Smazané soubory na RPi zůstanou, takže je případně smaž ručně.
 
