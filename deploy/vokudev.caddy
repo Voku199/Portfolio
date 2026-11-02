@@ -1,0 +1,34 @@
+# Blok pro /etc/caddy/Caddyfile na RPi. Nasazuje ho deploy/caddy-vokudev.sh (nahradí starý blok vokudev.cz).
+
+# www -> bez www (jedna kanonická adresa, žádný duplicitní obsah)
+www.vokudev.cz {
+    redir https://vokudev.cz{uri} permanent
+}
+
+vokudev.cz {
+    root * /home/voku/vokudev
+    encode zstd gzip
+
+    # zdrojáky, skripty a nástroje se ven neservírují
+    @hidden path /tools/* /deploy/* /.github/* /.claude/* *.md *.sh *.py /.gitignore /.gitattributes
+    error @hidden 404
+
+    header {
+        Strict-Transport-Security "max-age=31536000"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+    # obrázky a modely se mění zřídka, HTML se kontroluje pokaždé
+    @assets path *.webp *.png *.jpg *.svg *.glb *.ico
+    header @assets Cache-Control "public, max-age=604800"
+    @pages path / /*.html /projekty/ /*.xml /*.txt /*.json
+    header @pages Cache-Control "no-cache"
+
+    file_server
+
+    handle_errors 404 {
+        rewrite * /404.html
+        file_server
+    }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stránka nenalezena | Voku</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F0EEE6">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono:wght@400&family=Newsreader:ital,opsz,wght@0,6..72,300..400;1,6..72,300..400&display=swap">
+<style>
+/* GitHub Pages servíruje tuhle stránku pro každou neexistující adresu, proto absolutní cesty (/...). */
+:root { --bg: #F0EEE6; --ink: #141413; --muted: #5E5D59; --clay: #D97757; --clay-2: #B5512F; --paper: #FAF9F5; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { min-height: 100vh; display: grid; place-items: center; padding: 16px; background: var(--bg); color: var(--ink); font-family: 'Geist', system-ui, sans-serif; }
+main { width: min(640px, 100%); border: 1px solid var(--ink); }
+.top { padding: .65rem 1.4rem; border-bottom: 1px solid var(--ink); font: 11.5px 'Geist Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.in { padding: clamp(2rem, 7vw, 3.4rem) 1.4rem; }
+h1 { font: 400 clamp(2.6rem, 9vw, 4.4rem)/1 'Newsreader', serif; letter-spacing: -.03em; }
+h1 em { color: var(--clay-2); }
+p { margin-top: 1.2rem; font: 400 19px/1.5 'Newsreader', serif; color: var(--muted); max-width: 40ch; }
+nav { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+a { display: inline-flex; align-items: center; gap: .5rem; font-size: 15px; font-weight: 500; text-decoration: none; color: var(--paper); background: var(--ink); border: 1px solid var(--ink); border-radius: 8px; padding: .75rem 1.3rem; box-shadow: 3px 3px 0 var(--clay); }
+a + a { color: var(--ink); background: none; }
+</style>
+</head>
+<body>
+<main>
+  <div class="top">404 · vokudev.cz</div>
+  <div class="in">
+    <h1>Tahle stránka <em>neexistuje</em>.</h1>
+    <p>Možná se přesunula, možná nikdy nebyla. Projekty najdeš v archivu.</p>
+    <nav>
+      <a href="/">Na portfolio</a>
+      <a href="/projekty/">Archiv projektů</a>
+    </nav>
+  </div>
+</main>
+</body>
+</html>

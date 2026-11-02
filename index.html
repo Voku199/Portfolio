@@ -4,25 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vojtěch "Voku" Kurinec | Portfolio</title>
-<meta name="description" content="Portfolio Vojtěcha „Voku“ Kurince, mladého vývojáře z jižních Čech. Weby a rezervační systémy pro laser game arény, hra Sparks of Silt v Unity a vlastní projekty v Pythonu.">
+<meta name="description" content="Vojtěch „Voku“ Kurinec, mladý vývojář z jižních Čech. Weby a rezervace pro laser game arény, hra Sparks of Silt a přes 60 vlastních projektů v Pythonu.">
 <meta name="author" content="Vojtěch Kurinec">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="alternate" type="application/json" href="projekty/projects.json" title="Všechny projekty (JSON)">
 <meta name="theme-color" content="#F0EEE6">
-<link rel="canonical" href="https://voku199.github.io/Portfolio/">
+<link rel="canonical" href="https://vokudev.cz/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://voku199.github.io/Portfolio/">
+<meta property="og:url" content="https://vokudev.cz/">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:site_name" content="Voku Portfolio">
 <meta property="og:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
 <meta property="og:description" content="Mladý vývojář z jižních Čech: weby pro laser game arény, hra Sparks of Silt a vlastní projekty.">
-<meta property="og:image" content="https://voku199.github.io/Portfolio/og-image.png">
+<meta property="og:image" content="https://vokudev.cz/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vojtěch „Voku“ Kurinec, portfolio mladého vývojáře z jižních Čech">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Vojtěch &quot;Voku&quot; Kurinec | Portfolio">
 <meta name="twitter:description" content="Mladý vývojář z jižních Čech: weby pro laser game arény, hra Sparks of Silt a vlastní projekty.">
-<meta name="twitter:image" content="https://voku199.github.io/Portfolio/og-image.png">
+<meta name="twitter:image" content="https://vokudev.cz/og-image.png">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="img/hero.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,19 +52,43 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Vojtěch Kurinec",
-  "alternateName": "Voku",
-  "url": "https://voku199.github.io/Portfolio/",
-  "image": "https://voku199.github.io/Portfolio/og-image.png",
-  "email": "vojta.kurinec@gmail.com",
-  "jobTitle": "Vývojář",
-  "address": { "@type": "PostalAddress", "addressRegion": "Jihočeský kraj", "addressCountry": "CZ" },
-  "sameAs": [
-    "https://github.com/Voku199",
-    "https://instagram.com/voku199"
-  ],
-  "knowsAbout": ["Python", "Flask", "JavaScript", "Java", "Unity", "Blender", "Raspberry Pi", "3D tisk", "AI"]
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://vokudev.cz/#voku",
+      "name": "Vojtěch Kurinec",
+      "alternateName": "Voku",
+      "url": "https://vokudev.cz/",
+      "image": "https://vokudev.cz/ja_seriozne.webp",
+      "email": "vojta.kurinec@gmail.com",
+      "jobTitle": "Vývojář",
+      "address": { "@type": "PostalAddress", "addressRegion": "Jihočeský kraj", "addressCountry": "CZ" },
+      "sameAs": [
+        "https://github.com/Voku199",
+        "https://instagram.com/voku199"
+      ],
+      "knowsAbout": ["Python", "Flask", "JavaScript", "Java", "WebXR", "three.js", "Unity", "Blender", "Raspberry Pi", "3D tisk", "AI"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://vokudev.cz/#web",
+      "url": "https://vokudev.cz/",
+      "name": "Voku Portfolio",
+      "inLanguage": ["cs", "en"],
+      "publisher": { "@id": "https://vokudev.cz/#voku" }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://vokudev.cz/#page",
+      "url": "https://vokudev.cz/",
+      "name": "Vojtěch \"Voku\" Kurinec | Portfolio",
+      "inLanguage": "cs",
+      "isPartOf": { "@id": "https://vokudev.cz/#web" },
+      "mainEntity": { "@id": "https://vokudev.cz/#voku" },
+      "primaryImageOfPage": "https://vokudev.cz/og-image.png",
+      "hasPart": { "@type": "CollectionPage", "@id": "https://vokudev.cz/projekty/#page", "url": "https://vokudev.cz/projekty/" }
+    }
+  ]
 }
 </script>
 <style>
@@ -489,6 +516,9 @@ body.nav-open { overflow: hidden; }
 }
 .btn:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--clay); }
 .btn:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--clay); }
+/* odkaz z vybranych projektu do generovaneho archivu (projekty/) */
+.archive-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem; }
+.archive-intro .btn b { font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--ink); background: var(--paper); border-radius: 999px; padding: .1rem .5rem; }
 
 /* Uvodni animace: jmeno vyjede, obraz se odkryje jako opona, tah stetcem se dotahne */
 .mask { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
@@ -1113,6 +1143,7 @@ html.is-hello-out main, html.is-hello-out .nav { transform: none; transition: tr
       <a href="#now" data-i18n="navNow">Teď stavím</a>
       <a href="#clients" data-i18n="navClients">Zakázky</a>
       <a href="#projects" data-i18n="navProjects">Projekty</a>
+      <a href="projekty/" data-i18n="navArchive">Archiv</a>
       <a href="#how" data-i18n="navHow">Jak pracuju</a>
       <a href="#tech" data-i18n="navTech">Technologie</a>
       <a href="#contact" data-i18n="navContact">Kontakt</a>
@@ -1136,6 +1167,7 @@ html.is-hello-out main, html.is-hello-out .nav { transform: none; transition: tr
   <a href="#how"><span class="kicker">05</span><span data-i18n="navHow">Jak pracuju</span></a>
   <a href="#tech"><span class="kicker">06</span><span data-i18n="navTech">Technologie</span></a>
   <a href="#contact"><span class="kicker">07</span><span data-i18n="navContact">Kontakt</span></a>
+  <a href="projekty/"><span class="kicker">↗</span><span data-i18n="navArchiveAll">Všechny projekty</span></a>
 </div>
 
 <main id="main" class="wrap">
@@ -1189,7 +1221,7 @@ html.is-hello-out main, html.is-hello-out .nav { transform: none; transition: tr
   </div>
 
   <div class="figures" aria-label="Voku v číslech">
-    <div><b>10+</b><span data-i18n="figProjects">vlastních projektů</span></div>
+    <div><b data-auto="projects">60+</b><span data-i18n="figProjects">vlastních projektů</span></div>
     <div><b>3</b><span data-i18n="figClients">zakázky pro klienty</span></div>
     <div><b>3+</b><span data-i18n="figYears">roky programování</span></div>
     <div><b>16</b><span data-i18n="figAge">let</span></div>
@@ -1339,7 +1371,10 @@ html.is-hello-out main, html.is-hello-out .nav { transform: none; transition: tr
     <h2 class="block__title" data-i18n="projectsHeading">Věci, co jsem postavil.</h2>
   </div>
   <div class="block__body">
-    <p class="lead" data-i18n="projectsLead">Vlastní projekty, na kterých se učím. Některé běží, některé jsem odložil, ze všech jsem si něco odnesl.</p>
+    <div class="archive-intro">
+      <p class="lead" data-i18n="projectsLead">Vlastní projekty, na kterých se učím. Některé běží, některé jsem odložil, ze všech jsem si něco odnesl.</p>
+      <a class="btn" href="projekty/"><span data-i18n="archiveCta">Projít všechny projekty</span> <b data-auto="projects-n">61</b></a>
+    </div>
     <img class="spot" src="img/spot-blocks.svg" width="400" height="400" alt="" loading="lazy">
   </div>
 
@@ -1580,6 +1615,9 @@ const T = {
     navProjects:       'Projekty',
     navTech:           'Technologie',
     navContact:        'Kontakt',
+    navArchive:        'Archiv',
+    navArchiveAll:     'Všechny projekty',
+    archiveCta:        'Projít všechny projekty',
     navHow:            'Jak pracuju',
     mastRegion:        'Jihočeský kraj, CZ',
     mastIssue:         'Vydání',
@@ -1677,6 +1715,9 @@ const T = {
     navProjects:       'Projects',
     navTech:           'Tech',
     navContact:        'Contact',
+    navArchive:        'Archive',
+    navArchiveAll:     'All projects',
+    archiveCta:        'Browse every project',
     navHow:            'How I work',
     mastRegion:        'South Bohemia, CZ',
     mastIssue:         'Issue',

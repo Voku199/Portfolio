@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://voku199.github.io/Portfolio/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://vokudev.cz/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <image:image><image:loc>https://vokudev.cz/og-image.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://vokudev.cz/projekty/</loc>
+    <lastmod>2026-11-02</lastmod>
+    <image:image><image:loc>https://vokudev.cz/projekty/og.png</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/sandiff.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/lid.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/respawn-lasergame-cb.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/paprika.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/vr-lasergame.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/dumbai.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/mythicals.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/nagori-studio.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/knowix.webp</image:loc></image:image>
+    <image:image><image:loc>https://vokudev.cz/projekty/shots/bakix.webp</image:loc></image:image>
   </url>
 </urlset>

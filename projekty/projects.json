@@ -1,0 +1,1202 @@
+{
+ "generated": "2026-11-02",
+ "projects": [
+  {
+   "name": "SANDIFF",
+   "slug": "sandiff",
+   "category": "web",
+   "cs": "Web LoL týmu kámošů z Písku: zeď plakátů, profily hráčů a ranky z Riot API.",
+   "en": "Site of my friends' LoL team: a wall of posters, player profiles and ranks from the Riot API.",
+   "url": "https://lol.bakix.cz",
+   "demo": true,
+   "status": "live",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "SQLite"
+   ],
+   "lines": 2145,
+   "tests": true,
+   "updated": "2026-10-31",
+   "image": "https://vokudev.cz/projekty/shots/sandiff.webp"
+  },
+  {
+   "name": "JARVIS",
+   "slug": "jarvis",
+   "category": "ai",
+   "cs": "Asistent v liště: napíšeš česky, co chceš, a on to v počítači udělá, i bez internetu.",
+   "en": "A tray assistant: type what you want in Czech and it does it on the PC, even offline.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "NumPy"
+   ],
+   "lines": 15342,
+   "tests": true,
+   "updated": "2026-10-31",
+   "image": "https://vokudev.cz/projekty/shots/jarvis.svg"
+  },
+  {
+   "name": "LID",
+   "slug": "lid",
+   "category": "web",
+   "cs": "Aplikace školního parlamentu: nápady, tajné hlasování a veřejná nástěnka.",
+   "en": "App for my school parliament: ideas, secret ballots and a public board.",
+   "url": null,
+   "demo": false,
+   "status": "live",
+   "stack": [
+    "Python",
+    "Flask",
+    "SQLite",
+    "PWA"
+   ],
+   "lines": 8688,
+   "tests": true,
+   "updated": "2026-10-31",
+   "image": "https://vokudev.cz/projekty/shots/lid.webp"
+  },
+  {
+   "name": "Kytara za 15 minut",
+   "slug": "kytara-za-15-minut",
+   "category": "web",
+   "cs": "Offline webovka, která učí hrát na kytaru po patnácti minutách denně.",
+   "en": "An offline web app that teaches acoustic guitar fifteen minutes a day.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "TypeScript",
+    "Vite",
+    "Playwright"
+   ],
+   "lines": 4709,
+   "tests": false,
+   "updated": "2026-10-30",
+   "image": "https://vokudev.cz/projekty/shots/kytara-za-15-minut.svg"
+  },
+  {
+   "name": "PC Tuning",
+   "slug": "pc-tuning",
+   "category": "nastroje",
+   "cs": "Cestovní režim a optimalizace notebooku ve stylu Applu přes PowerShell a C#.",
+   "en": "An Apple-style travel mode and tune-up for my laptop in PowerShell and C#.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "PowerShell"
+   ],
+   "lines": 2520,
+   "tests": true,
+   "updated": "2026-10-29",
+   "image": "https://vokudev.cz/projekty/shots/pc-tuning.svg"
+  },
+  {
+   "name": "liteclip",
+   "slug": "liteclip",
+   "category": "nastroje",
+   "cs": "Replay buffer pro hry: F8 uloží posledních 30 vteřin a jedním klikem jde clip na Discord.",
+   "en": "A replay buffer for games: F8 saves the last 30 seconds and one click sends it to Discord.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "ffmpeg",
+    "pywebview",
+    "WinAPI",
+    "pystray"
+   ],
+   "lines": 3544,
+   "tests": true,
+   "updated": "2026-10-29",
+   "image": "https://vokudev.cz/projekty/shots/liteclip.svg"
+  },
+  {
+   "name": "Respawn Lasergame ČB",
+   "slug": "respawn-lasergame-cb",
+   "category": "klienti",
+   "cs": "Web a systém skutečné laser arény: rezervace, statistiky z Laserforce a tři úrovně správy.",
+   "en": "Site and system for a real laser arena: bookings, Laserforce stats and three admin tiers.",
+   "url": "https://lasergamecb.cz",
+   "demo": false,
+   "status": "live",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Resend",
+    "three.js",
+    "discord.py"
+   ],
+   "lines": 50502,
+   "tests": true,
+   "updated": "2026-10-28",
+   "image": "https://vokudev.cz/projekty/shots/respawn-lasergame-cb.webp"
+  },
+  {
+   "name": "Paprika",
+   "slug": "paprika",
+   "category": "nastroje",
+   "cs": "Python knihovna na skládání hudby bez DAW: syntéza, efekty, mix a sampler.",
+   "en": "A Python library for making music without a DAW: synthesis, effects, mixing and a sampler.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "NumPy",
+    "SciPy"
+   ],
+   "lines": 33944,
+   "tests": true,
+   "updated": "2026-10-28",
+   "image": "https://vokudev.cz/projekty/shots/paprika.webp"
+  },
+  {
+   "name": "GitHub profil",
+   "slug": "github-profil",
+   "category": "nastroje",
+   "cs": "Spočítá kód v monorepu a vyrobí z toho animovaná SVG na můj GitHub profil.",
+   "en": "Counts the code in my monorepo and turns it into animated SVGs for my GitHub profile.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "SVG"
+   ],
+   "lines": 300,
+   "tests": false,
+   "updated": "2026-10-28",
+   "image": "https://vokudev.cz/projekty/shots/github-profil.svg"
+  },
+  {
+   "name": "Halloween Jukebox",
+   "slug": "halloween-jukebox",
+   "category": "web",
+   "cs": "Hosté na párty přidávají písničky z mobilu a hraje to Spotify nebo YouTube přes RPi.",
+   "en": "Party guests queue songs from their phones, played through Spotify or YouTube via a Pi.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "yt-dlp",
+    "PWA"
+   ],
+   "lines": 2670,
+   "tests": true,
+   "updated": "2026-10-26",
+   "image": "https://vokudev.cz/projekty/shots/halloween-jukebox.svg"
+  },
+  {
+   "name": "VR Lasergame",
+   "slug": "vr-lasergame",
+   "category": "hry",
+   "cs": "Deathmatch proti šesti botům na Questu 3, pohybuješ se chůzí na místě.",
+   "en": "Deathmatch against six bots on Quest 3, you move by walking on the spot.",
+   "url": "https://vr.bakix.cz",
+   "demo": true,
+   "status": "live",
+   "stack": [
+    "JavaScript",
+    "WebXR",
+    "three.js",
+    "Flask",
+    "SQLite"
+   ],
+   "lines": 5212,
+   "tests": true,
+   "updated": "2026-10-24",
+   "image": "https://vokudev.cz/projekty/shots/vr-lasergame.webp"
+  },
+  {
+   "name": "FolderLock",
+   "slug": "folderlock",
+   "category": "nastroje",
+   "cs": "Zamkne složku heslem se skutečným šifrováním AES-256-GCM, ne jen schováním.",
+   "en": "Locks a folder with a password using real AES-256-GCM encryption, not just hiding it.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "AES-256-GCM",
+    "Tkinter"
+   ],
+   "lines": 332,
+   "tests": false,
+   "updated": "2026-10-16",
+   "image": "https://vokudev.cz/projekty/shots/folderlock.svg"
+  },
+  {
+   "name": "AI Prezentace",
+   "slug": "ai-prezentace",
+   "category": "ai",
+   "cs": "Prezentační engine: řeknu, co chci, a Claude to zapíše jako data do slidů.",
+   "en": "A slide engine: I say what I want and Claude writes it into the slides as data.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "JavaScript",
+    "Python"
+   ],
+   "lines": 7366,
+   "tests": false,
+   "updated": "2026-10-15",
+   "image": "https://vokudev.cz/projekty/shots/ai-prezentace.svg"
+  },
+  {
+   "name": "DumbAI",
+   "slug": "dumbai",
+   "category": "web",
+   "cs": "Hledač faktů nad českou Wikipedií a Wikidaty schválně bez AI, aby šel použít i ve škole.",
+   "en": "A fact finder over Czech Wikipedia and Wikidata, deliberately without AI so it is allowed at school.",
+   "url": "https://dumbai.bakix.cz",
+   "demo": true,
+   "status": "live",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "SQLite",
+    "PWA"
+   ],
+   "lines": 1735,
+   "tests": true,
+   "updated": "2026-10-13",
+   "image": "https://vokudev.cz/projekty/shots/dumbai.webp"
+  },
+  {
+   "name": "Mythicals",
+   "slug": "mythicals",
+   "category": "hry",
+   "cs": "Minecraft plugin: osm mýtických zbraní, každá jen jednou na server, tři životy a tajný Death Note.",
+   "en": "Minecraft plugin: eight mythic weapons, one per server, three lives and a secret Death Note.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Java",
+    "Python",
+    "Paper",
+    "Gradle"
+   ],
+   "lines": 6769,
+   "tests": true,
+   "updated": "2026-10-12",
+   "image": "https://vokudev.cz/projekty/shots/mythicals.webp"
+  },
+  {
+   "name": "Discord Builder",
+   "slug": "discord-builder",
+   "category": "ai",
+   "cs": "Bot, kterému napíšeš, jak má server vypadat, a Claude ho postaví přes tool use.",
+   "en": "A bot you tell what your server should look like, and Claude builds it with tool use.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "discord.py",
+    "Claude API",
+    "Gemini",
+    "SQLite"
+   ],
+   "lines": 2397,
+   "tests": true,
+   "updated": "2026-10-10",
+   "image": "https://vokudev.cz/projekty/shots/discord-builder.svg"
+  },
+  {
+   "name": "Podcast Studio",
+   "slug": "podcast-studio",
+   "category": "nastroje",
+   "cs": "OBS overlay, kde poskakuje nálepka toho, kdo zrovna mluví na Discordu.",
+   "en": "An OBS overlay where the sticker of whoever is talking on Discord bounces around.",
+   "url": null,
+   "demo": false,
+   "status": "active",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "MediaPipe",
+    "NumPy"
+   ],
+   "lines": 2356,
+   "tests": true,
+   "updated": "2026-10-09",
+   "image": "https://vokudev.cz/projekty/shots/podcast-studio.svg"
+  },
+  {
+   "name": "Nagori Studio",
+   "slug": "nagori-studio",
+   "category": "web",
+   "cs": "Web indie studia a hry Sparks of Silt se scroll animacemi v čistém JavaScriptu.",
+   "en": "Site for an indie studio and its game Sparks of Silt, with scroll animations in plain JavaScript.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask"
+   ],
+   "lines": 2299,
+   "tests": true,
+   "updated": "2026-10-01",
+   "image": "https://vokudev.cz/projekty/shots/nagori-studio.webp"
+  },
+  {
+   "name": "Trenér přijímaček",
+   "slug": "trener-prijimacek",
+   "category": "nastroje",
+   "cs": "Každý den naservíruje 25 minut matiky nebo češtiny z testů CERMAT.",
+   "en": "Serves 25 minutes of maths or Czech from CERMAT exams every day.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Gemini",
+    "SQLite"
+   ],
+   "lines": 3022,
+   "tests": true,
+   "updated": "2026-10-01",
+   "image": "https://vokudev.cz/projekty/shots/trener-prijimacek.svg"
+  },
+  {
+   "name": "ZŠ Chrášťany",
+   "slug": "zs-chrastany",
+   "category": "klienti",
+   "cs": "Návrh nového webu základní a mateřské školy, celý obsah v jednom datovém souboru.",
+   "en": "A redesign proposal for a primary school website, all content in one data file.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask"
+   ],
+   "lines": 1541,
+   "tests": false,
+   "updated": "2026-09-26",
+   "image": "https://vokudev.cz/projekty/shots/zs-chrastany.svg"
+  },
+  {
+   "name": "VoiceShift",
+   "slug": "voiceshift",
+   "category": "ai",
+   "cs": "Lokální převod hlasu buď rychle přes DSP, nebo kvalitně přes neurální model RVC.",
+   "en": "Local voice conversion, fast through DSP or high quality through an RVC neural model.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Praat",
+    "NumPy",
+    "SciPy"
+   ],
+   "lines": 2858,
+   "tests": false,
+   "updated": "2026-09-21",
+   "image": "https://vokudev.cz/projekty/shots/voiceshift.svg"
+  },
+  {
+   "name": "STARDOMS Lasergame",
+   "slug": "stardoms-lasergame",
+   "category": "klienti",
+   "cs": "Nový web a rezervace po hodinách pro arénu v Domažlicích, náhrada za starý WordPress.",
+   "en": "A new site with hourly booking for an arena in Domažlice, replacing an old WordPress.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "SQLite"
+   ],
+   "lines": 8038,
+   "tests": true,
+   "updated": "2026-09-15",
+   "image": "https://vokudev.cz/projekty/shots/stardoms-lasergame.svg"
+  },
+  {
+   "name": "Hangar",
+   "slug": "hangar",
+   "category": "nastroje",
+   "cs": "Ovládací panel celého monorepa: spouští projekty, ukazuje logy a stav gitu.",
+   "en": "Control panel for my whole monorepo: starts projects, streams logs, shows git status.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask"
+   ],
+   "lines": 1646,
+   "tests": false,
+   "updated": "2026-09-12",
+   "image": "https://vokudev.cz/projekty/shots/hangar.svg"
+  },
+  {
+   "name": "Flybrain Tetris",
+   "slug": "flybrain-tetris",
+   "category": "ai",
+   "cs": "Skutečný connectome mozku octomilky se evolucí učí hrát Tetris.",
+   "en": "A real fruit-fly connectome learns to play Tetris through evolution.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "NumPy",
+    "SciPy",
+    "Matplotlib"
+   ],
+   "lines": 2851,
+   "tests": false,
+   "updated": "2026-09-11",
+   "image": "https://vokudev.cz/projekty/shots/flybrain-tetris.svg"
+  },
+  {
+   "name": "Respawn: členská sekce",
+   "slug": "respawn-clenska-sekce",
+   "category": "klienti",
+   "cs": "Prototyp klientské zóny arény: profil hráče, historie her a žebříčky.",
+   "en": "Prototype member area for the arena: player profile, match history and ladders.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "PWA"
+   ],
+   "lines": 6014,
+   "tests": false,
+   "updated": "2026-09-09",
+   "image": "https://vokudev.cz/projekty/shots/respawn-clenska-sekce.svg"
+  },
+  {
+   "name": "FakeCraft",
+   "slug": "fakecraft",
+   "category": "hry",
+   "cs": "Voxelová survival v prohlížeči, textury i hudbu generuje kód za běhu.",
+   "en": "A voxel survival game in the browser, textures and music generated by code at runtime.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "JavaScript",
+    "Socket.IO",
+    "Flask",
+    "three.js"
+   ],
+   "lines": 7565,
+   "tests": true,
+   "updated": "2026-09-08",
+   "image": "https://vokudev.cz/projekty/shots/fakecraft.svg"
+  },
+  {
+   "name": "Knowix",
+   "slug": "knowix",
+   "category": "web",
+   "cs": "Studijní asistent jako PWA, který zná tvůj rozvrh a otázky posílá na víc AI modelů.",
+   "en": "A study assistant PWA that knows your timetable and routes questions to several AI models.",
+   "url": "https://knowix.bakix.cz",
+   "demo": false,
+   "status": "live",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Mistral",
+    "Gemini",
+    "APScheduler"
+   ],
+   "lines": 8204,
+   "tests": true,
+   "updated": "2026-08-27",
+   "image": "https://vokudev.cz/projekty/shots/knowix.webp"
+  },
+  {
+   "name": "mangaengine",
+   "slug": "mangaengine",
+   "category": "hry",
+   "cs": "Offline renderer jednobitové manga kresby z JSON scén, s vlastním rasterizérem a rastry.",
+   "en": "Offline renderer of 1-bit manga art from JSON scenes, with its own rasterizer and screentones.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "NumPy",
+    "SciPy"
+   ],
+   "lines": 9251,
+   "tests": true,
+   "updated": "2026-08-19",
+   "image": "https://vokudev.cz/projekty/shots/mangaengine.svg"
+  },
+  {
+   "name": "LoLCoach",
+   "slug": "lolcoach",
+   "category": "ai",
+   "cs": "AI kouč, který sleduje živou hru League of Legends a radí, co dělat dál.",
+   "en": "An AI coach that watches a live League of Legends game and tells you what to do next.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Tkinter"
+   ],
+   "lines": 2692,
+   "tests": false,
+   "updated": "2026-08-18",
+   "image": "https://vokudev.cz/projekty/shots/lolcoach.svg"
+  },
+  {
+   "name": "Anime engine pro LLM",
+   "slug": "anime-engine-pro-llm",
+   "category": "ai",
+   "cs": "Animační engine, který řídí jazykový model a dostává zpátky obrázek i naměřená čísla.",
+   "en": "An animation engine driven by a language model, which gets back an image plus measurements.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "NumPy"
+   ],
+   "lines": 14298,
+   "tests": true,
+   "updated": "2026-08-18",
+   "image": "https://vokudev.cz/projekty/shots/anime-engine-pro-llm.svg"
+  },
+  {
+   "name": "Auto-deploy",
+   "slug": "auto-deploy",
+   "category": "server",
+   "cs": "Webhook servery: git push ověří podpisem a nasadí web, ten nejnovější umí i rollback.",
+   "en": "Webhook servers: a git push is verified by signature and deployed, the newest one can roll back.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Shell",
+    "Python",
+    "Flask"
+   ],
+   "lines": 461,
+   "tests": false,
+   "updated": "2026-08-06",
+   "image": "https://vokudev.cz/projekty/shots/auto-deploy.svg"
+  },
+  {
+   "name": "Rychlá Kola Srdce",
+   "slug": "rychla-kola-srdce",
+   "category": "hry",
+   "cs": "Pixel-art vizuální novela s volbami a body náklonnosti k postavám.",
+   "en": "A pixel-art visual novel with choices and affection points for each character.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Pygame",
+    "ffmpeg"
+   ],
+   "lines": 7382,
+   "tests": true,
+   "updated": "2026-08-03",
+   "image": "https://vokudev.cz/projekty/shots/rychla-kola-srdce.svg"
+  },
+  {
+   "name": "Trading 212 Monitor",
+   "slug": "trading-212-monitor",
+   "category": "nastroje",
+   "cs": "Denní report portfolia a upozornění na velké pohyby, jen pro čtení.",
+   "en": "A daily portfolio report and big-move alerts, strictly read-only.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "APScheduler",
+    "PWA",
+    "SQLite"
+   ],
+   "lines": 3086,
+   "tests": true,
+   "updated": "2026-08-01",
+   "image": "https://vokudev.cz/projekty/shots/trading-212-monitor.svg"
+  },
+  {
+   "name": "Bakix",
+   "slug": "bakix",
+   "category": "web",
+   "cs": "AI studijní asistent nad Bakaláři s vlastním OAuth přihlášením a Premium přes Stripe.",
+   "en": "AI study assistant on top of Bakaláři with its own OAuth login and Stripe Premium.",
+   "url": "https://bakix.cz",
+   "demo": false,
+   "status": "live",
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Gemini",
+    "Mistral",
+    "Stripe"
+   ],
+   "lines": 20350,
+   "tests": false,
+   "updated": "2026-07-25",
+   "image": "https://vokudev.cz/projekty/shots/bakix.webp"
+  },
+  {
+   "name": "PostureGuard",
+   "slug": "postureguard",
+   "category": "nastroje",
+   "cs": "Přes webkameru hlídá, jak sedím, a když se hrbím, vyskočí červené okno.",
+   "en": "Watches my posture through the webcam and pops up a red window when I slouch.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "MediaPipe",
+    "Tkinter",
+    "OpenCV"
+   ],
+   "lines": 346,
+   "tests": false,
+   "updated": "2026-07-24",
+   "image": "https://vokudev.cz/projekty/shots/postureguard.svg"
+  },
+  {
+   "name": "nullstate",
+   "slug": "nullstate",
+   "category": "hry",
+   "cs": "2D pixel-art hackerská hra inspirovaná seriálem Mr. Robot.",
+   "en": "A 2D pixel-art hacking game inspired by Mr. Robot.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Pygame"
+   ],
+   "lines": 9610,
+   "tests": false,
+   "updated": "2026-07-18",
+   "image": "https://vokudev.cz/projekty/shots/nullstate.svg"
+  },
+  {
+   "name": "Městečko Palermo",
+   "slug": "mestecko-palermo",
+   "category": "hry",
+   "cs": "Hra na mafii proti AI botům, kteří spolu lžou a obviňují se.",
+   "en": "A mafia game against AI bots that lie to and accuse each other.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "JavaScript",
+    "Python",
+    "Socket.IO",
+    "Flask",
+    "three.js"
+   ],
+   "lines": 6159,
+   "tests": true,
+   "updated": "2026-07-15",
+   "image": "https://vokudev.cz/projekty/shots/mestecko-palermo.svg"
+  },
+  {
+   "name": "Vlastní CLI agent",
+   "slug": "vlastni-cli-agent",
+   "category": "ai",
+   "cs": "Kódovací agent v terminálu nad lokálními modely z Ollamy.",
+   "en": "A terminal coding agent running on local Ollama models.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python"
+   ],
+   "lines": 894,
+   "tests": false,
+   "updated": "2026-07-15",
+   "image": "https://vokudev.cz/projekty/shots/vlastni-cli-agent.svg"
+  },
+  {
+   "name": "8.B → 9.B",
+   "slug": "8b-9b",
+   "category": "web",
+   "cs": "Malý web s profily spolužáků na konec školního roku.",
+   "en": "A small end-of-year site with profiles of my classmates.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "three.js"
+   ],
+   "lines": 5441,
+   "tests": false,
+   "updated": "2026-07-14",
+   "image": "https://vokudev.cz/projekty/shots/8b-9b.svg"
+  },
+  {
+   "name": "Parcel",
+   "slug": "parcel",
+   "category": "hry",
+   "cs": "Příběhová hra o rozvozu balíků vykreslovaná vlastním raycasterem.",
+   "en": "A story game about delivering parcels, drawn by my own raycaster.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Pygame",
+    "NumPy",
+    "SciPy"
+   ],
+   "lines": 3891,
+   "tests": false,
+   "updated": "2026-07-13",
+   "image": "https://vokudev.cz/projekty/shots/parcel.svg"
+  },
+  {
+   "name": "Hack Sandbox",
+   "slug": "hack-sandbox",
+   "category": "nastroje",
+   "cs": "Schválně děravá CTF aplikace na trénink SQL injection a XSS, běží jen lokálně.",
+   "en": "A deliberately vulnerable CTF app for practising SQL injection and XSS, local only.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "SQLite"
+   ],
+   "lines": 1422,
+   "tests": false,
+   "updated": "2026-07-12",
+   "image": "https://vokudev.cz/projekty/shots/hack-sandbox.svg"
+  },
+  {
+   "name": "Bunkr",
+   "slug": "bunkr",
+   "category": "hry",
+   "cs": "Textové RPG po apokalypse: jeden hráč, AI společníci a oddělený AI vypravěč.",
+   "en": "Post-apocalyptic text RPG: one player, AI companions and a separate AI narrator.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Gemini",
+    "SQLite"
+   ],
+   "lines": 1255,
+   "tests": false,
+   "updated": "2026-07-09",
+   "image": "https://vokudev.cz/projekty/shots/bunkr.svg"
+  },
+  {
+   "name": "Roblox MCP",
+   "slug": "roblox-mcp",
+   "category": "ai",
+   "cs": "Stavění v Roblox Studiu přes MCP, které řídí levný model GLM místo Clauda.",
+   "en": "Building in Roblox Studio over MCP, driven by the cheap GLM model instead of Claude.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "OpenAI API"
+   ],
+   "lines": 807,
+   "tests": false,
+   "updated": "2026-07-06",
+   "image": "https://vokudev.cz/projekty/shots/roblox-mcp.svg"
+  },
+  {
+   "name": "Webly",
+   "slug": "webly",
+   "category": "nastroje",
+   "cs": "Vlastní programovací jazyk pro web, kde routy, databáze i přihlášení jsou přímo v jazyce.",
+   "en": "My own programming language for the web, with routes, a database and auth built into the language.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "SQLite"
+   ],
+   "lines": 1787,
+   "tests": false,
+   "updated": "2026-07-02",
+   "image": "https://vokudev.cz/projekty/shots/webly.svg"
+  },
+  {
+   "name": "Geoguessr",
+   "slug": "geoguessr",
+   "category": "web",
+   "cs": "Hádání míst na mapě pro víc hráčů naráz přes WebSockety.",
+   "en": "Multiplayer guess-the-place game over WebSockets.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Socket.IO",
+    "Flask",
+    "SQLite"
+   ],
+   "lines": 839,
+   "tests": false,
+   "updated": "2026-06-29",
+   "image": "https://vokudev.cz/projekty/shots/geoguessr.svg"
+  },
+  {
+   "name": "MC Server Panel",
+   "slug": "mc-server-panel",
+   "category": "server",
+   "cs": "Webový panel na spouštění a správu Minecraft serveru.",
+   "en": "A web panel for starting and managing a Minecraft server.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "HTML",
+    "Flask"
+   ],
+   "lines": 499,
+   "tests": false,
+   "updated": "2026-06-26",
+   "image": "https://vokudev.cz/projekty/shots/mc-server-panel.svg"
+  },
+  {
+   "name": "Music Visualizer",
+   "slug": "music-visualizer",
+   "category": "nastroje",
+   "cs": "Vizualizér čehokoli, co zrovna hraje v počítači, i s názvem písničky ze Spotify.",
+   "en": "A visualizer for whatever is playing on the PC, with the song title from Spotify.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Pygame",
+    "NumPy",
+    "PyInstaller"
+   ],
+   "lines": 1162,
+   "tests": false,
+   "updated": "2026-06-24",
+   "image": "https://vokudev.cz/projekty/shots/music-visualizer.svg"
+  },
+  {
+   "name": "Bakix Monitor",
+   "slug": "bakix-monitor",
+   "category": "server",
+   "cs": "Discord bot hlídá Raspberry Pi, na kterém běží bakix.cz, a každé ráno pošle report.",
+   "en": "A Discord bot that watches the Raspberry Pi running bakix.cz and reports every morning.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "discord.py"
+   ],
+   "lines": 524,
+   "tests": false,
+   "updated": "2026-06-24",
+   "image": "https://vokudev.cz/projekty/shots/bakix-monitor.svg"
+  },
+  {
+   "name": "Přijímačky data",
+   "slug": "prijimacky-data",
+   "category": "web",
+   "cs": "Stahuje a třídí data o přijímacím řízení na střední školy.",
+   "en": "Scrapes and sorts admissions data for Czech secondary schools.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "Mistral",
+    "BeautifulSoup"
+   ],
+   "lines": 986,
+   "tests": false,
+   "updated": "2026-06-21",
+   "image": "https://vokudev.cz/projekty/shots/prijimacky-data.svg"
+  },
+  {
+   "name": "Dustbound",
+   "slug": "dustbound",
+   "category": "hry",
+   "cs": "Pixel-art příběhová hra v Pygame, chystaná zdarma na Steam.",
+   "en": "A pixel-art story game in Pygame, headed to Steam for free.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Pygame"
+   ],
+   "lines": 3512,
+   "tests": false,
+   "updated": "2026-06-15",
+   "image": "https://vokudev.cz/projekty/shots/dustbound.svg"
+  },
+  {
+   "name": "Screen Time",
+   "slug": "screen-time",
+   "category": "nastroje",
+   "cs": "Sleduje, co dělám na počítači, AI to roztřídí a každé pondělí přijde report.",
+   "en": "Tracks what I do on my PC, AI sorts it into categories and a report arrives every Monday.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "Resend",
+    "SQLite",
+    "WinAPI",
+    "Matplotlib"
+   ],
+   "lines": 2339,
+   "tests": false,
+   "updated": "2026-06-07",
+   "image": "https://vokudev.cz/projekty/shots/screen-time.svg"
+  },
+  {
+   "name": "PWA Remote",
+   "slug": "pwa-remote",
+   "category": "nastroje",
+   "cs": "Z mobilu se stane dálkový ovladač počítače.",
+   "en": "Turns a phone into a remote control for the PC.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Socket.IO",
+    "Flask",
+    "PWA"
+   ],
+   "lines": 995,
+   "tests": false,
+   "updated": "2026-06-02",
+   "image": "https://vokudev.cz/projekty/shots/pwa-remote.svg"
+  },
+  {
+   "name": "Lasergame (první verze)",
+   "slug": "lasergame-prvni-verze",
+   "category": "web",
+   "cs": "Původní systém arény: skóre, turnaje, Discord bot a ovládání Minecraft serveru na RPi.",
+   "en": "The original arena system: scores, tournaments, a Discord bot and Minecraft server control on a Pi.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "Mistral",
+    "SQLite"
+   ],
+   "lines": 30460,
+   "tests": false,
+   "updated": "2026-05-30",
+   "image": "https://vokudev.cz/projekty/shots/lasergame-prvni-verze.svg"
+  },
+  {
+   "name": "Lasergame Stats",
+   "slug": "lasergame-stats",
+   "category": "web",
+   "cs": "Stáhne moje statistiky z Laserforce a ukáže je v grafech s historií her.",
+   "en": "Scrapes my Laserforce stats and shows them as charts with a match history.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "BeautifulSoup"
+   ],
+   "lines": 4258,
+   "tests": false,
+   "updated": "2026-05-30",
+   "image": "https://vokudev.cz/projekty/shots/lasergame-stats.svg"
+  },
+  {
+   "name": "Bakix Hackathon",
+   "slug": "bakix-hackathon",
+   "category": "web",
+   "cs": "Verze Bakixu postavená za jediný den na vibe-coding hackathonu 19. 5. 2026.",
+   "en": "A version of Bakix built in a single day at a vibe-coding hackathon on 19 May 2026.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "JavaScript",
+    "Flask",
+    "Gemini",
+    "three.js",
+    "APScheduler"
+   ],
+   "lines": 10393,
+   "tests": false,
+   "updated": "2026-05-26",
+   "image": "https://vokudev.cz/projekty/shots/bakix-hackathon.svg"
+  },
+  {
+   "name": "Server Dashboard",
+   "slug": "server-dashboard",
+   "category": "server",
+   "cs": "Správa služeb, skener portů a ukládání odkazů pro můj Linux server.",
+   "en": "Service manager, port scanner and link saver for my Linux server.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask"
+   ],
+   "lines": 1136,
+   "tests": false,
+   "updated": "2026-05-19",
+   "image": "https://vokudev.cz/projekty/shots/server-dashboard.svg"
+  },
+  {
+   "name": "Claude Usage",
+   "slug": "claude-usage",
+   "category": "nastroje",
+   "cs": "PWA, která ukazuje, kolik tokenů spotřebuju v Claude Code.",
+   "en": "A PWA that shows how many tokens I burn in Claude Code.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "JavaScript",
+    "Flask",
+    "Gemini"
+   ],
+   "lines": 592,
+   "tests": false,
+   "updated": "2026-05-19",
+   "image": "https://vokudev.cz/projekty/shots/claude-usage.svg"
+  },
+  {
+   "name": "eeebox",
+   "slug": "eeebox",
+   "category": "server",
+   "cs": "Dashboard vzdáleného Linux boxu: monitoring, prohlížeč NAS a napojení na Odoo.",
+   "en": "Dashboard for a remote Linux box: monitoring, a NAS browser and an Odoo connection.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask"
+   ],
+   "lines": 8161,
+   "tests": false,
+   "updated": "2026-05-13",
+   "image": "https://vokudev.cz/projekty/shots/eeebox.svg"
+  },
+  {
+   "name": "Šachy s AI",
+   "slug": "sachy-s-ai",
+   "category": "hry",
+   "cs": "Šachy v prohlížeči proti AI soupeři.",
+   "en": "Browser chess against an AI opponent.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Flask",
+    "Mistral"
+   ],
+   "lines": 2701,
+   "tests": true,
+   "updated": "2026-05-10",
+   "image": "https://vokudev.cz/projekty/shots/sachy-s-ai.svg"
+  },
+  {
+   "name": "OS Asistent",
+   "slug": "os-asistent",
+   "category": "ai",
+   "cs": "Osobní AI asistent v terminálu s vlastní pamětí.",
+   "en": "A personal AI assistant in the terminal with its own memory.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "Mistral",
+    "Rich"
+   ],
+   "lines": 2079,
+   "tests": true,
+   "updated": "2026-04-05",
+   "image": "https://vokudev.cz/projekty/shots/os-asistent.svg"
+  },
+  {
+   "name": "Hlasový asistent",
+   "slug": "hlasovy-asistent",
+   "category": "ai",
+   "cs": "Hlasový asistent s rozpoznáváním řeči a hlasem z ElevenLabs.",
+   "en": "A voice assistant with speech recognition and an ElevenLabs voice.",
+   "url": null,
+   "demo": false,
+   "status": null,
+   "stack": [
+    "Python",
+    "ElevenLabs",
+    "edge-tts",
+    "SpeechRecognition"
+   ],
+   "lines": 275,
+   "tests": false,
+   "updated": "2026-04-02",
+   "image": "https://vokudev.cz/projekty/shots/hlasovy-asistent.svg"
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+# Vojtěch "Voku" Kurinec
+
+> Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, vlastní hry, AI nástroje a servery na Raspberry Pi. 61 projektů, 350k+ řádků kódu.
+
+- [Portfolio](https://vokudev.cz/): kdo jsem, na čem dělám, zakázky, kontakt
+- [Archiv projektů](https://vokudev.cz/projekty/): všechny projekty s popisem a technologiemi
+- [Projekty jako JSON](https://vokudev.cz/projekty/projects.json): strojově čitelná data
+
+## Kontakt
+
+- E-mail: vojta.kurinec@gmail.com
+- GitHub: https://github.com/Voku199
+
+## Zakázky
+
+- [Respawn Lasergame ČB](https://lasergamecb.cz): Web a systém skutečné laser arény: rezervace, statistiky z Laserforce a tři úrovně správy. (Python, JavaScript, Flask, Resend, three.js, discord.py)
+- [ZŠ Chrášťany](https://vokudev.cz/projekty/#zs-chrastany): Návrh nového webu základní a mateřské školy, celý obsah v jednom datovém souboru. (Python, Flask)
+- [STARDOMS Lasergame](https://vokudev.cz/projekty/#stardoms-lasergame): Nový web a rezervace po hodinách pro arénu v Domažlicích, náhrada za starý WordPress. (Python, JavaScript, Flask, SQLite)
+- [Respawn: členská sekce](https://vokudev.cz/projekty/#respawn-clenska-sekce): Prototyp klientské zóny arény: profil hráče, historie her a žebříčky. (Python, Flask, PWA)
+
+## Weby a aplikace
+
+- [SANDIFF](https://lol.bakix.cz): Web LoL týmu kámošů z Písku: zeď plakátů, profily hráčů a ranky z Riot API. (Python, JavaScript, Flask, SQLite)
+- [LID](https://vokudev.cz/projekty/#lid): Aplikace školního parlamentu: nápady, tajné hlasování a veřejná nástěnka. (Python, Flask, SQLite, PWA)
+- [Kytara za 15 minut](https://vokudev.cz/projekty/#kytara-za-15-minut): Offline webovka, která učí hrát na kytaru po patnácti minutách denně. (TypeScript, Vite, Playwright)
+- [Halloween Jukebox](https://vokudev.cz/projekty/#halloween-jukebox): Hosté na párty přidávají písničky z mobilu a hraje to Spotify nebo YouTube přes RPi. (Python, JavaScript, Flask, yt-dlp, PWA)
+- [DumbAI](https://dumbai.bakix.cz): Hledač faktů nad českou Wikipedií a Wikidaty schválně bez AI, aby šel použít i ve škole. (Python, JavaScript, Flask, SQLite, PWA)
+- [Nagori Studio](https://vokudev.cz/projekty/#nagori-studio): Web indie studia a hry Sparks of Silt se scroll animacemi v čistém JavaScriptu. (Python, JavaScript, Flask)
+- [Knowix](https://knowix.bakix.cz): Studijní asistent jako PWA, který zná tvůj rozvrh a otázky posílá na víc AI modelů. (Python, JavaScript, Flask, Mistral, Gemini, APScheduler)
+- [Bakix](https://bakix.cz): AI studijní asistent nad Bakaláři s vlastním OAuth přihlášením a Premium přes Stripe. (Python, JavaScript, Flask, Gemini, Mistral, Stripe)
+- [8.B → 9.B](https://vokudev.cz/projekty/#8b-9b): Malý web s profily spolužáků na konec školního roku. (Python, JavaScript, Flask, three.js)
+- [Geoguessr](https://vokudev.cz/projekty/#geoguessr): Hádání míst na mapě pro víc hráčů naráz přes WebSockety. (Python, Socket.IO, Flask, SQLite)
+- [Přijímačky data](https://vokudev.cz/projekty/#prijimacky-data): Stahuje a třídí data o přijímacím řízení na střední školy. (Python, Flask, Mistral, BeautifulSoup)
+- [Lasergame (první verze)](https://vokudev.cz/projekty/#lasergame-prvni-verze): Původní systém arény: skóre, turnaje, Discord bot a ovládání Minecraft serveru na RPi. (Python, Flask, Mistral, SQLite)
+- [Lasergame Stats](https://vokudev.cz/projekty/#lasergame-stats): Stáhne moje statistiky z Laserforce a ukáže je v grafech s historií her. (Python, Flask, BeautifulSoup)
+- [Bakix Hackathon](https://vokudev.cz/projekty/#bakix-hackathon): Verze Bakixu postavená za jediný den na vibe-coding hackathonu 19. 5. 2026. (Python, JavaScript, Flask, Gemini, three.js, APScheduler)
+
+## Hry a grafika
+
+- [VR Lasergame](https://vr.bakix.cz): Deathmatch proti šesti botům na Questu 3, pohybuješ se chůzí na místě. (JavaScript, WebXR, three.js, Flask, SQLite)
+- [Mythicals](https://vokudev.cz/projekty/#mythicals): Minecraft plugin: osm mýtických zbraní, každá jen jednou na server, tři životy a tajný Death Note. (Java, Python, Paper, Gradle)
+- [FakeCraft](https://vokudev.cz/projekty/#fakecraft): Voxelová survival v prohlížeči, textury i hudbu generuje kód za běhu. (JavaScript, Socket.IO, Flask, three.js)
+- [mangaengine](https://vokudev.cz/projekty/#mangaengine): Offline renderer jednobitové manga kresby z JSON scén, s vlastním rasterizérem a rastry. (Python, NumPy, SciPy)
+- [Rychlá Kola Srdce](https://vokudev.cz/projekty/#rychla-kola-srdce): Pixel-art vizuální novela s volbami a body náklonnosti k postavám. (Python, Pygame, ffmpeg)
+- [nullstate](https://vokudev.cz/projekty/#nullstate): 2D pixel-art hackerská hra inspirovaná seriálem Mr. Robot. (Python, Pygame)
+- [Městečko Palermo](https://vokudev.cz/projekty/#mestecko-palermo): Hra na mafii proti AI botům, kteří spolu lžou a obviňují se. (JavaScript, Python, Socket.IO, Flask, three.js)
+- [Parcel](https://vokudev.cz/projekty/#parcel): Příběhová hra o rozvozu balíků vykreslovaná vlastním raycasterem. (Python, Pygame, NumPy, SciPy)
+- [Bunkr](https://vokudev.cz/projekty/#bunkr): Textové RPG po apokalypse: jeden hráč, AI společníci a oddělený AI vypravěč. (Python, JavaScript, Flask, Gemini, SQLite)
+- [Dustbound](https://vokudev.cz/projekty/#dustbound): Pixel-art příběhová hra v Pygame, chystaná zdarma na Steam. (Python, JavaScript, Pygame)
+- [Šachy s AI](https://vokudev.cz/projekty/#sachy-s-ai): Šachy v prohlížeči proti AI soupeři. (Python, Flask, Mistral)
+
+## AI
+
+- [JARVIS](https://vokudev.cz/projekty/#jarvis): Asistent v liště: napíšeš česky, co chceš, a on to v počítači udělá, i bez internetu. (Python, NumPy)
+- [AI Prezentace](https://vokudev.cz/projekty/#ai-prezentace): Prezentační engine: řeknu, co chci, a Claude to zapíše jako data do slidů. (JavaScript, Python)
+- [Discord Builder](https://vokudev.cz/projekty/#discord-builder): Bot, kterému napíšeš, jak má server vypadat, a Claude ho postaví přes tool use. (Python, discord.py, Claude API, Gemini, SQLite)
+- [VoiceShift](https://vokudev.cz/projekty/#voiceshift): Lokální převod hlasu buď rychle přes DSP, nebo kvalitně přes neurální model RVC. (Python, JavaScript, Flask, Praat, NumPy, SciPy)
+- [Flybrain Tetris](https://vokudev.cz/projekty/#flybrain-tetris): Skutečný connectome mozku octomilky se evolucí učí hrát Tetris. (Python, NumPy, SciPy, Matplotlib)
+- [LoLCoach](https://vokudev.cz/projekty/#lolcoach): AI kouč, který sleduje živou hru League of Legends a radí, co dělat dál. (Python, Tkinter)
+- [Anime engine pro LLM](https://vokudev.cz/projekty/#anime-engine-pro-llm): Animační engine, který řídí jazykový model a dostává zpátky obrázek i naměřená čísla. (Python, NumPy)
+- [Vlastní CLI agent](https://vokudev.cz/projekty/#vlastni-cli-agent): Kódovací agent v terminálu nad lokálními modely z Ollamy. (Python)
+- [Roblox MCP](https://vokudev.cz/projekty/#roblox-mcp): Stavění v Roblox Studiu přes MCP, které řídí levný model GLM místo Clauda. (Python, OpenAI API)
+- [OS Asistent](https://vokudev.cz/projekty/#os-asistent): Osobní AI asistent v terminálu s vlastní pamětí. (Python, Mistral, Rich)
+- [Hlasový asistent](https://vokudev.cz/projekty/#hlasovy-asistent): Hlasový asistent s rozpoznáváním řeči a hlasem z ElevenLabs. (Python, ElevenLabs, edge-tts, SpeechRecognition)
+
+## Nástroje
+
+- [PC Tuning](https://vokudev.cz/projekty/#pc-tuning): Cestovní režim a optimalizace notebooku ve stylu Applu přes PowerShell a C#. (PowerShell)
+- [liteclip](https://vokudev.cz/projekty/#liteclip): Replay buffer pro hry: F8 uloží posledních 30 vteřin a jedním klikem jde clip na Discord. (Python, JavaScript, ffmpeg, pywebview, WinAPI, pystray)
+- [Paprika](https://vokudev.cz/projekty/#paprika): Python knihovna na skládání hudby bez DAW: syntéza, efekty, mix a sampler. (Python, NumPy, SciPy)
+- [GitHub profil](https://vokudev.cz/projekty/#github-profil): Spočítá kód v monorepu a vyrobí z toho animovaná SVG na můj GitHub profil. (Python, SVG)
+- [FolderLock](https://vokudev.cz/projekty/#folderlock): Zamkne složku heslem se skutečným šifrováním AES-256-GCM, ne jen schováním. (Python, AES-256-GCM, Tkinter)
+- [Podcast Studio](https://vokudev.cz/projekty/#podcast-studio): OBS overlay, kde poskakuje nálepka toho, kdo zrovna mluví na Discordu. (Python, JavaScript, Flask, MediaPipe, NumPy)
+- [Trenér přijímaček](https://vokudev.cz/projekty/#trener-prijimacek): Každý den naservíruje 25 minut matiky nebo češtiny z testů CERMAT. (Python, JavaScript, Flask, Gemini, SQLite)
+- [Hangar](https://vokudev.cz/projekty/#hangar): Ovládací panel celého monorepa: spouští projekty, ukazuje logy a stav gitu. (Python, JavaScript, Flask)
+- [Trading 212 Monitor](https://vokudev.cz/projekty/#trading-212-monitor): Denní report portfolia a upozornění na velké pohyby, jen pro čtení. (Python, JavaScript, Flask, APScheduler, PWA, SQLite)
+- [PostureGuard](https://vokudev.cz/projekty/#postureguard): Přes webkameru hlídá, jak sedím, a když se hrbím, vyskočí červené okno. (Python, MediaPipe, Tkinter, OpenCV)
+- [Hack Sandbox](https://vokudev.cz/projekty/#hack-sandbox): Schválně děravá CTF aplikace na trénink SQL injection a XSS, běží jen lokálně. (Python, Flask, SQLite)
+- [Webly](https://vokudev.cz/projekty/#webly): Vlastní programovací jazyk pro web, kde routy, databáze i přihlášení jsou přímo v jazyce. (Python, SQLite)
+- [Music Visualizer](https://vokudev.cz/projekty/#music-visualizer): Vizualizér čehokoli, co zrovna hraje v počítači, i s názvem písničky ze Spotify. (Python, Pygame, NumPy, PyInstaller)
+- [Screen Time](https://vokudev.cz/projekty/#screen-time): Sleduje, co dělám na počítači, AI to roztřídí a každé pondělí přijde report. (Python, Flask, Resend, SQLite, WinAPI, Matplotlib)
+- [PWA Remote](https://vokudev.cz/projekty/#pwa-remote): Z mobilu se stane dálkový ovladač počítače. (Python, Socket.IO, Flask, PWA)
+- [Claude Usage](https://vokudev.cz/projekty/#claude-usage): PWA, která ukazuje, kolik tokenů spotřebuju v Claude Code. (JavaScript, Flask, Gemini)
+
+## Servery
+
+- [Auto-deploy](https://vokudev.cz/projekty/#auto-deploy): Webhook servery: git push ověří podpisem a nasadí web, ten nejnovější umí i rollback. (Shell, Python, Flask)
+- [MC Server Panel](https://vokudev.cz/projekty/#mc-server-panel): Webový panel na spouštění a správu Minecraft serveru. (HTML, Flask)
+- [Bakix Monitor](https://vokudev.cz/projekty/#bakix-monitor): Discord bot hlídá Raspberry Pi, na kterém běží bakix.cz, a každé ráno pošle report. (Python, discord.py)
+- [Server Dashboard](https://vokudev.cz/projekty/#server-dashboard): Správa služeb, skener portů a ukládání odkazů pro můj Linux server. (Python, Flask)
+- [eeebox](https://vokudev.cz/projekty/#eeebox): Dashboard vzdáleného Linux boxu: monitoring, prohlížeč NAS a napojení na Odoo. (Python, Flask)
