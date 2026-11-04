@@ -3,7 +3,7 @@
 | Skript | Co dělá |
 |---|---|
 | `paint.py` | namaluje obrazy a ilustrace do `img/` |
-| `build_projects.py` | postaví rozcestník `index.html` a archiv `projekty/` přímo z monorepa + upraví počty na `o-mne/` a `sitemap.xml` |
+| `build_projects.py` | postaví úvodní stránku `index.html` a archiv `projekty/` přímo z monorepa + upraví počty na `o-mne/` a `sitemap.xml` |
 | `shoot.py` | vyfotí screenshoty živých webů do `tools/shots/` (Playwright) |
 
 ## Archiv projektů (`/projekty/`)
@@ -28,9 +28,9 @@ napojené přes `@id` na `Person` z hlavní stránky).
 - Nová složka v monorepu se na web **nedostane sama**, build ji jen vypíše jako „nezařazenou“. Soukromé složky, jejichž jména nemají být ani ve veřejném repu, patří do `tools/ignore.local.txt` (v `.gitignore`).
 - `projekty/index.html` je generovaný, upravuj `projekty.template.html`.
 
-## Rozcestník (`/`) a stránka O mně (`/o-mne/`)
+## Úvodní stránka (`/`) a stránka O mně (`/o-mne/`)
 
-`index.html` je generovaný z `rozcestnik.template.html`, needituj ho ručně. Karty na něm určuje pole `featured` v `projects_data.py` (pořadí), věta `try_cs` a `try_en` říká, co tam návštěvník může udělat, a `note_cs` a `note_en` proč to případně nejde hned. Novinky jsou naposledy změněné projekty. `o-mne/index.html` je dřívější portfolio a píše se ručně, build v něm mění jen počty.
+`index.html` je generovaný z `rozcestnik.template.html`, needituj ho ručně. Texty o mně se píšou přímo v šabloně (CS v HTML i v `T.cs`, EN v `T.en`). Karty k vyzkoušení určuje pole `featured` v `projects_data.py` (pořadí), věta `try_cs` a `try_en` říká, co tam návštěvník může udělat, a `note_cs` a `note_en` proč to případně nejde hned. `o-mne/index.html` je dřívější portfolio a píše se ručně, build v něm mění jen počty.
 
 ## Doména vokudev.cz
 

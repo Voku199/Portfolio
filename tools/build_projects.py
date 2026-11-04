@@ -1,4 +1,4 @@
-"""Postaví rozcestník (index.html) a archiv projektů (projekty/index.html) přímo z monorepa.
+"""Postaví úvodní stránku (index.html) a archiv projektů (projekty/index.html) přímo z monorepa.
 
     python tools/build_projects.py                 # monorepo = složka nad PORTOFOLIO/
     python tools/build_projects.py --root X        # jiná složka s projekty
@@ -320,29 +320,22 @@ def featured_html(i, p):
 </a>"""
 
 
-def news_html(p, cats):
-    d = datetime.fromtimestamp(p["updated"])
-    return f"""
-      <li><a href="projekty/#{p['slug']}"><time datetime="{d:%Y-%m-%d}" data-day="{d:%Y-%m-%d}">{d.day}. {d.month}. {d.year}</time><span class="news__name">{escape(p['name'])}</span><span class="news__cat" data-cat-label="{p['cat']}">{escape(cats[p['cat']][0])}</span></a></li>"""
-
-
-def build_home(items, cats, total):
-    """Rozcestník: vybrané projekty k vyzkoušení (pole featured) a naposledy změněné projekty."""
+def build_home(items, total):
+    """Úvodní stránka: kdo jsem (ručně v šabloně) a vybrané projekty k vyzkoušení (pole featured)."""
     featured = sorted((p for p in items if p.get("featured")), key=lambda p: p["featured"])
     for p in featured:
         if not (p.get("url") and p.get("try_cs") and p.get("try_en")):
-            raise SystemExit(f"{p['slug']}: projekt na rozcestníku potřebuje url, try_cs a try_en")
+            raise SystemExit(f"{p['slug']}: projekt na úvodní stránce potřebuje url, try_cs a try_en")
     if not featured:
         raise SystemExit("v projects_data.py není žádný projekt s polem featured")
     n = len(featured)
-    word = "projekt k vyzkoušení" if n == 1 else "projekty k vyzkoušení" if n < 5 else "projektů k vyzkoušení"
     home, about, archive = f"{D.SITE_URL}/", f"{D.SITE_URL}/o-mne/", f"{D.SITE_URL}/projekty/"
     jsonld = {"@context": "https://schema.org", "@graph": [
         {"@type": "WebSite", "@id": f"{home}#web", "url": home, "name": "Voku", "inLanguage": ["cs", "en"],
          "publisher": {"@id": f"{home}#voku"}},
         {"@type": "Person", "@id": f"{home}#voku", "name": "Vojtěch Kurinec", "alternateName": "Voku", "url": about},
         {"@type": "WebPage", "@id": f"{home}#page", "url": home, "inLanguage": "cs",
-         "name": "Vojtěch \"Voku\" Kurinec | Projekty k vyzkoušení",
+         "name": "Vojtěch \"Voku\" Kurinec | Mladý vývojář z jižních Čech",
          "isPartOf": {"@id": f"{home}#web"}, "about": {"@id": f"{home}#voku"},
          "primaryImageOfPage": f"{home}og-image.png",
          "hasPart": [{"@type": "ProfilePage", "@id": f"{about}#page", "url": about},
@@ -351,19 +344,14 @@ def build_home(items, cats, total):
              {"@type": "ListItem", "position": i + 1, "url": p["url"], "name": p["name"]}
              for i, p in enumerate(featured)]}},
     ]}
-    i18n = {"cats": cats,
-            "try": {p["slug"]: [p["try_cs"], p["try_en"]] for p in featured},
+    i18n = {"try": {p["slug"]: [p["try_cs"], p["try_en"]] for p in featured},
             "note": {p["slug"]: [p["note_cs"], p["note_en"]] for p in featured if p.get("note_cs")}}
     page = HOME_TEMPLATE.read_text(encoding="utf-8")
     for key, val in {
         "SITE_URL": D.SITE_URL,
         "COUNT": str(len(items)),
         "LINES": round_k(total),
-        "FEATURED_COUNT": str(n),
-        "FEATURED_WORD_JS": json.dumps(word, ensure_ascii=False),
-        "FEATURED_WORD": word,
         "FEATURED": "".join(featured_html(i, p) for i, p in enumerate(featured)),
-        "NEWS": "".join(news_html(p, cats) for p in items[:D.NEWS_COUNT]),
         "I18N": json.dumps(i18n, ensure_ascii=False).replace("</", "<\\/"),
         "JSONLD": json.dumps(jsonld, ensure_ascii=False, indent=1),
     }.items():
@@ -529,13 +517,13 @@ def publish(items, total, langs, root, check, scanned):
     (OUT / "projects.json").write_text(json.dumps({"generated": today.isoformat(), "projects": public},
                                                   ensure_ascii=False, indent=1), encoding="utf-8", newline="")
 
-    # čísla na stránce O mně a rozcestník (soubor se mění jen když se opravdu změní -> poctivé lastmod)
+    # čísla na stránce O mně a úvodní stránka (soubor se mění jen když se opravdu změní -> poctivé lastmod)
     old = ABOUT_FILE.read_bytes().decode("utf-8")
     html = re.sub(r'(data-auto="projects">)[^<]*', rf"\g<1>{len(items) // 10 * 10}+", old)
     html = re.sub(r'(data-auto="projects-n">)[^<]*', rf"\g<1>{len(items)}", html)
     write_if_changed(ABOUT_FILE, html)
     about_mod = date.fromtimestamp(ABOUT_FILE.stat().st_mtime).isoformat()
-    featured = build_home(items, cats, total)
+    featured = build_home(items, total)
     home_mod = date.fromtimestamp((SITE / "index.html").stat().st_mtime).isoformat()
 
     # sitemap: Google bere jen loc + lastmod (changefreq/priority ignoruje), obrázky pomáhají Google Images
@@ -565,7 +553,7 @@ def publish(items, total, langs, root, check, scanned):
     lines = [f"# Vojtěch \"Voku\" Kurinec", "",
              f"> Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, "
              f"vlastní hry, AI nástroje a servery na Raspberry Pi. {len(items)} projektů, {round_k(total)} řádků kódu.", "",
-             f"- [Rozcestník]({home}): projekty, které si můžeš hned vyzkoušet: "
+             f"- [Úvod]({home}): kdo jsem a projekty, které si můžeš hned vyzkoušet: "
              + ", ".join(p["name"] for p in featured),
              f"- [O mně]({about}): kdo jsem, na čem dělám, zakázky, technologie, kontakt",
              f"- [Archiv projektů]({page_url}): všechny projekty s popisem a technologiemi",

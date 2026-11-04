@@ -36,7 +36,7 @@
 {{JSONLD}}
 </script>
 <style>
-/* Stejný papír, inkoust a terakota jako rozcestník (../index.html) a o-mne/. */
+/* Stejný papír, inkoust a terakota jako úvodní stránka (../index.html) a o-mne/. */
 :root {
   --bg: #F0EEE6; --paper: #FAF9F5; --sand: #E8E4D6;
   --ink: #141413; --muted: #5E5D59; --faint: #8A8880; --hair: #CFCBBE;
@@ -256,7 +256,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
 <header class="nav">
   <div class="nav__inner wrap">
     <a class="nav__logo" href="../">Voku <small data-t="logoSub">Archiv</small></a>
-    <a class="nav__back" href="../"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-t="back">Zpět na rozcestník</span></a>
+    <a class="nav__back" href="../"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-t="back">Zpět na úvod</span></a>
     <div class="lang-switch" role="group" aria-label="Language / Jazyk">
       <button type="button" class="active" data-lang="cs" aria-pressed="true" title="Česky">CS</button>
       <button type="button" data-lang="en" aria-pressed="false" title="English">EN</button>
@@ -363,7 +363,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
   var DATA = JSON.parse(document.getElementById('i18n').textContent);
   var T = {
     cs: {
-      skip: 'Přeskočit na projekty', logoSub: 'Archiv', back: 'Zpět na rozcestník', mastArchive: 'Archiv projektů', mastState: 'Stav k',
+      skip: 'Přeskočit na projekty', logoSub: 'Archiv', back: 'Zpět na úvod', mastArchive: 'Archiv projektů', mastState: 'Stav k',
       kicker: 'projektů z jednoho monorepa', h1: 'Všechno, co jsem <em>kdy postavil</em>.',
       lead: 'Na hlavní stránce je jen pár vybraných věcí. Tady je <strong>všechno</strong>: zakázky, hry, AI pokusy i malé nástroje, které mi zjednodušují den. Stránku staví skript <strong>přímo z mého kódu</strong>, takže technologie, velikost a datum poslední změny jsou vždycky pravdivé.',
       figProjects: 'projektů', figLines: 'řádků kódu', figLangs: 'jazyků', figLive: 'běží naostro',
