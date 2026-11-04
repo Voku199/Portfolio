@@ -3,14 +3,14 @@
 | Skript | Co dělá |
 |---|---|
 | `paint.py` | namaluje obrazy a ilustrace do `img/` |
-| `build_projects.py` | postaví úvodní stránku `index.html` a archiv `projekty/` přímo z monorepa + upraví počty na `o-mne/` a `sitemap.xml` |
+| `build_projects.py` | postaví `index.html`, `jak-funguju/` a appku `projekty/` ze šablon a monorepa + `sitemap.xml` a `llms.txt` |
 | `shoot.py` | vyfotí screenshoty živých webů do `tools/shots/` (Playwright) |
 
-## Archiv projektů (`/projekty/`)
+## Projekty (`/projekty/`)
 
 ```bash
 python tools/shoot.py            # jen když se změnily živé weby
-python tools/build_projects.py   # vždycky před pushem
+python tools/build_projects.py   # vždycky před pushem, i po změně v assets/ (mění otisk ?v=)
 python tools/shoot.py --og       # po buildu: náhled pro sdílení projekty/og.png + apple-touch-icon.png
 python tools/build_projects.py --check   # suchý běh: co se najde, jaké technologie
 python tools/build_projects.py --from-json   # bez monorepa: čísla z projects.json, texty a odkazy z projects_data.py
@@ -19,18 +19,30 @@ python tools/build_projects.py --from-json   # bez monorepa: čísla z projects.
 Build se zastaví, když v monorepu najde míň než 80 % projektů, protože by jinak ořezal archiv a smazal obrázky. Na počítači bez celého monorepa použij `--from-json`.
 
 Build zároveň přegeneruje **SEO soubory**: `sitemap.xml` (s obrázky, `lastmod` hlavní stránky jen když se změnila),
-`llms.txt` (přehled pro AI vyhledávače) a JSON-LD archivu (`CollectionPage` + `BreadcrumbList` + `ItemList`,
-napojené přes `@id` na `Person` z hlavní stránky).
+`llms.txt` (přehled pro AI vyhledávače) a JSON-LD stránek (`Person` na úvodní stránce, ostatní se na něj napojují přes `@id`).
 
 - **Ručně** v `projects_data.py`: který projekt se ukáže, název, kategorie, jedna věta CS + EN, odkaz, jestli je to bezpečné živé demo.
 - **Samo**: technologie (z `requirements.txt`, `package.json`, `build.gradle` a podpisů v kódu), počet řádků, datum poslední změny, stav „Aktivní“ (změna za posledních 30 dní).
 - **Obrázek**: `tools/shots/<slug>.png` → pole `shot` → namalovaná obálka.
 - Nová složka v monorepu se na web **nedostane sama**, build ji jen vypíše jako „nezařazenou“. Soukromé složky, jejichž jména nemají být ani ve veřejném repu, patří do `tools/ignore.local.txt` (v `.gitignore`).
-- `projekty/index.html` je generovaný, upravuj `projekty.template.html`.
+- `projekty/index.html` je generovaný, upravuj `projekty.template.html`, `assets/projekty.css` a `assets/projekty.js`.
 
-## Úvodní stránka (`/`) a stránka O mně (`/o-mne/`)
+## Úvodní stránka (`/`) a Jak funguju (`/jak-funguju/`)
 
-`index.html` je generovaný z `rozcestnik.template.html`, needituj ho ručně. Texty o mně se píšou přímo v šabloně (CS v HTML i v `T.cs`, EN v `T.en`). Karty k vyzkoušení určuje pole `featured` v `projects_data.py` (pořadí), věta `try_cs` a `try_en` říká, co tam návštěvník může udělat, a `note_cs` a `note_en` proč to případně nejde hned. `o-mne/index.html` je dřívější portfolio a píše se ručně, build v něm mění jen počty.
+Obě se generují, takže needituj `index.html` ani `jak-funguju/index.html`, ale `tools/index.template.html` a `tools/jak-funguju.template.html`. Česky se píše přímo v HTML, anglicky v bloku `<script id="i18n">` dole v šabloně (stejný klíč jako `data-t`). Karty k vyzkoušení určuje pole `featured` v `projects_data.py` (pořadí), věta `try_cs` a `try_en` říká, co tam návštěvník může udělat, a `note_cs` a `note_en` proč to případně nejde hned. Odkaz `projekty/#slug` na neexistující projekt build zastaví.
+
+`o-mne/index.html` je jen přesměrování, aby staré odkazy dál fungovaly.
+
+## Vzhled
+
+| Soubor | Co v něm je |
+|---|---|
+| `assets/site.css` | barvy (světlý i tmavý režim jako tokeny na `:root`), typografie, sekce |
+| `assets/site.js` | tmavý režim, jazyk, odkrývání, kroky na `/jak-funguju/` |
+| `assets/ascii.js` | živý ASCII obraz: scéna, palety pro svítání a noc, postupné dokreslování (`stage` 0 až 7) |
+| `assets/projekty.*` | appka s projekty |
+
+Tmavý režim: uložená volba, jinak nastavení systému, jinak denní doba (od 20 do 6 tmavě).
 
 ## Doména vokudev.cz
 

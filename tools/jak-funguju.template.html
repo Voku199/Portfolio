@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!-- VYGENEROVÁNO: tools/build_projects.py z tools/jak-funguju.template.html. Needituj ručně, přepíše se. -->
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jak funguju, když dostanu zakázku | Vojtěch "Voku" Kurinec</title>
+<meta name="description" content="Co přesně udělám, když mi napíšeš se zakázkou: od prvních vět přes zadání, návrh a stavbu až po nasazení a provoz. Krok po kroku, se skutečnými příklady.">
+<meta name="author" content="Vojtěch Kurinec">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#F0EEE6">
+<link rel="canonical" href="{{SITE_URL}}/jak-funguju/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{SITE_URL}}/jak-funguju/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Voku">
+<meta property="og:title" content="Jak funguju, když dostanu zakázku | Voku">
+<meta property="og:description" content="Od prvních vět přes zadání, návrh a stavbu až po nasazení a provoz. Krok po kroku, se skutečnými příklady.">
+<meta property="og:image" content="{{SITE_URL}}/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jak funguju, když dostanu zakázku | Voku">
+<meta name="twitter:description" content="Od prvních vět přes zadání, návrh a stavbu až po nasazení a provoz.">
+<meta name="twitter:image" content="{{SITE_URL}}/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+{{HEAD}}
+<script type="application/ld+json">
+{{JSONLD}}
+</script>
+</head>
+<body>
+<a class="skip" href="#postup" data-t="skip">Přeskočit na obsah</a>
+{{NAV}}
+
+<main id="main" class="wrap wrap--ruled">
+
+<section class="intro">
+  <div>
+    <p class="kicker"><b>{{COUNT}}</b><span data-t="kicker">projektů a tři zakázky za mnou</span></p>
+    <h1 data-t="h1">Jak funguju, když dostanu <em>zakázku</em>.</h1>
+  </div>
+  <p class="lead" data-t="lead">Vypadá to docela podobně jako malování. Nejdřív skica, pak barvy, pak detaily a nakonec to musí žít samo. Obraz tady vedle se <strong>dokresluje stejně jako zakázka</strong>, tak scrolluj a uvidíš.</p>
+</section>
+
+<section class="proc" id="postup" aria-label="Postup zakázky" data-t-aria="procLabel">
+  <div class="proc__art">
+    <canvas class="proc__canvas" id="proc-canvas" role="img" aria-label="ASCII obraz hory Fuji, který se s každým krokem dokresluje" data-t-aria="procAlt"></canvas>
+    <p class="proc__state" aria-hidden="true"><span class="proc__bar" id="proc-bar">[#------]</span><span id="proc-num">1/7</span><span class="proc__name" id="proc-name"></span></p>
+  </div>
+  <ol class="steps">
+    <li class="step" data-stage="1">
+      <span class="step__state" data-t="s1state">obrys</span>
+      <span class="step__n" data-t="s1n">Krok 1</span>
+      <h2 data-t="s1h">Napíšeš mi.</h2>
+      <p class="step__text" data-t="s1p">Stačí pár vět, klidně bez technických slov. Já se doptám na to, co mi chybí: co to má dělat, kdo to bude používat a co teď nefunguje. Tohle je ten obrys, ještě nic nekóduju.</p>
+      <p class="step__eg" data-t="s1e"><b>Ze skutečnosti</b><a href="../projekty/#stardoms-lasergame">STARDOMS Lasergame</a> v Domažlicích měli starý web na WordPressu a potřebovali rezervace po hodinách.</p>
+    </li>
+    <li class="step" data-stage="2">
+      <span class="step__state" data-t="s2state">obloha a slunce</span>
+      <span class="step__n" data-t="s2n">Krok 2</span>
+      <h2 data-t="s2h">Sepíšu zadání.</h2>
+      <p class="step__text" data-t="s2p">Z konzultace udělám jasný seznam, co to bude umět a co zatím ne, tak abysme oba věděli, o čem se bavíme, ještě než napíšu první řádek. Když se mi na nápadu něco nezdá, řeknu to rovnou.</p>
+      <p class="step__eg" data-t="s2e"><b>Proč to dělám</b>U <a href="../projekty/#respawn-lasergame-cb">Respawnu</a> jsem se naučil, že dotáhnout zakázku od zadání přes konzultace po předání je víc práce než samotný kód.</p>
+    </li>
+    <li class="step" data-stage="3">
+      <span class="step__state" data-t="s3state">skica tužkou</span>
+      <span class="step__n" data-t="s3n">Krok 3</span>
+      <h2 data-t="s3h">Ukážu návrh.</h2>
+      <p class="step__text" data-t="s3p">Dřív než se to celé postaví, uvidíš, jak to bude vypadat a jak se to bude ovládat. Změnit skicu je strašně levnější než předělávat hotový systém.</p>
+      <p class="step__eg" data-t="s3e"><b>Ze skutečnosti</b>Pro <a href="../projekty/#zs-chrastany">ZŠ Chrášťany</a> vznikl návrh nového webu, kde je celý obsah v jednom datovém souboru.</p>
+    </li>
+    <li class="step" data-stage="3.95">
+      <span class="step__state" data-t="s4state">první barvy</span>
+      <span class="step__n" data-t="s4n">Krok 4</span>
+      <h2 data-t="s4h">Stavím.</h2>
+      <p class="step__text" data-t="s4p">AI píše kód, já vedu směr, architekturu a všechno kontroluju. Klidně ať to napíše, ale musím tomu rozumět, protože za výsledek odpovídám já. Nejčastěji je to Python a Flask, ale nebojím se sáhnout po čemkoli, co problém vyřeší.</p>
+      <p class="step__eg" data-t="s4e"><b>Ze skutečnosti</b><a href="../projekty/#respawn-lasergame-cb">Respawn Lasergame ČB</a>: rezervace, statistiky z Laserforce a tři úrovně správy.</p>
+    </li>
+    <li class="step" data-stage="5">
+      <span class="step__state" data-t="s5state">torii, nosná konstrukce</span>
+      <span class="step__n" data-t="s5n">Krok 5</span>
+      <h2 data-t="s5h">Zkouším to rozbít.</h2>
+      <p class="step__text" data-t="s5p">Ošetřím data, přihlašování a slabá místa. Pak to projdu, najdu bugy, opravím a zopakuju, a atd… dokud to nedrží.</p>
+      <p class="step__eg" data-t="s5e"><b>Čím se na to připravuju</b><a href="../projekty/#hack-sandbox">Hack Sandbox</a> je schválně děravá aplikace, na které si trénuju SQL injection a XSS, tak abych věděl, jak se to dělá z druhé strany.</p>
+    </li>
+    <li class="step" data-stage="6.2">
+      <span class="step__state" data-t="s6state">květy, poslední tahy</span>
+      <span class="step__n" data-t="s6n">Krok 6</span>
+      <h2 data-t="s6h">Nasadím a předám.</h2>
+      <p class="step__text" data-t="s6p">Dostanu to z localhostu k reálným lidem, ukážu ti, jak se to ovládá, a předám to. Až tady se pozná, jestli to celé fungovalo.</p>
+      <p class="step__eg" data-t="s6e"><b>Čím to dělám</b><a href="../projekty/#auto-deploy">Auto-deploy</a>: po git pushi server ověří podpis a sám web nasadí, ten nejnovější umí aj i rollback.</p>
+    </li>
+    <li class="step" data-stage="7">
+      <span class="step__state" data-t="s7state">a žije to</span>
+      <span class="step__n" data-t="s7n">Krok 7</span>
+      <h2 data-t="s7h">A pak to žije.</h2>
+      <p class="step__text" data-t="s7p">Hotový web není konec. Respawn běží naostro a pořád ho rozvíjím. Když se něco rozbije, chci to vědět dřív než ty, a kdyby se stalo to nejhorší, jsou tu zálohy.</p>
+      <p class="step__eg" data-t="s7e"><b>Čím to hlídám</b><a href="../projekty/#bakix-monitor">Bakix Monitor</a> je Discord bot, který hlídá můj server a každé ráno pošle report. Zálohy mi běží každý den a šifrovaně.</p>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="kicker"><b>*</b><span data-t="buildKicker">Co dělám</span></p>
+    <h2 class="block__title" data-t="buildH">Co ti můžu postavit.</h2>
+  </div>
+  <div class="cells build" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div><h3 data-t="b1t">Weby a rezervace</h3><p data-t="b1d">Web, který umí víc než vypadat. Třeba <a href="../projekty/#respawn-lasergame-cb">Respawn</a> a <a href="../projekty/#stardoms-lasergame">STARDOMS</a>.</p></div>
+    <div><h3 data-t="b2t">Pro školy a spolky</h3><p data-t="b2d">Přehledné weby a aplikace jako návrh pro <a href="../projekty/#zs-chrastany">ZŠ Chrášťany</a> nebo <a href="../projekty/#lid">LID</a> pro školní parlament.</p></div>
+    <div><h3 data-t="b3t">Správa a přehledy</h3><p data-t="b3d">Administrace s více úrovněmi, statistiky a dashboardy, jako <a href="../projekty/#server-dashboard">Server Dashboard</a>.</p></div>
+    <div><h3 data-t="b4t">Boti a automatizace</h3><p data-t="b4d">Věci, které dělají práci za tebe, třeba <a href="../projekty/#discord-builder">Discord Builder</a> nebo <a href="../projekty/#screen-time">Screen Time</a>.</p></div>
+    <div><h3 data-t="b5t">AI do aplikací</h3><p data-t="b5d">Tam, kde to dává smysl, jako <a href="../projekty/#knowix">Knowix</a> nad zápisy z hodin. A <a href="../projekty/#dumbai">DumbAI</a> schválně bez AI, když je to lepší.</p></div>
+    <div><h3 data-t="b6t">Něco jiného?</h3><p data-t="b6d">Klidně se zeptej. Nejlíp se učím na tom, co jsem ještě nedělal, a <a href="../projekty/">{{COUNT}} projektů</a> ukazuje, že mě to fakt baví.</p></div>
+  </div>
+</section>
+
+<section class="block block--open">
+  <div class="block__head">
+    <p class="kicker"><b>?</b><span data-t="ageKicker">Otázka, kterou slyším</span></p>
+    <h2 class="block__title" data-t="ageH">Je ti 16. Zvládneš to?</h2>
+  </div>
+  <div class="block__body">
+    <div class="prose" data-t="ageText">
+      <p>Nejlepší odpověď je <a href="https://lasergamecb.cz" target="_blank" rel="noopener">Respawn</a>, web a systém pro opravdovou laser arénu v Českých Budějovicích. A díky téhle práci se mi ozvali další.</p>
+      <p>Nejsem nejlepší vývojář na světě a nebudu to tvrdit. Ale když něco nevím, tak to řeknu a naučím se to. A AI používám tak, abych tomu pořád rozuměl, ne aby to za mě někdo vyřešil a já jen doufal.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ask" id="napis">
+  <div>
+    <p class="kicker"><b>~</b><span data-t="askKicker">Začneme?</span></p>
+    <h2 data-t="askH">Máš něco takového v hlavě?</h2>
+    <p class="lead" data-t="askLead">Napiš mi. Pomůže, když tam bude:</p>
+    <ul class="ask__list">
+      <li data-t="ask1">co to má dělat</li>
+      <li data-t="ask2">pro koho to je</li>
+      <li data-t="ask3">do kdy to potřebuješ</li>
+      <li data-t="ask4">web, který se ti líbí, jestli nějaký máš</li>
+    </ul>
+  </div>
+  <div class="ask__go">
+    <a class="btn" href="mailto:vojta.kurinec@gmail.com?subject=Zak%C3%A1zka&amp;body=Ahoj%20Voku%2C%0A%0ACo%20to%20m%C3%A1%20d%C4%9Blat%3A%20%0APro%20koho%20to%20je%3A%20%0ADo%20kdy%20to%20pot%C5%99ebuju%3A%20%0AWeb%2C%20kter%C3%BD%20se%20mi%20l%C3%ADb%C3%AD%3A%20%0A" data-t-href="askMail"><span data-t="askBtn">Napsat e-mail</span> <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    <small>vojta.kurinec@gmail.com</small>
+    <a class="link" href="../projekty/"><span data-t="askMore">Nejdřív se podívat na projekty</span></a>
+  </div>
+</section>
+
+</main>
+
+{{FOOTER}}
+
+<script id="i18n" type="application/json">{
+  "en": {
+    "title": "How I work when I get a job | Vojtěch \"Voku\" Kurinec",
+    "kicker": "projects and three client jobs behind me",
+    "h1": "How I work when I get a <em>job</em>.",
+    "lead": "It’s quite a lot like painting. First a sketch, then colours, then details, and in the end it has to live on its own. The painting next to this <strong>gets finished the same way a job does</strong>, so scroll and see.",
+    "procLabel": "The steps of a job", "procAlt": "An ASCII painting of Mount Fuji that gets more complete with every step",
+    "s1state": "outline", "s1n": "Step 1", "s1h": "You write to me.",
+    "s1p": "A few sentences are enough, no technical words needed. I’ll ask about what I’m missing: what it should do, who will use it and what doesn’t work right now. This is the outline, I’m not coding anything yet.",
+    "s1e": "<b>From real life</b><a href=\"../projekty/#stardoms-lasergame\">STARDOMS Lasergame</a> in Domažlice had an old WordPress site and needed hourly bookings.",
+    "s2state": "sky and sun", "s2n": "Step 2", "s2h": "I write up the brief.",
+    "s2p": "I turn the conversation into a clear list of what it will do and what it won’t for now, so we both know what we’re talking about before I write the first line. If something about the idea seems off to me, I’ll say so straight away.",
+    "s2e": "<b>Why I do it</b><a href=\"../projekty/#respawn-lasergame-cb\">Respawn</a> taught me that seeing a job through from brief and consultations to handover is more work than the code itself.",
+    "s3state": "pencil sketch", "s3n": "Step 3", "s3h": "I show you a design.",
+    "s3p": "Before the whole thing gets built, you’ll see how it will look and how it will work. Changing a sketch is so much cheaper than reworking a finished system.",
+    "s3e": "<b>From real life</b>For <a href=\"../projekty/#zs-chrastany\">ZŠ Chrášťany</a> I made a design for a new school website with all the content in one data file.",
+    "s4state": "first colours", "s4n": "Step 4", "s4h": "I build.",
+    "s4p": "AI writes code, I set the direction and architecture and check everything. Sure, let it write it, but I have to understand it, because the result is on me. Most often it’s Python and Flask, but I’ll reach for whatever solves the problem.",
+    "s4e": "<b>From real life</b><a href=\"../projekty/#respawn-lasergame-cb\">Respawn Lasergame ČB</a>: bookings, Laserforce stats and three admin tiers.",
+    "s5state": "torii, the structure", "s5n": "Step 5", "s5h": "I try to break it.",
+    "s5p": "I handle data, logins and weak spots. Then I go through it, find bugs, fix them and repeat until it holds.",
+    "s5e": "<b>How I prepare for it</b><a href=\"../projekty/#hack-sandbox\">Hack Sandbox</a> is a deliberately leaky app where I practise SQL injection and XSS, so I know how it’s done from the other side.",
+    "s6state": "blossoms, last strokes", "s6n": "Step 6", "s6h": "I deploy and hand over.",
+    "s6p": "I get it from localhost to real people, show you how to use it and hand it over. This is where you find out whether it all worked.",
+    "s6e": "<b>How I do it</b><a href=\"../projekty/#auto-deploy\">Auto-deploy</a>: after a git push the server checks the signature and deploys the site itself, and the newest one can even roll back.",
+    "s7state": "and it’s alive", "s7n": "Step 7", "s7h": "And then it lives.",
+    "s7p": "A finished site isn’t the end. Respawn runs in production and I keep developing it. If something breaks, I want to know before you do, and if the worst happens, there are backups.",
+    "s7e": "<b>How I watch it</b><a href=\"../projekty/#bakix-monitor\">Bakix Monitor</a> is a Discord bot that watches my server and sends a report every morning. My backups run daily and encrypted.",
+    "buildKicker": "What I do", "buildH": "What I can build for you.",
+    "b1t": "Websites and bookings", "b1d": "A site that does more than look nice. Like <a href=\"../projekty/#respawn-lasergame-cb\">Respawn</a> and <a href=\"../projekty/#stardoms-lasergame\">STARDOMS</a>.",
+    "b2t": "For schools and clubs", "b2d": "Clear sites and apps like the design for <a href=\"../projekty/#zs-chrastany\">ZŠ Chrášťany</a> or <a href=\"../projekty/#lid\">LID</a> for a school parliament.",
+    "b3t": "Admin and overviews", "b3d": "Multi-tier admin, stats and dashboards, like <a href=\"../projekty/#server-dashboard\">Server Dashboard</a>.",
+    "b4t": "Bots and automation", "b4d": "Things that do the work for you, like <a href=\"../projekty/#discord-builder\">Discord Builder</a> or <a href=\"../projekty/#screen-time\">Screen Time</a>.",
+    "b5t": "AI in apps", "b5d": "Where it makes sense, like <a href=\"../projekty/#knowix\">Knowix</a> on top of lesson notes. And <a href=\"../projekty/#dumbai\">DumbAI</a> deliberately without AI, when that’s better.",
+    "b6t": "Something else?", "b6d": "Just ask. I learn best on what I haven’t done yet, and <a href=\"../projekty/\">{{COUNT}} projects</a> show I really enjoy it.",
+    "ageKicker": "A question I hear", "ageH": "You’re 16. Can you handle it?",
+    "ageText": "<p>The best answer is <a href=\"https://lasergamecb.cz\" target=\"_blank\" rel=\"noopener\">Respawn</a>, the site and system for a real laser arena in České Budějovice. And that work is why others got in touch.</p><p>I’m not the best developer in the world and I won’t claim to be. But when I don’t know something, I say so and learn it. And I use AI in a way that keeps me understanding the thing, not so someone solves it for me and I just hope.</p>",
+    "askKicker": "Shall we start?", "askH": "Got something like this in mind?", "askLead": "Write to me. It helps if it includes:",
+    "ask1": "what it should do", "ask2": "who it’s for", "ask3": "when you need it by", "ask4": "a site you like, if you have one",
+    "askBtn": "Send an e-mail", "askMore": "Look at the projects first",
+    "askMail": "mailto:vojta.kurinec@gmail.com?subject=Project&body=Hi%20Voku%2C%0A%0AWhat%20it%20should%20do%3A%20%0AWho%20it%27s%20for%3A%20%0AWhen%20I%20need%20it%20by%3A%20%0AA%20site%20I%20like%3A%20%0A"
+  }
+}</script>
+<script src="../assets/ascii.js?v={{V}}"></script>
+<script src="../assets/site.js?v={{V}}"></script>
+</body>
+</html>

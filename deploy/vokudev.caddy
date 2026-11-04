@@ -19,10 +19,10 @@ vokudev.cz {
         Referrer-Policy "strict-origin-when-cross-origin"
         -Server
     }
-    # obrázky a modely se mění zřídka, HTML se kontroluje pokaždé
-    @assets path *.webp *.png *.jpg *.svg *.glb *.ico
+    # obrázky a modely se mění zřídka, CSS a JS mají v adrese otisk (?v=), HTML se kontroluje pokaždé
+    @assets path *.webp *.png *.jpg *.svg *.glb *.ico *.css *.js
     header @assets Cache-Control "public, max-age=604800"
-    @pages path / /*.html /o-mne/ /projekty/ /*.xml /*.txt /*.json
+    @pages path / /*.html /o-mne/ /jak-funguju/ /projekty/ /*.xml /*.txt /*.json
     header @pages Cache-Control "no-cache"
 
     file_server
