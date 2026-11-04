@@ -1,0 +1,5 @@
+# SANDIFF. lol.bakix.cz zůstává, je natištěná na tričku.
+lol.vokudev.cz, lol.bakix.cz {
+    import projekt
+    reverse_proxy 127.0.0.1:9980
+}

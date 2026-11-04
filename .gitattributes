@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+# Skripty a konfigurace pro RPi: CRLF by je na Linuxu rozbilo i při nahrání z Windows
+*.sh text eol=lf
+*.awk text eol=lf
+*.caddy text eol=lf
+deploy/** text eol=lf

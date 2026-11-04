@@ -1,0 +1,10 @@
+[Unit]
+Description=Denni zaloha dat z RPi (restic)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/vokudev-zaloha
+Nice=15
+IOSchedulingClass=idle

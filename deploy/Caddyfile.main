@@ -1,0 +1,12 @@
+# /etc/caddy/Caddyfile: jen společné nastavení, projekty jsou v /etc/caddy/sites/*.caddy
+# Nasazuje deploy/caddy-rozdelit.sh.
+(projekt) {
+    encode zstd gzip
+    header {
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+}
+
+import /etc/caddy/sites/*.caddy

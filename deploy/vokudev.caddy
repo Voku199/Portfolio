@@ -1,4 +1,4 @@
-# Blok pro /etc/caddy/Caddyfile na RPi. Nasazuje ho deploy/caddy-vokudev.sh (nahradí starý blok vokudev.cz).
+# Blok hlavního webu na RPi. Nasazuje ho deploy/caddy-vokudev.sh.
 
 # www -> bez www (jedna kanonická adresa, žádný duplicitní obsah)
 www.vokudev.cz {
@@ -22,7 +22,7 @@ vokudev.cz {
     # obrázky a modely se mění zřídka, HTML se kontroluje pokaždé
     @assets path *.webp *.png *.jpg *.svg *.glb *.ico
     header @assets Cache-Control "public, max-age=604800"
-    @pages path / /*.html /projekty/ /*.xml /*.txt /*.json
+    @pages path / /*.html /o-mne/ /projekty/ /*.xml /*.txt /*.json
     header @pages Cache-Control "no-cache"
 
     file_server
