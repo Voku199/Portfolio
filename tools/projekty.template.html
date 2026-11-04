@@ -36,7 +36,7 @@
 {{JSONLD}}
 </script>
 <style>
-/* Stejný papír, inkoust a terakota jako hlavní stránka (../index.html). */
+/* Stejný papír, inkoust a terakota jako rozcestník (../index.html) a o-mne/. */
 :root {
   --bg: #F0EEE6; --paper: #FAF9F5; --sand: #E8E4D6;
   --ink: #141413; --muted: #5E5D59; --faint: #8A8880; --hair: #CFCBBE;
@@ -256,7 +256,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
 <header class="nav">
   <div class="nav__inner wrap">
     <a class="nav__logo" href="../">Voku <small data-t="logoSub">Archiv</small></a>
-    <a class="nav__back" href="../"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-t="back">Zpět na portfolio</span></a>
+    <a class="nav__back" href="../"><svg class="i" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span data-t="back">Zpět na rozcestník</span></a>
     <div class="lang-switch" role="group" aria-label="Language / Jazyk">
       <button type="button" class="active" data-lang="cs" aria-pressed="true" title="Česky">CS</button>
       <button type="button" data-lang="en" aria-pressed="false" title="English">EN</button>
@@ -338,7 +338,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
       <li data-t="how1"><span>Všechny projekty mám v <strong>jednom monorepu</strong>, každý ve vlastní složce.</span></li>
       <li data-t="how2"><span>Skript <code>build_projects.py</code> je projde, z <code>requirements.txt</code>, <code>package.json</code> a samotného kódu pozná <strong>technologie</strong>, spočítá řádky a zjistí, kdy jsem na projektu naposledy dělal.</span></li>
       <li data-t="how3"><span>Popisky píšu <strong>ručně</strong> a na web jde jen to, co do seznamu sám pustím. Nový projekt se neukáže, dokud ho neschválím.</span></li>
-      <li data-t="how4"><span>Screenshoty živých webů fotí <strong>Playwright</strong>, zbytek dostane obálku namalovanou kódem stejným štětcem jako obrazy na hlavní stránce.</span></li>
+      <li data-t="how4"><span>Screenshoty živých webů fotí <strong>Playwright</strong>, zbytek dostane obálku namalovanou kódem stejným štětcem jako obrazy na stránce O mně.</span></li>
     </ol>
     <p class="lead" style="margin-top:1.6rem;font-size:16px"><a class="link" href="projects.json" data-t="json">Stejná data jako JSON</a></p>
   </div>
@@ -347,7 +347,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
 <footer class="footer">
   <div class="footer__cta">
     <p data-t="ctaText">Chceš něco z toho vidět zblízka?</p>
-    <a class="btn" href="../#contact"><span data-t="ctaBtn">Napiš mi</span> <svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    <a class="btn" href="../o-mne/#contact"><span data-t="ctaBtn">Napiš mi</span> <svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
   </div>
   <div class="footer__row">
     <small><a href="../">vokudev.cz</a> · <span data-t="built">vygenerováno</span> {{UPDATED_CS}}</small>
@@ -363,7 +363,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
   var DATA = JSON.parse(document.getElementById('i18n').textContent);
   var T = {
     cs: {
-      skip: 'Přeskočit na projekty', logoSub: 'Archiv', back: 'Zpět na portfolio', mastArchive: 'Archiv projektů', mastState: 'Stav k',
+      skip: 'Přeskočit na projekty', logoSub: 'Archiv', back: 'Zpět na rozcestník', mastArchive: 'Archiv projektů', mastState: 'Stav k',
       kicker: 'projektů z jednoho monorepa', h1: 'Všechno, co jsem <em>kdy postavil</em>.',
       lead: 'Na hlavní stránce je jen pár vybraných věcí. Tady je <strong>všechno</strong>: zakázky, hry, AI pokusy i malé nástroje, které mi zjednodušují den. Stránku staví skript <strong>přímo z mého kódu</strong>, takže technologie, velikost a datum poslední změny jsou vždycky pravdivé.',
       figProjects: 'projektů', figLines: 'řádků kódu', figLangs: 'jazyků', figLive: 'běží naostro',
@@ -377,13 +377,13 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
       how1: '<span>Všechny projekty mám v <strong>jednom monorepu</strong>, každý ve vlastní složce.</span>',
       how2: '<span>Skript <code>build_projects.py</code> je projde, z <code>requirements.txt</code>, <code>package.json</code> a samotného kódu pozná <strong>technologie</strong>, spočítá řádky a zjistí, kdy jsem na projektu naposledy dělal.</span>',
       how3: '<span>Popisky píšu <strong>ručně</strong> a na web jde jen to, co do seznamu sám pustím. Nový projekt se neukáže, dokud ho neschválím.</span>',
-      how4: '<span>Screenshoty živých webů fotí <strong>Playwright</strong>, zbytek dostane obálku namalovanou kódem stejným štětcem jako obrazy na hlavní stránce.</span>',
+      how4: '<span>Screenshoty živých webů fotí <strong>Playwright</strong>, zbytek dostane obálku namalovanou kódem stejným štětcem jako obrazy na stránce O mně.</span>',
       json: 'Stejná data jako JSON', ctaText: 'Chceš něco z toho vidět zblízka?', ctaBtn: 'Napiš mi',
       built: 'vygenerováno', colophon: 'Sázeno písmy Newsreader, Geist a Geist Mono. Obálky malované kódem.',
       title: '{{COUNT}} projektů: weby, hry a AI | Vojtěch "Voku" Kurinec'
     },
     en: {
-      skip: 'Skip to projects', logoSub: 'Archive', back: 'Back to portfolio', mastArchive: 'Project archive', mastState: 'As of',
+      skip: 'Skip to projects', logoSub: 'Archive', back: 'Back to the start', mastArchive: 'Project archive', mastState: 'As of',
       kicker: 'projects from one monorepo', h1: 'Everything I have <em>ever built</em>.',
       lead: 'The main page shows a handful of picks. This is <strong>everything</strong>: client work, games, AI experiments and the small tools that run my day. A script builds this page <strong>straight from my code</strong>, so the stack, size and last-change date are always true.',
       figProjects: 'projects', figLines: 'lines of code', figLangs: 'languages', figLive: 'live in production',
@@ -397,7 +397,7 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
       how1: '<span>All my projects live in <strong>one monorepo</strong>, each in its own folder.</span>',
       how2: '<span>The <code>build_projects.py</code> script walks through them, reads the <strong>stack</strong> from <code>requirements.txt</code>, <code>package.json</code> and the code itself, counts lines and checks when I last touched each one.</span>',
       how3: '<span>I write the descriptions <strong>by hand</strong>, and only what I add to the list goes public. A new project stays hidden until I approve it.</span>',
-      how4: '<span><strong>Playwright</strong> screenshots the live sites, the rest get a cover painted in code with the same brush as the paintings on the main page.</span>',
+      how4: '<span><strong>Playwright</strong> screenshots the live sites, the rest get a cover painted in code with the same brush as the paintings on the About page.</span>',
       json: 'Same data as JSON', ctaText: 'Want a closer look at any of these?', ctaBtn: 'Get in touch',
       built: 'generated', colophon: 'Set in Newsreader, Geist and Geist Mono. Covers painted in code.',
       title: '{{COUNT}} projects: web, games and AI | Vojtěch "Voku" Kurinec'

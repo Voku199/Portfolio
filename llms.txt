@@ -2,7 +2,8 @@
 
 > Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, vlastní hry, AI nástroje a servery na Raspberry Pi. 61 projektů, 350k+ řádků kódu.
 
-- [Portfolio](https://vokudev.cz/): kdo jsem, na čem dělám, zakázky, kontakt
+- [Rozcestník](https://vokudev.cz/): projekty, které si můžeš hned vyzkoušet: DumbAI, VR Lasergame, SANDIFF, Knowix
+- [O mně](https://vokudev.cz/o-mne/): kdo jsem, na čem dělám, zakázky, technologie, kontakt
 - [Archiv projektů](https://vokudev.cz/projekty/): všechny projekty s popisem a technologiemi
 - [Projekty jako JSON](https://vokudev.cz/projekty/projects.json): strojově čitelná data
 

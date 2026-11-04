@@ -12,10 +12,14 @@ Pole projektu:
     demo     True = bezpečné živé demo, smí se ukazovat jako „vyzkoušej si to“
     status   live (běží naostro) | None (dopočítá se z data poslední změny)
     shot     obrázek uvnitř projektu (cesta od monorepa), když není screenshot v tools/shots/
+    featured pořadí na hlavní stránce (rozcestník), jen projekty, které běží a jsou opravdu veřejné
+    try_cs, try_en    u featured: jedna věta, co tam návštěvník může udělat
+    note_cs, note_en  u featured: proč to nejde vyzkoušet hned (nepovinné, třeba když je potřeba účet)
     stack    ruční seznam technologií místo automatického (nepovinné)
 """
 
 SITE_URL = "https://vokudev.cz"
+NEWS_COUNT = 5                            # kolik naposledy změněných projektů ukázat na rozcestníku
 
 CATEGORIES = [
     ("klienti", "Zakázky", "Client work"),
@@ -58,15 +62,23 @@ PROJECTS = [
     {"dirs": [".Bakix-Knowix"], "name": "Knowix", "cat": "web",
      "cs": "Studijní asistent jako PWA, který zná tvůj rozvrh a otázky posílá na víc AI modelů.",
      "en": "A study assistant PWA that knows your timetable and routes questions to several AI models.",
-     "url": "https://knowix.bakix.cz", "status": "live"},
+     "url": "https://knowix.bakix.cz", "status": "live", "featured": 4,
+     "try_cs": "Asistent, který čte zápisy z hodin tvojí třídy a odpovídá přesně k tomu, co jste probírali.",
+     "try_en": "An assistant that reads your class's lesson notes and answers about exactly what you covered.",
+     "note_cs": "Na vyzkoušení potřebuješ školní účet v Bakalářích nebo kód od spolužáka.",
+     "note_en": "To try it you need a Bakaláři school account or a class code from a classmate."},
     {"dirs": [".DumbAI"], "name": "DumbAI", "cat": "web",
      "cs": "Hledač faktů nad českou Wikipedií a Wikidaty schválně bez AI, aby šel použít i ve škole.",
      "en": "A fact finder over Czech Wikipedia and Wikidata, deliberately without AI so it is allowed at school.",
-     "url": "https://dumbai.bakix.cz", "demo": True, "status": "live"},
+     "url": "https://dumbai.bakix.cz", "demo": True, "status": "live", "featured": 1,
+     "try_cs": "Napiš třeba „3 informace o Vatikánu“ a dostaneš fakta z Wikipedie v bodech i s odkazy.",
+     "try_en": "Type something like \"3 facts about the Vatican\" and get Wikipedia facts as bullet points with links. It works in Czech."},
     {"dirs": ["sandiff"], "name": "SANDIFF", "cat": "web",
      "cs": "Web LoL týmu kámošů z Písku: zeď plakátů, profily hráčů a ranky z Riot API.",
      "en": "Site of my friends' LoL team: a wall of posters, player profiles and ranks from the Riot API.",
-     "url": "https://lol.bakix.cz", "demo": True, "status": "live"},
+     "url": "https://lol.bakix.cz", "demo": True, "status": "live", "featured": 3,
+     "try_cs": "Projdi si zeď plakátů, soupisku a Diff-o-metr LoL týmu kámošů z Písku.",
+     "try_en": "Walk through the poster wall, the roster and the Diff-o-meter of my friends' LoL team. It is in Czech."},
     {"dirs": ["LID"], "name": "LID", "cat": "web",
      "cs": "Aplikace školního parlamentu: nápady, tajné hlasování a veřejná nástěnka.",
      "en": "App for my school parliament: ideas, secret ballots and a public board.",
@@ -104,7 +116,9 @@ PROJECTS = [
     {"dirs": ["vr-lasergame"], "name": "VR Lasergame", "cat": "hry",
      "cs": "Deathmatch proti šesti botům na Questu 3, pohybuješ se chůzí na místě.",
      "en": "Deathmatch against six bots on Quest 3, you move by walking on the spot.",
-     "url": "https://vr.bakix.cz", "demo": True, "status": "live",
+     "url": "https://vr.bakix.cz", "demo": True, "status": "live", "featured": 2,
+     "try_cs": "Zastřílej si přímo v prohlížeči: na počítači myší a WASD, na Questu 3 chůzí na místě.",
+     "try_en": "Play right in the browser: mouse and WASD on a computer, walking on the spot on a Quest 3.",
      "stack": ["JavaScript", "WebXR", "three.js", "Flask", "SQLite"]},
     {"dirs": ["Mythicals"], "name": "Mythicals", "cat": "hry",
      "cs": "Minecraft plugin: osm mýtických zbraní, každá jen jednou na server, tři životy a tajný Death Note.",

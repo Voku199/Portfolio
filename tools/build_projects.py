@@ -1,8 +1,13 @@
-"""Postaví archiv projektů (projekty/index.html) přímo z monorepa.
+"""Postaví rozcestník (index.html) a archiv projektů (projekty/index.html) přímo z monorepa.
 
     python tools/build_projects.py                 # monorepo = složka nad PORTOFOLIO/
     python tools/build_projects.py --root X        # jiná složka s projekty
     python tools/build_projects.py --check         # jen vypíše, co by se stalo, nic nezapíše
+    python tools/build_projects.py --from-json     # bez monorepa: čísla vezme z projekty/projects.json,
+                                                   # texty, odkazy a výběr z projects_data.py a šablon
+
+Když se v monorepu najde málo projektů (špatná složka, jiný počítač), build skončí chybou
+dřív, než by archiv ořezal a smazal obrázky. Na takovém počítači použij --from-json.
 
 Co je ručně a co samo:
     ručně   tools/projects_data.py  - který projekt se ukáže, název, jedna věta CS/EN, odkaz
@@ -35,6 +40,9 @@ OUT = SITE / "projekty"
 SHOTS_IN = HERE / "shots"
 SHOTS_OUT = OUT / "shots"
 TEMPLATE = HERE / "projekty.template.html"
+HOME_TEMPLATE = HERE / "rozcestnik.template.html"
+ABOUT_FILE = SITE / "o-mne" / "index.html"
+MIN_FOUND = 0.8                          # míň nalezených projektů = skoro jistě špatná složka
 DEFAULT_ROOT = SITE.parent.parent        # .Projekty (monorepo)
 
 sys.path.insert(0, str(HERE))
@@ -297,12 +305,112 @@ def demo_html(p):
 </a>"""
 
 
+def featured_html(i, p):
+    note = (f'\n    <span class="card__note" data-note="{p["slug"]}">{escape(p["note_cs"])}</span>'
+            if p.get("note_cs") else "")
+    return f"""
+<a class="card" href="{escape(p['url'])}" target="_blank" rel="noopener" data-ping="{escape(p['url'])}" style="--i:{i % 2}">
+  <span class="card__img"><img src="projekty/shots/{p['image']}" alt="" width="960" height="600" loading="lazy" decoding="async"></span>
+  <span class="card__body">
+    <span class="card__top"><span class="ping" data-t="pingWait">Zkouším spojení…</span><span class="card__host">{escape(host(p['url']))}</span></span>
+    <span class="card__name">{escape(p['name'])}</span>
+    <span class="card__try" data-try="{p['slug']}">{escape(p['try_cs'])}</span>{note}
+    <span class="card__go"><span data-t="tryIt">Vyzkoušet</span> <svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+  </span>
+</a>"""
+
+
+def news_html(p, cats):
+    d = datetime.fromtimestamp(p["updated"])
+    return f"""
+      <li><a href="projekty/#{p['slug']}"><time datetime="{d:%Y-%m-%d}" data-day="{d:%Y-%m-%d}">{d.day}. {d.month}. {d.year}</time><span class="news__name">{escape(p['name'])}</span><span class="news__cat" data-cat-label="{p['cat']}">{escape(cats[p['cat']][0])}</span></a></li>"""
+
+
+def build_home(items, cats, total):
+    """Rozcestník: vybrané projekty k vyzkoušení (pole featured) a naposledy změněné projekty."""
+    featured = sorted((p for p in items if p.get("featured")), key=lambda p: p["featured"])
+    for p in featured:
+        if not (p.get("url") and p.get("try_cs") and p.get("try_en")):
+            raise SystemExit(f"{p['slug']}: projekt na rozcestníku potřebuje url, try_cs a try_en")
+    if not featured:
+        raise SystemExit("v projects_data.py není žádný projekt s polem featured")
+    n = len(featured)
+    word = "projekt k vyzkoušení" if n == 1 else "projekty k vyzkoušení" if n < 5 else "projektů k vyzkoušení"
+    home, about, archive = f"{D.SITE_URL}/", f"{D.SITE_URL}/o-mne/", f"{D.SITE_URL}/projekty/"
+    jsonld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebSite", "@id": f"{home}#web", "url": home, "name": "Voku", "inLanguage": ["cs", "en"],
+         "publisher": {"@id": f"{home}#voku"}},
+        {"@type": "Person", "@id": f"{home}#voku", "name": "Vojtěch Kurinec", "alternateName": "Voku", "url": about},
+        {"@type": "WebPage", "@id": f"{home}#page", "url": home, "inLanguage": "cs",
+         "name": "Vojtěch \"Voku\" Kurinec | Projekty k vyzkoušení",
+         "isPartOf": {"@id": f"{home}#web"}, "about": {"@id": f"{home}#voku"},
+         "primaryImageOfPage": f"{home}og-image.png",
+         "hasPart": [{"@type": "ProfilePage", "@id": f"{about}#page", "url": about},
+                     {"@type": "CollectionPage", "@id": f"{archive}#page", "url": archive}],
+         "mainEntity": {"@type": "ItemList", "numberOfItems": n, "itemListElement": [
+             {"@type": "ListItem", "position": i + 1, "url": p["url"], "name": p["name"]}
+             for i, p in enumerate(featured)]}},
+    ]}
+    i18n = {"cats": cats,
+            "try": {p["slug"]: [p["try_cs"], p["try_en"]] for p in featured},
+            "note": {p["slug"]: [p["note_cs"], p["note_en"]] for p in featured if p.get("note_cs")}}
+    page = HOME_TEMPLATE.read_text(encoding="utf-8")
+    for key, val in {
+        "SITE_URL": D.SITE_URL,
+        "COUNT": str(len(items)),
+        "LINES": round_k(total),
+        "FEATURED_COUNT": str(n),
+        "FEATURED_WORD_JS": json.dumps(word, ensure_ascii=False),
+        "FEATURED_WORD": word,
+        "FEATURED": "".join(featured_html(i, p) for i, p in enumerate(featured)),
+        "NEWS": "".join(news_html(p, cats) for p in items[:D.NEWS_COUNT]),
+        "I18N": json.dumps(i18n, ensure_ascii=False).replace("</", "<\\/"),
+        "JSONLD": json.dumps(jsonld, ensure_ascii=False, indent=1),
+    }.items():
+        page = page.replace("{{" + key + "}}", val)
+    write_if_changed(SITE / "index.html", page)
+    return featured
+
+
+def write_if_changed(path, text):
+    """Soubor se mění jen když se opravdu změní obsah -> poctivé lastmod v sitemapě."""
+    if not path.exists() or path.read_bytes().decode("utf-8") != text:
+        path.write_text(text, encoding="utf-8", newline="")
+
+
 def round_k(n):
     return f"{n // 10_000 * 10}k+" if n >= 10_000 else cs_num(n)
 
 
-def build(root, check=False):
+def from_json():
+    """Položky z minulého buildu (projects.json) + aktuální ruční data z projects_data.py."""
+    old = {p["slug"]: p for p in json.loads((OUT / "projects.json").read_text(encoding="utf-8"))["projects"]}
+    now = datetime.now().timestamp()
+    items = []
+    for p in D.PROJECTS:
+        slug = p.get("slug") or slugify(p["name"])
+        o = old.get(slug)
+        if not o:
+            print(f"  {slug}: není v projects.json, přeskakuju (přidá ho až build z monorepa)")
+            continue
+        updated = datetime.strptime(o["updated"], "%Y-%m-%d").timestamp()
+        status = p.get("status") or ("active" if now - updated < 30 * 86400 else None)
+        items.append({**p, "slug": slug, "lines": o["lines"], "updated": updated, "stack": p.get("stack") or o["stack"],
+                      "status": status, "url": p.get("url"), "tests": o["tests"], "image": o["image"].rsplit("/", 1)[1]})
+    order = {slug: i for i, slug in enumerate(old)}      # stejné datum = pořadí z minula, žádný šum v diffu
+    items.sort(key=lambda p: (-p["updated"], order[p["slug"]]))
+    found = re.search(r'<b>(\d+)</b><span data-t="figLangs">', (OUT / "index.html").read_text(encoding="utf-8"))
+    if not found:
+        raise SystemExit("v projekty/index.html jsem nenašel počet jazyků")
+    return items, sum(p["lines"] for p in items), int(found.group(1))
+
+
+def build(root, check=False, use_json=False):
     root = Path(root)
+    if use_json:
+        items, total, langs = from_json()
+        publish(items, total, langs, root, check, scanned=False)
+        return
     listed = {d for p in D.PROJECTS for d in p["dirs"]}
     present = {e.name for e in root.iterdir() if e.is_dir()}
     local = HERE / "ignore.local.txt"
@@ -310,7 +418,6 @@ def build(root, check=False):
     unknown = sorted(present - listed - set(D.IGNORE) - private - {".idea", ".claude", ".git"})
     missing = sorted(d for d in listed if d not in present)
 
-    cats = {k: (cs, en) for k, cs, en in D.CATEGORIES}
     items, lang_total = [], {}
     now = datetime.now().timestamp()
     for p in D.PROJECTS:
@@ -330,34 +437,43 @@ def build(root, check=False):
     items.sort(key=lambda p: -p["updated"])
     total = sum(lang_total.values())
     langs = sum(1 for v in lang_total.values() if v > 1000)
-    demos = [p for p in items if p.get("demo")]
-    live = sum(1 for p in items if p["status"] == "live")
-
-    print(f"{len(items)} projektů, {total} řádků, {langs} jazyků, {live} běží naostro, {len(demos)} živá dema")
     if unknown:
         print("  nezařazené složky (doplň do projects_data.py nebo IGNORE):", ", ".join(unknown))
     if missing:
         print("  v projects_data.py, ale v monorepu nejsou:", ", ".join(missing))
+    if not check and len(items) < MIN_FOUND * len(D.PROJECTS):
+        raise SystemExit(f"STOP: v {root} je jen {len(items)} z {len(D.PROJECTS)} projektů, build by ořezal archiv "
+                         "a smazal obrázky. Nastav --root na monorepo, nebo použij --from-json.")
+    publish(items, total, langs, root, check, scanned=True)
+
+
+def publish(items, total, langs, root, check, scanned):
+    cats = {k: (cs, en) for k, cs, en in D.CATEGORIES}
+    demos = [p for p in items if p.get("demo")]
+    live = sum(1 for p in items if p["status"] == "live")
+
+    print(f"{len(items)} projektů, {total} řádků, {langs} jazyků, {live} běží naostro, {len(demos)} živá dema")
     if check:
         for p in items:
             print(f"  {p['slug']:<24} {p['cat']:<9} {p['lines']:>7}  {', '.join(p['stack'])}")
         return
 
-    # obrázky
-    SHOTS_OUT.mkdir(parents=True, exist_ok=True)
-    used = set()
-    for p in items:
-        src, is_shot = image_for(p, root)
-        if src:
-            p["image"] = f"{p['slug']}.webp"
-            raster(src, SHOTS_OUT / p["image"], top=is_shot)
-        else:
-            p["image"] = f"{p['slug']}.svg"
-            (SHOTS_OUT / p["image"]).write_text(cover_svg(p["slug"], p["cat"]), encoding="utf-8", newline="")
-        used.add(p["image"])
-    for old in SHOTS_OUT.iterdir():          # obrázky smazaných projektů pryč
-        if old.name not in used:
-            old.unlink()
+    # obrázky (při --from-json zůstávají, jak jsou)
+    used = {p["image"] for p in items} if not scanned else set()
+    if scanned:
+        SHOTS_OUT.mkdir(parents=True, exist_ok=True)
+        for p in items:
+            src, is_shot = image_for(p, root)
+            if src:
+                p["image"] = f"{p['slug']}.webp"
+                raster(src, SHOTS_OUT / p["image"], top=is_shot)
+            else:
+                p["image"] = f"{p['slug']}.svg"
+                (SHOTS_OUT / p["image"]).write_text(cover_svg(p["slug"], p["cat"]), encoding="utf-8", newline="")
+            used.add(p["image"])
+        for old in SHOTS_OUT.iterdir():      # obrázky smazaných projektů pryč
+            if old.name not in used:
+                old.unlink()
 
     counts = {k: sum(1 for p in items if p["cat"] == k) for k in cats}
     filters = '<button type="button" class="on" data-f="all" aria-pressed="true"><span data-t="all">Vše</span> <i>{}</i></button>'.format(len(items))
@@ -366,7 +482,7 @@ def build(root, check=False):
 
     i18n = {"cats": cats, "p": {p["slug"]: [p["cs"], p["en"]] for p in items}}
     today = date.today()
-    home, page_url = f"{D.SITE_URL}/", f"{D.SITE_URL}/projekty/"
+    home, about, page_url = f"{D.SITE_URL}/", f"{D.SITE_URL}/o-mne/", f"{D.SITE_URL}/projekty/"
     person = {"@id": f"{home}#voku"}
     jsonld = {"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "@id": f"{page_url}#page", "url": page_url,
@@ -376,7 +492,7 @@ def build(root, check=False):
          "primaryImageOfPage": f"{page_url}og.png",
          "breadcrumb": {"@id": f"{page_url}#breadcrumb"}, "mainEntity": {"@id": f"{page_url}#list"}},
         {"@type": "BreadcrumbList", "@id": f"{page_url}#breadcrumb", "itemListElement": [
-            {"@type": "ListItem", "position": 1, "name": "Portfolio", "item": home},
+            {"@type": "ListItem", "position": 1, "name": "Voku", "item": home},
             {"@type": "ListItem", "position": 2, "name": "Archiv projektů", "item": page_url}]},
         {"@type": "ItemList", "@id": f"{page_url}#list", "numberOfItems": len(items), "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "item": {
@@ -413,14 +529,14 @@ def build(root, check=False):
     (OUT / "projects.json").write_text(json.dumps({"generated": today.isoformat(), "projects": public},
                                                   ensure_ascii=False, indent=1), encoding="utf-8", newline="")
 
-    # čísla na hlavní stránce (soubor se mění jen když se čísla opravdu změní -> poctivé lastmod)
-    home_file = SITE / "index.html"
-    old = home_file.read_text(encoding="utf-8")
+    # čísla na stránce O mně a rozcestník (soubor se mění jen když se opravdu změní -> poctivé lastmod)
+    old = ABOUT_FILE.read_bytes().decode("utf-8")
     html = re.sub(r'(data-auto="projects">)[^<]*', rf"\g<1>{len(items) // 10 * 10}+", old)
     html = re.sub(r'(data-auto="projects-n">)[^<]*', rf"\g<1>{len(items)}", html)
-    if html != old:
-        home_file.write_text(html, encoding="utf-8", newline="")
-    home_mod = date.fromtimestamp(home_file.stat().st_mtime).isoformat()
+    write_if_changed(ABOUT_FILE, html)
+    about_mod = date.fromtimestamp(ABOUT_FILE.stat().st_mtime).isoformat()
+    featured = build_home(items, cats, total)
+    home_mod = date.fromtimestamp((SITE / "index.html").stat().st_mtime).isoformat()
 
     # sitemap: Google bere jen loc + lastmod (changefreq/priority ignoruje), obrázky pomáhají Google Images
     shots = [p for p in items if p["image"].endswith(".webp")]
@@ -430,6 +546,11 @@ def build(root, check=False):
   <url>
     <loc>{home}</loc>
     <lastmod>{home_mod}</lastmod>
+    <image:image><image:loc>{home}og-image.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>{about}</loc>
+    <lastmod>{about_mod}</lastmod>
     <image:image><image:loc>{home}og-image.png</image:loc></image:image>
   </url>
   <url>
@@ -444,7 +565,9 @@ def build(root, check=False):
     lines = [f"# Vojtěch \"Voku\" Kurinec", "",
              f"> Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, "
              f"vlastní hry, AI nástroje a servery na Raspberry Pi. {len(items)} projektů, {round_k(total)} řádků kódu.", "",
-             f"- [Portfolio]({home}): kdo jsem, na čem dělám, zakázky, kontakt",
+             f"- [Rozcestník]({home}): projekty, které si můžeš hned vyzkoušet: "
+             + ", ".join(p["name"] for p in featured),
+             f"- [O mně]({about}): kdo jsem, na čem dělám, zakázky, technologie, kontakt",
              f"- [Archiv projektů]({page_url}): všechny projekty s popisem a technologiemi",
              f"- [Projekty jako JSON]({page_url}projects.json): strojově čitelná data", "",
              "## Kontakt", "", "- E-mail: vojta.kurinec@gmail.com", "- GitHub: https://github.com/Voku199", ""]
@@ -457,12 +580,13 @@ def build(root, check=False):
                   for p in group]
         lines.append("")
     (SITE / "llms.txt").write_text("\n".join(lines), encoding="utf-8", newline="")
-    print(f"  -> projekty/index.html, projects.json, sitemap.xml, llms.txt, {len(used)} obrázků")
+    print(f"  -> index.html, projekty/index.html, projects.json, sitemap.xml, llms.txt, {len(used)} obrázků")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=str(DEFAULT_ROOT))
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--from-json", action="store_true", help="bez monorepa, čísla z projekty/projects.json")
     a = ap.parse_args()
-    build(a.root, a.check)
+    build(a.root, a.check, a.from_json)
