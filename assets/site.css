@@ -129,8 +129,8 @@ h1, h2, h3 { font-family: var(--serif); font-optical-sizing: auto; font-weight: 
 .nav__links a:hover::after, .nav__links a[aria-current="page"]::after { transform: none; }
 .nav__links a[aria-current="page"] { color: var(--ink); }
 
-/* přepínač: slunce a měsíc z ASCII znaků, posouvá se mezi nimi inkoust */
-.theme { position: relative; flex: none; display: grid; grid-template-columns: 1fr 1fr; width: 52px; height: 28px; background: none; border: 1px solid var(--line); cursor: pointer; font-family: var(--mono); font-size: 13px; line-height: 1; }
+/* přepínač: slunce a měsíc, posouvá se mezi nimi inkoust */
+.theme { position: relative; flex: none; display: grid; grid-template-columns: 1fr 1fr; width: 52px; height: 28px; background: none; border: 1px solid var(--line); cursor: pointer; font-size: 15px; line-height: 1; }
 .theme::before { content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 50%; background: var(--ink); transition: transform .45s var(--ease), background-color .5s; }
 .theme span { position: relative; display: grid; place-items: center; color: var(--muted); transition: color .3s; }
 .theme__sun { color: var(--on-ink) !important; }
@@ -300,8 +300,11 @@ a.feature:hover .feature__go .i { transform: translate(2px, -2px); }
 @media (max-width: 480px) { .likes { grid-template-columns: 1fr; } }
 .like { padding: 1.3rem var(--gutter) 1.5rem; }
 .like:hover { background: var(--paper); }
-.like pre { font-family: var(--mono); font-size: 12.5px; line-height: 1.25; height: 5.2em; color: var(--accent); overflow: hidden; transition: transform .6s var(--ease); transform-origin: left bottom; }
-.like:hover pre { transform: translateY(-3px) rotate(-1.5deg); }
+/* ikonka: čáry v inkoustu, jeden detail v terakotě */
+.like .i { display: block; width: 52px; height: 52px; stroke-width: 2; transition: transform .6s var(--ease); transform-origin: left bottom; }
+.like .hl { stroke: var(--clay); }
+.like .dot { fill: var(--clay); stroke: none; }
+.like:hover .i { transform: translateY(-3px) rotate(-3deg); }
 .like h3 { font-size: 24px; line-height: 1.2; margin-top: .6rem; }
 .like p { margin-top: .3rem; color: var(--muted); font-size: 15px; }
 .like a { text-decoration-color: var(--clay); text-underline-offset: .2em; }

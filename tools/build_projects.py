@@ -370,7 +370,7 @@ def nav_html(base, current):
   <div class="nav__inner wrap">
     <a class="nav__logo" href="{home}" aria-label="Voku">{SEAL}<span>Voku</span></a>
     <nav class="nav__links" aria-label="Menu" data-t-aria="navMenu">{items}</nav>
-    <button class="theme" type="button" aria-pressed="false" aria-label="Zapnout tmavý režim"><span class="theme__sun" aria-hidden="true">*</span><span class="theme__moon" aria-hidden="true">)</span></button>
+    <button class="theme" type="button" aria-pressed="false" aria-label="Zapnout tmavý režim"><span class="theme__sun" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg></span><span class="theme__moon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg></span></button>
     <div class="lang-switch" role="group" aria-label="Language / Jazyk">
       <button type="button" class="active" data-lang="cs" aria-pressed="true" title="Česky">CS</button>
       <button type="button" data-lang="en" aria-pressed="false" title="English">EN</button>
