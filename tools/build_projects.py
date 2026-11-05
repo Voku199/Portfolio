@@ -386,7 +386,7 @@ def footer_html(base, total, count):
     <p class="footer__quote" data-t="footQuote">„Neboj se říct <span class="brush">svůj názor</span>.“</p>
     <div class="waves" data-waves aria-hidden="true"></div>
     <div class="footer__row">
-      <small class="footer__nav"><a href="{home}">vokudev.cz</a><a href="{base}jak-funguju/" data-t="navHow">Jak funguju</a><a href="{base}projekty/" data-t="navProjects">Projekty</a><a href="https://github.com/Voku199" rel="me noopener">GitHub</a></small>
+      <small class="footer__nav"><a href="{home}">vokudev.cz</a><a href="{base}jak-funguju/" data-t="navHow">Jak funguju</a><a href="{base}projekty/" data-t="navProjects">Projekty</a><a href="https://github.com/Voku199" rel="me noopener">github.com/Voku199</a></small>
       <small>{count} · {round_k(total)} <span data-t="footLines">řádků kódu</span></small>
     </div>
   </div>
@@ -405,7 +405,8 @@ def fill(template, values):
 
 
 def person(home):
-    return {"@type": "Person", "@id": f"{home}#voku", "name": "Vojtěch Kurinec", "alternateName": "Voku", "url": home,
+    return {"@type": "Person", "@id": f"{home}#voku", "name": "Vojtěch Kurinec", "givenName": "Vojtěch",
+            "familyName": "Kurinec", "alternateName": ["Voku199", "Voku", "Vojtech Kurinec"], "url": home,
             "image": f"{home}ja_seriozne.webp", "email": "vojta.kurinec@gmail.com", "jobTitle": "Vývojář",
             "address": {"@type": "PostalAddress", "addressRegion": "Jihočeský kraj", "addressCountry": "CZ"},
             "sameAs": ["https://github.com/Voku199", "https://instagram.com/voku199"],
@@ -429,11 +430,12 @@ def build_home(items, total):
     n = len(featured)
     home, how, archive = f"{D.SITE_URL}/", f"{D.SITE_URL}/jak-funguju/", f"{D.SITE_URL}/projekty/"
     jsonld = {"@context": "https://schema.org", "@graph": [
-        {"@type": "WebSite", "@id": f"{home}#web", "url": home, "name": "Voku", "inLanguage": ["cs", "en"],
+        {"@type": "WebSite", "@id": f"{home}#web", "url": home, "name": "Voku",
+         "alternateName": ["Vojtěch Kurinec", "Voku199", "vokudev.cz"], "inLanguage": ["cs", "en"],
          "publisher": {"@id": f"{home}#voku"}},
         person(home),
         {"@type": "ProfilePage", "@id": f"{home}#page", "url": home, "inLanguage": "cs",
-         "name": "Vojtěch \"Voku\" Kurinec | Mladý vývojář z jižních Čech",
+         "name": "Vojtěch Kurinec (Voku199) | Mladý vývojář z jižních Čech",
          "isPartOf": {"@id": f"{home}#web"}, "mainEntity": {"@id": f"{home}#voku"},
          "primaryImageOfPage": f"{home}og-image.png",
          "hasPart": [{"@type": "WebPage", "@id": f"{how}#page", "url": how},
@@ -600,7 +602,7 @@ def publish(items, total, langs, root, check, scanned):
     author = {"@id": f"{home}#voku"}
     jsonld = {"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "@id": f"{page_url}#page", "url": page_url,
-         "name": "Projekty | Vojtěch \"Voku\" Kurinec", "inLanguage": "cs",
+         "name": "Projekty | Vojtěch Kurinec (Voku199)", "inLanguage": "cs",
          "description": f"Všech {len(items)} projektů Vojtěcha Kurince: weby, hry, AI nástroje a servery.",
          "isPartOf": {"@id": f"{home}#web"}, "author": author, "dateModified": today.isoformat(),
          "primaryImageOfPage": f"{page_url}og.png",
@@ -666,7 +668,7 @@ def publish(items, total, langs, root, check, scanned):
 """, encoding="utf-8", newline="")
 
     # llms.txt: stručný přehled pro AI vyhledávače (ChatGPT, Perplexity, AI Overviews)
-    lines = [f"# Vojtěch \"Voku\" Kurinec", "",
+    lines = ["# Vojtěch Kurinec (Voku199)", "",
              f"> Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, "
              f"vlastní hry, AI nástroje a servery na Raspberry Pi. {len(items)} projektů, {round_k(total)} řádků kódu.", "",
              f"- [Úvod]({home}): kdo jsem, co jsem dokázal, proč to dělám, jak pracuju, co mám rád a kontakt. "

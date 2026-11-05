@@ -1,4 +1,4 @@
-# Vojtěch "Voku" Kurinec
+# Vojtěch Kurinec (Voku199)
 
 > Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, vlastní hry, AI nástroje a servery na Raspberry Pi. 61 projektů, 350k+ řádků kódu.
 
