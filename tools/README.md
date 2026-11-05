@@ -41,6 +41,7 @@ Obě se generují, takže needituj `index.html` ani `jak-funguju/index.html`, al
 | `assets/site.js` | tmavý režim, jazyk, odkrývání, kroky na `/jak-funguju/` |
 | `assets/ascii.js` | živý ASCII obraz: scéna, palety pro svítání a noc, postupné dokreslování (`stage` 0 až 7) |
 | `assets/projekty.*` | appka s projekty |
+| `assets/tech.svg` | ikonky technologií v sekci Jak pracuju, používají se přes `<use href="assets/tech.svg#python">` (loga ze Simple Icons, CC0) |
 
 Tmavý režim: uložená volba, jinak nastavení systému, jinak denní doba (od 20 do 6 tmavě).
 

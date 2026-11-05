@@ -284,14 +284,17 @@ a.feature:hover .feature__go .i { transform: translate(2px, -2px); }
 .stack div { display: flex; align-items: baseline; gap: .6rem; padding: .34rem 0; }
 .stack dt { flex: none; color: var(--accent); }
 .stack dt::before { content: '* '; }
-.stack i { flex: 1; min-width: 1.5rem; height: 1em; overflow: hidden; font-style: normal; color: var(--hair); white-space: nowrap; }
+.stack i { flex: 1; min-width: 1.5rem; height: 1em; line-height: 1; overflow: hidden; font-style: normal; color: var(--hair); white-space: nowrap; }
 .stack i::before { content: '........................................................................................................'; }
-.stack dd { text-align: right; color: var(--ink); }
+.stack dd { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .25rem .95rem; color: var(--ink); }
 .stack small { color: var(--faint); font-size: 12px; }
+.tech { display: inline-flex; align-items: baseline; gap: .4em; white-space: nowrap; transition: color .2s; }
+.tech svg { align-self: center; width: 1.2em; height: 1.2em; flex: none; fill: currentColor; color: var(--muted); transition: color .2s, transform .3s var(--ease); }
+.tech:hover svg { color: var(--accent); transform: translateY(-1px); }
 @media (max-width: 620px) {
   .stack div { display: block; padding: .5rem 0; }
   .stack i { display: none; }
-  .stack dd { text-align: left; padding-left: 1.2em; }
+  .stack dd { justify-content: flex-start; margin-top: .3rem; padding-left: 1.2em; }
 }
 
 /* ── Co mám rád ── */
