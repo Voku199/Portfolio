@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!-- VYGENEROVÁNO: tools/build_projects.py z tools/index.template.html. Needituj ručně, přepíše se. -->
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vojtěch Kurinec (Voku199) | Mladý vývojář z jižních Čech</title>
+<meta name="description" content="Vojtěch Kurinec, na internetu Voku199 nebo Voku, je mladý vývojář z jižních Čech. Weby, hry a věci s AI: kdo jsem, co jsem dokázal, jak pracuju a co mám rád.">
+<meta name="author" content="Vojtěch Kurinec">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#F0EEE6">
+<link rel="canonical" href="{{SITE_URL}}/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{SITE_URL}}/">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:site_name" content="Voku">
+<meta property="og:title" content="Vojtěch Kurinec (Voku199) | Mladý vývojář z jižních Čech">
+<meta property="og:description" content="Stavím weby, hry a věci s AI. {{COUNT}} projektů, {{LINES}} řádků kódu a tři zakázky.">
+<meta property="og:image" content="{{SITE_URL}}/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Vojtěch Kurinec (Voku199), mladý vývojář z jižních Čech">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vojtěch Kurinec (Voku199) | Mladý vývojář z jižních Čech">
+<meta name="twitter:description" content="Stavím weby, hry a věci s AI. {{COUNT}} projektů, {{LINES}} řádků kódu a tři zakázky.">
+<meta name="twitter:image" content="{{SITE_URL}}/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="alternate" type="application/json" href="projekty/projects.json" title="Všechny projekty (JSON)">
+<script>
+/* Staré odkazy (vokudev.cz/#contact) míří dál na správné místo. */
+(function (m, h) {
+  var to = m[h];
+  if (!to) return;
+  if (to.charAt(0) === '#') history.replaceState(null, '', to);
+  else location.replace(to);
+})({ '#about': '#kdo', '#o-mne': '#kdo', '#now': '#dokazal', '#clients': '#dokazal', '#tech': '#jak', '#contact': '#kontakt', '#how': 'jak-funguju/', '#projects': 'projekty/' }, location.hash);
+</script>
+{{HEAD}}
+<script type="application/ld+json">
+{{JSONLD}}
+</script>
+</head>
+<body>
+<a class="skip" href="#kdo" data-t="skip">Přeskočit na obsah</a>
+{{NAV}}
+
+<ul class="rail" aria-label="Kapitoly" data-t-aria="railLabel">
+  <li><a href="#kdo"><span data-t="railWho">Kdo jsem</span></a></li>
+  <li><a href="#dokazal"><span data-t="railDid">Co jsem dokázal</span></a></li>
+  <li><a href="#proc"><span data-t="railWhy">Proč to dělám</span></a></li>
+  <li><a href="#jak"><span data-t="railHow">Jak pracuju</span></a></li>
+  <li><a href="#rad"><span data-t="railLike">Co mám rád</span></a></li>
+  <li><a href="#dal"><span data-t="railNext">Kam dál</span></a></li>
+</ul>
+
+<main id="main">
+
+<section class="hero" aria-label="Úvod" data-t-aria="heroLabel">
+  <canvas class="hero__canvas" id="hero-canvas" role="img" aria-label="Obraz z ASCII znaků: hora Fuji, červená brána torii na jezeře a větev sakury" data-t-aria="paintAlt"></canvas>
+  <noscript><img class="hero__fallback" src="img/hero.svg" alt="" width="960" height="1200"></noscript>
+  <div class="hero__text">
+    <h1 class="hi">
+      <svg class="hi__word" viewBox="50 14 510 290" role="img" aria-label="Ahoj">
+        <path class="hi__ink" pathLength="1" d="M130 134C118 120 90 118 74 132C58 146 56 178 68 192C80 206 108 202 120 184C128 172 132 150 134 124C132 150 130 182 138 196C144 206 156 204 166 192C190 160 214 90 216 60C218 34 204 22 194 34C184 48 186 120 188 200C192 160 212 124 236 124C258 124 262 146 262 166C262 184 262 196 274 200C284 204 298 196 306 184C318 160 340 128 370 124C350 118 326 136 326 162C326 190 346 204 364 198C384 192 394 166 388 146C384 130 372 122 360 126C352 130 356 140 368 138C388 136 412 124 432 114C434 160 436 230 432 262C428 292 400 298 396 280C392 262 420 230 460 210C490 196 520 190 548 196"/>
+        <circle class="hi__dot" cx="440" cy="84" r="7"/>
+      </svg>
+      <span data-t="h1">jsem <span class="brush">Voku</span>.</span>
+    </h1>
+    <p class="lead" data-t="lead">Celým jménem Vojtěch Kurinec, na internetu Voku199. Je mi 16, jsem z jižních Čech a programuju, hlavně weby, hry a věci s AI. Tohle je stránka o mně, takže si klidně dej čaj…</p>
+    <div class="hero__cta">
+      <a class="btn" href="#kdo"><span data-t="ctaWho">Kdo vlastně jsem</span> <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      <a class="link" href="projekty/" data-t="ctaProjects">Rovnou k projektům</a>
+    </div>
+  </div>
+  <p class="hero__cap" data-t="heroCap">Každý znak je jeden tah štětcem. Klikni na vodu, nebo přepni noc.</p>
+</section>
+
+<div class="wrap wrap--ruled">
+
+<section class="block" id="kdo">
+  <div class="block__head">
+    <p class="kicker"><b>01</b><span data-t="whoKicker">Kdo jsem</span></p>
+    <h2 class="block__title" data-t="whoH">Nejlíp se něco naučím, když to prostě postavím.</h2>
+    <img class="spot" src="img/spot-sprout.svg" width="400" height="400" alt="" loading="lazy">
+  </div>
+  <div class="block__body">
+    <div class="who">
+      <div class="prose prose--drop" data-t="whoText">
+        <p>Jmenuju se <strong>Vojtěch Kurinec</strong>, ale většina lidí mě zná jako <strong>Voku</strong>. Je mi 16 a IT je moje vášeň, takže programuju, zkouším věci s AI, tisknu na 3D tiskárně, bastlím s Raspberry Pi a docela hodně mě baví hardware.</p>
+        <p>Mám za sebou spoustu vlastních projektů a naučil jsem se na nich víc než v jakékoli učebnici. Některé běží, některé jsem odložil, ale ze všech jsem si něco odnesl.</p>
+      </div>
+      <div class="who__photo">
+        <button class="photo" type="button" aria-pressed="false" aria-label="Přepnout fotku: vážně, nebo vtipně" data-t-aria="photoBtn">
+          <img src="ja_seriozne.webp" width="302" height="400" loading="lazy" decoding="async" alt="Vojtěch Kurinec, portrét" data-t-alt="photoAlt">
+          <img src="ja_uwu.webp" width="229" height="400" loading="lazy" decoding="async" alt="Vojtěch Kurinec, vtipná fotka s legračním výrazem" data-t-alt="photoAltFunny">
+        </button>
+        <span class="photo__cap" data-t="photoCap">Trošku vtipnej. Zkus na mě kliknout.</span>
+      </div>
+    </div>
+    <dl class="facts">
+      <div><dt data-t="factAge">Věk</dt><dd data-t="factAgeVal">16 let</dd></div>
+      <div><dt data-t="factFrom">Odkud</dt><dd data-t="factFromVal">Jihočeský kraj</dd></div>
+      <div><dt data-t="factFav">Nejradši</dt><dd data-t="factFavVal">Python a Flask</dd></div>
+      <div><dt data-t="factNow">Teď stavím</dt><dd data-t="factNowVal">Sparks of Silt a systém pro Respawn ČB</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section id="dokazal">
+  <div class="block block--open">
+    <div class="block__head">
+      <p class="kicker"><b>02</b><span data-t="didKicker">Co jsem dokázal</span></p>
+      <h2 class="block__title" data-t="didH">Z jedné zakázky jsou tři.</h2>
+    </div>
+    <div class="block__body">
+      <div class="prose" data-t="didText">
+        <p><strong>Respawn Lasergame České Budějovice</strong> byla moje první opravdu velká práce pro klienta. Musel jsem být serióznější, komunikovat profesionálně a dotáhnout to od zadání přes konzultace až po předání.</p>
+        <p>No a když web začal fungovat, ozvali se další. Díky Respawnu jsem získal zakázku pro <strong>další laser game arénu</strong> a <strong>pro jednu školu</strong>.</p>
+      </div>
+    </div>
+    <div class="block__full cells figures">
+      <div><b data-count>{{COUNT}}</b><span data-t="figProjects">vlastních projektů</span></div>
+      <div><b data-count>{{LINES}}</b><span data-t="figLines">řádků kódu</span></div>
+      <div><b data-count>3</b><span data-t="figClients">zakázky pro klienty</span></div>
+      <div><b data-count>3+</b><span data-t="figYears">roky programování</span></div>
+    </div>
+    <div class="block__full cells features">
+      <a class="feature" href="https://lasergamecb.cz" target="_blank" rel="noopener">
+        <span class="feature__art"><img src="projekty/shots/respawn-lasergame-cb.webp" alt="" width="960" height="600" loading="lazy" decoding="async"></span>
+        <span class="feature__body">
+          <span class="feature__top"><span class="status status--live" data-t="liveBadge">V provozu</span><span class="feature__host">lasergamecb.cz</span></span>
+          <span class="feature__name">Respawn Lasergame ČB</span>
+          <span class="feature__line" data-t="respawnLine">Web a systém skutečné laser arény: rezervace, statistiky z Laserforce a tři úrovně správy. Běží naostro a pořád ho rozvíjím.</span>
+        </span>
+      </a>
+      <div class="feature">
+        <span class="feature__art"><img src="img/sparks.svg" alt="" width="800" height="600" loading="lazy" decoding="async"></span>
+        <span class="feature__body">
+          <span class="feature__top"><span class="status status--wip" data-t="wipBadge">Ve vývoji</span></span>
+          <span class="feature__name">Sparks of Silt</span>
+          <span class="feature__line" data-t="sparksLine">Moje vlastní hra ve stylu Arcane. Stavím ji v Unity, postavy dělám v Blenderu a hudbu k ní skládám ve vlastní Python knihovně Paprika.</span>
+        </span>
+      </div>
+    </div>
+    <div class="block__full" id="vyzkousej">
+      <div class="sec-head">
+        <h3 data-t="tryH">Tohle si můžeš hned vyzkoušet.</h3>
+        <p class="lead" data-t="tryLead">Tyhle projekty běží <strong>na Raspberry Pi u mě doma</strong>, takže si je můžeš rovnou proklikat. Tečka ukazuje, jestli zrovna odpovídají.</p>
+      </div>
+      <div class="cells features" style="border-top:1px solid var(--line)">{{FEATURED}}
+      </div>
+      <div class="also prose" style="border-top:1px solid var(--line);max-width:none"><p data-t="also">A pak jsou tu věci jako <a href="projekty/#webly">vlastní programovací jazyk</a>, <a href="projekty/#flybrain-tetris">Tetris, který se učí hrát skutečný mozek octomilky</a>, nebo <a href="projekty/#bakix-hackathon">Bakix postavený za jediný den na hackathonu</a> a atd… Všechno je v <a href="projekty/">projektech</a>.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="proc">
+  <p class="kicker"><b>03</b><span data-t="whyKicker">Proč to dělám</span></p>
+  <p class="why__quote" data-t="whyQuote">Dělám věci hlavně proto, abych se <span class="brush">posouval dál</span> a pomáhal ostatním, ne pro slávu nebo peníze.</p>
+  <div class="why__cols">
+    <div class="prose" data-t="whyA"><p>Spousta věcí vznikla prostě proto, že jsem je sám potřeboval. Hrbil jsem se u počítače, tak jsem si napsal <a href="projekty/#postureguard">PostureGuard</a>, který přes webkameru hlídá, jak sedím, a když se hrbím, vyskočí červené okno. Otravné, ale funguje to.</p></div>
+    <div class="prose" data-t="whyB"><p>A někdy z toho má radost i někdo jiný. Školní parlament dostal <a href="projekty/#lid">aplikaci LID</a> na nápady a tajné hlasování, kámoši z Písku mají <a href="projekty/#sandiff">web svého LoL týmu</a>. Když to někomu pomůže, je to nejlepší část celé práce.</p></div>
+  </div>
+</section>
+
+<section class="block" id="jak">
+  <div class="block__head">
+    <p class="kicker"><b>04</b><span data-t="howKicker">Jak pracuju</span></p>
+    <h2 class="block__title" data-t="howH">Řídím vývoj, AI dělá těžkou práci.</h2>
+    <img class="spot" src="img/spot-path.svg" width="400" height="400" alt="" loading="lazy">
+  </div>
+  <div class="block__body">
+    <p class="lead" data-t="howLead">Snažím se programovat i „normálně“, ale nepoužívat AI v roce 2026 je jako odmítat kalkulačku v roce 2010. AI je <strong>můj nástroj, ne berlička</strong>. Klidně ať napíše kód, ale <strong>musím tomu rozumět</strong>, zabezpečit to a dostat to k lidem. A u všeho se <em>učím pořád dokola</em>.</p>
+    <ol class="cells flow">
+      <li><h4 data-t="flow1t">Nápad</h4><p data-t="flow1d">Najít problém, který stojí za to vyřešit.</p></li>
+      <li><h4 data-t="flow2t">Stavba s AI</h4><p data-t="flow2d">AI píše kód, já vedu směr, architekturu a kontroluju to.</p></li>
+      <li><h4 data-t="flow3t">Nasazení</h4><p data-t="flow3d">Dostat to z localhostu k reálným uživatelům.</p></li>
+      <li><h4 data-t="flow4t">Bezpečnost</h4><p data-t="flow4d">Ošetřit data, přihlašování a slabá místa.</p></li>
+      <li><h4 data-t="flow5t">Testování</h4><p data-t="flow5d">Projít to, najít bugy, opravit, zopakovat.</p></li>
+      <li><h4 data-t="flow6t">Marketing</h4><p data-t="flow6d">Dostat projekt mezi lidi. A znovu od začátku.</p></li>
+    </ol>
+    <dl class="stack" aria-label="Technologie" data-t-aria="stackLabel">
+      <div><dt data-t="stackLangs">jazyky</dt><i aria-hidden="true"></i><dd><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#python"/></svg>python</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#html"/></svg>html</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#css"/></svg>css</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#javascript"/></svg>javascript</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#java"/></svg>java</span></dd></div>
+      <div><dt data-t="stackWeb">web</dt><i aria-hidden="true"></i><dd><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#flask"/></svg>flask</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#sqlite"/></svg>sqlite</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#mysql"/></svg>mysql</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#discord"/></svg><span data-t="techBots">discord boti</span></span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#odoo"/></svg>odoo</span></dd></div>
+      <div><dt data-t="stackGames">hry a 3d</dt><i aria-hidden="true"></i><dd><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#unity"/></svg>unity</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#blender"/></svg>blender</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#threejs"/></svg>three.js</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#video"/></svg><span data-t="techVideo">střih videí</span></span></dd></div>
+      <div><dt data-t="stackHw">hardware</dt><i aria-hidden="true"></i><dd><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#raspberrypi"/></svg>raspberry pi</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#linux"/></svg>linux</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#git"/></svg>git</span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#print3d"/></svg><span data-t="tech3d">3d tisk</span></span><span class="tech"><svg aria-hidden="true"><use href="assets/tech.svg?v={{V}}#ai"/></svg>ai</span></dd></div>
+    </dl>
+    <p style="margin-top:1.6rem"><a class="link" href="jak-funguju/"><span data-t="howMore">Jak to vypadá u zakázky krok po kroku</span> <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+  </div>
+</section>
+
+<section id="rad">
+  <div class="sec-head" style="padding-top:clamp(2.6rem,6vw,4.6rem)">
+    <p class="kicker" style="margin-bottom:1.1rem"><b>05</b><span data-t="likeKicker">Co mám rád</span></p>
+    <h2 class="block__title" style="margin-top:0" data-t="likeH">A když zrovna nestavím web…</h2>
+  </div>
+  <div class="cells likes" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 42h24M16 42v-4h16v4"/><path d="M18 38c0-6 8-9 9-17-2 2-5 3-7 3l-4 3-4-4 9-12 1-5 4 4c6 2 10 8 10 15 0 5-1 9-3 13"/><circle class="dot" cx="23" cy="14.5" r="1.6"/></svg><h3 data-t="like1t">Šachy</h3><p data-t="like1d">Hraju je a napsal jsem si i <a href="projekty/#sachy-s-ai">šachy proti AI</a>, tak aby bylo s kým hrát.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 16h23v8H17l-2 12H8l2-12H4z"/><path d="M27 18h4v4h-4M17 24c0 3-1 5-4 5"/><path class="hl" d="M36 20h9M35 12l5-3M35 28l5 3"/></svg><h3 data-t="like2t">Laser game</h3><p data-t="like2d">Tam to celé začalo. Mám <a href="projekty/#lasergame-stats">vlastní statistiky</a> a aj i <a href="projekty/#vr-lasergame">verzi ve VR</a>.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><path d="M15 13h18c5 0 8 4 9 10l2 10c.7 4-4 6-7 3l-6-6H17l-6 6c-3 3-7.7 1-7-3l2-10c1-6 4-10 9-10z"/><path d="M15 18v7M11.5 21.5h7"/><circle class="dot" cx="31" cy="19" r="1.9"/><circle class="dot" cx="36" cy="24" r="1.9"/></svg><h3 data-t="like3t">Hry</h3><p data-t="like3d">League of Legends, Minecraft a k tomu <a href="projekty/#nullstate">vlastní hry</a>, takže hraní je vlastně taky práce.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="12" width="24" height="24" rx="2"/><path d="M18 5v7M30 5v7M18 36v7M30 36v7M5 18h7M5 30h7M36 18h7M36 30h7"/><rect class="hl" x="19" y="19" width="10" height="10"/></svg><h3 data-t="like4t">Hardware</h3><p data-t="like4d">Raspberry Pi mi doma běží pořád a jede na něm i tenhle web.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 43h40M8 43V6h32v37M8 13h32"/><path d="M19 13h10v5l-5 6-5-6z"/><path class="hl" d="M16 38h16M18 33h12M21 28h6"/></svg><h3 data-t="like5t">3D tisk</h3><p data-t="like5d">Protože je fajn, když věc neskončí jen na obrazovce.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><path d="M18 37V12l22-6v26M18 20l22-6"/><circle class="hl" cx="12.5" cy="37" r="5.5"/><circle class="hl" cx="34.5" cy="32" r="5.5"/></svg><h3 data-t="like6t">Hudba</h3><p data-t="like6d">Skládám ji v Pythonu v <a href="projekty/#paprika">Paprice</a>, protože proč ne. A postavil jsem si appku na <a href="projekty/#kytara-za-15-minut">kytaru</a>.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="15" width="38" height="28" rx="2"/><path d="m16 5 8 10 8-10"/><path d="m13 24 6 5-6 5"/><path class="hl" d="M23 35h11"/></svg><h3 data-t="like7t">Arcane a Mr. Robot</h3><p data-t="like7d">Z obou mám vlastní hru, takže to asi trochu přeháním.</p></div>
+    <div class="like"><svg class="i" viewBox="0 0 48 48" aria-hidden="true"><circle cx="31" cy="8" r="4"/><path d="m27 16-5 12 7 6 1 11M22 28l-3 7-9 3M27 16l-9 2-4 7M27 16l6 7 7 1"/><path class="hl" d="M3 14h7M2 21h5M3 28h6"/></svg><h3 data-t="like8t">Sport</h3><p data-t="like8d">Občas. Aspoň se pak nehrbím, a kdyby jo, mám na to appku.</p></div>
+  </div>
+</section>
+
+<section id="dal">
+  <div class="sec-head">
+    <p class="kicker"><b>06</b><span data-t="nextKicker">Kam dál</span></p>
+  </div>
+  <div class="doors" style="border-top:1px solid var(--line)">
+    <a class="door" href="jak-funguju/">
+      <span class="kicker" data-t="door1k">Chceš zakázku</span>
+      <span class="door__name"><span data-t="door1">Jak funguju</span> <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <p data-t="door1d">Co přesně udělám, když mi napíšeš, v jakém pořadí a proč.</p>
+    </a>
+    <a class="door" href="projekty/">
+      <span class="kicker" data-t="door2k">Chceš se podívat</span>
+      <span class="door__name"><span data-t="door2">Projekty</span> <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <p data-t="door2d">Všech {{COUNT}}: zakázky, hry, AI pokusy i malé nástroje. U každého krátké info.</p>
+    </a>
+  </div>
+  <div class="contact" id="kontakt">
+    <a class="contact__mail" href="mailto:vojta.kurinec@gmail.com?subject=Dotaz&amp;body=Ahoj,">vojta.kurinec@gmail.com</a>
+    <ul class="contact__list">
+      <li><a class="link" href="https://github.com/Voku199" rel="me noopener" target="_blank">github.com/Voku199</a></li>
+      <li><a class="link" href="https://instagram.com/voku199" rel="me noopener" target="_blank">instagram.com/voku199</a></li>
+    </ul>
+  </div>
+</section>
+
+</div>
+</main>
+
+{{FOOTER}}
+
+<script id="i18n" type="application/json">{
+  "en": {
+    "title": "Vojtěch Kurinec (Voku199) | Young developer from South Bohemia",
+    "railLabel": "Chapters", "railWho": "Who I am", "railDid": "What I’ve done", "railWhy": "Why I do it", "railHow": "How I work", "railLike": "What I like", "railNext": "Where next",
+    "heroLabel": "Intro", "paintAlt": "A painting made of ASCII characters: Mount Fuji, a red torii gate on a lake and a cherry branch",
+    "h1": "I’m <span class=\"brush\">Voku</span>.",
+    "lead": "<em>Ahoj</em> is Czech for hello. My full name is Vojtěch Kurinec, online I go by Voku199. I’m 16, from South Bohemia, and I code. Mostly websites, games and things with AI. This page is all about me, so feel free to grab a tea…",
+    "ctaWho": "So who am I", "ctaProjects": "Straight to the projects",
+    "heroCap": "Every character is one brush stroke. Click the water, or switch to night.",
+    "whoKicker": "Who I am", "whoH": "I learn best by just building the thing.",
+    "whoText": "<p>My name is <strong>Vojtěch Kurinec</strong>, but most people know me as <strong>Voku</strong>. I’m 16 and IT is my passion, so I code, try things with AI, 3D print, tinker with Raspberry Pi and I’m really into hardware.</p><p>I have a lot of my own projects behind me and I learned more from them than from any textbook. Some run, some I shelved, but I took something away from all of them.</p>",
+    "photoBtn": "Switch the photo: serious or funny", "photoAlt": "Vojtěch Kurinec, portrait", "photoAltFunny": "Vojtěch Kurinec, a funny photo with a silly face", "photoCap": "A bit funny. Try clicking me.",
+    "factAge": "Age", "factAgeVal": "16", "factFrom": "From", "factFromVal": "South Bohemia", "factFav": "Favourite", "factFavVal": "Python and Flask", "factNow": "Building now", "factNowVal": "Sparks of Silt and a system for Respawn ČB",
+    "didKicker": "What I’ve done", "didH": "One client turned into three.",
+    "didText": "<p><strong>Respawn Lasergame České Budějovice</strong> was my first really big job for a client. I had to be more serious, communicate professionally and see it through from the brief and consultations all the way to handover.</p><p>And once the site was working, others got in touch. Thanks to Respawn I got work for <strong>another laser game arena</strong> and <strong>a school</strong>.</p>",
+    "figProjects": "own projects", "figLines": "lines of code", "figClients": "client jobs", "figYears": "years of coding",
+    "liveBadge": "Live", "wipBadge": "In progress",
+    "respawnLine": "Site and system for a real laser arena: bookings, Laserforce stats and three admin tiers. It runs in production and I keep developing it.",
+    "sparksLine": "My own game in the style of Arcane. I’m building it in Unity, making the characters in Blender and composing the music in my own Python library, Paprika.",
+    "tryH": "Things you can try right now.", "tryLead": "These run <strong>on a Raspberry Pi in my home</strong>, so you can click through them right now. The dot shows whether each one is answering.", "tryIt": "Try it",
+    "also": "And then there’s <a href=\"projekty/#webly\">my own programming language</a>, <a href=\"projekty/#flybrain-tetris\">Tetris being learned by a real fruit fly brain</a>, <a href=\"projekty/#bakix-hackathon\">Bakix built in a single day at a hackathon</a> and so on… It’s all in the <a href=\"projekty/\">projects</a>.",
+    "whyKicker": "Why I do it", "whyQuote": "I do things mainly to <span class=\"brush\">keep moving forward</span> and to help others, not for fame or money.",
+    "whyA": "<p>A lot of it exists simply because I needed it. I was slouching at my computer, so I wrote <a href=\"projekty/#postureguard\">PostureGuard</a>, which watches how I sit through the webcam and throws up a red window when I slouch. Annoying, but it works.</p>",
+    "whyB": "<p>And sometimes someone else gets something out of it too. The school parliament got <a href=\"projekty/#lid\">the LID app</a> for ideas and secret ballots, my friends from Písek have <a href=\"projekty/#sandiff\">a site for their LoL team</a>. When it helps someone, that’s the best part of the whole job.</p>",
+    "howKicker": "How I work", "howH": "I lead the build, AI does the heavy lifting.",
+    "howLead": "I try to code the “normal” way too, but not using AI in 2026 is like refusing a calculator in 2010. AI is <strong>my tool, not a crutch</strong>. Sure, let it write the code, but <strong>I have to understand it</strong>, secure it and get it to people. And with everything, I <em>keep learning over and over</em>.",
+    "flow1t": "Idea", "flow1d": "Find a problem worth solving.", "flow2t": "Build with AI", "flow2d": "AI writes code, I set direction and architecture and check it.", "flow3t": "Deploy", "flow3d": "Get it from localhost to real users.", "flow4t": "Security", "flow4d": "Handle data, logins and weak spots.", "flow5t": "Testing", "flow5d": "Go through it, find bugs, fix, repeat.", "flow6t": "Marketing", "flow6d": "Get the project to people. And start again.",
+    "stackLabel": "Technologies", "stackLangs": "languages", "stackWeb": "web", "stackGames": "games and 3d", "stackHw": "hardware", "techBots": "discord bots", "techVideo": "video editing", "tech3d": "3d printing",
+    "howMore": "What a client job looks like, step by step",
+    "likeKicker": "What I like", "likeH": "And when I’m not building a website…",
+    "like1t": "Chess", "like1d": "I play it, and I even wrote <a href=\"projekty/#sachy-s-ai\">chess against AI</a> so there’s always someone to play with.",
+    "like2t": "Laser game", "like2d": "That’s where it all started. I have <a href=\"projekty/#lasergame-stats\">my own stats</a> and even <a href=\"projekty/#vr-lasergame\">a VR version</a>.",
+    "like3t": "Games", "like3d": "League of Legends, Minecraft and <a href=\"projekty/#nullstate\">my own games</a> on top, so playing is kind of work too.",
+    "like4t": "Hardware", "like4d": "A Raspberry Pi runs non-stop at my place, and this very site lives on it.",
+    "like5t": "3D printing", "like5d": "Because it’s nice when a thing doesn’t end on a screen.",
+    "like6t": "Music", "like6d": "I compose it in Python with <a href=\"projekty/#paprika\">Paprika</a>, because why not. I also built an app for <a href=\"projekty/#kytara-za-15-minut\">guitar</a>.",
+    "like7t": "Arcane and Mr. Robot", "like7d": "I have my own game based on each, so I’m probably overdoing it.",
+    "like8t": "Sport", "like8d": "Sometimes. At least I don’t slouch afterwards, and if I do, there’s an app for that.",
+    "nextKicker": "Where next",
+    "door1k": "You want something built", "door1": "How I work", "door1d": "What exactly happens when you write to me, in what order and why.",
+    "door2k": "You want to look around", "door2": "Projects", "door2d": "All {{COUNT}}: client work, games, AI experiments and small tools. A short note on each."
+  },
+  {{I18N_EXTRA}}
+}</script>
+<script src="assets/ascii.js?v={{V}}"></script>
+<script src="assets/site.js?v={{V}}"></script>
+</body>
+</html>

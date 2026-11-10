@@ -1,4 +1,4 @@
-"""Postaví rozcestník (index.html) a archiv projektů (projekty/index.html) přímo z monorepa.
+"""Postaví úvodní stránku (index.html), /jak-funguju/ a appku s projekty (projekty/index.html) přímo z monorepa.
 
     python tools/build_projects.py                 # monorepo = složka nad PORTOFOLIO/
     python tools/build_projects.py --root X        # jiná složka s projekty
@@ -23,6 +23,7 @@ Nová složka v monorepu, která není v projects_data.py ani v IGNORE, se na we
 nedostane, build ji jen vypíše. Nic soukromého tak neuteče omylem.
 """
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -40,8 +41,10 @@ OUT = SITE / "projekty"
 SHOTS_IN = HERE / "shots"
 SHOTS_OUT = OUT / "shots"
 TEMPLATE = HERE / "projekty.template.html"
-HOME_TEMPLATE = HERE / "rozcestnik.template.html"
-ABOUT_FILE = SITE / "o-mne" / "index.html"
+HOME_TEMPLATE = HERE / "index.template.html"
+HOW_TEMPLATE = HERE / "jak-funguju.template.html"
+HOW_FILE = SITE / "jak-funguju" / "index.html"
+ASSETS = SITE / "assets"
 MIN_FOUND = 0.8                          # míň nalezených projektů = skoro jistě špatná složka
 DEFAULT_ROOT = SITE.parent.parent        # .Projekty (monorepo)
 
@@ -271,105 +274,212 @@ def status_html(p):
     return ""
 
 
+ARROW = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>'
+CAT_MARKS = {"klienti": ("#", "var(--seal)"), "web": ("=", "#6A9BCC"), "hry": ("+", "var(--olive)"),
+             "ai": ("*", "#8E7FBB"), "nastroje": ("-", "var(--clay)"), "server": (":", "var(--muted)")}
+
+
 def card_html(i, p, cats):
-    img = f'<img src="shots/{p["image"]}" alt="" width="480" height="300" loading="lazy" decoding="async">'
-    figure = (f'<a class="pc__img" href="{escape(p["url"])}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">{img}</a>'
-              if p["url"] else f'<div class="pc__img">{img}</div>')
-    chips = "".join(f"<li>{escape(t)}</li>" for t in p["stack"])
-    link = (f'<a class="link" href="{escape(p["url"])}" target="_blank" rel="noopener">{escape(host(p["url"]))}'
-            f'<svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>' if p["url"] else "")
+    """Řádek v seznamu + detail. Detail je v HTML u každého projektu, ať ho vidí vyhledávače i prohlížeč bez JS."""
     d = datetime.fromtimestamp(p["updated"])
+    chips = "".join(f"<li>{escape(t)}</li>" for t in p["stack"])
+    lang = p["stack"][0] if p["stack"] else ""
+    can_try = bool(p.get("url") and (p.get("demo") or p.get("featured")))
+    ping = f'<span data-ping="{escape(p["url"])}"><span class="ping"></span></span>' if can_try else ""
+    try_line = f'<p class="d__try" data-try="{p["slug"]}">{escape(p["try_cs"])}</p>' if p.get("try_cs") else ""
+    note = f'<p class="d__note" data-note="{p["slug"]}">{escape(p["note_cs"])}</p>' if p.get("note_cs") else ""
+    label = ('<span data-t="tryIt">Vyzkoušet naživo</span>' if can_try else '<span data-t="openIt">Otevřít</span>')
+    go = (f'<a class="btn d__go" href="{escape(p["url"])}" target="_blank" rel="noopener">{label} '
+          f'<span style="opacity:.7;font-weight:400">{escape(host(p["url"]))}</span> {ARROW}</a>') if p["url"] else ""
     return f"""
-<article class="pc" id="{p['slug']}" data-slug="{p['slug']}" data-cat="{p['cat']}" data-lines="{p['lines']}" data-date="{d:%Y-%m-%d}" data-name="{escape(p['name'].lower())}" style="--i:{i % 6}">
-  {figure}
-  <div class="pc__body">
-    <div class="pc__top"><span class="pc__cat" data-cat-label="{p['cat']}">{escape(cats[p['cat']][0])}</span>{status_html(p)}</div>
-    <h3>{escape(p['name'])}</h3>
-    <p data-p="{p['slug']}">{escape(p['cs'])}</p>
-    <ul class="chips" aria-label="Technologie">{chips}</ul>
-    <div class="pc__foot"><span class="pc__meta"><span data-lines="{p['lines']}">{cs_num(p['lines'])} řádků</span> · <time datetime="{d:%Y-%m}">{CS_MONTHS[d.month - 1]} {d.year}</time></span>{link}</div>
-  </div>
+<article class="p" id="{p['slug']}" data-status="{p['status'] or ''}" data-cat="{p['cat']}" data-lines="{p['lines']}" data-date="{d:%Y-%m-%d}" data-name="{escape(p['name'].lower())}" data-can="{1 if can_try else 0}" style="--i:{min(i, 16)}">
+  <h2 class="p__h"><button class="p__row" type="button" aria-expanded="false" aria-controls="m-{p['slug']}">
+    <span class="p__star" aria-hidden="true">*</span><span class="p__name">{escape(p['name'])}</span><span class="p__dots" aria-hidden="true"></span><span class="p__right">{escape(lang)} · {d.year}</span>
+    <span class="p__line" data-p="{p['slug']}">{escape(p['cs'])}</span>
+  </button></h2>
+  <div class="p__more" id="m-{p['slug']}"><div class="d">
+    <span class="d__img"><img src="shots/{p['image']}" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
+    <div class="d__body">
+      <div class="d__top"><span class="d__cat" data-cat-label="{p['cat']}">{escape(cats[p['cat']][0])}</span>{status_html(p)}{ping}</div>
+      <p class="d__name">{escape(p['name'])}</p>
+      <p class="d__desc" data-p="{p['slug']}">{escape(p['cs'])}</p>{try_line}{note}
+      <ul class="chips">{chips}</ul>
+      <p class="d__facts"><span>{cs_num(p['lines'])} <span data-t="factLinesWord">řádků</span></span><span>{d.month}/{d.year}</span></p>
+      {go}
+    </div>
+  </div></div>
 </article>"""
 
 
-def demo_html(p):
-    return f"""
-<a class="demo" href="{escape(p['url'])}" target="_blank" rel="noopener" data-ping="{escape(p['url'])}">
-  <span class="demo__img"><img src="shots/{p['image']}" alt="" width="480" height="300" loading="lazy" decoding="async"></span>
-  <span class="demo__body">
-    <span class="demo__top"><span class="ping" data-t="pingWait">Zkouším spojení…</span><span class="demo__host">{escape(host(p['url']))}</span></span>
-    <span class="demo__name">{escape(p['name'])}</span>
-    <span class="demo__line" data-p="{p['slug']}">{escape(p['cs'])}</span>
-    <span class="demo__go"><span data-t="tryIt">Vyzkoušet naživo</span> <svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
-  </span>
-</a>"""
-
-
 def featured_html(i, p):
-    note = (f'\n    <span class="card__note" data-note="{p["slug"]}">{escape(p["note_cs"])}</span>'
+    note = (f'\n    <span class="feature__note" data-note="{p["slug"]}">{escape(p["note_cs"])}</span>'
             if p.get("note_cs") else "")
     return f"""
-<a class="card" href="{escape(p['url'])}" target="_blank" rel="noopener" data-ping="{escape(p['url'])}" style="--i:{i % 2}">
-  <span class="card__img"><img src="projekty/shots/{p['image']}" alt="" width="960" height="600" loading="lazy" decoding="async"></span>
-  <span class="card__body">
-    <span class="card__top"><span class="ping" data-t="pingWait">Zkouším spojení…</span><span class="card__host">{escape(host(p['url']))}</span></span>
-    <span class="card__name">{escape(p['name'])}</span>
-    <span class="card__try" data-try="{p['slug']}">{escape(p['try_cs'])}</span>{note}
-    <span class="card__go"><span data-t="tryIt">Vyzkoušet</span> <svg class="i" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+<a class="feature" href="{escape(p['url'])}" target="_blank" rel="noopener" data-ping="{escape(p['url'])}">
+  <span class="feature__art"><img src="projekty/shots/{p['image']}" alt="" width="960" height="600" loading="lazy" decoding="async"></span>
+  <span class="feature__body">
+    <span class="feature__top"><span class="ping"></span><span class="feature__host">{escape(host(p['url']))}</span></span>
+    <span class="feature__name">{escape(p['name'])}</span>
+    <span class="feature__line" data-try="{p['slug']}">{escape(p['try_cs'])}</span>{note}
+    <span class="feature__go"><span data-t="tryIt">Vyzkoušet</span> {ARROW}</span>
   </span>
 </a>"""
 
 
-def news_html(p, cats):
-    d = datetime.fromtimestamp(p["updated"])
-    return f"""
-      <li><a href="projekty/#{p['slug']}"><time datetime="{d:%Y-%m-%d}" data-day="{d:%Y-%m-%d}">{d.day}. {d.month}. {d.year}</time><span class="news__name">{escape(p['name'])}</span><span class="news__cat" data-cat-label="{p['cat']}">{escape(cats[p['cat']][0])}</span></a></li>"""
+# ─────────────────────────────────────────────────────────── společné kusy stránek
+
+FONTS = ("https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500"
+         "&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&display=swap")
+# Motiv se rozhoduje ještě před prvním vykreslením, ať stránka v noci neblikne:
+# uložená volba > systém > denní doba (večer a v noci tmavě, protože kvůli tomu tmavý režim je).
+THEME_SCRIPT = ("<script>(function(d){d.classList.add('js');var t;try{t=localStorage.getItem('theme')}catch(e){}"
+                "if(t!=='light'&&t!=='dark'){var h=new Date().getHours();"
+                "t=matchMedia('(prefers-color-scheme: dark)').matches||h>=20||h<6?'dark':'light'}"
+                "d.dataset.theme=t})(document.documentElement)</script>")
+SEAL = ('<svg class="seal" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="5"/>'
+        '<g fill="#fff6f2"><rect x="15.5" y="5" width="3" height="23"/><rect x="7" y="13" width="3" height="15"/>'
+        '<rect x="24" y="13" width="3" height="15"/><rect x="7" y="25" width="20" height="3"/></g></svg>')
 
 
-def build_home(items, cats, total):
-    """Rozcestník: vybrané projekty k vyzkoušení (pole featured) a naposledy změněné projekty."""
+def asset_version():
+    """Krátký otisk assets/: změna souboru = nová adresa, takže se neservíruje starý z cache."""
+    h = hashlib.sha1()
+    for f in sorted(ASSETS.iterdir()):
+        h.update(f.read_bytes())
+    return h.hexdigest()[:8]
+
+
+def head_html(base):
+    return "\n".join([
+        THEME_SCRIPT,
+        '<link rel="preconnect" href="https://fonts.googleapis.com">',
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
+        f'<link rel="stylesheet" href="{FONTS}">',
+        f'<link rel="stylesheet" href="{base}assets/site.css?v={asset_version()}">',
+    ])
+
+
+def nav_html(base, current):
+    links = [("jak-funguju/", "navHow", "Jak funguju", "how"), ("projekty/", "navProjects", "Projekty", "projects")]
+    items = ""
+    for href, key, label, name in links:
+        here = ' aria-current="page"' if name == current else ""
+        items += f'<a href="{base}{href}" data-t="{key}"{here}>{label}</a>'
+    home = "../" if base else "./"
+    return f"""<header class="nav">
+  <div class="nav__inner wrap">
+    <a class="nav__logo" href="{home}" aria-label="Voku">{SEAL}<span>Voku</span></a>
+    <nav class="nav__links" aria-label="Menu" data-t-aria="navMenu">{items}</nav>
+    <button class="theme" type="button" aria-pressed="false" aria-label="Zapnout tmavý režim"><span class="theme__sun" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/></svg></span><span class="theme__moon" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg></span></button>
+    <div class="lang-switch" role="group" aria-label="Language / Jazyk">
+      <button type="button" class="active" data-lang="cs" aria-pressed="true" title="Česky">CS</button>
+      <button type="button" data-lang="en" aria-pressed="false" title="English">EN</button>
+    </div>
+  </div>
+</header>"""
+
+
+def footer_html(base, total, count):
+    home = "../" if base else "./"
+    return f"""<footer class="footer">
+  <div class="wrap wrap--ruled">
+    <p class="footer__quote" data-t="footQuote">„Neboj se říct <span class="brush">svůj názor</span>.“</p>
+    <div class="waves" data-waves aria-hidden="true"></div>
+    <div class="footer__row">
+      <small class="footer__nav"><a href="{home}">vokudev.cz</a><a href="{base}jak-funguju/" data-t="navHow">Jak funguju</a><a href="{base}projekty/" data-t="navProjects">Projekty</a><a href="https://github.com/Voku199" rel="me noopener">github.com/Voku199</a></small>
+      <small>{count} · {round_k(total)} <span data-t="footLines">řádků kódu</span></small>
+    </div>
+  </div>
+</footer>"""
+
+
+def fill(template, values):
+    """Dosadí {{KLÍČE}}. Nedosazený klíč je skoro jistě překlep, proto build skončí chybou."""
+    page = template
+    for key, val in values.items():
+        page = page.replace("{{" + key + "}}", val)
+    left = sorted(set(re.findall(r"\{\{[A-Z_0-9]+\}\}", page)))
+    if left:
+        raise SystemExit(f"v šabloně zůstalo nedosazené: {left}")
+    return page
+
+
+def person(home):
+    return {"@type": "Person", "@id": f"{home}#voku", "name": "Vojtěch Kurinec", "givenName": "Vojtěch",
+            "familyName": "Kurinec", "alternateName": ["Voku199", "Voku", "Vojtech Kurinec"], "url": home,
+            "image": f"{home}ja_seriozne.webp", "email": "vojta.kurinec@gmail.com", "jobTitle": "Vývojář",
+            "address": {"@type": "PostalAddress", "addressRegion": "Jihočeský kraj", "addressCountry": "CZ"},
+            "sameAs": ["https://github.com/Voku199", "https://instagram.com/voku199"],
+            "knowsAbout": ["Python", "Flask", "JavaScript", "Java", "WebXR", "three.js", "Unity", "Blender",
+                           "Raspberry Pi", "3D tisk", "AI"]}
+
+
+def json_inner(data):
+    """Obsah JSON objektu bez závorek, jde dosadit do i18n bloku v šabloně."""
+    return json.dumps(data, ensure_ascii=False)[1:-1].replace("</", "<\\/")
+
+
+def build_home(items, total):
+    """Úvodní stránka: texty ručně v šabloně, čísla a projekty k vyzkoušení (pole featured) z buildu."""
     featured = sorted((p for p in items if p.get("featured")), key=lambda p: p["featured"])
     for p in featured:
         if not (p.get("url") and p.get("try_cs") and p.get("try_en")):
-            raise SystemExit(f"{p['slug']}: projekt na rozcestníku potřebuje url, try_cs a try_en")
+            raise SystemExit(f"{p['slug']}: projekt na úvodní stránce potřebuje url, try_cs a try_en")
     if not featured:
         raise SystemExit("v projects_data.py není žádný projekt s polem featured")
     n = len(featured)
-    word = "projekt k vyzkoušení" if n == 1 else "projekty k vyzkoušení" if n < 5 else "projektů k vyzkoušení"
-    home, about, archive = f"{D.SITE_URL}/", f"{D.SITE_URL}/o-mne/", f"{D.SITE_URL}/projekty/"
+    home, how, archive = f"{D.SITE_URL}/", f"{D.SITE_URL}/jak-funguju/", f"{D.SITE_URL}/projekty/"
     jsonld = {"@context": "https://schema.org", "@graph": [
-        {"@type": "WebSite", "@id": f"{home}#web", "url": home, "name": "Voku", "inLanguage": ["cs", "en"],
+        {"@type": "WebSite", "@id": f"{home}#web", "url": home, "name": "Voku",
+         "alternateName": ["Vojtěch Kurinec", "Voku199", "vokudev.cz"], "inLanguage": ["cs", "en"],
          "publisher": {"@id": f"{home}#voku"}},
-        {"@type": "Person", "@id": f"{home}#voku", "name": "Vojtěch Kurinec", "alternateName": "Voku", "url": about},
-        {"@type": "WebPage", "@id": f"{home}#page", "url": home, "inLanguage": "cs",
-         "name": "Vojtěch \"Voku\" Kurinec | Projekty k vyzkoušení",
-         "isPartOf": {"@id": f"{home}#web"}, "about": {"@id": f"{home}#voku"},
+        person(home),
+        {"@type": "ProfilePage", "@id": f"{home}#page", "url": home, "inLanguage": "cs",
+         "name": "Vojtěch Kurinec (Voku199) | Mladý vývojář z jižních Čech",
+         "isPartOf": {"@id": f"{home}#web"}, "mainEntity": {"@id": f"{home}#voku"},
          "primaryImageOfPage": f"{home}og-image.png",
-         "hasPart": [{"@type": "ProfilePage", "@id": f"{about}#page", "url": about},
+         "hasPart": [{"@type": "WebPage", "@id": f"{how}#page", "url": how},
                      {"@type": "CollectionPage", "@id": f"{archive}#page", "url": archive}],
-         "mainEntity": {"@type": "ItemList", "numberOfItems": n, "itemListElement": [
+         "about": {"@type": "ItemList", "numberOfItems": n, "itemListElement": [
              {"@type": "ListItem", "position": i + 1, "url": p["url"], "name": p["name"]}
              for i, p in enumerate(featured)]}},
     ]}
-    i18n = {"cats": cats,
-            "try": {p["slug"]: [p["try_cs"], p["try_en"]] for p in featured},
-            "note": {p["slug"]: [p["note_cs"], p["note_en"]] for p in featured if p.get("note_cs")}}
-    page = HOME_TEMPLATE.read_text(encoding="utf-8")
-    for key, val in {
-        "SITE_URL": D.SITE_URL,
-        "COUNT": str(len(items)),
-        "LINES": round_k(total),
-        "FEATURED_COUNT": str(n),
-        "FEATURED_WORD_JS": json.dumps(word, ensure_ascii=False),
-        "FEATURED_WORD": word,
+    extra = {"try": {p["slug"]: [p["try_cs"], p["try_en"]] for p in featured},
+             "note": {p["slug"]: [p["note_cs"], p["note_en"]] for p in featured if p.get("note_cs")}}
+    page = fill(HOME_TEMPLATE.read_text(encoding="utf-8"), {
+        "HEAD": head_html(""), "NAV": nav_html("", "home"), "FOOTER": footer_html("", total, f"{len(items)} projektů"),
+        "V": asset_version(), "SITE_URL": D.SITE_URL, "COUNT": str(len(items)), "LINES": round_k(total),
         "FEATURED": "".join(featured_html(i, p) for i, p in enumerate(featured)),
-        "NEWS": "".join(news_html(p, cats) for p in items[:D.NEWS_COUNT]),
-        "I18N": json.dumps(i18n, ensure_ascii=False).replace("</", "<\\/"),
+        "I18N_EXTRA": json_inner(extra),
         "JSONLD": json.dumps(jsonld, ensure_ascii=False, indent=1),
-    }.items():
-        page = page.replace("{{" + key + "}}", val)
+    })
     write_if_changed(SITE / "index.html", page)
     return featured
+
+
+def build_how(items, total):
+    """/jak-funguju/: texty ručně v šabloně, počty z buildu. Mrtvý odkaz na projekt zastaví build."""
+    known = {p["slug"] for p in items}
+    template = HOW_TEMPLATE.read_text(encoding="utf-8")
+    for slug in re.findall(r"projekty/#([a-z0-9-]+)", template + HOME_TEMPLATE.read_text(encoding="utf-8")):
+        if slug not in known:
+            raise SystemExit(f"odkaz na neexistující projekt: {slug}")
+    home, url = f"{D.SITE_URL}/", f"{D.SITE_URL}/jak-funguju/"
+    jsonld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "@id": f"{url}#page", "url": url, "inLanguage": "cs",
+         "name": "Jak funguju, když dostanu zakázku", "isPartOf": {"@id": f"{home}#web"},
+         "about": {"@id": f"{home}#voku"}, "primaryImageOfPage": f"{home}og-image.png",
+         "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [
+             {"@type": "ListItem", "position": 1, "name": "Voku", "item": home},
+             {"@type": "ListItem", "position": 2, "name": "Jak funguju", "item": url}]}},
+    ]}
+    page = fill(template, {
+        "HEAD": head_html("../"), "NAV": nav_html("../", "how"), "FOOTER": footer_html("../", total, f"{len(items)} projektů"),
+        "V": asset_version(), "SITE_URL": D.SITE_URL, "COUNT": str(len(items)),
+        "JSONLD": json.dumps(jsonld, ensure_ascii=False, indent=1),
+    })
+    HOW_FILE.parent.mkdir(exist_ok=True)
+    write_if_changed(HOW_FILE, page)
 
 
 def write_if_changed(path, text):
@@ -449,10 +559,9 @@ def build(root, check=False, use_json=False):
 
 def publish(items, total, langs, root, check, scanned):
     cats = {k: (cs, en) for k, cs, en in D.CATEGORIES}
-    demos = [p for p in items if p.get("demo")]
     live = sum(1 for p in items if p["status"] == "live")
 
-    print(f"{len(items)} projektů, {total} řádků, {langs} jazyků, {live} běží naostro, {len(demos)} živá dema")
+    print(f"{len(items)} projektů, {total} řádků, {langs} jazyků, {live} běží naostro, {sum(1 for p in items if p.get('demo'))} živá dema")
     if check:
         for p in items:
             print(f"  {p['slug']:<24} {p['cat']:<9} {p['lines']:>7}  {', '.join(p['stack'])}")
@@ -476,50 +585,50 @@ def publish(items, total, langs, root, check, scanned):
                 old.unlink()
 
     counts = {k: sum(1 for p in items if p["cat"] == k) for k in cats}
+    can_try = sum(1 for p in items if p.get("url") and (p.get("demo") or p.get("featured")))
     filters = '<button type="button" class="on" data-f="all" aria-pressed="true"><span data-t="all">Vše</span> <i>{}</i></button>'.format(len(items))
+    filters += f'<button type="button" data-f="try" aria-pressed="false"><span data-t="liveFilter">Jde vyzkoušet</span> <i>{can_try}</i></button>'
     filters += "".join(f'<button type="button" data-f="{k}" aria-pressed="false"><span data-cat-label="{k}">{escape(cs)}</span> <i>{counts[k]}</i></button>'
                        for k, (cs, _) in cats.items() if counts[k])
+    # jeden znak = jeden projekt, barva a značka podle kategorie
+    catbar = "".join(f'<span style="color:{CAT_MARKS[k][1]}">{CAT_MARKS[k][0] * counts[k]}</span>'
+                     for k in cats if counts[k])
 
-    i18n = {"cats": cats, "p": {p["slug"]: [p["cs"], p["en"]] for p in items}}
+    i18n = {"cats": cats, "p": {p["slug"]: [p["cs"], p["en"]] for p in items},
+            "try": {p["slug"]: [p["try_cs"], p["try_en"]] for p in items if p.get("try_cs")},
+            "note": {p["slug"]: [p["note_cs"], p["note_en"]] for p in items if p.get("note_cs")}}
     today = date.today()
-    home, about, page_url = f"{D.SITE_URL}/", f"{D.SITE_URL}/o-mne/", f"{D.SITE_URL}/projekty/"
-    person = {"@id": f"{home}#voku"}
+    home, how, page_url = f"{D.SITE_URL}/", f"{D.SITE_URL}/jak-funguju/", f"{D.SITE_URL}/projekty/"
+    author = {"@id": f"{home}#voku"}
     jsonld = {"@context": "https://schema.org", "@graph": [
         {"@type": "CollectionPage", "@id": f"{page_url}#page", "url": page_url,
-         "name": "Archiv projektů | Vojtěch \"Voku\" Kurinec", "inLanguage": "cs",
+         "name": "Projekty | Vojtěch Kurinec (Voku199)", "inLanguage": "cs",
          "description": f"Všech {len(items)} projektů Vojtěcha Kurince: weby, hry, AI nástroje a servery.",
-         "isPartOf": {"@id": f"{home}#web"}, "author": person, "dateModified": today.isoformat(),
+         "isPartOf": {"@id": f"{home}#web"}, "author": author, "dateModified": today.isoformat(),
          "primaryImageOfPage": f"{page_url}og.png",
          "breadcrumb": {"@id": f"{page_url}#breadcrumb"}, "mainEntity": {"@id": f"{page_url}#list"}},
         {"@type": "BreadcrumbList", "@id": f"{page_url}#breadcrumb", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Voku", "item": home},
-            {"@type": "ListItem", "position": 2, "name": "Archiv projektů", "item": page_url}]},
+            {"@type": "ListItem", "position": 2, "name": "Projekty", "item": page_url}]},
         {"@type": "ItemList", "@id": f"{page_url}#list", "numberOfItems": len(items), "itemListElement": [
             {"@type": "ListItem", "position": i + 1, "item": {
                 "@type": "CreativeWork", "@id": f"{page_url}#{p['slug']}", "name": p["name"],
-                "description": p["cs"], "creator": person, "keywords": ", ".join(p["stack"]),
+                "description": p["cs"], "creator": author, "keywords": ", ".join(p["stack"]),
                 "dateModified": datetime.fromtimestamp(p["updated"]).strftime("%Y-%m-%d"),
                 "image": f"{page_url}shots/{p['image']}",
                 **({"url": p["url"]} if p["url"] else {})}}
             for i, p in enumerate(items)]},
     ]}
-    page = TEMPLATE.read_text(encoding="utf-8")
-    for key, val in {
-        "SITE_URL": D.SITE_URL,
-        "COUNT": str(len(items)),
-        "LINES": round_k(total),
-        "LANGS": str(langs),
-        "LIVE": str(live),
-        "UPDATED_ISO": today.isoformat(),
-        "UPDATED_CS": f"{today.day}. {today.month}. {today.year}",
-        "FILTERS": filters,
-        "DEMOS": "".join(demo_html(p) for p in demos),
+    page = fill(TEMPLATE.read_text(encoding="utf-8"), {
+        "HEAD": head_html("../"), "NAV": nav_html("../", "projects"), "FOOTER": footer_html("../", total, f"{len(items)} projektů"),
+        "V": asset_version(), "SITE_URL": D.SITE_URL, "COUNT": str(len(items)), "LINES": round_k(total),
+        "LANGS": str(langs), "LIVE": str(live), "UPDATED_CS": f"{today.day}. {today.month}. {today.year}",
+        "FILTERS": filters, "CATBAR": catbar,
         "CARDS": "".join(card_html(i, p, cats) for i, p in enumerate(items)),
-        "I18N": json.dumps(i18n, ensure_ascii=False).replace("</", "<\\/"),
+        "I18N_EXTRA": json_inner(i18n),
         "JSONLD": json.dumps(jsonld, ensure_ascii=False, indent=1),
-    }.items():
-        page = page.replace("{{" + key + "}}", val)
-    (OUT / "index.html").write_text(page, encoding="utf-8", newline="")
+    })
+    write_if_changed(OUT / "index.html", page)
 
     public = [{"name": p["name"], "slug": p["slug"], "category": p["cat"], "cs": p["cs"], "en": p["en"],
                "url": p["url"], "demo": bool(p.get("demo")), "status": p["status"], "stack": p["stack"],
@@ -529,14 +638,11 @@ def publish(items, total, langs, root, check, scanned):
     (OUT / "projects.json").write_text(json.dumps({"generated": today.isoformat(), "projects": public},
                                                   ensure_ascii=False, indent=1), encoding="utf-8", newline="")
 
-    # čísla na stránce O mně a rozcestník (soubor se mění jen když se opravdu změní -> poctivé lastmod)
-    old = ABOUT_FILE.read_bytes().decode("utf-8")
-    html = re.sub(r'(data-auto="projects">)[^<]*', rf"\g<1>{len(items) // 10 * 10}+", old)
-    html = re.sub(r'(data-auto="projects-n">)[^<]*', rf"\g<1>{len(items)}", html)
-    write_if_changed(ABOUT_FILE, html)
-    about_mod = date.fromtimestamp(ABOUT_FILE.stat().st_mtime).isoformat()
-    featured = build_home(items, cats, total)
+    # soubor se mění jen když se opravdu změní -> poctivé lastmod
+    featured = build_home(items, total)
+    build_how(items, total)
     home_mod = date.fromtimestamp((SITE / "index.html").stat().st_mtime).isoformat()
+    how_mod = date.fromtimestamp(HOW_FILE.stat().st_mtime).isoformat()
 
     # sitemap: Google bere jen loc + lastmod (changefreq/priority ignoruje), obrázky pomáhají Google Images
     shots = [p for p in items if p["image"].endswith(".webp")]
@@ -549,8 +655,8 @@ def publish(items, total, langs, root, check, scanned):
     <image:image><image:loc>{home}og-image.png</image:loc></image:image>
   </url>
   <url>
-    <loc>{about}</loc>
-    <lastmod>{about_mod}</lastmod>
+    <loc>{how}</loc>
+    <lastmod>{how_mod}</lastmod>
     <image:image><image:loc>{home}og-image.png</image:loc></image:image>
   </url>
   <url>
@@ -562,13 +668,13 @@ def publish(items, total, langs, root, check, scanned):
 """, encoding="utf-8", newline="")
 
     # llms.txt: stručný přehled pro AI vyhledávače (ChatGPT, Perplexity, AI Overviews)
-    lines = [f"# Vojtěch \"Voku\" Kurinec", "",
+    lines = ["# Vojtěch Kurinec (Voku199)", "",
              f"> Mladý vývojář z jižních Čech (Jihočeský kraj, CZ). Weby a rezervační systémy pro laser game arény, "
              f"vlastní hry, AI nástroje a servery na Raspberry Pi. {len(items)} projektů, {round_k(total)} řádků kódu.", "",
-             f"- [Rozcestník]({home}): projekty, které si můžeš hned vyzkoušet: "
-             + ", ".join(p["name"] for p in featured),
-             f"- [O mně]({about}): kdo jsem, na čem dělám, zakázky, technologie, kontakt",
-             f"- [Archiv projektů]({page_url}): všechny projekty s popisem a technologiemi",
+             f"- [Úvod]({home}): kdo jsem, co jsem dokázal, proč to dělám, jak pracuju, co mám rád a kontakt. "
+             "Projekty, které si můžeš hned vyzkoušet: " + ", ".join(p["name"] for p in featured),
+             f"- [Jak funguju]({how}): co přesně udělám, když dostanu zakázku, krok po kroku",
+             f"- [Projekty]({page_url}): všechny projekty s popisem a technologiemi",
              f"- [Projekty jako JSON]({page_url}projects.json): strojově čitelná data", "",
              "## Kontakt", "", "- E-mail: vojta.kurinec@gmail.com", "- GitHub: https://github.com/Voku199", ""]
     for k, (cs, _) in cats.items():
@@ -580,7 +686,7 @@ def publish(items, total, langs, root, check, scanned):
                   for p in group]
         lines.append("")
     (SITE / "llms.txt").write_text("\n".join(lines), encoding="utf-8", newline="")
-    print(f"  -> index.html, projekty/index.html, projects.json, sitemap.xml, llms.txt, {len(used)} obrázků")
+    print(f"  -> index.html, jak-funguju/index.html, projekty/index.html, projects.json, sitemap.xml, llms.txt, {len(used)} obrázků")
 
 
 if __name__ == "__main__":

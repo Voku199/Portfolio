@@ -12,14 +12,13 @@ Pole projektu:
     demo     True = bezpečné živé demo, smí se ukazovat jako „vyzkoušej si to“
     status   live (běží naostro) | None (dopočítá se z data poslední změny)
     shot     obrázek uvnitř projektu (cesta od monorepa), když není screenshot v tools/shots/
-    featured pořadí na hlavní stránce (rozcestník), jen projekty, které běží a jsou opravdu veřejné
+    featured pořadí na úvodní stránce, jen projekty, které běží a jsou opravdu veřejné
     try_cs, try_en    u featured: jedna věta, co tam návštěvník může udělat
     note_cs, note_en  u featured: proč to nejde vyzkoušet hned (nepovinné, třeba když je potřeba účet)
     stack    ruční seznam technologií místo automatického (nepovinné)
 """
 
 SITE_URL = "https://vokudev.cz"
-NEWS_COUNT = 5                            # kolik naposledy změněných projektů ukázat na rozcestníku
 
 CATEGORIES = [
     ("klienti", "Zakázky", "Client work"),
